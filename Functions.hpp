@@ -19,6 +19,8 @@ class HVP_Core {
 	
 	class loot {
 		file = "core\loot";
+		class airdropLoot {};
+		class heliCrashLoot {};
 		class lootInit {};
 		class lootMain {};
 		class spawnLoot {};
@@ -63,14 +65,12 @@ class HVP_Core {
 		class showEventIcon {};
 		class hideEventIcon {};
 		class airdrop {};
-		class airdropLoot {};
 		class artillery {};
 		class quake {};
 		class nuke {};
 		class uav {};
 		class chemAttack {};
 		class heliCrash {};
-		class heliCrashLoot {};
 		class dropPod {};
 		class paranormal {};
 	};
