@@ -72,20 +72,4 @@ class Params {
 		isGlobal = 1;
 	};
 	
-	class testmode2121 {
-		title = "Testing Mode: (Prevents the game from ending and launches beta features)";
-		values[] = {1,0};
-		texts[] = {"Enabled","Disabled"};
-		default = 0;
-		isGlobal = 1;
-	}
-		
-	class debugending21 {
-		title = "Debug Mode: (Shows additional debugging information)";
-		values[] = {1,0};
-		texts[] = {"Enabled","Disabled"};
-		default = 0;
-		isGlobal = 1;
-	}
-	
 }
