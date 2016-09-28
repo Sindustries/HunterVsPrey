@@ -1,7 +1,7 @@
 
 	waitUntil {(getPos player select 2) < 200 && animationState player isEqualTo "para_pilot"};
 	while {animationState player isEqualTo "para_pilot"} do {
-		if (daytime < 6 || daytime > 18) then {
+		if (sunOrMoon isEqualTo 0) then {
 			if (side player isEqualTo EAST || side player isEqualTo RESISTANCE) then {
 				if (HVPGameType isEqualTo 1) then {
 					player action ["nvGoggles", player];

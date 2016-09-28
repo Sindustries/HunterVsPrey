@@ -15,7 +15,7 @@ if (HVPGameType isEqualTo 1) then {
 
 		sleep HVP_rareEvent;
 
-		if (daytime > 18 || daytime < 6) then {
+		if (sunOrMoon isEqualTo 0) then {
 			if (vehicle player isEqualTo player) then {
 
 				_eventRoll = floor (random 4);
@@ -63,7 +63,7 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 
 		sleep HVP_rareEvent;
 
-		if (daytime > 18 || daytime < 6) then {
+		if (sunOrMoon isEqualTo 0) then {
 			if (vehicle player isEqualTo player) then {
 
 				_eventRoll = floor (random 6);
