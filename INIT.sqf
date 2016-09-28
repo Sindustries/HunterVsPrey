@@ -110,7 +110,7 @@ if (isServer) then {
 	_adaptiveZoneMinTime = ["adaptiveZoneMinTime"] call HVP_fnc_getSetting;
 	_adaptiveZoneMaxTime = ["adaptiveZoneMaxTime"] call HVP_fnc_getSetting;
 	if (HVPZoneSizeMax isEqualTo 0) then {
-		_allUnits = {isPlayer _x && side _x != sideLogic} count allUnits;
+		_allUnits = {isPlayer _x && side _x != sideLogic} count playableUnits;
 		HVPZoneSizeMax = (_allUnits * 250);
 		if (HVPZoneSizeMax > _adaptiveZoneMaxSize) then {
 			HVPZoneSizeMax = _adaptiveZoneMaxSize;
@@ -238,7 +238,6 @@ if (isServer) then {
 } else {
 	waitUntil {HVPLootLoaded isEqualTo true};
 };
-
 
 cutText ["LOADING VEHICLES (LAND)", "BLACK FADED", 999];
 if (isServer) then {
