@@ -179,7 +179,7 @@ if (_scenario isEqualTo "Explode" || _scenario isEqualTo "Parachute") then {
 			waitUntil {(getPosATL _unit select 2) <= 100};
 			[_unit,["OpenParachute",_unit]] remoteExec ["action", _unit];
 			waitUntil {animationState _unit == "para_pilot"};
-			[] spawn HVP_fnc_parasmoke;
+			[] remoteExec ["HVP_fnc_parasmoke", _unit];
 			_packHolder attachTo [vehicle _unit,[-0.07,0.67,-0.13],"pelvis"]; 
 			_packHolder setVectorDirAndUp [[0,-0.2,-1],[0,1,0]];
 			waitUntil {(getPos _unit select 2) < 1 || isTouchingGround _unit};		
@@ -204,7 +204,7 @@ if (_scenario isEqualTo "Explode" || _scenario isEqualTo "Parachute") then {
 			waitUntil {(getPosATL _unit select 2) <= 100};
 			[_unit,["OpenParachute",_unit]] remoteExec ["action", _unit];
 			waitUntil {animationState _unit == "para_pilot"};
-			[] spawn HVP_fnc_parasmoke;
+			[] remoteExec ["HVP_fnc_parasmoke", _unit];
 			waitUntil {(getPos _unit select 2) < 1 || isTouchingGround _unit};
 			[_unit] remoteExec ["ace_hearing_fnc_removeEarplugs", _unit];
 			_unit removeItem "ACE_earplugs";
