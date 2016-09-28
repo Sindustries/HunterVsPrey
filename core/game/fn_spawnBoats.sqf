@@ -8,7 +8,7 @@ private ["_maxNumBoats","_boatsCreated","_usedPosArray","_boatSelection","_cfg",
 //-----------------------------------
 //-VARIABLES
 
-_maxNumBoats = _this select 0;
+_maxNumBoats = 100;
 _boatsCreated = 0;
 _usedPosArray = [];
 _minDistSpawn = ["vehicleBoatMinDist"] call HVP_fnc_getSetting;

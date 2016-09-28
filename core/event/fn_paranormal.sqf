@@ -13,7 +13,7 @@ while {alive player} do {
 //-----------------------------------
 //-ROLL FOR EVENT
 
-sleep (HVPEventTime*2+(random HVPEventTime)-(random HVPEventTime));
+sleep HVP_rareEvent;
 
 if (daytime > 18 || daytime < 6) then {
 	if (vehicle player isEqualTo player) then {

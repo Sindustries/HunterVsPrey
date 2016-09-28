@@ -13,7 +13,12 @@ if (HVPLegacyMode == 1) exitWith {systemChat "Sinspawn:: Legacy Mode enabled, sh
 _pos = HVP_Pos;
 _sizeMult = ["lootSpawn_mult"] call HVP_fnc_getSetting;
 _size = (HVPZoneSizeMax * 1.25);
-_lootChance = HVPLootChance;
+if (HVPGameType isEqualTo 1) then {
+	_lootChance = ["lootSpawn_HVPchance"] call HVP_fnc_getSetting;
+};
+if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
+	_lootChance = ["lootSpawn_CRUchance"] call HVP_fnc_getSetting;
+};
 _zAdjustHouse = ["lootSpawn_zAdjustHouse"] call HVP_fnc_getSetting;
 _zAdjustWild = ["lootSpawn_zAdjustWild"] call HVP_fnc_getSetting;
 _safePlace = [0,0,0];

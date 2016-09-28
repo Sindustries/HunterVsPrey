@@ -5,6 +5,10 @@
 */
 class HVP {
 	
+/* MAIN SETTINGS */
+
+	HVPStatMode = true;					//Set to false to disable stat saving
+	
 /* ADAPTIVE TIME SETTINGS */
 
 	daytimeMultiplier = 80;				//Time multiplier during the day	>> BOTH THESE SETTINGS HAVE A MAX OF 120 <<
@@ -13,6 +17,10 @@ class HVP {
 /* SPAWN SETTINGS */
 
 	groundChanceUnconscious = 25;		//Chance of being unconscious during "Ground" spawn
+	
+/* EVENT SETTINGS */
+
+	HVPEventTime = 5;					//Time (MINS) randomiser for events
 	
 /* LOADOUT SETTINGS */
 
@@ -55,6 +63,8 @@ class HVP {
 	
 /* LOOT SETTINGS */
 
+	lootSpawn_HVPchance = 20;			//Chance (%) of loot spawning (HVP mode)
+	lootSpawn_CRUchance = 66;			//Chance (%) of loot spawning (CRU/PRED mode)
 	lootSpawn_mult = 1.5;				//Multiplier of area (radius) from position to spawn loot
 	lootSpawn_zAdjustHouse = 0.15;		//Height adjustment to prevent loot spawning in the floor
 	lootSpawn_zAdjustWild = 0.04;		//Same as above, but for wild loot
@@ -122,6 +132,7 @@ class SMS {
 };
 	
 class Z {
+	HVP_ZombieMode = true;				//Set to false to disable zombies
 	HVP_maxZombies = 100;				//Total number of alive zombies
 	HVP_zhordeSize = 8; 				//Max num to spawn on each spawner
 	HVP_zSpawnChance = 75;				//Chance of a spawner spawning zombies (%)

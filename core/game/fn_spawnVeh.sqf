@@ -8,7 +8,7 @@ private ["_maxNumVeh","_carSel","_spawnPos","_posCheck","_car","_spawnCar","_mar
 //-----------------------------------
 //-VARIABLES
 
-_maxNumVeh = _this select 0;
+_maxNumVeh = 100;
 _vehCreated = 0;
 _usedPosArray = [];
 _minDistSpawn = ["vehicleCarMinDist"] call HVP_fnc_getSetting;

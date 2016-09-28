@@ -14,36 +14,19 @@ player enableSimulation false;
 player allowDamage false;
 player enableStamina false;
 //-----------------------------------
-//-TIME
-HVPTime = (paramsArray select 1);
-HVPTimeMult = (paramsArray select 2);
-//-GAME
-HVPGameType = (paramsArray select 4);
-HVPSpawnType = (paramsArray select 5);
-HVPManual = (paramsArray select 6);
-HVPAbilitiesEnabled = (paramsArray select 7);
-HVPPhaseType = (paramsArray select 8);
-HVPPhaseSpacing = (paramsArray select 9);
-HVPPhaseTime = (paramsArray select 10);
-HVPZoneSizeMax = (paramsArray select 11);
-//-LOOT, CARS AND EVENTS
-HVPLootMode = (paramsArray select 13);
-HVPLootChance = (paramsArray select 14);
-HVPCarsNumber = (paramsArray select 15);
-HVPEventsEnabled = (paramsArray select 16);
-HVPExtEvents = (paramsArray select 17);
-HVPParanormalEvent = (paramsArray select 18);
-HVPEventTime = (paramsArray select 19);
+//-MAIN
+HVPGameType = (paramsArray select 1);
+HVPSpawnType = (paramsArray select 2);
+HVPManual = (paramsArray select 3);
+HVPPhaseType = (paramsArray select 4);
+HVPPhaseSpacing = (paramsArray select 5);
+HVPPhaseTime = (paramsArray select 6);
+HVPZoneSizeMax = (paramsArray select 7);
 //-EXTRAS
-HVPZombieMode = (paramsArray select 21);
-HVPAntiCamp = (paramsArray select 22);
-HVPStatMode = (paramsArray select 23);
-HVPTestMode = (paramsArray select 24);
-HVPDebugMode = (paramsArray select 25);
-/* Disable stat-saving if debug mode */
-if (HVPDebugMode isEqualTo 1) then {
-	HVPStatMode = 0;
-};
+HVPAntiCamp = (paramsArray select 9);
+HVPParanormalEvent = (paramsArray select 10);
+HVPTestMode = (paramsArray select 11);
+HVPDebugMode = (paramsArray select 12);
 //-----------------------------------
 ["HVP"] call HVP_fnc_getSettings;
 SIN_adminUIDs = ["SIN_adminUIDs"] call HVP_fnc_getSetting;
@@ -52,6 +35,12 @@ HVP_gasMasks = ["HVP_gasMasks"] call HVP_fnc_getSetting;
 HVP_mines = ["HVP_mines"] call HVP_fnc_getSetting;
 HVP_redGuns = ["HVP_redGuns"] call HVP_fnc_getSetting;
 HVP_redAmmo = ["HVP_redAmmo"] call HVP_fnc_getSetting;
+HVP_ZombieMode = ["HVP_ZombieMode"] call HVP_fnc_getSetting;
+HVPStatMode = ["HVPStatMode"] call HVP_fnc_getSetting;
+/* Disable stat-saving if debug mode */
+if (HVPDebugMode isEqualTo 1) then {
+	HVPStatMode = 0;
+};
 //-----------------------------------
 HVPErrorPos = (getArray(configFile >> "CfgWorlds" >> worldName >> "centerPosition"));
 HVP_Pos_Found = false;
@@ -87,14 +76,11 @@ playMusic (selectRandom HVP_music);
 //-----------------------------------
 //-SET TIME OF DAY
 if (isServer) then {
-	if (HVPTime isEqualTo 50) then {
-		HVPTime = floor(random 25);
-	};
 	if (HVPGameType isEqualTo 1) then {
-		setDate [2015, 1, 12, HVPTime, 0];
+		setDate [2015, 1, 12, 0, 0];
 	};
 	if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
-		setDate [2015, 8, 11, HVPTime, 0];	
+		setDate [2015, 8, 11, floor(random 25), 0];	
 	};
 };
 //-----------------------------------
@@ -173,7 +159,7 @@ if (isServer) then {
 		case 0: {
 			cutText ["FINDING GAME LOCATION", "BLACK FADED", 999];
 			HVP_Pos = [(getPos player),0,99999,0,0,0,0] call SIN_fnc_findPos;
-			HVP_Pos_Found = "true";
+			HVP_Pos_Found = true;
 			publicVariable "HVP_Pos_Found";		
 		};
 		case 1: {
@@ -225,14 +211,14 @@ if (isServer) then {
 if (isServer) then {
 	[[]] spawn HVP_fnc_tpw_core;
 	[10,30,(HVPZoneSizeMax * 1.25),150,60] spawn HVP_fnc_tpw_animals;
-	[90,(HVPEventTime/2),1,[20,30,50,70,80],0] spawn HVP_fnc_tpw_air;
+	[90,(300/2),1,[20,30,50,70,80],0] spawn HVP_fnc_tpw_air;
 };
 //-----------------------------------
 //-INIT LOOT, CARS, BOATS, ZOMBEES!
 ("HUDProgressBar" call BIS_fnc_rscLayer) cutRsc ["HVPHUDProgressBar","PLAIN",-1,true];
 uiNameSpace getVariable "PBarProgress" ctrlSetTextColor [0.2, 0.5, 0.9, 1];
 
-if (HVPZombieMode isEqualTo 1) then {
+if (HVP_ZombieMode isEqualTo 1) then {
 	cutText ["RAISING THE DEAD", "BLACK FADED", 999];
 	if (isServer) then {
 		["Z"] call HVP_fnc_getSettings;
@@ -244,38 +230,36 @@ if (HVPZombieMode isEqualTo 1) then {
 	};
 };
 
-if (HVPLootMode > 0) then {
-	cutText ["LOADING LOOT", "BLACK FADED", 999];
-	if (isServer) then {
-		[] call HVP_fnc_lootInit;
-		HVPLootLoaded = true;
-		publicVariable "HVPLootLoaded";
-	} else {
-		waitUntil {HVPLootLoaded isEqualTo true};
-	};
+cutText ["LOADING LOOT", "BLACK FADED", 999];
+if (isServer) then {
+	[] call HVP_fnc_lootInit;
+	HVPLootLoaded = true;
+	publicVariable "HVPLootLoaded";
+} else {
+	waitUntil {HVPLootLoaded isEqualTo true};
 };
 
-if (HVPCarsNumber > 0) then {
-	cutText ["LOADING VEHICLES (LAND)", "BLACK FADED", 999];
-	if (isServer) then {
-		[HVPCarsNumber] call HVP_fnc_spawnVeh;
-		HVPCarsLoaded = true;
-		publicVariable "HVPCarsLoaded";
-	} else {
-		waitUntil {HVPCarsLoaded isEqualTo true};
-	};
+
+cutText ["LOADING VEHICLES (LAND)", "BLACK FADED", 999];
+if (isServer) then {
+	[] call HVP_fnc_spawnVeh;
+	HVPCarsLoaded = true;
+	publicVariable "HVPCarsLoaded";
+} else {
+	waitUntil {HVPCarsLoaded isEqualTo true};
 };
 
-if (HVPCarsNumber > 0) then {
-	cutText ["LOADING VEHICLES (SEA)", "BLACK FADED", 999];
-	if (isServer) then {
-		[HVPCarsNumber] call HVP_fnc_spawnBoats;
-		HVPBoatsLoaded = true;
-		publicVariable "HVPBoatsLoaded";
-	} else {
-		waitUntil {HVPBoatsLoaded isEqualTo true};
-	};
+
+
+cutText ["LOADING VEHICLES (SEA)", "BLACK FADED", 999];
+if (isServer) then {
+	[] call HVP_fnc_spawnBoats;
+	HVPBoatsLoaded = true;
+	publicVariable "HVPBoatsLoaded";
+} else {
+	waitUntil {HVPBoatsLoaded isEqualTo true};
 };
+
 
 ("HUDProgressBar" call BIS_fnc_rscLayer) cutText ["","PLAIN"];
 cutText ["", "BLACK FADED", 999];
@@ -315,9 +299,7 @@ if (player isKindOf "VirtualSpectator_F" && isServer) then {
 };
 //-----------------------------------
 //-ABILITY MANAGER
-if (HVPAbilitiesEnabled isEqualTo 1) then {
-	[] spawn HVP_fnc_abilityManager;
-};
+[] spawn HVP_fnc_abilityManager;
 //-----------------------------------
 //-PLAYER MARKERS
 [] spawn HVP_fnc_playermarkers;

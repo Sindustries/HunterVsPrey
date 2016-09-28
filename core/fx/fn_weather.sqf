@@ -10,9 +10,10 @@ private ["_dayMult","_nightMult"];
 _dayMult = ["daytimeMultiplier"] call HVP_fnc_getSetting;
 _nightMult = ["nighttimeMultiplier"] call HVP_fnc_getSetting;
 
-if (HVPTimeMult <= 120) then {
-	setTimeMultiplier HVPTimeMult;
-} else {
+if (HVPGameType isEqualTo 1) then {
+	setTimeMultiplier 1;
+};
+if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 	if (daytime < 6 && daytime >= 0 || daytime < 24 && daytime > 18) then {
 		setTimeMultiplier _nightMult;
 	};

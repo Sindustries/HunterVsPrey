@@ -3,9 +3,13 @@
 	By Sinbane
 	Loads events and keeps them running
 */
-private ["_common","_uncommon","_rare"];
+private ["_time"];
 //-----------------------------------
 //-DEFINABLE
+
+_time = ["HVPEventTime"] call HVP_fnc_getSetting;
+HVPEventTime = (_time * 60);
+
 [] spawn {
 	while {true} do {
 		HVP_commonEvent = (HVPEventTime+(random HVPEventTime)-(random HVPEventTime));
@@ -16,7 +20,7 @@ private ["_common","_uncommon","_rare"];
 };
 //-----------------------------------
 //-LOAD EVENTS
-if (isServer && HVPEventsEnabled isEqualTo 1) then {
+if (isServer) then {
 //-----------------------------------
 //-AIRDROPS
 
@@ -91,9 +95,6 @@ if (isServer && HVPEventsEnabled isEqualTo 1) then {
 		};
 	};
 
-//-----------------------------------
-};
-if (isServer && HVPExtEvents isEqualTo 1) then {
 //-----------------------------------
 //-ARTILLERY
 
