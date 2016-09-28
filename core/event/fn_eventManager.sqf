@@ -18,6 +18,8 @@ HVPEventTime = (_time * 60);
 		sleep 30;
 	};
 };
+
+sleep 20;
 //-----------------------------------
 //-LOAD EVENTS
 if (isServer) then {
