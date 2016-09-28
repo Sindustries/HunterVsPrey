@@ -3,31 +3,22 @@
 	Author: Sinbane
 	Spawns a random helicopter that flys into the zone and crashes, spawning loot crates around it
 */
-private ["_helicrash_pos","_heliSelection","_cfg","_cfgName","_eventHeli","_eventheligroup","_pilot","_wp","_counter","_posFound","_lootPos","_loot"];
+private ["_helicrash_pos","_heliSelection","_cfg","_cfgName","_spawnPos","_eventHeli","_eventheligroup","_pilot","_wp","_counter","_posFound","_lootPos","_loot"];
 //-----------------------------------
-//-POS
+//-GET HELI TYPES
 
-_helicrash_pos = _this select 0;
+_heliSelection = _this select 0;
+_helicrash_pos = _this select 1;
 
 //-----------------------------------
-//-GET HELI TYPE
+//-GET POS
 
-_heliSelection = [];
-
-_cfg = (configFile >> "CfgVehicles");
-for "_i" from 0 to ((count _cfg)-1) do {
-	if (isClass (_cfg select _i)) then {
-		_cfgName = configName (_cfg select _i);			
-		if (_cfgName isKindOf "helicopter" && (getNumber ((_cfg select _i) >> "scope") == 2) && (getNumber ((_cfg select _i) >> "isUav")) == 0) then {
-			_heliSelection pushBackUnique _cfgName;
-		};
-	};
-};
+_spawnPos = [HVP_phase_pos,(HVP_phase_radius + 1500),(HVP_phase_radius + 3000),0,1,0,0] call SIN_fnc_findPos;
 
 //-----------------------------------
 //-CREATE HELI
 
-_eventHeli = createVehicle [(selectRandom _heliSelection), [(_helicrash_pos select 0)+1000+(random (HVPZoneSizeMax * 2))-(random (HVPZoneSizeMax * 2)), (_helicrash_pos select 1)+1000+(random (HVPZoneSizeMax * 2))-(random (HVPZoneSizeMax * 2)), 30+(random 100)],[], 0, "FLY"];
+_eventHeli = createVehicle [(selectRandom _heliSelection), [(_spawnPos select 0),(_spawnPos select 1),30+(random 100)],[], 0, "FLY"];
 clearItemCargoGlobal _eventHeli;
 clearMagazineCargoGlobal _eventHeli;
 clearBackpackCargoGlobal _eventHeli;

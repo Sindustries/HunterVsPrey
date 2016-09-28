@@ -3,16 +3,16 @@
 	Author: Sinbane
 	Spawns a Taru Pod that plummets to the ground, killing it's occupants
 */
-private ["_pos","_posFound","_posCheck","_pod","_light","_ai","_man","_index","_crater","_fire","_alarm","_sparks1","_sparks2"];
+private ["_dropPos","_posFound","_posCheck","_pod","_light","_ai","_man","_index","_crater","_fire","_alarm","_sparks1","_sparks2"];
 //-----------------------------------
 //-POS
 
-_pos = _this select 0;
+_dropPos = _this select 0;
 
 //-----------------------------------
 //-CREATE POD
 
-_pod = createVehicle ["Land_Pod_Heli_Transport_04_covered_F", [(_pos select 0),(_pos select 1),(1500 + (random 1000))],[], 0, "NONE"];
+_pod = createVehicle ["Land_Pod_Heli_Transport_04_covered_F", [(_dropPos select 0),(_dropPos select 1),(1500 + (random 1000))],[], 0, "NONE"];
 _pod allowDamage false;
 _pod lock true;
 _pod setDir (random 360);
