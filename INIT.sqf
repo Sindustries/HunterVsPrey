@@ -299,7 +299,6 @@ if (player isKindOf "VirtualSpectator_F" && isServer) then {
 [] spawn HVP_fnc_playermarkers;
 //-----------------------------------
 //-TEST MODE CHECK
-private "_allUnits";
 _allUnits = {isPlayer _x && side _x != sideLogic} count playableUnits;
 if (_allUnits isEqualTo 1) then {
 	HVPTestMode = 1;
