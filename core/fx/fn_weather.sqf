@@ -14,7 +14,7 @@ if (HVPGameType isEqualTo 1) then {
 	setTimeMultiplier 0;
 };
 if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
-	if (sunOrMoon isEqualTo 0) then {
+	if (sunOrMoon < 1) then {
 		setTimeMultiplier _nightMult;
 	};
 	if (sunOrMoon isEqualTo 1) then {
