@@ -21,6 +21,7 @@ class HVP {
 /* EVENT SETTINGS */
 
 	HVPEventTime = 5;					//Time (MINS) randomiser for events
+	HVPParanormalEvent = true;			//Paranormal activity active?
 	
 /* LOADOUT SETTINGS */
 

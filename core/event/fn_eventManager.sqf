@@ -236,7 +236,8 @@ if (isServer) then {
 //-----------------------------------
 //-PARANORMAL
 
-if (HVPParanormalEvent isEqualTo 1 && side player != sideLogic) then {
+HVPParanormalEvent = ["HVPParanormalEvent"] call HVP_fnc_getSetting;
+if (HVPParanormalEvent isEqualTo 1 && playerSide != sideLogic) then {
 	[] spawn HVP_fnc_paranormal;
 };
 

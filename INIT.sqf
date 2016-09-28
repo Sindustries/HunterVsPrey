@@ -20,13 +20,11 @@ HVPSpawnType = (paramsArray select 2);
 HVPManual = (paramsArray select 3);
 HVPPhaseType = (paramsArray select 4);
 HVPPhaseSpacing = (paramsArray select 5);
-HVPPhaseTime = (paramsArray select 6);
-HVPZoneSizeMax = (paramsArray select 7);
+HVPZoneSizeMax = (paramsArray select 6);
 //-EXTRAS
-HVPAntiCamp = (paramsArray select 9);
-HVPParanormalEvent = (paramsArray select 10);
-HVPTestMode = (paramsArray select 11);
-HVPDebugMode = (paramsArray select 12);
+HVPAntiCamp = (paramsArray select 8);
+HVPTestMode = (paramsArray select 9);
+HVPDebugMode = (paramsArray select 10);
 //-----------------------------------
 ["HVP"] call HVP_fnc_getSettings;
 SIN_adminUIDs = ["SIN_adminUIDs"] call HVP_fnc_getSetting;
@@ -119,14 +117,12 @@ if (isServer) then {
 			HVPZoneSizeMax = _adaptiveZoneMinSize;
 		};
 	};		
-	if (HVPPhaseTime isEqualTo 0) then {
-		HVPPhaseTime = ((HVPZoneSizeMax * 2) / 5);
-		if (HVPPhaseTime > _adaptiveZoneMaxTime) then {
-			HVPPhaseTime = _adaptiveZoneMaxTime;
-		};
-		if (HVPPhaseTime < _adaptiveZoneMinTime) then {
-			HVPPhaseTime = _adaptiveZoneMinTime;
-		};
+	HVPPhaseTime = ((HVPZoneSizeMax * 2) / 5);
+	if (HVPPhaseTime > _adaptiveZoneMaxTime) then {
+		HVPPhaseTime = _adaptiveZoneMaxTime;
+	};
+	if (HVPPhaseTime < _adaptiveZoneMinTime) then {
+		HVPPhaseTime = _adaptiveZoneMinTime;
 	};
 	HVP_phase_radius = HVPZoneSizeMax;
 	publicVariable "HVP_phase_num";

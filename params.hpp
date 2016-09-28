@@ -48,14 +48,6 @@ class Params {
 		isGlobal = 1;
 	}
 	
-	class phasetime9 {
-		title = "Phase Time: (Period between phases will be half this if applicable) (If set to Single Phase, this will used for Ability cooldown)";
-		values[] = {0,120,300,600,900,1200};
-		texts[] = {"Adaptive","2 minutes","5 minutes","10 minutes","15 minutes","20 minutes"};
-		default = 0;
-		isGlobal = 1;
-	}
-	
 	class ZoneSizeMax10 {
 		title = "First Zone Size:";
 		values[] = {0,500,1000,1500,2000,2500,3000};
@@ -79,14 +71,6 @@ class Params {
 		default = 0;
 		isGlobal = 1;
 	};
-	
-	class paranormalEvent16 {
-        title = "Paranormal Activity:";
-        values[] = {1,0};
-        texts[] = {"Enabled","Disabled"};
-        default = 0;
-		isGlobal = 1;
-    };
 	
 	class testmode2121 {
 		title = "Testing Mode: (Prevents the game from ending and launches beta features)";
