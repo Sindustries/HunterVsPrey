@@ -262,7 +262,7 @@ cutText ["", "BLACK FADED", 999];
 if (isServer) then {
 	[] spawn HVP_fnc_phaseInit;
 };
-[] call HVP_fnc_eventManager;
+[] spawn HVP_fnc_eventManager;
 //-----------------------------------
 //-PLAYER LOADOUTS
 cutText ["GEARING UP", "BLACK FADED", 999];
@@ -299,6 +299,7 @@ if (player isKindOf "VirtualSpectator_F" && isServer) then {
 [] spawn HVP_fnc_playermarkers;
 //-----------------------------------
 //-TEST MODE CHECK
+private "_allUnits";
 _allUnits = {isPlayer _x && side _x != sideLogic} count playableUnits;
 if (_allUnits isEqualTo 1) then {
 	HVPTestMode = 1;
