@@ -3,7 +3,6 @@
 
 if (!isServer) exitWith {};	
 	
-	sleep 10;
 	_mark_x = _this select 0;
 	_radius_x =  _this select 1;
 	_npos = [getpos _mark_x select 0, getpos _mark_x select 1, 0];
