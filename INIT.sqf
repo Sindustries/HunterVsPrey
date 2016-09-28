@@ -63,13 +63,6 @@ if ((getPlayerUID player) in SIN_adminUIDs) then {
 //-----------------------------------
 player setVariable ["HVP_ready", false, true];
 waitUntil {time > 0};
-private "_allUnits";
-_allUnits = {isPlayer _x && side _x != sideLogic} count playableUnits;
-if (_allUnits isEqualTo 1) then {
-	HVPTestMode = 1;
-} else {
-	HVPTestMode = 0;
-};
 //-----------------------------------
 if (player isKindof "B_Survivor_F" && HVPGameType isEqualTo 1 || player isKindof "O_Survivor_F" && HVPGameType isEqualTo 1) exitWith {
 	["wrongslot",false] spawn BIS_fnc_endMission;
@@ -430,10 +423,9 @@ if (HVPDebugMode isEqualTo 0) then {
 	player allowDamage true;
 	if (playerSide isEqualTo resistance) then {
 		if (HVPGameType isEqualTo 1 || HVPGameType isEqualTo 2) then {
-			player addRating -10000;
+			player addRating -999999;
 		};
 	};
-	[] spawn HVP_fnc_sideTasks;
 	switch (HVPGameType) do {
 		case 1: {
 			maintask = player createSimpleTask ["maintask"];
@@ -471,9 +463,16 @@ if (HVPDebugMode isEqualTo 0) then {
 	
 	sleep 8;
 	[] spawn HVP_fnc_intro;
+	[] spawn HVP_fnc_sideTasks;
 };
 //-----------------------------------
 //-WIN CONDITIONS
+private "_allUnits";
+if (_allUnits isEqualTo 1) then {
+	HVPTestMode = 1;
+} else {
+	HVPTestMode = 0;
+};
 if (isServer && HVPTestMode isEqualTo 0 && HVPDebugMode isEqualTo 0) then {
 	[] spawn HVP_fnc_endConditions;
 };
