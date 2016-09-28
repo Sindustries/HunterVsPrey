@@ -7,6 +7,7 @@ class HVP {
 	
 /* MAIN SETTINGS */
 
+	HVP_ZombieMode = true;				//Set to false to disable zombies
 	HVPStatMode = true;					//Set to false to disable stat saving
 	
 /* ADAPTIVE TIME SETTINGS */
@@ -133,7 +134,6 @@ class SMS {
 };
 	
 class Z {
-	HVP_ZombieMode = true;				//Set to false to disable zombies
 	HVP_maxZombies = 100;				//Total number of alive zombies
 	HVP_zhordeSize = 8; 				//Max num to spawn on each spawner
 	HVP_zSpawnChance = 75;				//Chance of a spawner spawning zombies (%)
