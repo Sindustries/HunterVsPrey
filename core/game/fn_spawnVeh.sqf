@@ -78,6 +78,7 @@ if (isServer) then {
 			if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 				[_spawncar] call HVP_fnc_airdropLoot;
 			};
+			_spawncar setPos (getPos _spawncar);
 			_spawncar allowDamage true;
 			
 			if (HVPZombieMode isEqualTo 1 && (random 100) < 75) then {
