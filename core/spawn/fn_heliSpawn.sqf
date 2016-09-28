@@ -144,7 +144,7 @@ if (_scenario isEqualTo "Land") then {
 	{
 		if (isPlayer _x) then {
 			doGetOut _x;
-			[_x] call ace_hearing_fnc_removeEarplugs;
+			[_x] remoteExec ["ace_hearing_fnc_removeEarplugs", _x];
 			_x removeItem "ACE_earplugs";
 		};
 	} forEach crew _heli;
@@ -179,6 +179,7 @@ if (_scenario isEqualTo "Explode" || _scenario isEqualTo "Parachute") then {
 			waitUntil {(getPosATL _unit select 2) <= 100};
 			[_unit,["OpenParachute",_unit]] remoteExec ["action", _unit];
 			waitUntil {animationState _unit == "para_pilot"};
+			[] spawn HVP_fnc_parasmoke;
 			_packHolder attachTo [vehicle _unit,[-0.07,0.67,-0.13],"pelvis"]; 
 			_packHolder setVectorDirAndUp [[0,-0.2,-1],[0,1,0]];
 			waitUntil {(getPos _unit select 2) < 1 || isTouchingGround _unit};		
@@ -196,15 +197,16 @@ if (_scenario isEqualTo "Explode" || _scenario isEqualTo "Parachute") then {
 			for "_i" from 0 to (count (_items select 0) - 1) do {
 				(unitBackpack _unit) addItemCargoGlobal [(_items select 0) select _i,(_items select 1) select _i]; //return the items
 			};
-			[_unit] call ace_hearing_fnc_removeEarplugs;
+			[_unit] remoteExec ["ace_hearing_fnc_removeEarplugs", _unit];
 			_unit removeItem "ACE_earplugs";
 		} else {
 			_unit addBackpack "b_parachute";
 			waitUntil {(getPosATL _unit select 2) <= 100};
 			[_unit,["OpenParachute",_unit]] remoteExec ["action", _unit];
 			waitUntil {animationState _unit == "para_pilot"};
+			[] spawn HVP_fnc_parasmoke;
 			waitUntil {(getPos _unit select 2) < 1 || isTouchingGround _unit};
-			[_unit] call ace_hearing_fnc_removeEarplugs;
+			[_unit] remoteExec ["ace_hearing_fnc_removeEarplugs", _unit];
 			_unit removeItem "ACE_earplugs";
 		};
 		
