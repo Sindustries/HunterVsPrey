@@ -1,0 +1,23 @@
+/* #Nyrefu
+$[
+	1.063,
+	["hvphud",[[0,0,1,1],0.025,0.04,"GUI_GRID"],0,0,0],
+	[2200,"HVPHUDBG",[1,"",["0.432969 * safezoneW + safezoneX","-0.00599999 * safezoneH + safezoneY","0.134062 * safezoneW","0.044 * safezoneH"],[-1,-1,-1,-1],[-1,-1,-1,-1],[-1,-1,-1,-1],"","-1"],[]],
+	[1800,"HVPHUDabilfrm",[1,"",["0.432969 * safezoneW + safezoneX","-0.00599999 * safezoneH + safezoneY","0.0825 * safezoneW","0.044 * safezoneH"],[-1,-1,-1,-1],[-1,-1,-1,-1],[-1,-1,-1,-1],"","-1"],[]],
+	[1801,"HVPHUDphasefrm",[1,"",["0.515469 * safezoneW + safezoneX","-0.00599999 * safezoneH + safezoneY","0.0515625 * safezoneW","0.044 * safezoneH"],[-1,-1,-1,-1],[-1,-1,-1,-1],[-1,-1,-1,-1],"","-1"],[]],
+	[1000,"HVPHUDabilttltxt",[1,"ABILITY:",["0.459781 * safezoneW + safezoneX","0.00279997 * safezoneH + safezoneY","0.0309375 * safezoneW","0.011 * safezoneH"],[-1,-1,-1,-1],[-1,-1,-1,-1],[-1,-1,-1,-1],"","0.75"],[]],
+	[1002,"HVPHUDphasettltxt",[1,"TIMER:",["0.529906 * safezoneW + safezoneX","0.00279997 * safezoneH + safezoneY","0.020625 * safezoneW","0.011 * safezoneH"],[-1,-1,-1,-1],[-1,-1,-1,-1],[-1,-1,-1,-1],"","0.75"],[]],
+	[1001,"HVPHUDABILDESC",[1,"ARTILLERY STRIKE",["0.438125 * safezoneW + safezoneX","0.0204 * safezoneH + safezoneY","0.0721875 * safezoneW","0.011 * safezoneH"],[-1,-1,-1,-1],[-1,-1,-1,-1],[-1,-1,-1,-1],"","-1"],[]],
+	[1003,"HVPphasetxt",[1,"3 - 12:34",["0.520625 * safezoneW + safezoneX","0.0204 * safezoneH + safezoneY","0.04125 * safezoneW","0.011 * safezoneH"],[-1,-1,-1,-1],[-1,-1,-1,-1],[-1,-1,-1,-1],"","-1"],[]],
+	[2400,"HVPHUDProgressBarLocation",[1,"PROGRESS BAR HERE PLEASE",["0.43297 * safezoneW + safezoneX","0.0413 * safezoneH + safezoneY","0.134062 * safezoneW","0.0055 * safezoneH"],[-1,-1,-1,-1],[-1,-1,-1,-1],[-1,-1,-1,-1],"","-1"],[]],
+	[2201,"HVPHUDBloodBG",[1,"",["0.567031 * safezoneW + safezoneX","-0.00599999 * safezoneH + safezoneY","0.0360937 * safezoneW","0.044 * safezoneH"],[-1,-1,-1,-1],[-1,-1,-1,-1],[-1,-1,-1,-1],"","-1"],[]],
+	[1802,"HVPHUDBloodFRM",[1,"",["0.567031 * safezoneW + safezoneX","-0.00599999 * safezoneH + safezoneY","0.0360937 * safezoneW","0.044 * safezoneH"],[-1,-1,-1,-1],[-1,-1,-1,-1],[-1,-1,-1,-1],"","-1"],[]],
+	[1200,"HVPHUD_bloodimg",[1,"#(argb,8,8,3)color(1,1,1,1)",["0.570125 * safezoneW + safezoneX","0.0138 * safezoneH + safezoneY","0.0103125 * safezoneW","0.022 * safezoneH"],[-1,-1,-1,-1],[-1,-1,-1,-1],[-1,-1,-1,-1],"","-1"],[]],
+	[1004,"HVPHUDBloodcount",[1,"100%",["0.579407 * safezoneW + safezoneX","0.0204 * safezoneH + safezoneY","0.020625 * safezoneW","0.011 * safezoneH"],[-1,-1,-1,-1],[-1,-1,-1,-1],[-1,-1,-1,-1],"","-1"],[]],
+	[1005,"HVPHUDbloodtxt",[1,"BLOOD",["0.572187 * safezoneW + safezoneX","0.00280001 * safezoneH + safezoneY","0.0257812 * safezoneW","0.011 * safezoneH"],[-1,-1,-1,-1],[-1,-1,-1,-1],[-1,-1,-1,-1],"","0.75"],[]],
+	[1201,"HVPHUB_artyIcon",[1,"#(argb,8,8,3)color(1,1,1,1)",["0.329844 * safezoneW + safezoneX","0.00500001 * safezoneH + safezoneY","0.020625 * safezoneW","0.033 * safezoneH"],[-1,-1,-1,-1],[-1,-1,-1,-1],[-1,-1,-1,-1],"","-1"],[]],
+	[1202,"HVPHUD_quakeIcon",[1,"#(argb,8,8,3)color(1,1,1,1)",["0.407187 * safezoneW + safezoneX","0.00500001 * safezoneH + safezoneY","0.020625 * safezoneW","0.033 * safezoneH"],[-1,-1,-1,-1],[-1,-1,-1,-1],[-1,-1,-1,-1],"","-1"],[]],
+	[1203,"HVPHUD_uavIcon",[1,"#(argb,8,8,3)color(1,1,1,1)",["0.381406 * safezoneW + safezoneX","0.00500001 * safezoneH + safezoneY","0.020625 * safezoneW","0.033 * safezoneH"],[-1,-1,-1,-1],[-1,-1,-1,-1],[-1,-1,-1,-1],"","-1"],[]],
+	[1204,"HVPHUD_chemAttackIcon",[1,"#(argb,8,8,3)color(1,1,1,1)",["0.355625 * safezoneW + safezoneX","0.00500001 * safezoneH + safezoneY","0.020625 * safezoneW","0.033 * safezoneH"],[-1,-1,-1,-1],[-1,-1,-1,-1],[-1,-1,-1,-1],"","-1"],[]]
+]
+*/

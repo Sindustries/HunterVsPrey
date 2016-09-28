@@ -1,0 +1,52 @@
+onLoadName = "Hunter vs Prey";
+OnLoadMission = "Hunter. Survivor. Prey.";
+dev = "Sinbane";
+author = "Sinbane";
+//briefingName = "briefingname";
+overviewText = "Chapter 2";
+//overviewPicture = "\a3\Missions_F_Beta\data\img\showcase_commanding_I_overview_ca.paa";
+overviewPicture = "hvp2.paa";
+LoadScreen = "";
+
+class Header
+{
+ gameType = TDM ;            //DM, Team, Coop, ...
+ minPlayers = 1;             //min # of players the mission supports
+ maxPlayers = 30;            //Max # of players the mission supports
+};
+
+respawnButton = 0;
+respawn = 3;
+respawnDialog = 0;
+respawnDelay = 999999;
+respawnTemplates[] = {""};
+disabledAI = 1;
+disableChannels[]={2,4,6};
+joinUnassigned = 1;
+enableDebugConsole = 1;
+
+#include "params.hpp"
+#include "CfgMaster.hpp"
+#include "sounds.hpp"
+#include "debriefing.hpp"
+#include "GUI\defines.hpp"
+#include "SINadmin\SIN_admin.hpp"
+
+class CfgFunctions {
+    #include "Functions.hpp"
+};
+
+class RscTitles {
+	#include "GUI\HVP_HUD.hpp"
+	#include "GUI\HVP_HUD_subs.hpp"
+	#include "GUI\HVP_HUD_blood.hpp"
+	
+	class Default 
+	{
+		idd = -1;
+		fadein = 0;
+		fadeout = 0;
+		duration = 0;
+	};
+	
+};
