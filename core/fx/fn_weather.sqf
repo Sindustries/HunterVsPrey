@@ -11,13 +11,13 @@ _dayMult = ["daytimeMultiplier"] call HVP_fnc_getSetting;
 _nightMult = ["nighttimeMultiplier"] call HVP_fnc_getSetting;
 
 if (HVPGameType isEqualTo 1) then {
-	setTimeMultiplier 1;
+	setTimeMultiplier 0;
 };
 if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
-	if (daytime < 6 && daytime >= 0 || daytime < 24 && daytime > 18) then {
+	if (sunOrMoon isEqualTo 0) then {
 		setTimeMultiplier _nightMult;
 	};
-	if (daytime > 6 && daytime <= 18) then {
+	if (sunOrMoon isEqualTo 1) then {
 		setTimeMultiplier _dayMult;
 	};
 	[_dayMult,_nightMult] spawn {
@@ -25,14 +25,14 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 		_dayMult = _this select 0;
 		_nightMult = _this select 1;
 		while {true} do {
-			waitUntil {sleep 1; daytime > 5 && daytime < 6 || daytime > 17 && daytime < 18};
-			if (daytime > 5 && daytime < 6) then {
+			waitUntil {sleep 2; sunOrMoon isEqualTo 0 || sunOrMoon isEqualTo 1};
+			if (sunOrMoon isEqualTo 1) then {
 				setTimeMultiplier _dayMult;
-				waitUntil {sleep 1; daytime > 6};
+				waitUntil {sleep 2; sunOrMoon isEqualTo 0};
 			};
-			if (daytime > 17 && daytime < 18) then {
+			if (sunOrMoon isEqualTo 0) then {
 				setTimeMultiplier _nightMult;
-				waitUntil {sleep 1; daytime > 18};
+				waitUntil {sleep 2; sunOrMoon isEqualTo 1};
 			};
 		sleep 1;
 		};
@@ -47,11 +47,11 @@ setWind [0, 0, true];
 	private ["_onGround","_allUnits"];
 	waitUntil {HVP_phase_num isEqualTo 1};
 	
-	_onGround = {isPlayer _x && isTouchingGround _x && (getPosATL _x select 2) < 1} count allUnits;
-	_allUnits = {isPlayer _x && side _x != sideLogic} count allUnits;
+	_onGround = {isPlayer _x && isTouchingGround _x && (getPosATL _x select 2) < 1} count playableUnits;
+	_allUnits = {isPlayer _x && side _x != sideLogic} count playableUnits;
 	while {_onGround != _allUnits} do {
-		_onGround = {isPlayer _x && isTouchingGround _x && (getPosATL _x select 2) < 1} count allUnits;
-		_allUnits = {isPlayer _x && side _x != sideLogic} count allUnits;
+		_onGround = {isPlayer _x && isTouchingGround _x && (getPosATL _x select 2) < 1} count playableUnits;
+		_allUnits = {isPlayer _x && side _x != sideLogic} count playableUnits;
 		sleep 5;
 	};
 	sleep 10;
@@ -72,28 +72,20 @@ if (HVPGameType isEqualTo 1) exitWith {
 //-CRUCIBLE & PREDATOR MODE
 
 if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {	
-	if (daytime < 6 && daytime >= 0 || daytime < 24 && daytime > 18) then {
-		0 setOvercast (random 1);
-		0 setFog (random 0.8);
-	};
-	if (daytime > 6 && daytime <= 18) then {
-		0 setOvercast (random 1);
-		0 setFog (random 0.8);
-	};
-	waitUntil {sleep 1; daytime > 5 && daytime < 6 || daytime > 17 && daytime < 18};
 	while {true} do {
-		if (daytime > 5 && daytime < 6) then {
+		if (sunOrMoon isEqualTo 1) then {
 			(30 * timeMultiplier) setOvercast (random 1);
-			waitUntil {sleep 1; daytime > 6};
+			sleep 30;
 			(30 * timeMultiplier) setFog (random 0.8);
+			waitUntil {sleep 5; sunOrMoon isEqualTo 0};
 		};
-		if (daytime > 17 && daytime < 18) then {
+		if (sunOrMoon isEqualTo 0) then {
 			(30 * timeMultiplier) setOvercast (random 1);
-			waitUntil {sleep 1; daytime > 18};
+			sleep 30;
 			(30 * timeMultiplier) setFog (random 0.8);
+			waitUntil {sleep 5; sunOrMoon isEqualTo 1};
 		};
 		sleep 1;
-		waitUntil {sleep 1; daytime > 5 && daytime < 6 || daytime > 17 && daytime < 18};
 	};
 };
 
