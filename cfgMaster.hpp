@@ -116,8 +116,8 @@ class HVP {
 	singlePhaseShiftSize = 5;			//Distance (METERS) single phase type will move by every second
 	
 	phaseBreakTime = 0.5;				//Multiplier applied to active phase time to get inactive phase time	
-	phaseTimeDecay = 0.75;				//Multiplier applied to overall phase time after each phase
-	phaseSizeDecay = 0.75;				//Multiplier applied to phase size between each phase
+	phaseTimeDecay = 0.8;				//Multiplier applied to overall phase time after each phase
+	phaseSizeDecay = 0.8;				//Multiplier applied to phase size between each phase
 	
 };
 	
