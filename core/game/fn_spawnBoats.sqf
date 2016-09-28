@@ -38,14 +38,13 @@ if (isServer) then {
 		_shorePos = [HVP_pos,0,HVPZoneSizeMax,0,0,9999,1] call BIS_fnc_findSafePos;
 		_posCheck = [_shorePos] call SIN_fnc_checkPos;
 		if (_posCheck) then {
-			_spawnPos = [_shorePos,0,50,0,2,9999,0] call BIS_fnc_findSafePos;
+			_spawnPos = [_shorePos,0,50,0.25,2,0,0] call BIS_fnc_findSafePos;
 			_posCheck = [_spawnPos] call SIN_fnc_checkPos;
 			_distCheck = [_spawnPos,_usedPosArray,_minDistSpawn] call SIN_fnc_checkDist;
 			if (_posCheck && _distCheck) then {
 				_grp = createGroup WEST;
 				_monkey = _grp createUnit ["B_crew_F",_spawnPos, [], 0, "FORM"];
 				_monkey hideobjectglobal true;
-				sleep 0.05;
 				_depth = (getPosATL _monkey select 2);
 				if (_depth >= 1) then {
 					_spawnBoat = (selectRandom _boatSelection) createVehicle _spawnPos;
@@ -72,7 +71,6 @@ if (isServer) then {
 					_usedPosArray pushBackUnique _spawnPos;
 					_boatsCreated = _boatsCreated + 1;
 				};
-				sleep 0.05;
 				deleteVehicle _monkey;
 			} else {
 				_errorCount = _errorCount + 1;
