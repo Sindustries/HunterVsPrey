@@ -35,7 +35,7 @@ HVP_gasMasks = ["HVP_gasMasks"] call HVP_fnc_getSetting;
 HVP_mines = ["HVP_mines"] call HVP_fnc_getSetting;
 HVP_redGuns = ["HVP_redGuns"] call HVP_fnc_getSetting;
 HVP_redAmmo = ["HVP_redAmmo"] call HVP_fnc_getSetting;
-HVP_ZombieMode = ["HVP_ZombieMode"] call HVP_fnc_getSetting;
+HVPZombieMode = ["HVP_ZombieMode"] call HVP_fnc_getSetting;
 HVPStatMode = ["HVPStatMode"] call HVP_fnc_getSetting;
 /* Disable stat-saving if debug mode */
 if (HVPDebugMode isEqualTo 1) then {
@@ -218,7 +218,7 @@ if (isServer) then {
 ("HUDProgressBar" call BIS_fnc_rscLayer) cutRsc ["HVPHUDProgressBar","PLAIN",-1,true];
 uiNameSpace getVariable "PBarProgress" ctrlSetTextColor [0.2, 0.5, 0.9, 1];
 
-if (HVP_ZombieMode isEqualTo 1) then {
+if (HVPZombieMode isEqualTo 1) then {
 	cutText ["RAISING THE DEAD", "BLACK FADED", 999];
 	if (isServer) then {
 		["Z"] call HVP_fnc_getSettings;
