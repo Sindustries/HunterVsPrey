@@ -131,7 +131,7 @@ Sinspawn_lootList = [
 
 ], [ //NIGHT VISION
 
-], [ //MINES
+], [ //SUPPRESORS
 
 ]];
 };
@@ -211,6 +211,10 @@ Sinspawn_lootList = [
 "UGL_FlareYellow_F",
 "UGL_FlareCIR_F",
 "HandGrenade",
+"APERSBoundingMine_Range_Mag",
+"DemoCharge_Remote_Mag",
+"APERSTripMine_Wire_Mag",
+"ClaymoreDirectionalMine_Remote_Mag",
 "SmokeShell",
 "SmokeShellRed",
 "SmokeShellGreen",
@@ -251,16 +255,6 @@ Sinspawn_lootList = [
 "optic_LRPS",
 "optic_AMS",
 "optic_KHS_blk",
-"muzzle_snds_H",
-"muzzle_snds_L",
-"muzzle_snds_M",
-"muzzle_snds_B",
-"muzzle_snds_H_MG",
-"muzzle_snds_acp",
-"muzzle_snds_338_black",
-"muzzle_snds_93mmg",
-"muzzle_snds_58_blk_F",
-"muzzle_snds_65_TI_blk_F",
 "acc_flashlight",
 "acc_pointer_IR"
 ], [ //MEDICAL
@@ -499,11 +493,17 @@ Sinspawn_lootList = [
 "NVGoggles_OPFOR",
 "NVGoggles_blk_F",
 "O_NVGoggles_urb_F"
-], [ //MINES
-"APERSBoundingMine_Range_Mag",
-"DemoCharge_Remote_Mag",
-"APERSTripMine_Wire_Mag",
-"ClaymoreDirectionalMine_Remote_Mag"
+], [ //SUPPRESSORS
+"muzzle_snds_H",
+"muzzle_snds_L",
+"muzzle_snds_M",
+"muzzle_snds_B",
+"muzzle_snds_H_MG",
+"muzzle_snds_acp",
+"muzzle_snds_338_black",
+"muzzle_snds_93mmg",
+"muzzle_snds_58_blk_F",
+"muzzle_snds_65_TI_blk_F"
 ]];
 };
 
@@ -511,7 +511,7 @@ Sinspawn_lootList = [
 //-EXTRAS
 
 if (HVPZombieMode isEqualTo 1) then {
-	(Sinspawn_lootList select 2) pushBack "RyanZombiesAntiVirusTemporary_Item";
+	(Sinspawn_lootList select 3) pushBack "RyanZombiesAntiVirusTemporary_Item";
 	(Sinspawn_lootList select 2) pushBack "RyanZombiesAntiVirusCure_Item";
 };
 
