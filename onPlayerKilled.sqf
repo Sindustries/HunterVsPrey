@@ -22,9 +22,9 @@ if (HVPGameType isEqualTo 1) then {
 //-SPAWN ZOMBEES
 
 if (HVPZombieMode isEqualTo 1) then {
-	[(getPos player)] remoteExec ["z_fnc_setSpawn", 2];
-	[(getPos player)] remoteExec ["z_fnc_setSpawn", 2];
-	[(getPos player)] remoteExec ["z_fnc_setSpawn", 2];
+	[(getPos player)] remoteExec ["Z_fnc_setSpawn", 2];
+	[(getPos player)] remoteExec ["Z_fnc_setSpawn", 2];
+	[(getPos player)] remoteExec ["Z_fnc_setSpawn", 2];
 };
 
 //-----------------------------------

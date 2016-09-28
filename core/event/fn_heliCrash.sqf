@@ -67,7 +67,7 @@ _eventHeli setDamage 0.97;
 waitUntil {isTouchingGround _eventHeli};
 
 if (HVPZombieMode isEqualTo 1) then {
-	[(getPos _eventHeli)] spawn Z_fnc_setZSpawn;
+	[(getPos _eventHeli)] spawn Z_fnc_setSpawn;
 };
 
 for "_counter" from 1 to 2 do {
