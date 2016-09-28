@@ -75,6 +75,15 @@ class HVP_Core {
 		class paranormal {};
 	};
 	
+	class paranormal {
+		file = "core\event\paranormal";
+		class paraChat {};
+		class paraDarkness {};
+		class paraDecoy {};
+		class paraGhost {};
+		class paraTeleport {};
+	}
+	
 	class abilitycore {
 		file = "core\ability";
 		class abilitymanager {};
