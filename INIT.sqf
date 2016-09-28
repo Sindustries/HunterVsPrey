@@ -240,7 +240,7 @@ if (HVPZombieMode isEqualTo 1) then {
 		HVPzombiesLoaded = true;
 		publicVariable "HVPZombiesLoaded";
 	} else {
-		waitUntil {HVPZombiesLoaded isEqualTo true}
+		waitUntil {HVPZombiesLoaded isEqualTo true};
 	};
 };
 
@@ -251,7 +251,7 @@ if (HVPLootMode > 0) then {
 		HVPLootLoaded = true;
 		publicVariable "HVPLootLoaded";
 	} else {
-		waitUntil {HVPLootLoaded isEqualTo "true"};
+		waitUntil {HVPLootLoaded isEqualTo true};
 	};
 };
 
