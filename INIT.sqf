@@ -300,7 +300,7 @@ if (player isKindOf "VirtualSpectator_F" && isServer) then {
 //-----------------------------------
 //-TEST MODE CHECK
 private "_allUnits";
-_allUnits = {isPlayer _x && alive _x && side _x != sideLogic} count playableUnits;
+_allUnits = {isPlayer _x && side _x != sideLogic} count playableUnits;
 if (_allUnits isEqualTo 1) then {
 	HVPTestMode = 1;
 } else {
