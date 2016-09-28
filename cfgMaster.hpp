@@ -8,6 +8,7 @@ class HVP {
 /* MAIN SETTINGS */
 
 	HVP_ZombieMode = true;				//Set to false to disable zombies
+	HVPDebugMode = false;				//Enable lots of debugging info
 	HVPStatMode = true;					//Set to false to disable stat saving
 	
 /* ADAPTIVE TIME SETTINGS */

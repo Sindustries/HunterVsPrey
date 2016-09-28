@@ -23,8 +23,6 @@ HVPPhaseSpacing = (paramsArray select 5);
 HVPZoneSizeMax = (paramsArray select 6);
 //-EXTRAS
 HVPAntiCamp = (paramsArray select 8);
-HVPTestMode = (paramsArray select 9);
-HVPDebugMode = (paramsArray select 10);
 //-----------------------------------
 ["HVP"] call HVP_fnc_getSettings;
 SIN_adminUIDs = ["SIN_adminUIDs"] call HVP_fnc_getSetting;
@@ -35,6 +33,7 @@ HVP_redGuns = ["HVP_redGuns"] call HVP_fnc_getSetting;
 HVP_redAmmo = ["HVP_redAmmo"] call HVP_fnc_getSetting;
 HVPZombieMode = ["HVP_ZombieMode"] call HVP_fnc_getSetting;
 HVPStatMode = ["HVPStatMode"] call HVP_fnc_getSetting;
+HVPDebugMode = ["HVPDebugMode"] call HVP_fnc_getSetting;
 /* Disable stat-saving if debug mode */
 if (HVPDebugMode isEqualTo 1) then {
 	HVPStatMode = 0;
@@ -64,6 +63,13 @@ if ((getPlayerUID player) in SIN_adminUIDs) then {
 //-----------------------------------
 player setVariable ["HVP_ready", false, true];
 waitUntil {time > 0};
+private "_allUnits";
+_allUnits = {isPlayer _x && side _x != sideLogic} count playableUnits;
+if (_allUnits isEqualTo 1) then {
+	HVPTestMode = 1;
+} else {
+	HVPTestMode = 0;
+};
 //-----------------------------------
 if (player isKindof "B_Survivor_F" && HVPGameType isEqualTo 1 || player isKindof "O_Survivor_F" && HVPGameType isEqualTo 1) exitWith {
 	["wrongslot",false] spawn BIS_fnc_endMission;
