@@ -15,6 +15,10 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 	uiNameSpace getVariable "HVP_HUD_AbilTitle" ctrlSetTextColor [0, 0, 1, 1];
 };
 
-[HVP_abilName] spawn HVP_fnc_addAbility;
+if (isNil "HVP_abilName") then {
+	[] spawn HVP_fnc_addAbility;
+} else {
+	[HVP_abilName] spawn HVP_fnc_addAbility;
+};
 
 //-----------------------------------
