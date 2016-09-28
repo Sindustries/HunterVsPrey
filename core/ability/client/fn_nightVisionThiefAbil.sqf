@@ -13,6 +13,3 @@
 titleText ["NIGHT VISION THIEF ACTIVATED", "PLAIN DOWN", 0.5];
 
 //-----------------------------------
-//-ADD AT NEXT PHASE
-
-["NightVisionThief"] spawn HVP_fnc_addAbility;

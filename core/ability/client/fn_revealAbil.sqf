@@ -14,6 +14,3 @@
 	titleText ["ENEMIES REVEALED", "PLAIN DOWN", 0.5];
 
 //-----------------------------------
-//-ADD AT NEXT PHASE
-
-["Reveal"] spawn HVP_fnc_addAbility;

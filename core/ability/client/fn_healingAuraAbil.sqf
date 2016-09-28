@@ -18,6 +18,3 @@ if (HVPGameType isEqualTo 2) then {
 };
 
 //-----------------------------------
-//-ADD AT NEXT PHASE
-
-["HealingAura"] spawn HVP_fnc_addAbility;	

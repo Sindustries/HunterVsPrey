@@ -14,6 +14,3 @@ _safePlayer = player;
 titleText ["BANISH ACTIVATED", "PLAIN DOWN", 0.5];
 
 //-----------------------------------
-//-ADD AT NEXT PHASE
-
-["Banish"] spawn HVP_fnc_addAbility;	

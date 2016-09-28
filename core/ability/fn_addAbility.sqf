@@ -29,13 +29,14 @@ switch (HVPPhaseType) do {
 if (HVPGameType isEqualTo 1) then {	
 	{	
 		if (_setAbil isEqualTo (_x select 0)) then {
-			HVP_abilName = (_x select 1);
-			systemChat format["%1",HVP_abilName];
+			HVP_abilName = (_x select 0);
+			HVP_abilDisplay	= (_x select 1);
+			systemChat format["%1",HVP_abilDisplay];
 			systemChat format["%1",(_x select 2)];
 			if ((_x select 4) isEqualTo "true") then {
 				HVP_Ability = [player,(_x select 0)] call BIS_fnc_addCommMenuItem;
 			} else {
-				uiNameSpace getVariable "HVP_HUD_AbilTitle" ctrlSetText format["%1",HVP_abilName];
+				uiNameSpace getVariable "HVP_HUD_AbilTitle" ctrlSetText format["%1",HVP_abilDisplay];
 				uiNameSpace getVariable "HVP_HUD_AbilTitle" ctrlSetTextColor [0, 1, 0, 1];
 				//HVP_abilExec = (_x select 3);
 				player setVariable ["AbilExec",(_x select 3),false];

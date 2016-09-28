@@ -12,7 +12,4 @@ titleText ["DISARM ACTIVATED", "PLAIN DOWN", 0.5];
 
 [(getPos player),player] remoteExec ["HVP_fnc_disarmAbilEffect", 0];
 
-//-----------------------------------
-//-ADD AT NEXT PHASE
-
-["Disarm"] spawn HVP_fnc_addAbility;	
+//-----------------------------------	

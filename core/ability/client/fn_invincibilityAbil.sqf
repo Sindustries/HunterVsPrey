@@ -25,6 +25,3 @@ deleteVehicle _chemLight;
 titleText ["INVINCIBILITY DEACTIVATED", "PLAIN DOWN", 0.5];
 
 //-----------------------------------
-//-ADD AT NEXT PHASE
-
-["Invincibility"] spawn HVP_fnc_addAbility;	

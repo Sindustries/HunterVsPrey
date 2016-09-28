@@ -21,6 +21,3 @@ player enableStamina true;
 player setVariable ["isFatigueFree",false];
 
 //-----------------------------------
-//-ADD AT NEXT PHASE
-
-["FatigueFree"] spawn HVP_fnc_addAbility;	

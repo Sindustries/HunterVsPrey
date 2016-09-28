@@ -13,6 +13,3 @@ titleText ["FATIGUE AURA ACTIVATED", "PLAIN DOWN", 0.5];
 [(getPos player),player] remoteExec ["HVP_fnc_fatigueAuraAbilEffect", 0];
 
 //-----------------------------------
-//-ADD AT NEXT PHASE
-
-["FatigueAura"] spawn HVP_fnc_addAbility;	

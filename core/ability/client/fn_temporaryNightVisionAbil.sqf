@@ -20,6 +20,3 @@ titleText ["TEMPORARY NIGHT VISION", "PLAIN DOWN", 0.5];
 player action ["nvGogglesOff", player];
 	
 //-----------------------------------
-//-ADD AT NEXT PHASE
-
-["TemporaryNightVision"] spawn HVP_fnc_addAbility;	

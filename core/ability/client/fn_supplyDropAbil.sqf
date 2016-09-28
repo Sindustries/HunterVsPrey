@@ -23,7 +23,4 @@ while {!_posFound} do {
 
 titleText ["SUPPLY DROP DEPLOYED", "PLAIN DOWN", 0.5];
 
-//-----------------------------------
-//-ADD AT NEXT PHASE
-
-["SupplyDrop"] spawn HVP_fnc_addAbility;	
+//-----------------------------------	

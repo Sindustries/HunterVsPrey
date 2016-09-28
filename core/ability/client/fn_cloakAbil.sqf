@@ -19,6 +19,3 @@ _time = (_minTime + random(_maxTime - _minTime));
 titleText ["CLOAK DEACTIVATED", "PLAIN DOWN", 0.5];
 
 //-----------------------------------
-//-ADD AT NEXT PHASE
-
-["Cloak"] spawn HVP_fnc_addAbility;	

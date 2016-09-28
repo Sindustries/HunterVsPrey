@@ -26,7 +26,4 @@ while {!_spawnFound} do {
 	};
 };
 
-//-----------------------------------
-//-ADD AT NEXT PHASE
-
-["Escape"] spawn HVP_fnc_addAbility;	
+//-----------------------------------	

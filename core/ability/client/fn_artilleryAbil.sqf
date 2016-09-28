@@ -45,6 +45,3 @@ while {true} do {
 };
 
 //-----------------------------------
-//-ADD AT NEXT PHASE
-
-["Artillery"] spawn HVP_fnc_addAbility;

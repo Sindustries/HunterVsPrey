@@ -13,6 +13,3 @@ titleText ["BIOHAZARD ACTIVATED", "PLAIN DOWN", 0.5];
 [] call HVP_fnc_biohazardAbilEffect;
 
 //-----------------------------------
-//-ADD AT NEXT PHASE
-
-["Biohazard"] spawn HVP_fnc_addAbility;	
