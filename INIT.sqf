@@ -298,6 +298,15 @@ if (player isKindOf "VirtualSpectator_F" && isServer) then {
 //-PLAYER MARKERS
 [] spawn HVP_fnc_playermarkers;
 //-----------------------------------
+//-TEST MODE CHECK
+private "_allUnits";
+_allUnits = {isPlayer _x && alive _x && side _x != sideLogic} count playableUnits;
+if (_allUnits isEqualTo 1) then {
+	HVPTestMode = 1;
+} else {
+	HVPTestMode = 0;
+};
+//-----------------------------------
 //-PLAYER SPAWN
 cutText ["PREPARING TO SPAWN", "BLACK FADED", 999];
 player setVariable ["HVP_ready", true, true];
@@ -467,12 +476,6 @@ if (HVPDebugMode isEqualTo 0) then {
 };
 //-----------------------------------
 //-WIN CONDITIONS
-private "_allUnits";
-if (_allUnits isEqualTo 1) then {
-	HVPTestMode = 1;
-} else {
-	HVPTestMode = 0;
-};
 if (isServer && HVPTestMode isEqualTo 0 && HVPDebugMode isEqualTo 0) then {
 	[] spawn HVP_fnc_endConditions;
 };
