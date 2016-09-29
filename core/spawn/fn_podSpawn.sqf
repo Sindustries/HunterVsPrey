@@ -31,29 +31,13 @@ _light = createVehicle ["Land_Flush_Light_red_F", (getPos _pod),[], 0, "NONE"];
 _light attachTo [_pod, [0,0,0.7]];
 
 //-----------------------------------
-//-MOVE PLAYERS INTO POD
+//-MOVE PLAYER INTO POD
 
-_index = 2;
+sleep 1;
+player moveInCargo [_pod, 2];
+player allowDamage false;
+player setVariable ["HVP_spawned", true, true];
 
-if (HVPGameType isEqualTo 1) then {
-	_side = _this select 0;
-	{
-		if (isPlayer _x && side _x isEqualTo _side) then {
-			sleep 1;
-			_x moveInCargo [_pod, _index];
-			_x allowDamage false;
-			_x setVariable ["HVP_spawned", true, true];
-			_index = _index + 1;
-		};
-	} forEach allUnits;
-};
-
-if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
-	sleep 1;
-	player moveInCargo [_pod, _index];
-	player allowDamage false;
-	player setVariable ["HVP_spawned", true, true];
-};
 
 //-----------------------------------
 //- WAIT UNTIL CRASH 
