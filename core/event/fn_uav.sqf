@@ -6,8 +6,6 @@
 
 	private ["_uavSelection","_uavArea","_uavSpawnPos","_uavScanSize","_uavTime","_uav","_wp","_uavUpdate"];
 	
-	hint "on yer uav!";
-	
 	_uavSelection = _this select 0;
 	_uavArea = _this select 1;
 	_uavScanSize = _this select 2; //150-200
@@ -25,7 +23,7 @@
 	_wp setWaypointLoiterType "CIRCLE_L";
 	_wp setWaypointLoiterRadius (_uavScanSize * 0.9);
 	
-	if (HVPDebugMode == 1) then {
+	//if (HVPDebugMode == 1) then {
 		private["_uavMarkername", "_UAVMarker"];
 		_uavMarkername = format["UAV%1",(getPos _uav)];
 		_UAVMarker = createMarker [_uavMarkername,(getPos _uav)];
@@ -43,9 +41,9 @@
 			};
 			deleteMarker _UAVMarker;
 		};
-	};
+	//};
 	
-	waitUntil {_uav distance2D _uavArea <= _uavScanSize || (damage _uav) >= 0.7 || !alive _uav};	
+	waitUntil {_uav distance2D _uavArea <= (_uavScanSize+500) || (damage _uav) >= 0.7 || !alive _uav};	
 	if ((damage _uav) >= 0.7) exitWith {
 		_uav setDamage 1;
 	};
