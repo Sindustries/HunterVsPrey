@@ -86,16 +86,16 @@ sleep 3;
 //-----------------------------------
 //-MARKER
 
-_aMarkername = format["nuke%1",_nukePos];
-_nukeMarker = createMarker [_aMarkername, _nukePos];
+_aMarkername = format["nuke%1",(getPos _obj_nuke)];
+_nukeMarker = createMarker [_aMarkername, (getPos _obj_nuke)];
 _nukeMarker setMarkerShape "ELLIPSE";
 _nukeMarker setMarkerBrush "Grid";
 _nukeMarker setMarkerColor "ColorOpfor";
 _nukeMarker setMarkerSize [(_radius + 25),(_radius + 25)];
 _nukeMarker setMarkerAlpha 1;
 
-_aMarkername2 = format["nuke2%1",_nukePos];
-_nukeMarker2 = createMarker [_aMarkername2, _nukePos];
+_aMarkername2 = format["nuke2%1",(getPos _obj_nuke)];
+_nukeMarker2 = createMarker [_aMarkername2, (getPos _obj_nuke)];
 _nukeMarker2 setMarkerShape "ICON";
 _nukeMarker2 setMarkerType "MinefieldAP";
 _nukeMarker2 setMarkerColor "colorIndependent";
