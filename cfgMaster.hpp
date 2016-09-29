@@ -124,7 +124,7 @@ class HVP {
 class SMS {
 	SMS_maxBlood = 1000;				//Max blood level
 	SMS_bloodRegen = 5;					//How much blood to be replenished
-	SMS_bloodRegenRate = 10;			//How often to replenish (in sec)
+	SMS_bloodRegenRate = 5;			//How often to replenish (in sec)
 	SMS_bleedRate = 8;					//How often bleed ticks happen (in sec)
 	SMS_passOutNum = 0.40;				//At what % blood to pass out
 	SMS_passOutChance = 10;				//Chance of passing out each bleed tick
