@@ -7,7 +7,7 @@ private ["_playerPosArray","_zIndex","_index"];
 //-----------------------------------
 
 	while {true} do {
-		sleep 20;	
+		sleep 10;	
 		
 		if (sunOrMoon isEqualTo 0 || fog >= 0.5 || overcast >= 0.7) then {
 			_playerPosArray = [];
