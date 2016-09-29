@@ -182,8 +182,7 @@ for "_i" from 0 to ((count _cfg)-1) do {
 		waitUntil {sleep 5; HVP_phase_num >= 1};
 		
 		while {true} do {
-			sleep 30; //HVP_rareEvent;
-			hint "yo dwg i hear u lyk bombz";
+			sleep HVP_rareEvent;
 			
 			_nukePos = [HVP_phase_pos,0,(HVP_phase_radius * 0.5),0,0,0,0] call SIN_fnc_findPos;
 			[(_this select 0),_nukePos,(HVP_phase_radius * 0.2),true,true,true,true] call HVP_fnc_nuke;
