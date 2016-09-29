@@ -30,7 +30,7 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 				setTimeMultiplier _dayMult;
 				waitUntil {sleep 2; sunOrMoon isEqualTo 0};
 			};
-			if (sunOrMoon isEqualTo 0) then {
+			if (sunOrMoon > 0) then {
 				setTimeMultiplier _nightMult;
 				waitUntil {sleep 2; sunOrMoon isEqualTo 1};
 			};
