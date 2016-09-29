@@ -193,7 +193,7 @@ for "_i" from 0 to ((count _cfg)-1) do {
 //-UAV
 
 	[_uavSelection] spawn {
-		private ["_temp","_uavScanSize","_uavTime","_uavUpdate","_uavScanPos","_uavSpawnPos"];		
+		private ["_uavScanSize","_uavTime","_uavUpdate","_uavScanPos"];		
 		while {true} do {
 		
 			sleep 30; //HVP_rareEvent;
@@ -203,7 +203,7 @@ for "_i" from 0 to ((count _cfg)-1) do {
 			_uavUpdate = 3;
 			
 			_uavScanPos = [HVP_phase_pos,0,(HVP_phase_radius * 0.9),0,0,0,0] call SIN_fnc_findPos;
-			[(_this select 0),_uavSpawnPos,_uavScanSize,_uavTime,_uavUpdate] call HVP_fnc_uav;
+			[(_this select 0),_uavScanPos,_uavScanSize,_uavTime,_uavUpdate] call HVP_fnc_uav;
 		};
 	};
 
