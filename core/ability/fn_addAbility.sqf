@@ -13,7 +13,8 @@ params [
 switch (HVPPhaseType) do {
 	case 1: {
 		_currentPhase = HVP_phase_num;
-		waitUntil {sleep 1; HVP_phase_num isEqualTo (_currentPhase + 1)};		
+		waitUntil {sleep 1; HVP_phase_num isEqualTo (_currentPhase + 1)};
+		sleep 1;
 	};
 	case 2: {
 		if (HVP_phase_active isEqualTo "false") then {
