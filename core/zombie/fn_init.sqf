@@ -4,7 +4,7 @@
 	Author: Sinbane
 	Grabs zombies from Ryans Zombie & Demon's mod and spawns them when called
 */
-private ["_cfg","_i","_cfgName","_counter","_temp"];
+private ["_cfg","_i","_cfgName","_counter","_temp","_exclusions"];
 //-----------------------------------
 //-DON'T EDIT
 ["Z"] call HVP_fnc_getSettings;
