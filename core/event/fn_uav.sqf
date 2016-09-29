@@ -42,16 +42,18 @@
 		};
 	};
 	
-	waitUntil {_uav distance2D _uavArea <= _uavScanSize || (damage _uav) >= 0.7};	
+	waitUntil {_uav distance2D _uavArea <= _uavScanSize || (damage _uav) >= 0.7 || !alive _uav};	
 	if ((damage _uav) >= 0.7) exitWith {
 		_uav setDamage 1;
 	};
+	if (!alive _uav) exitWith {};
 	
 	{titleText ["UAV SCANNING IN PROGRESS", "PLAIN DOWN", 0.5];} remoteExec ["bis_fnc_call", 0];
 	"WARNING: A rogue UAV is scanning an area, shoot it down or avoid the area" remoteExec ["systemChat", 0],
 	["HUDuavLayer","HVPHUDuavImg"] remoteExec ["HVP_fnc_showEventIcon", 0];
 	
 	while {_uavTime > 0} do {
+		if (!alive _uav) exitWith {};
 		if ((damage _uav) > 0.7) exitWith {_uav setDamage 1;};
 		if (_uav distance2D _uavArea <= _uavScanSize) then {
 			_playerCount = {isPlayer _x && alive _x && _x distance2D _uavArea <= _uavScanSize} count allUnits;
