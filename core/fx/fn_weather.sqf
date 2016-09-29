@@ -14,10 +14,10 @@ if (HVPGameType isEqualTo 1) then {
 	setTimeMultiplier 0;
 };
 if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
-	if (sunOrMoon < 1) then {
+	if (sunOrMoon isEqualTo 0) then {
 		setTimeMultiplier _nightMult;
 	};
-	if (sunOrMoon isEqualTo 1) then {
+	if (sunOrMoon > 0) then {
 		setTimeMultiplier _dayMult;
 	};
 	[_dayMult,_nightMult] spawn {
@@ -26,13 +26,15 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 		_nightMult = _this select 1;
 		while {true} do {
 			waitUntil {sunOrMoon isEqualTo 0 || sunOrMoon isEqualTo 1};
-			if (sunOrMoon isEqualTo 1) then {
+			if (sunOrMoon > 0) then {
 				setTimeMultiplier _dayMult;
+				hint format["TimeMult: %1",timeMultiplier];
 				waitUntil {sunOrMoon isEqualTo 0};
 			};
-			if (sunOrMoon > 0) then {
+			if (sunOrMoon isEqualTo 0) then {
 				setTimeMultiplier _nightMult;
-				waitUntil {sunOrMoon isEqualTo 1};
+				hint format["TimeMult: %1",timeMultiplier];
+				waitUntil {sunOrMoon > 0};
 			};
 		sleep 1;
 		};
