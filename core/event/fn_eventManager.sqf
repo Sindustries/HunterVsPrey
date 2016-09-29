@@ -3,7 +3,7 @@
 	By Sinbane
 	Loads events and keeps them running
 */
-private ["_time","_airDropHeliSelection","_heliCrashSelection","_cfg","_i","_cfgName"];
+private ["_time","_airDropHeliSelection","_heliCrashSelection","_uavSelection","_cfg","_i","_cfgName"];
 //-----------------------------------
 //-DEFINABLE
 
@@ -44,6 +44,18 @@ for "_i" from 0 to ((count _cfg)-1) do {
 		_cfgName = configName (_cfg select _i);			
 		if (_cfgName isKindOf "helicopter" && (getNumber ((_cfg select _i) >> "scope") == 2) && (getNumber ((_cfg select _i) >> "isUav")) == 0) then {
 			_heliCrashSelection pushBackUnique _cfgName;
+		};
+	};
+};
+
+//UAV selection
+_uavSelection = [];
+_cfg = (configFile >> "CfgVehicles");
+for "_i" from 0 to ((count _cfg)-1) do {
+	if (isClass (_cfg select _i)) then {
+		_cfgName = configName (_cfg select _i);			
+		if (_cfgName isKindOf "Air" && (getNumber ((_cfg select _i) >> "scope") == 2) && (getNumber ((_cfg select _i) >> "isUav")) == 1) then {
+			_uavSelection pushBackUnique _cfgName;
 		};
 	};
 };
@@ -172,9 +184,8 @@ for "_i" from 0 to ((count _cfg)-1) do {
 //-----------------------------------
 //-UAV
 
-	[] spawn {
+	[_uavSelection] spawn {
 		private ["_temp","_uavScanSize","_uavTime","_uavUpdate","_uavScanPos","_uavSpawnPos"];
-		_temp = createVehicle ["I_UAV_01_F",[0,0,0], [], 0, "FLY"];
 		sleep 1;
 		deleteVehicle _temp;
 		
@@ -189,7 +200,7 @@ for "_i" from 0 to ((count _cfg)-1) do {
 			
 			_uavScanPos = [HVP_phase_pos,0,(HVP_phase_radius * 0.9),0,0,0,0] call SIN_fnc_findPos;
 			_uavSpawnPos = [_uavScanPos,400,800,0,0,0,0] call SIN_fnc_findPos;
-			[_uavScanPos,_uavSpawnPos,_uavScanSize,_uavTime,_uavUpdate] call HVP_fnc_uav;
+			[(_this select 0),_uavScanPos,_uavSpawnPos,_uavScanSize,_uavTime,_uavUpdate] call HVP_fnc_uav;
 		};
 	};
 
