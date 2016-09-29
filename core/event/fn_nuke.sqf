@@ -16,7 +16,7 @@ _weather_effect = _this select 4;
 _radiation = _this select 5;
 _fallout = _this select 6;
 
-_heliSpawnPos = [_nukePos,(HVP_phase_radius + 1500),(HVP_phase_radius + 3000),0,1,0,0] call SIN_fnc_findPos;
+_heliSpawnPos = [_nukePos,(HVP_phase_radius + 1000),(HVP_phase_radius + 2000),0,1,0,0] call SIN_fnc_findPos;
 
 //-----------------------------------
 //-BRING IN THE NUKE!
@@ -50,8 +50,6 @@ _pilot moveindriver _eventHeli;
 _pilot doMove _nukePos;
 _eventheligroup setSpeedMode "FULL";
 
-player moveInCargo _eventHeli;
-
 waitUntil {(_eventHeli distance2D _nukePos) < 100 && unitReady _pilot || !alive _eventHeli};
 if (!alive _eventHeli) exitWith {};
 {ropeCut [_x, 0.5]} forEach (ropes _eventHeli);
@@ -60,7 +58,6 @@ player setPos [(getPosATL _obj_nuke select 0), (getPosATL _obj_nuke select 1), 0
 
 if ((getPosATL _obj_nuke select 2) > 10) then {	//B_Parachute_02_F
 	_parachute = createVehicle ["NonSteerable_Parachute_F",[0,0,50], [], 0, "FLY"];
-	sleep 1;
 	_parachute setPosATL [(getPosATL _obj_nuke select 0), (getPosATL _obj_nuke select 1), (getPosATL _obj_nuke select 2)];
 	_obj_nuke attachTo [_parachute,[0,0,0.5]];
 };
