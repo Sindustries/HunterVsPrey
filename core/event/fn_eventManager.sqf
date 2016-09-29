@@ -3,7 +3,7 @@
 	By Sinbane
 	Loads events and keeps them running
 */
-private ["_time","_airDropHeliSelection","_heliCrashSelection","_uavSelection","_cfg","_i","_cfgName"];
+private ["_time","_airDropHeliSelection","_heliCrashSelection","_nukeHeliSelection","_uavSelection","_cfg","_i","_cfgName"];
 //-----------------------------------
 //-DEFINABLE
 
@@ -44,6 +44,18 @@ for "_i" from 0 to ((count _cfg)-1) do {
 		_cfgName = configName (_cfg select _i);			
 		if (_cfgName isKindOf "helicopter" && (getNumber ((_cfg select _i) >> "scope") == 2) && (getNumber ((_cfg select _i) >> "isUav")) == 0) then {
 			_heliCrashSelection pushBackUnique _cfgName;
+		};
+	};
+};
+
+//Nuke Heli selection
+_nukeHeliSelection = [];
+_cfg = (configFile >> "CfgVehicles");
+for "_i" from 0 to ((count _cfg)-1) do {
+	if (isClass (_cfg select _i)) then {
+		_cfgName = configName (_cfg select _i);			
+		if (_cfgName isKindOf "Helicopter" && (getNumber ((_cfg select _i) >> "scope") == 2) && (getNumber ((_cfg select _i) >> "isUav")) == 0 && (getNumber ((_cfg select _i) >> "slingLoadMaxCargoMass") >= 5000)) then {
+			_nukeHeliSelection pushBackUnique _cfgName;
 		};
 	};
 };
@@ -165,7 +177,7 @@ for "_i" from 0 to ((count _cfg)-1) do {
 //-----------------------------------
 //-NUKE	
 	
-	[] spawn {
+	[_nukeHeliSelection] spawn {
 		private ["_nukePos","_nuke"];
 		waitUntil {sleep 5; HVP_phase_num >= 1};
 		
@@ -173,9 +185,7 @@ for "_i" from 0 to ((count _cfg)-1) do {
 			sleep HVP_rareEvent;
 			
 			_nukePos = [HVP_phase_pos,0,(HVP_phase_radius * 0.9),0,0,0,0] call SIN_fnc_findPos;
-			_nuke = createVehicle ["I_UAV_01_F",_nukePos, [], 0, "NONE"];
-			_nuke hideObjectGlobal true;
-			[_nuke,(HVP_phase_radius * 0.2),true,true,true,true] call HVP_fnc_nuke;
+			[(_this select 0),_nukePos,(HVP_phase_radius * 0.2),true,true,true,true] call HVP_fnc_nuke;
 
 			sleep HVP_uncommonEvent;
 		};
