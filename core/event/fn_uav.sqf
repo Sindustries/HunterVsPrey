@@ -51,8 +51,9 @@
 	"WARNING: A rogue UAV is scanning an area, shoot it down or avoid the area" remoteExec ["systemChat", 0],
 	["HUDuavLayer","HVPHUDuavImg"] remoteExec ["HVP_fnc_showEventIcon", 0];
 	
-	for "_timer" from 0 to _uavTime do {
-		while {(damage _uav) < 1 && _uavTime > 0  && _uav distance2D _uavArea <= _uavScanSize} do {
+	while {_uavTime > 0} do {
+		if ((damage _uav) > 0.7) exitWith {_uav setDamage 1;};
+		if (_uav distance2D _uavArea <= _uavScanSize) then {
 			_playerCount = {isPlayer _x && alive _x && _x distance2D _uavArea <= _uavScanSize} count allUnits;
 		
 			if (_playerCount > 0) then {
@@ -92,10 +93,9 @@
 					};
 				} forEach allUnits;
 			};
-			_uavTime = _uavTime - _uavUpdate;
-			sleep _uavUpdate;
 		};
 		sleep _uavUpdate;
+		_uavTime = _uavTime - _uavUpdate;
 	};
 	
 	_uav setDamage 1;
