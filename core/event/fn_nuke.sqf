@@ -80,7 +80,7 @@ _pilot doMove _heliEndPos;
 	deleteVehicle _pilot;
 };
 
-waitUntil {isTouchingGround _obj_nuke};
+waitUntil {(getPos _obj_nuke select 2) < 1};
 sleep 3;
 
 //-----------------------------------
