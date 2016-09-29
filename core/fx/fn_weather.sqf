@@ -25,16 +25,16 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 		_dayMult = _this select 0;
 		_nightMult = _this select 1;
 		while {true} do {
-			waitUntil {sunOrMoon isEqualTo 0 || sunOrMoon isEqualTo 1};
+			waitUntil {sleep 0.1; sunOrMoon isEqualTo 0 || sunOrMoon isEqualTo 1};
 			if (sunOrMoon > 0) then {
 				setTimeMultiplier _dayMult;
 				hint format["TimeMult: %1",timeMultiplier];
-				waitUntil {sunOrMoon isEqualTo 0};
+				waitUntil {sleep 0.1; sunOrMoon isEqualTo 0};
 			};
 			if (sunOrMoon isEqualTo 0) then {
 				setTimeMultiplier _nightMult;
 				hint format["TimeMult: %1",timeMultiplier];
-				waitUntil {sunOrMoon > 0};
+				waitUntil {sleep 0.1; sunOrMoon > 0};
 			};
 		sleep 1;
 		};
