@@ -107,10 +107,10 @@ class HVP {
 	
 /* PHASE SETTINGS */
 
-	adaptiveZoneMinSize = 750;			//Min Size of adaptive zone (RADIUS)
+	adaptiveZoneMinSize = 1000;			//Min Size of adaptive zone (RADIUS)
 	adaptiveZoneMaxSize = 4000;			//Max Size of adaptive zone (RADIUS)	
-	adaptiveZoneMinTime = 180;			//Min Time of adaptive zone (SEC)
-	adaptiveZoneMaxTime = 900;			//Max Time of adaptive zone (SEC)
+	adaptiveZoneMinTime = 3;			//Min Time of adaptive zone (MIN)
+	adaptiveZoneMaxTime = 15;			//Max Time of adaptive zone (MIN)
 	
 	singlePhaseReduceSize = 0.5;		//Distance (METERS) single phase type will reduce by every second
 	singlePhaseShiftSize = 5;			//Distance (METERS) single phase type will move by every second

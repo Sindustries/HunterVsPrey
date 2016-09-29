@@ -117,11 +117,11 @@ if (isServer) then {
 		};
 	};		
 	HVPPhaseTime = ((HVPZoneSizeMax * 2) / 5);
-	if (HVPPhaseTime > _adaptiveZoneMaxTime) then {
-		HVPPhaseTime = _adaptiveZoneMaxTime;
+	if (HVPPhaseTime > (_adaptiveZoneMaxTime * 60)) then {
+		HVPPhaseTime = (_adaptiveZoneMaxTime * 60);
 	};
-	if (HVPPhaseTime < _adaptiveZoneMinTime) then {
-		HVPPhaseTime = _adaptiveZoneMinTime;
+	if (HVPPhaseTime < (_adaptiveZoneMinTime * 60)) then {
+		HVPPhaseTime = (_adaptiveZoneMinTime * 60);
 	};
 	HVP_phase_radius = HVPZoneSizeMax;
 	publicVariable "HVP_phase_num";
