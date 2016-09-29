@@ -9,7 +9,7 @@ private ["_maxNumBoats","_boatsCreated","_usedPosArray","_boatSelection","_cfg",
 //-VARIABLES
 
 _minDistSpawn = ["vehicleBoatMinDist"] call HVP_fnc_getSetting;
-_maxNumBoats = ((HVPZoneSizeMax/_minDistSpawn)*2);
+_maxNumBoats = ((HVPZoneSizeMax*2)/_minDistSpawn);
 _boatsCreated = 0;
 _usedPosArray = [];
 

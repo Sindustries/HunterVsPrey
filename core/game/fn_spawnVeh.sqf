@@ -9,7 +9,7 @@ private ["_maxNumVeh","_carSel","_spawnPos","_posCheck","_car","_spawnCar","_mar
 //-VARIABLES
 
 _minDistSpawn = ["vehicleCarMinDist"] call HVP_fnc_getSetting;
-_maxNumVeh = ((HVPZoneSizeMax/_minDistSpawn)*2);
+_maxNumVeh = ((HVPZoneSizeMax*2)/_minDistSpawn);
 _vehCreated = 0;
 _usedPosArray = [];
 
