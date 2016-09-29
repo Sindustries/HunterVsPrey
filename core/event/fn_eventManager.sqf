@@ -196,10 +196,10 @@ for "_i" from 0 to ((count _cfg)-1) do {
 		private ["_uavScanSize","_uavTime","_uavUpdate","_uavScanPos"];		
 		while {true} do {
 		
-			sleep 30; //HVP_rareEvent;
+			sleep HVP_rareEvent;
 			
 			_uavScanSize = (HVP_Phase_Radius * 0.2);
-			_uavTime = 60 +(random HVPPhaseTime);
+			_uavTime = ((60*2)+(random(60*3)));
 			_uavUpdate = 3;
 			
 			_uavScanPos = [HVP_phase_pos,0,(HVP_phase_radius * 0.9),0,0,0,0] call SIN_fnc_findPos;

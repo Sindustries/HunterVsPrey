@@ -23,30 +23,26 @@
 	_wp setWaypointLoiterType "CIRCLE_L";
 	_wp setWaypointLoiterRadius (_uavScanSize * 0.9);
 	
-	//if (HVPDebugMode == 1) then {
-		private["_uavMarkername", "_UAVMarker"];
-		_uavMarkername = format["UAV%1",(getPos _uav)];
-		_UAVMarker = createMarker [_uavMarkername,(getPos _uav)];
-		_UAVMarker setMarkerShape "ICON";
-		_UAVMarker setMarkerType "mil_triangle";
-		_UAVMarker setMarkerColor "colorUnknown";
-		_UAVMarker setMarkerSize [0.5,0.5];
-		_UAVMarker setMarkerAlpha 0.8;
-		[_uav,_UAVMarker] spawn {
-			private["_uav", "_UAVMarker"];
-			_uav = _this select 0;
-			_UAVMarker = _this select 1;
-			while {(damage _uav) < 0.7} do {
-				_UAVMarker setMarkerPos (getPos _uav);
-			};
-			deleteMarker _UAVMarker;
+	private["_uavMarkername", "_UAVMarker"];
+	_uavMarkername = format["UAV%1",(getPos _uav)];
+	_UAVMarker = createMarker [_uavMarkername,(getPos _uav)];
+	_UAVMarker setMarkerShape "ICON";
+	_UAVMarker setMarkerType "mil_triangle";
+	_UAVMarker setMarkerColor "colorUnknown";
+	_UAVMarker setMarkerSize [0.5,0.5];
+	_UAVMarker setMarkerAlpha 0.8;
+	[_uav,_UAVMarker] spawn {
+		private["_uav", "_UAVMarker"];
+		_uav = _this select 0;
+		_UAVMarker = _this select 1;
+		while {alive _uav} do {
+			_UAVMarker setMarkerPos (getPos _uav);
+			sleep 0.1;
 		};
-	//};
-	
-	waitUntil {_uav distance2D _uavArea <= (_uavScanSize+500) || (damage _uav) >= 0.7 || !alive _uav};	
-	if ((damage _uav) >= 0.7) exitWith {
-		_uav setDamage 1;
+		deleteMarker _UAVMarker;
 	};
+	
+	waitUntil {_uav distance2D _uavArea <= (_uavScanSize+500) || !alive _uav};	
 	if (!alive _uav) exitWith {};
 	
 	{titleText ["UAV SCANNING IN PROGRESS", "PLAIN DOWN", 0.5];} remoteExec ["bis_fnc_call", 0];
@@ -55,7 +51,6 @@
 	
 	while {_uavTime > 0} do {
 		if (!alive _uav) exitWith {};
-		if ((damage _uav) > 0.7) exitWith {_uav setDamage 1;};
 		if (_uav distance2D _uavArea <= _uavScanSize) then {
 			_playerCount = {isPlayer _x && alive _x && _x distance2D _uavArea <= _uavScanSize} count allUnits;
 		
@@ -84,11 +79,11 @@
 							_uavArea = _this select 3;
 							_uavScanSize = _this select 4;
 							_uavUpdate = _this select 5;
-							while {(damage _uav) < 0.7 && _uav distance2D _uavArea <= _uavScanSize && _trackedPlayer distance2D _uavArea <= _uavScanSize && alive _trackedPlayer} do {
+							while {alive _uav && _uav distance2D _uavArea <= _uavScanSize && _trackedPlayer distance2D _uavArea <= _uavScanSize && alive _trackedPlayer} do {
 								_aMarker setMarkerPos (getPos _trackedPlayer);
 								sleep _uavUpdate;
 							};
-							if ((damage _uav) > 0.7 || _uav distance2D _uavArea > _uavScanSize || _trackedPlayer distance2D _uavArea > _uavScanSize || !alive _trackedPlayer) exitWith {
+							if (!alive _uav || _uav distance2D _uavArea > _uavScanSize || _trackedPlayer distance2D _uavArea > _uavScanSize || !alive _trackedPlayer) exitWith {
 								deleteMarker _aMarker;
 								("HUDuavLayer" call BIS_fnc_rscLayer) cutText ["","PLAIN"];
 							};
