@@ -54,22 +54,5 @@ class Params {
 		texts[] = {"Adaptive","1000m","2000m","3000m","4000m","5000m","6000m"};
 		default = 0;
 		isGlobal = 1;
-	}
-	
-	class brk18 {
-        title = "//-EXTRAS";
-        values[] = {0};
-        texts[] = {""};
-        default = 1;
-		isGlobal = 1;
-    };
-	
-	class anticamp {
-		title = "AntiCamp: (Reveals player locations if they linger in one area too long)";
-		values[] = {0,30,60,90,120};
-		texts[] = {"Disabled","30 seconds","60 seconds","90 seconds","120 seconds"};
-		default = 0;
-		isGlobal = 1;
-	};
-	
+	}	
 }

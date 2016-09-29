@@ -21,8 +21,6 @@ HVPManual = (paramsArray select 3);
 HVPPhaseType = (paramsArray select 4);
 HVPPhaseSpacing = (paramsArray select 5);
 HVPZoneSizeMax = (paramsArray select 6);
-//-EXTRAS
-HVPAntiCamp = (paramsArray select 8);
 //-----------------------------------
 ["HVP"] call HVP_fnc_getSettings;
 SIN_adminUIDs = ["SIN_adminUIDs"] call HVP_fnc_getSetting;
@@ -510,7 +508,10 @@ if (side player isEqualTo EAST || HVPGameType isEqualTo 2 || HVPGameType isEqual
 };
 //-----------------------------------
 //-ANTI CAMP
-if (HVPAntiCamp > 0) then {
+if (HVPGameType isEqualTo 2) then {
+	[] spawn HVP_fnc_antiCamp;
+};
+if (HVPGameType isEqualTo 3 && playerSide != resistance) then {
 	[] spawn HVP_fnc_antiCamp;
 };
 //-----------------------------------

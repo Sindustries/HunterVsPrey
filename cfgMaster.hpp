@@ -10,6 +10,7 @@ class HVP {
 	HVP_ZombieMode = true;				//Set to false to disable zombies
 	HVPDebugMode = false;				//Enable lots of debugging info
 	HVPStatMode = true;					//Set to false to disable stat saving
+	HVPantiCamp = 90;					//How long (SEC) players have until they are revealed on the map if camping
 	
 /* ADAPTIVE TIME SETTINGS */
 
