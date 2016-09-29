@@ -134,7 +134,6 @@ for "_i" from 0 to ((count _cfg)-1) do {
 
 		while {true} do {
 
-			waitUntil {sleep 5; HVP_phase_active isEqualTo "true"};
 			sleep HVP_uncommonEvent;
 			
 			_artyPos = [HVP_phase_pos,0,(HVP_phase_radius * 0.9),0,0,0,0] call SIN_fnc_findPos;
@@ -148,7 +147,6 @@ for "_i" from 0 to ((count _cfg)-1) do {
 	[] spawn {
 		private ["_size","_gasCount","_chemPos"];
 		while {true} do {
-			waitUntil {sleep 5; HVP_phase_active isEqualTo "true"};
 			sleep HVP_commonEvent;
 			
 			_size = (HVP_Phase_Radius * 0.05);
@@ -185,7 +183,7 @@ for "_i" from 0 to ((count _cfg)-1) do {
 			sleep HVP_rareEvent;
 			
 			_nukePos = [HVP_phase_pos,0,(HVP_phase_radius * 0.5),0,0,0,0] call SIN_fnc_findPos;
-			[(_this select 0),_nukePos,(HVP_phase_radius * 0.2),true,true,true,true] call HVP_fnc_nuke;
+			[(_this select 0),_nukePos,(HVP_phase_radius * 0.33),true,true,true,true] call HVP_fnc_nuke;
 
 			sleep HVP_uncommonEvent;
 		};
@@ -198,16 +196,14 @@ for "_i" from 0 to ((count _cfg)-1) do {
 		private ["_temp","_uavScanSize","_uavTime","_uavUpdate","_uavScanPos","_uavSpawnPos"];		
 		while {true} do {
 		
-			waitUntil {sleep 5; HVP_phase_active isEqualTo "true"};
-			sleep HVP_rareEvent;
+			sleep 30; //HVP_rareEvent;
 			
 			_uavScanSize = (HVP_Phase_Radius * 0.2);
 			_uavTime = 60 +(random HVPPhaseTime);
 			_uavUpdate = 3;
 			
 			_uavScanPos = [HVP_phase_pos,0,(HVP_phase_radius * 0.9),0,0,0,0] call SIN_fnc_findPos;
-			_uavSpawnPos = [_uavScanPos,400,800,0,0,0,0] call SIN_fnc_findPos;
-			[(_this select 0),_uavScanPos,_uavSpawnPos,_uavScanSize,_uavTime,_uavUpdate] call HVP_fnc_uav;
+			[(_this select 0),_uavSpawnPos,_uavScanSize,_uavTime,_uavUpdate] call HVP_fnc_uav;
 		};
 	};
 

@@ -6,12 +6,15 @@
 
 	private ["_uavSelection","_uavArea","_uavSpawnPos","_uavScanSize","_uavTime","_uav","_wp","_uavUpdate"];
 	
+	hint "on yer uav!";
+	
 	_uavSelection = _this select 0;
 	_uavArea = _this select 1;
-	_uavSpawnPos = _this select 2;
-	_uavScanSize = _this select 3; //150-200
-	_uavTime = _this select 4;
-	_uavUpdate = _this select 5;
+	_uavScanSize = _this select 2; //150-200
+	_uavTime = _this select 3;
+	_uavUpdate = _this select 4;
+	
+	_uavSpawnPos = [HVP_phase_pos,(HVP_phase_radius + 1000),(HVP_phase_radius + 2000),0,1,0,0] call SIN_fnc_findPos;
 	
 	_uav = createVehicle [(selectRandom _uavSelection),[_uavSpawnPos select 0,_uavSpawnPos select 1,100+(random 50)], [], 0, "FLY"];
 	createVehicleCrew _uav;
