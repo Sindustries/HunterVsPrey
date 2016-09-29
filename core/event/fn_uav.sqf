@@ -6,7 +6,7 @@
 
 	private ["_uavSelection","_uavArea","_uavSpawnPos","_uavScanSize","_uavTime","_uav","_wp","_uavUpdate"];
 	
-	_uavSelection = _this select 0
+	_uavSelection = _this select 0;
 	_uavArea = _this select 1;
 	_uavSpawnPos = _this select 2;
 	_uavScanSize = _this select 3; //150-200
