@@ -8,7 +8,7 @@ if (playerSide isEqualTo sideLogic) exitWith {};
 //-----------------------------------
 //-VARIABLES
 
-_timeUntil = ["HVPantiCamp"] call SIN_fnc_getSetting;
+_timeUntil = ["HVPantiCamp"] call HVP_fnc_getSetting;
 _distance = 15;
 _trackingDist = 100;
 
