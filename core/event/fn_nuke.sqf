@@ -94,7 +94,7 @@ _nukeMarker setMarkerColor "ColorOpfor";
 _nukeMarker setMarkerSize [(_radius + 25),(_radius + 25)];
 _nukeMarker setMarkerAlpha 1;
 
-_aMarkername2 = format["%1",(getPos _nukePos)];
+_aMarkername2 = format["nuke2%1",_nukePos];
 _nukeMarker2 = createMarker [_aMarkername2, _nukePos];
 _nukeMarker2 setMarkerShape "ICON";
 _nukeMarker2 setMarkerType "MinefieldAP";
@@ -102,11 +102,11 @@ _nukeMarker2 setMarkerColor "colorIndependent";
 _nukeMarker2 setMarkerSize [0.75,0.75];
 _nukeMarker2 setMarkerAlpha 1;
 
-{titleText ["NUCLEAR LAUNCH DETECTED", "PLAIN DOWN", 0.5];} remoteExec ["bis_fnc_call", 0];
-"WARNING: A nuclear bomb is incoming to the red area marked by a green skull. The area will be decimated in approx 2 minutes." remoteExec ["systemChat", 0];
+{titleText ["NUCLEAR DEVICE DETECTED", "PLAIN DOWN", 0.5];} remoteExec ["bis_fnc_call", 0];
+"WARNING: A nuclear bomb has been located in the red area marked by a green skull. The area will be decimated in approx 2 minutes." remoteExec ["systemChat", 0];
 true remoteExec ["showChat", 0];
 sleep 60;
-"WARNING: A nuclear bomb is incoming to the red area marked by a green skull. The area will be decimated in approx 1 minute." remoteExec ["systemChat", 0];
+"WARNING: A nuclear bomb has been located in the red area marked by a green skull. The area will be decimated in approx 1 minute." remoteExec ["systemChat", 0];
 true remoteExec ["showChat", 0];
 sleep 60;
 
