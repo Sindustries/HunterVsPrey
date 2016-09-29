@@ -185,10 +185,7 @@ for "_i" from 0 to ((count _cfg)-1) do {
 //-UAV
 
 	[_uavSelection] spawn {
-		private ["_temp","_uavScanSize","_uavTime","_uavUpdate","_uavScanPos","_uavSpawnPos"];
-		sleep 1;
-		deleteVehicle _temp;
-		
+		private ["_temp","_uavScanSize","_uavTime","_uavUpdate","_uavScanPos","_uavSpawnPos"];		
 		while {true} do {
 		
 			waitUntil {sleep 5; HVP_phase_active isEqualTo "true"};
