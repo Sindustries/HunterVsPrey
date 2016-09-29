@@ -48,6 +48,7 @@ _counter = (count HVP_zombies);
 	waitUntil {sleep 1; HVP_phase_active isEqualTo "true"};
 	[] spawn z_fnc_zMonitor;
 	[] spawn z_fnc_zDeleter;
+	[] spawn z_fnc_zSunDamage;
 };
 
 //-----------------------------------
