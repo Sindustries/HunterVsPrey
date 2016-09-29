@@ -56,11 +56,11 @@ waitUntil {(_eventHeli distance2D _nukePos) < 100 && unitReady _pilot || !alive 
 if (!alive _eventHeli) exitWith {};
 {ropeCut [_x, 0.5]} forEach (ropes _eventHeli);
 
-player setPos _nukePos;
+player setPos [(getPosATL _obj_nuke select 0), (getPosATL _obj_nuke select 1), 0];
 
 if ((getPosATL _obj_nuke select 2) > 10) then {	//B_Parachute_02_F
 	_parachute = createVehicle ["NonSteerable_Parachute_F",[0,0,50], [], 0, "FLY"];
-	sleep 0.1;
+	sleep 1;
 	_parachute setPosATL [(getPosATL _obj_nuke select 0), (getPosATL _obj_nuke select 1), (getPosATL _obj_nuke select 2)];
 	_obj_nuke attachTo [_parachute,[0,0,0.5]];
 };
