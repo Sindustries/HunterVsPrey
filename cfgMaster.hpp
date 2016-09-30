@@ -20,7 +20,6 @@ class HVP {
 /* SPAWN SETTINGS */
 
 	HVPSpawnType = 0;					//0:Random, 1:Ground, 2:HALO, 3:Helicopter, 4:Drop Pod
-
 	groundChanceUnconscious = 25;		//Chance of being unconscious during "Ground" spawn
 	
 /* EVENT SETTINGS */
@@ -46,26 +45,6 @@ class HVP {
 	fatigueFreeMaxTime = 60;		//Same as above
 	nightVisionMinTime = 20;		//Effects both Night Vision Thief and Temporary Night Vision
 	nightVisionMaxTime = 40;		//Same as above
-	
-	randomHeadgear[] = { "H_MilCap_ocamo","H_MilCap_mcamo","H_MilCap_oucamo","H_MilCap_rucamo","H_MilCap_gry","H_MilCap_dgtl","H_MilCap_blue","H_Bandanna_khk","H_Bandanna_khk_hs","H_Bandanna_cbr","H_Bandanna_sgg","H_Bandanna_gry","H_Beret_blk","H_Beret_red","H_Beret_grn","H_Beret_grn_SF","H_Beret_brn_SF","H_Beret_ocamo","H_Watchcap_blk","H_Watchcap_cbr","H_Watchcap_khk","H_Watchcap_camo","H_Watchcap_sgg" };
-	randomHeadgearAPEX[] = { "G_Balaclava_TI_blk_F","G_Balaclava_TI_tna_F","G_Balaclava_TI_G_blk_F","G_Balaclava_TI_G_tna_F" };
-	randomUniforms[] = { "U_IG_Guerilla1_1","U_IG_Guerilla2_1","U_IG_Guerilla2_2","U_IG_Guerilla2_3","U_IG_Guerilla3_1","U_IG_Guerilla3_2","U_I_G_Story_Protagonist_F","U_I_G_resistanceLeader_F","U_IG_Guerrilla_6_1" };
-	randomUniformsAPEX[] = { "U_I_C_Soldier_Bandit_1_F","U_I_C_Soldier_Bandit_2_F","U_I_C_Soldier_Bandit_3_F","U_I_C_Soldier_Bandit_4_F","U_I_C_Soldier_Bandit_5_F" };
-	randomGhillies[] = { "U_B_GhillieSuit","U_O_GhillieSuit","U_I_GhillieSuit" };
-	randomGhilliesMARKSMAN[] = { "U_B_FullGhillie_lsh","U_B_FullGhillie_sard","U_B_FullGhillie_ard","U_O_FullGhillie_lsh","U_O_FullGhillie_sard","U_O_FullGhillie_ard","U_I_FullGhillie_lsh","U_I_FullGhillie_sard","U_I_FullGhillie_ard","U_O_T_FullGhillie_tna_F","U_B_T_FullGhillie_tna_F" };
-	randomMercUniformAPEX[] = { "U_B_CTRG_Soldier_F","U_B_CTRG_Soldier_3_F","U_O_V_Soldier_Viper_F" };
-	
-	/* Admin menu PID's */
-	SIN_adminUIDs[] = { /*JAY*/"76561197983563875" };
-	/* Music tracks to be played while game is loading */
-	HVP_music[] = { "AmbientTrack01_F_EXP","AmbientTrack01a_F_EXP","AmbientTrack01b_F_EXP","Fallout","Wasteland","MAD","BackgroundTrack01_F_EPC","AmbientTrack01_F_EPB" };
-	/* Gas Masks */
-	HVP_gasMasks[] = { "H_PilotHelmetFighter_B","H_PilotHelmetFighter_O","H_PilotHelmetFighter_I","H_CrewHelmetHeli_B","H_CrewHelmetHeli_O","H_CrewHelmetHeli_I","H_Shemag_khk","H_Shemag_tan","H_Shemag_olive","H_Shemag_olive_hs","H_ShemagOpen_khk","H_ShemagOpen_tan","H_RacingHelmet_1_F","H_RacingHelmet_2_F","H_RacingHelmet_3_F","H_RacingHelmet_4_F","H_RacingHelmet_1_black_F","H_RacingHelmet_1_blue_F","H_RacingHelmet_1_green_F","H_RacingHelmet_1_red_F","H_RacingHelmet_1_white_F","H_RacingHelmet_1_yellow_F","H_RacingHelmet_1_orange_F","G_Bandanna_aviator","G_Bandanna_beast","G_Bandanna_blk","G_Bandanna_khk","G_Bandanna_oli","G_Bandanna_shades","G_Bandanna_sport","G_Bandanna_tan","H_HelmetO_ViperSP_hex_F","H_HelmetO_ViperSP_ghex_F","G_Balaclava_TI_blk_F","G_Balaclava_TI_G_blk_F","G_Balaclava_TI_G_tna_F","G_Balaclava_TI_tna_F","Mask_M50","Mask_M40","Mask_M40_OD" };
-	/* Non-lethal mines */
-	HVP_mines[] = { "APERSTripMine_Wire_Ammo","APERSBoundingMine_Range_Ammo","APERSMine_Range_Ammo","ATMine_Range_Ammo","ClaymoreDirectionalMine_Remote_Ammo","SLAMDirectionalMine_Wire_Ammo" };
-	/* Red Team "knockout" guns */
-	HVP_redGuns[] = { "hgun_P07_F" };
-	HVP_redAmmo[] = { "B_9x21_Ball_Tracer_Red" };
 	
 /* LOOT SETTINGS */
 
@@ -126,6 +105,27 @@ class HVP {
 	phaseTimeDecay = 0.8;				//Multiplier applied to overall phase time after each phase
 	phaseSizeDecay = 0.8;				//Multiplier applied to phase size between each phase
 	
+/* MISC SETTINGS */	
+	
+	randomHeadgear[] = { "H_MilCap_ocamo","H_MilCap_mcamo","H_MilCap_oucamo","H_MilCap_rucamo","H_MilCap_gry","H_MilCap_dgtl","H_MilCap_blue","H_Bandanna_khk","H_Bandanna_khk_hs","H_Bandanna_cbr","H_Bandanna_sgg","H_Bandanna_gry","H_Beret_blk","H_Beret_red","H_Beret_grn","H_Beret_grn_SF","H_Beret_brn_SF","H_Beret_ocamo","H_Watchcap_blk","H_Watchcap_cbr","H_Watchcap_khk","H_Watchcap_camo","H_Watchcap_sgg" };
+	randomHeadgearAPEX[] = { "G_Balaclava_TI_blk_F","G_Balaclava_TI_tna_F","G_Balaclava_TI_G_blk_F","G_Balaclava_TI_G_tna_F" };
+	randomUniforms[] = { "U_IG_Guerilla1_1","U_IG_Guerilla2_1","U_IG_Guerilla2_2","U_IG_Guerilla2_3","U_IG_Guerilla3_1","U_IG_Guerilla3_2","U_I_G_Story_Protagonist_F","U_I_G_resistanceLeader_F","U_IG_Guerrilla_6_1" };
+	randomUniformsAPEX[] = { "U_I_C_Soldier_Bandit_1_F","U_I_C_Soldier_Bandit_2_F","U_I_C_Soldier_Bandit_3_F","U_I_C_Soldier_Bandit_4_F","U_I_C_Soldier_Bandit_5_F" };
+	randomGhillies[] = { "U_B_GhillieSuit","U_O_GhillieSuit","U_I_GhillieSuit" };
+	randomGhilliesMARKSMAN[] = { "U_B_FullGhillie_lsh","U_B_FullGhillie_sard","U_B_FullGhillie_ard","U_O_FullGhillie_lsh","U_O_FullGhillie_sard","U_O_FullGhillie_ard","U_I_FullGhillie_lsh","U_I_FullGhillie_sard","U_I_FullGhillie_ard","U_O_T_FullGhillie_tna_F","U_B_T_FullGhillie_tna_F" };
+	randomMercUniformAPEX[] = { "U_B_CTRG_Soldier_F","U_B_CTRG_Soldier_3_F","U_O_V_Soldier_Viper_F" };
+	
+	/* Admin menu PID's */
+	SIN_adminUIDs[] = { /*JAY*/"76561197983563875" };
+	/* Music tracks to be played while game is loading */
+	HVP_music[] = { "AmbientTrack01_F_EXP","AmbientTrack01a_F_EXP","AmbientTrack01b_F_EXP","Fallout","Wasteland","MAD","BackgroundTrack01_F_EPC","AmbientTrack01_F_EPB" };
+	/* Gas Masks */
+	HVP_gasMasks[] = { "H_PilotHelmetFighter_B","H_PilotHelmetFighter_O","H_PilotHelmetFighter_I","H_CrewHelmetHeli_B","H_CrewHelmetHeli_O","H_CrewHelmetHeli_I","H_Shemag_khk","H_Shemag_tan","H_Shemag_olive","H_Shemag_olive_hs","H_ShemagOpen_khk","H_ShemagOpen_tan","H_RacingHelmet_1_F","H_RacingHelmet_2_F","H_RacingHelmet_3_F","H_RacingHelmet_4_F","H_RacingHelmet_1_black_F","H_RacingHelmet_1_blue_F","H_RacingHelmet_1_green_F","H_RacingHelmet_1_red_F","H_RacingHelmet_1_white_F","H_RacingHelmet_1_yellow_F","H_RacingHelmet_1_orange_F","G_Bandanna_aviator","G_Bandanna_beast","G_Bandanna_blk","G_Bandanna_khk","G_Bandanna_oli","G_Bandanna_shades","G_Bandanna_sport","G_Bandanna_tan","H_HelmetO_ViperSP_hex_F","H_HelmetO_ViperSP_ghex_F","G_Balaclava_TI_blk_F","G_Balaclava_TI_G_blk_F","G_Balaclava_TI_G_tna_F","G_Balaclava_TI_tna_F","Mask_M50","Mask_M40","Mask_M40_OD" };
+	/* Non-lethal mines */
+	HVP_mines[] = { "APERSTripMine_Wire_Ammo","APERSBoundingMine_Range_Ammo","APERSMine_Range_Ammo","ATMine_Range_Ammo","ClaymoreDirectionalMine_Remote_Ammo","SLAMDirectionalMine_Wire_Ammo" };
+	/* Red Team "knockout" guns */
+	HVP_redGuns[] = { "hgun_P07_F" };
+	HVP_redAmmo[] = { "B_9x21_Ball_Tracer_Red" };	
 };
 	
 class SMS {
