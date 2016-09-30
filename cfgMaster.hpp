@@ -19,6 +19,8 @@ class HVP {
 	
 /* SPAWN SETTINGS */
 
+	HVPSpawnType = 0;					//0:Random, 1:Ground, 2:HALO, 3:Helicopter, 4:Drop Pod
+
 	groundChanceUnconscious = 25;		//Chance of being unconscious during "Ground" spawn
 	
 /* EVENT SETTINGS */
@@ -107,6 +109,10 @@ class HVP {
 	vehicleBoatMinDist = 100;			//Min distance (METERS) between boat spawns	
 	
 /* PHASE SETTINGS */
+
+	HVPPhaseType = 1;					//1:Multiple, 2:Single
+	HVPPhaseSpacing = 1;				//1:Breaks in Between, 2:Continuous
+	HVPZoneSizeMax = 0;					//0:Adaptive - Can be anything, note this will set the RADIUS not the DIAMETER
 
 	adaptiveZoneMinSize = 1000;			//Min Size of adaptive zone (RADIUS)
 	adaptiveZoneMaxSize = 4000;			//Max Size of adaptive zone (RADIUS)	

@@ -16,13 +16,13 @@ player enableStamina false;
 //-----------------------------------
 //-MAIN
 HVPGameType = (paramsArray select 1);
-HVPSpawnType = (paramsArray select 2);
-HVPManual = (paramsArray select 3);
-HVPPhaseType = (paramsArray select 4);
-HVPPhaseSpacing = (paramsArray select 5);
-HVPZoneSizeMax = (paramsArray select 6);
+HVPManual = (paramsArray select 2);
 //-----------------------------------
 ["HVP"] call HVP_fnc_getSettings;
+HVPPhaseType = ["HVPPhaseType"] call HVP_fnc_getSetting;
+HVPPhaseSpacing = ["HVPPhaseSpacing"] call HVP_fnc_getSetting;
+HVPZoneSizeMax = ["HVPZoneSizeMax"] call HVP_fnc_getSetting;
+HVPSpawnType = ["HVPSpawnType"] call HVP_fnc_getSetting;
 SIN_adminUIDs = ["SIN_adminUIDs"] call HVP_fnc_getSetting;
 HVP_music = ["HVP_music"] call HVP_fnc_getSetting;
 HVP_gasMasks = ["HVP_gasMasks"] call HVP_fnc_getSetting;
