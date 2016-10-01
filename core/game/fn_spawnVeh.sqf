@@ -16,30 +16,18 @@ _usedPosArray = [];
 //-----------------------------------
 //-VEHICLE ARRAYS
 
-_carSel = [
-"B_Quadbike_01_F",
-"B_Truck_01_transport_F",
-"B_Truck_01_covered_F",
-"B_Truck_01_mover_F",
-"B_LSV_01_unarmed_F",
-"B_G_Offroad_01_F",
-"B_CTRG_LSV_01_light_F",
-"O_LSV_02_unarmed_F",
-"O_Truck_02_covered_F",
-"O_Truck_02_transport_F",
-"O_Truck_03_transport_F",
-"O_Truck_03_covered_F",
-"O_Truck_03_device_F",
-"O_G_Van_01_transport_F",
-"O_G_Offroad_01_F",
-"C_Offroad_01_repair_F",
-"C_Hatchback_01_F",
-"C_Hatchback_01_sport_F",
-"C_Van_01_box_F",
-"C_Kart_01_F",
-"C_Kart_01_Fuel_F",
-"C_Offroad_02_unarmed_F"
-];
+if (HVPGameType isEqualTo 1) then {
+	_cfg = (configFile >> "CfgVehicles");
+	for "_i" from 0 to ((count _cfg)-1) do {
+		if (isClass (_cfg select _i)) then {
+			_cfgName = configName (_cfg select _i);			
+			if (_cfgName isKindOf "Car" && (getNumber ((_cfg select _i) >> "scope") isEqualTo 2) && (getNumber ((_cfg select _i) >> "isUav")) isEqualTo 0 && (getText ((_cfg select _i) >> "faction")) isEqualTo "CIV_F") then {
+				_carSel pushBackUnique _cfgName;
+			};
+		};
+	};
+};
+
 
 if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 	_cfg = (configFile >> "CfgVehicles");

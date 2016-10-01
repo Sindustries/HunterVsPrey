@@ -16,13 +16,27 @@ _usedPosArray = [];
 //-----------------------------------
 //-VEHICLE ARRAYS
 
-_boatSelection = [];	
+_boatSelection = [];
 _cfg = (configFile >> "CfgVehicles");
-for "_i" from 0 to ((count _cfg)-1) do {
-	if (isClass (_cfg select _i)) then {
-		_cfgName = configName (_cfg select _i);			
-		if (_cfgName isKindOf "Ship" && (getNumber ((_cfg select _i) >> "scope") == 2) && (getNumber ((_cfg select _i) >> "isUav")) == 0) then {
-			_boatSelection pushBackUnique _cfgName;
+
+if (HVPGameType isEqualTo 1) then {
+	_cfg = (configFile >> "CfgVehicles");
+	for "_i" from 0 to ((count _cfg)-1) do {
+		if (isClass (_cfg select _i)) then {
+			_cfgName = configName (_cfg select _i);			
+			if (_cfgName isKindOf "Ship" && (getNumber ((_cfg select _i) >> "scope") isEqualTo 2) && (getNumber ((_cfg select _i) >> "isUav")) isEqualTo 0 && (getText ((_cfg select _i) >> "faction")) isEqualTo "CIV_F") then {
+				_boatSelection pushBackUnique _cfgName;
+			};
+		};
+	};
+};
+if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
+	for "_i" from 0 to ((count _cfg)-1) do {
+		if (isClass (_cfg select _i)) then {
+			_cfgName = configName (_cfg select _i);			
+			if (_cfgName isKindOf "Ship" && (getNumber ((_cfg select _i) >> "scope") == 2) && (getNumber ((_cfg select _i) >> "isUav")) == 0) then {
+				_boatSelection pushBackUnique _cfgName;
+			};
 		};
 	};
 };
