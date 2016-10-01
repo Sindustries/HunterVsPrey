@@ -145,6 +145,7 @@ class Z {
 	HVP_maxZombies = 100;				//Total number of alive zombies
 	HVP_zhordeSize = 8; 				//Max num to spawn on each spawner
 	HVP_zSpawnChance = 75;				//Chance of a spawner spawning zombies (%)
+	HVP_zBossChance = 2.5;				//Chance of spawning a boss zombie (demon)
 	HVP_zDeleteDist = 300;				//Distance (METERS) from players to remove zombies
 };
 
