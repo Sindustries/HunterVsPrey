@@ -31,6 +31,7 @@ for "_i" from 0 to ((count _cfg)-1) do {
 		};
 	};
 };
+copyToClipboard str HVP_zombies;
 
 //-SPAWN EACH ZOMBIE ONCE AND DELETE (TO CACHE)
 _counter = (count HVP_zombies);
