@@ -16,6 +16,7 @@ _usedPosArray = [];
 //-----------------------------------
 //-VEHICLE ARRAYS
 
+_carSel = [];
 if (HVPGameType isEqualTo 1) then {
 	_cfg = (configFile >> "CfgVehicles");
 	for "_i" from 0 to ((count _cfg)-1) do {
@@ -27,8 +28,6 @@ if (HVPGameType isEqualTo 1) then {
 		};
 	};
 };
-
-
 if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 	_cfg = (configFile >> "CfgVehicles");
 	for "_i" from 0 to ((count _cfg)-1) do {
