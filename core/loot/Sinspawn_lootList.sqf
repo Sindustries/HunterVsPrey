@@ -246,6 +246,8 @@ for "_i" from 0 to ((count _cfg)-1) do {
 	};
 };
 
+hint format["%1",(Sinspawn_lootList select 4)];
+
 //Vests
 _cfg = (configFile >> "CfgVehicles");
 for "_i" from 0 to ((count _cfg)-1) do {
