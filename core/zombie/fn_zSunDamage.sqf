@@ -11,7 +11,7 @@
 		
 		if (sunOrMoon isEqualTo 1 && fog < 0.5 && overcast < 0.7) then {
 			{
-				_x setDamage ((damage _x) + 0.1);
+				_x setDamage ((damage _x) + (random 0.1));
 			} forEach HVP_zombieArray;
 		};
 	};
