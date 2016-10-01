@@ -16,7 +16,7 @@ if (radius_c>0) then {
 			
 			_center_rad = [getpos _mark_rad select 0, getpos _mark_rad select 1, 0];
 			
-		while {true} do { 
+		while {alive player} do { 
 				if((player distance _center_rad) < _radiux) then {
 					//enableEnvironment false;
 					_noise_rad = ppEffectCreate ["FilmGrain", 2000];

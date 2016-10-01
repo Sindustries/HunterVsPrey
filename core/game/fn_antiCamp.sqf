@@ -4,10 +4,11 @@
 	Places a marker on the map revealing the location of the player if they stay still/in the same area for too long
 */
 private ["_timeUntil","_distance","_trackingDist","_msg","_stoppedPos","_counter","_aMarkername","_aMarker"];
+if (playerSide isEqualTo sideLogic) exitWith {};
 //-----------------------------------
 //-VARIABLES
 
-_timeUntil = HVPAntiCamp;
+_timeUntil = ["HVPantiCamp"] call HVP_fnc_getSetting;
 _distance = 15;
 _trackingDist = 100;
 

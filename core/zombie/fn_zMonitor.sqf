@@ -7,9 +7,9 @@ private ["_playerPosArray","_zIndex","_index"];
 //-----------------------------------
 
 	while {true} do {
-		sleep 20;	
+		sleep 10;	
 		
-		if (daytime < 6 && daytime >= 0 || daytime < 24 && daytime > 18 || fog >= 0.5 || overcast >= 0.7) then {
+		if (sunOrMoon isEqualTo 0 || fog >= 0.5 || overcast >= 0.7) then {
 			_playerPosArray = [];
 			{
 				if (isPlayer _x && alive _x && side _x != sideLogic) then {

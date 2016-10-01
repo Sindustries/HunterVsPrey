@@ -3,40 +3,18 @@
 	Author: Sinbane
 	Spawns a random helicopter that flys into the zone and delivers a loot crate
 */
-private ["_type","_dropPos","_heliSpawnPos","_heliSelection","_cfg","_i","_cfgName","_eventHeli","_pilot","_eventheligroup","_drop","_light","_smoke","_posFound","_heliEndPos","_posCheck","_parachute","_markerName","_markerStr"];
+private ["_type","_dropPos","_heliSpawnPos","_heliSelection","_cfg","_i","_cfgName","_eventHeli","_pilot","_eventheligroup","_drop","_light","_smoke","_heliEndPos","_parachute","_markerName","_markerStr"];
 //-----------------------------------
 //-PARAMS
 
 _type = _this select 0;
-_dropPos = _this select 1;
-_heliSpawnPos = _this select 2;
-_heliSelection = [];
+_dropPos = _this select 2; 
+_heliSelection = _this select 1;
 
 //-----------------------------------
-//-GET HELI TYPE
+//-GET POS
 
-if (_type isEqualTo "event") then {
-	_cfg = (configFile >> "CfgVehicles");
-	for "_i" from 0 to ((count _cfg)-1) do {
-		if (isClass (_cfg select _i)) then {
-			_cfgName = configName (_cfg select _i);			
-			if (_cfgName isKindOf "Helicopter" && (getNumber ((_cfg select _i) >> "scope") == 2) && (getNumber ((_cfg select _i) >> "isUav")) == 0 && (getNumber ((_cfg select _i) >> "slingLoadMaxCargoMass") >= 500)) then {
-				_heliSelection pushBackUnique _cfgName;
-			};
-		};
-	};
-};
-if (_type isEqualTo "ability") then {
-	_cfg = (configFile >> "CfgVehicles");
-	for "_i" from 0 to ((count _cfg)-1) do {
-		if (isClass (_cfg select _i)) then {
-			_cfgName = configName (_cfg select _i);			
-			if (_cfgName isKindOf "VTOL_Base_F" && (getNumber ((_cfg select _i) >> "scope") == 2) && (getNumber ((_cfg select _i) >> "isUav")) == 0) then {
-				_heliSelection pushBackUnique _cfgName;
-			};
-		};
-	};
-};
+_heliSpawnPos = [_dropPos,(HVP_phase_radius + 1500),(HVP_phase_radius + 3000),0,1,0,0] call SIN_fnc_findPos;
 
 //-----------------------------------
 //-CREATE HELI
@@ -123,28 +101,21 @@ if (daytime < 7 || daytime > 17) then {
 	_smoke = "F_20mm_Red" createvehicle ((_drop) ModelToWorld [0,0,200]); 
 	_smoke setVelocity [0,0,-10];
 } else {
-	_smoke = createVehicle ["SmokeShellGreen", (getPosATL _drop), [], 0, "NONE"];
+	_smoke = createVehicle ["SmokeShellPurple", (getPosATL _drop), [], 0, "NONE"];
 	_smoke attachTo [_drop, [0,0,0.15]];
 };
 
 //-----------------------------------
 //-FIND END LOCATION FOR HELI
 	
-_posFound = false;
-while {!_posFound} do {
-	_heliEndPos = [HVP_phase_pos,(HVP_phase_radius * 2),(HVP_phase_radius * 4),0,1,0,0] call BIS_fnc_findSafePos;
-	_posCheck = [_heliEndPos] call SIN_fnc_checkPos;
-	if (_posCheck) then {
-		_posFound = true;
-		_pilot doMove _heliEndPos;		
-	};
-};
-	
+_heliEndPos = [HVP_phase_pos,(HVP_phase_radius + 2000),(HVP_phase_radius + 4000),0,1,0,0] call SIN_fnc_findPos;
+_pilot doMove _heliEndPos;		
+
 [_pilot,_eventHeli,_dropPos] spawn {
 	_pilot = _this select 0;
 	_eventHeli = _this select 1;
 	_dropPos = _this select 2;
-	waitUntil {_eventHeli distance _dropPos > (HVP_phase_radius * 1.9) || !alive _eventHeli};
+	waitUntil {_eventHeli distance _dropPos > (HVP_phase_radius + 1500) || !alive _eventHeli};
 	deleteVehicle _eventHeli;
 	deleteVehicle _pilot;
 };

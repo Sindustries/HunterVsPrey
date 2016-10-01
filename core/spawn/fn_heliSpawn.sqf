@@ -19,53 +19,27 @@ _scenarios = [
 //-----------------------------------
 //-FILL HELI ARRAY FROM CONFIG
 
-if (HVPGameType isEqualTo 1) then {
-	_cfg = (configFile >> "CfgVehicles");
-	for "_i" from 0 to ((count _cfg)-1) do {
-		if (isClass (_cfg select _i)) then {
-			_cfgName = configName (_cfg select _i);			
-			if (_cfgName isKindOf "Helicopter" && (getNumber ((_cfg select _i) >> "scope") == 2) && (getNumber ((_cfg select _i) >> "isUav")) == 0 && (getNumber ((_cfg select _i) >> "transportSoldier") >= 4)) then {
-				_heliSelection pushBackUnique _cfgName;
-			};
+_cfg = (configFile >> "CfgVehicles");
+for "_i" from 0 to ((count _cfg)-1) do {
+	if (isClass (_cfg select _i)) then {
+		_cfgName = configName (_cfg select _i);			
+		if (_cfgName isKindOf "Helicopter" && (getNumber ((_cfg select _i) >> "scope") == 2) && (getNumber ((_cfg select _i) >> "isUav")) == 0 && (getNumber ((_cfg select _i) >> "transportSoldier") >= 1)) then {
+			_heliSelection pushBackUnique _cfgName;
 		};
 	};
 };
-if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
-	_cfg = (configFile >> "CfgVehicles");
-	for "_i" from 0 to ((count _cfg)-1) do {
-		if (isClass (_cfg select _i)) then {
-			_cfgName = configName (_cfg select _i);			
-			if (_cfgName isKindOf "Helicopter" && (getNumber ((_cfg select _i) >> "scope") == 2) && (getNumber ((_cfg select _i) >> "isUav")) == 0 && (getNumber ((_cfg select _i) >> "transportSoldier") >= 1)) then {
-				_heliSelection pushBackUnique _cfgName;
-			};
-		};
-	};
-};
+
 
 //-----------------------------------
 //-FIND A SPAWN LOCATION FOR HELI
 
-_posFound = false;
-while {!_posFound} do {
-	_heliSpawnPos = [HVP_phase_pos,(HVP_phase_radius * 1.25),(HVP_phase_radius * 1.66),0,1,0,0] call BIS_fnc_findSafePos;
-	_posCheck = [_heliSpawnPos] call SIN_fnc_checkPos;
-	if (_posCheck) then {
-		_posFound = true;
-	};
-};
+_heliSpawnPos = [HVP_phase_pos,(HVP_phase_radius + 1000),(HVP_phase_radius + 2000),0,1,0,0] call SIN_fnc_findPos;
 
 //-----------------------------------
 //-CREATE A LANDING ZONE
 
-_posFound = false;
-while {!_posFound} do {
-	_heliLandPos = [HVP_phase_pos,0,HVP_phase_radius,10,0,0.25,0] call BIS_fnc_findSafePos;
-	_posCheck = [_heliLandPos] call SIN_fnc_checkPos;
-	if (_posCheck) then {
-		_posFound = true;
-		_helipad = createVehicle ["Land_HelipadEmpty_F", _heliLandPos, [], 0, "NONE"];
-	};
-};
+_heliLandPos = [HVP_phase_pos,0,HVP_phase_radius,10,0,0.25,0] call SIN_fnc_findPos;
+_helipad = createVehicle ["Land_HelipadEmpty_F", _heliLandPos, [], 0, "NONE"];
 
 //-----------------------------------
 //-CREATE HELI AND PILOT, MOVE TO LANDING ZONE
@@ -105,26 +79,12 @@ _heligroup setSpeedMode "FULL";
 };
 	
 //-----------------------------------
-//-MOVE PLAYERS INTO CHOPPER
+//-MOVE PLAYER INTO CHOPPER
 
-if (HVPGameType isEqualTo 1) then {
-	{
-		if (isPlayer _x && side _x isEqualTo _side) then {
-			if (HVPSpawnType isEqualTo 0 && (_x getVariable "HVP_playerSpawn") isEqualTo "Heli" || HVPSpawnType isEqualTo 3) then {
-				[_x] remoteExec ["ace_hearing_fnc_putInEarplugs", _x];
-				_x assignAsCargo _heli;
-				_x moveInCargo _heli;
-				_x setVariable ["HVP_spawned", true, true];
-			};
-		};
-	} forEach allUnits;
-};
-if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
-	[player] call ace_hearing_fnc_putInEarplugs;
-	player assignAsCargo _heli;
-	player moveInCargo _heli;
-	player setVariable ["HVP_spawned", true, true];
-};
+[player] call ace_hearing_fnc_putInEarplugs;
+player assignAsCargo _heli;
+player moveInCargo _heli;
+player setVariable ["HVP_spawned", true, true];
 
 //-----------------------------------
 //-CHOOSE SCENARIO
@@ -144,7 +104,7 @@ if (_scenario isEqualTo "Land") then {
 	{
 		if (isPlayer _x) then {
 			doGetOut _x;
-			[_x] call ace_hearing_fnc_removeEarplugs;
+			[_x] remoteExec ["ace_hearing_fnc_removeEarplugs", _x];
 			_x removeItem "ACE_earplugs";
 		};
 	} forEach crew _heli;
@@ -179,6 +139,7 @@ if (_scenario isEqualTo "Explode" || _scenario isEqualTo "Parachute") then {
 			waitUntil {(getPosATL _unit select 2) <= 100};
 			[_unit,["OpenParachute",_unit]] remoteExec ["action", _unit];
 			waitUntil {animationState _unit == "para_pilot"};
+			[] remoteExec ["HVP_fnc_parasmoke", _unit];
 			_packHolder attachTo [vehicle _unit,[-0.07,0.67,-0.13],"pelvis"]; 
 			_packHolder setVectorDirAndUp [[0,-0.2,-1],[0,1,0]];
 			waitUntil {(getPos _unit select 2) < 1 || isTouchingGround _unit};		
@@ -196,15 +157,16 @@ if (_scenario isEqualTo "Explode" || _scenario isEqualTo "Parachute") then {
 			for "_i" from 0 to (count (_items select 0) - 1) do {
 				(unitBackpack _unit) addItemCargoGlobal [(_items select 0) select _i,(_items select 1) select _i]; //return the items
 			};
-			[_unit] call ace_hearing_fnc_removeEarplugs;
+			[_unit] remoteExec ["ace_hearing_fnc_removeEarplugs", _unit];
 			_unit removeItem "ACE_earplugs";
 		} else {
 			_unit addBackpack "b_parachute";
 			waitUntil {(getPosATL _unit select 2) <= 100};
 			[_unit,["OpenParachute",_unit]] remoteExec ["action", _unit];
 			waitUntil {animationState _unit == "para_pilot"};
+			[] remoteExec ["HVP_fnc_parasmoke", _unit];
 			waitUntil {(getPos _unit select 2) < 1 || isTouchingGround _unit};
-			[_unit] call ace_hearing_fnc_removeEarplugs;
+			[_unit] remoteExec ["ace_hearing_fnc_removeEarplugs", _unit];
 			_unit removeItem "ACE_earplugs";
 		};
 		

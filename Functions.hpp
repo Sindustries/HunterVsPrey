@@ -19,6 +19,8 @@ class HVP_Core {
 	
 	class loot {
 		file = "core\loot";
+		class airdropLoot {};
+		class heliCrashLoot {};
 		class lootInit {};
 		class lootMain {};
 		class spawnLoot {};
@@ -63,17 +65,24 @@ class HVP_Core {
 		class showEventIcon {};
 		class hideEventIcon {};
 		class airdrop {};
-		class airdropLoot {};
 		class artillery {};
 		class quake {};
 		class nuke {};
 		class uav {};
 		class chemAttack {};
 		class heliCrash {};
-		class heliCrashLoot {};
 		class dropPod {};
 		class paranormal {};
 	};
+	
+	class paranormal {
+		file = "core\event\paranormal";
+		class paraChat {};
+		class paraDarkness {};
+		class paraDecoy {};
+		class paraGhost {};
+		class paraTeleport {};
+	}
 	
 	class abilitycore {
 		file = "core\ability";
@@ -147,6 +156,7 @@ class Zombies {
 		class spawnZombies {};
 		class zDeleter {};
 		class zMonitor {};
+		class zSunDamage {};
 	};
 };
 

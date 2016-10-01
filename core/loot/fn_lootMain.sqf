@@ -14,7 +14,7 @@ _houseList = _pos nearObjects ["Building",_size];
 _counter = (count _houseList);
 {
 	_roll = (random 100);
-	if (_roll < _chanceWild && HVPLootMode isEqualTo 1) then {
+	if (_roll < _chanceWild) then {
 		private ["_spawnFound","_spawnPos","_posCheck"];
 		_spawnFound = false;
 		while {!_spawnFound} do {

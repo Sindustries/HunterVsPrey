@@ -3,9 +3,13 @@
 	By Sinbane
 	Loads events and keeps them running
 */
-private ["_common","_uncommon","_rare"];
+private ["_time","_airDropHeliSelection","_heliCrashSelection","_nukeHeliSelection","_uavSelection","_cfg","_i","_cfgName"];
 //-----------------------------------
 //-DEFINABLE
+
+_time = ["HVPEventTime"] call HVP_fnc_getSetting;
+HVPEventTime = (_time * 60);
+
 [] spawn {
 	while {true} do {
 		HVP_commonEvent = (HVPEventTime+(random HVPEventTime)-(random HVPEventTime));
@@ -14,14 +18,65 @@ private ["_common","_uncommon","_rare"];
 		sleep 30;
 	};
 };
+
+sleep 20;
 //-----------------------------------
 //-LOAD EVENTS
-if (isServer && HVPEventsEnabled isEqualTo 1) then {
+if (isServer) then {
+
+//Airdrop Heli selection
+_airDropHeliSelection = [];
+_cfg = (configFile >> "CfgVehicles");
+for "_i" from 0 to ((count _cfg)-1) do {
+	if (isClass (_cfg select _i)) then {
+		_cfgName = configName (_cfg select _i);			
+		if (_cfgName isKindOf "Helicopter" && (getNumber ((_cfg select _i) >> "scope") == 2) && (getNumber ((_cfg select _i) >> "isUav")) == 0 && (getNumber ((_cfg select _i) >> "slingLoadMaxCargoMass") >= 500)) then {
+			_airDropHeliSelection pushBackUnique _cfgName;
+		};
+	};
+};
+
+//HeliCrash Heli selection
+_heliCrashSelection = [];
+_cfg = (configFile >> "CfgVehicles");
+for "_i" from 0 to ((count _cfg)-1) do {
+	if (isClass (_cfg select _i)) then {
+		_cfgName = configName (_cfg select _i);			
+		if (_cfgName isKindOf "helicopter" && (getNumber ((_cfg select _i) >> "scope") == 2) && (getNumber ((_cfg select _i) >> "isUav")) == 0) then {
+			_heliCrashSelection pushBackUnique _cfgName;
+		};
+	};
+};
+
+//Nuke Heli selection
+_nukeHeliSelection = [];
+_cfg = (configFile >> "CfgVehicles");
+for "_i" from 0 to ((count _cfg)-1) do {
+	if (isClass (_cfg select _i)) then {
+		_cfgName = configName (_cfg select _i);			
+		if (_cfgName isKindOf "Helicopter" && (getNumber ((_cfg select _i) >> "scope") == 2) && (getNumber ((_cfg select _i) >> "isUav")) == 0 && (getNumber ((_cfg select _i) >> "slingLoadMaxCargoMass") >= 5000)) then {
+			_nukeHeliSelection pushBackUnique _cfgName;
+		};
+	};
+};
+
+//UAV selection
+_uavSelection = [];
+_cfg = (configFile >> "CfgVehicles");
+for "_i" from 0 to ((count _cfg)-1) do {
+	if (isClass (_cfg select _i)) then {
+		_cfgName = configName (_cfg select _i);			
+		if (_cfgName isKindOf "Air" && (getNumber ((_cfg select _i) >> "scope") == 2) && (getNumber ((_cfg select _i) >> "isUav")) == 1) then {
+			_uavSelection pushBackUnique _cfgName;
+		};
+	};
+};
+
 //-----------------------------------
 //-AIRDROPS
 
-	[] spawn {
-		private ["_time","_posFound","_dropPos","_posCheck","_heliSpawnPos"];
+	[_airDropHeliSelection] spawn {
+		private "_dropPos";
 		waitUntil {sleep 5; HVP_phase_num >= 1};
 
 		while {true} do {
@@ -30,19 +85,8 @@ if (isServer && HVPEventsEnabled isEqualTo 1) then {
 			} else {
 				sleep ((HVP_commonEvent)/2);
 			};
-			_posFound = false;
-			while {!_posFound} do {
-				_dropPos = [HVP_phase_pos,0,(HVP_phase_radius * 0.9),0,0,0,0] call BIS_fnc_findSafePos;
-				_posCheck = [_dropPos] call SIN_fnc_checkPos;
-				if (_posCheck) then {
-					_heliSpawnPos = [HVP_phase_pos,(HVPZoneSizeMax * 1.25),(HVPZoneSizeMax * 1.5),0,1,0,0] call BIS_fnc_findSafePos;
-					_posCheck = [_heliSpawnPos] call SIN_fnc_checkPos;
-					if (_posCheck) then {
-						_posFound = true;
-						["event",_dropPos,_heliSpawnPos] call HVP_fnc_airdrop;
-					};
-				};
-			};
+			_dropPos = [HVP_phase_pos,0,(HVP_phase_radius * 0.9),0,0,0,0] call SIN_fnc_findPos;
+			["event",(_this select 0),_dropPos] call HVP_fnc_airdrop;
 		};
 	};
 	
@@ -50,50 +94,30 @@ if (isServer && HVPEventsEnabled isEqualTo 1) then {
 //-DROP POD
 
 	[] spawn {
-		private ["_posFound","_dropPos","_posCheck"];
+		private "_dropPos";
 		waitUntil {sleep 5; HVP_phase_num >= 1};
 
 		while {true} do {
 			sleep HVP_uncommonEvent;
-			
-			_posFound = false;
-			while {!_posFound} do {
-				_dropPos = [HVP_phase_pos,0,HVP_phase_radius,0,0,0,0] call BIS_fnc_findSafePos;
-				_posCheck = [_dropPos] call SIN_fnc_checkPos;
-				if (_posCheck) then {
-					_posFound = true;
-					[_dropPos] call HVP_fnc_dropPod;
-				};
-			};
+			_dropPos = [HVP_phase_pos,0,(HVP_phase_radius * 0.9),0,0,0,0] call SIN_fnc_findPos;
+			[_dropPos] call HVP_fnc_dropPod;
 		};
 	};
 
 //-----------------------------------
 //-HELICRASH
 
-
-	[] spawn {
-		private ["_posFound","_helicrash_pos","_posCheck"];
+	[_heliCrashSelection] spawn {
+		private "_helicrash_pos";
 		waitUntil {sleep 5; HVP_phase_num >= 1};
 		
 		while {true} do {
 			sleep HVP_rareEvent;
-			
-			_posFound = false;
-			while {!_posFound} do {
-				_helicrash_pos = [HVP_phase_pos,0,(HVP_phase_radius * 0.9),0,0,0,0] call BIS_fnc_findSafePos;
-				_posCheck = [_helicrash_pos] call SIN_fnc_checkPos;
-				if (_posCheck) then {
-					_posFound = true;
-					[_helicrash_pos] call HVP_fnc_heliCrash;
-				};
-			};
+			_helicrash_pos = [HVP_phase_pos,0,(HVP_phase_radius * 0.9),0,0,0,0] call SIN_fnc_findPos;
+			[(_this select 0),_helicrash_pos] call HVP_fnc_heliCrash;
 		};
 	};
 
-//-----------------------------------
-};
-if (isServer && HVPExtEvents isEqualTo 1) then {
 //-----------------------------------
 //-ARTILLERY
 
@@ -103,25 +127,17 @@ if (isServer && HVPExtEvents isEqualTo 1) then {
 	_missileCount = 12;
 
 	[_vehCount,_missileCount] spawn {
-		private ["_posFound","_artyPos","_posCheck","_vehCount","_missileCount"];
+		private ["_artyPos","_vehCount","_missileCount"];
 
 		_vehCount = _this select 0;
 		_missileCount = _this select 1;
 
 		while {true} do {
 
-			waitUntil {sleep 5; HVP_phase_active isEqualTo "true"};
 			sleep HVP_uncommonEvent;
 			
-			_posFound = false;
-			while {!_posFound} do {
-				_artyPos = [HVP_phase_pos,0,(HVP_phase_radius * 0.9),0,0,0,0] call BIS_fnc_findSafePos;
-				_posCheck = [_artyPos] call SIN_fnc_checkPos;
-				if (_posCheck) then {
-					_posFound = true;
-					[_artyPos,_vehCount,_missileCount] call HVP_fnc_artillery;
-				};
-			};
+			_artyPos = [HVP_phase_pos,0,(HVP_phase_radius * 0.9),0,0,0,0] call SIN_fnc_findPos;
+			[_artyPos,_vehCount,_missileCount] call HVP_fnc_artillery;
 		};
 	};
 	
@@ -129,23 +145,15 @@ if (isServer && HVPExtEvents isEqualTo 1) then {
 //-CHEMICAL ATTACK
 
 	[] spawn {
-		private ["_size","_gasCount","_posFound","_chemPos","_posCheck"];
+		private ["_size","_gasCount","_chemPos"];
 		while {true} do {
-			waitUntil {sleep 5; HVP_phase_active isEqualTo "true"};
 			sleep HVP_commonEvent;
 			
 			_size = (HVP_Phase_Radius * 0.05);
 			_gasCount = (_size / 1.25);
 			
-			_posFound = false;
-			while {!_posFound} do {
-				_chemPos = [HVP_phase_pos,0,(HVP_phase_radius * 0.9),0,0,0,0] call BIS_fnc_findSafePos;
-				_posCheck = [_chemPos] call SIN_fnc_checkPos;
-				if (_posCheck) then {
-					_posFound = true;
-					[_chemPos,_size,_gasCount] call HVP_fnc_chemAttack;
-				};
-			};
+			_chemPos = [HVP_phase_pos,0,(HVP_phase_radius * 0.9),0,0,0,0] call SIN_fnc_findPos;
+			[_chemPos,_size,_gasCount] call HVP_fnc_chemAttack;
 		};
 	};
 
@@ -153,45 +161,30 @@ if (isServer && HVPExtEvents isEqualTo 1) then {
 //-QUAKE
 
 	[] spawn {
-		private ["_posFound","_quakePos","_posCheck","_posFound"];
+		private ["_quakePos"];
 		waitUntil {sleep 5; HVP_phase_num >= 1};
 		
 		while {true} do {
 			sleep HVP_uncommonEvent;
 			
-			_posFound = false;
-			while {!_posFound} do {
-				_quakePos = [HVP_phase_pos,0,(HVP_phase_radius * 0.9),0,1,0,0] call BIS_fnc_findSafePos;
-				_posCheck = [_quakePos] call SIN_fnc_checkPos;
-				if (_posCheck) then {
-					_posFound = true;
-					[_quakePos] call HVP_fnc_quake;
-				};
-			};
+			_quakePos = [HVP_phase_pos,0,(HVP_phase_radius * 0.9),0,1,0,0] call SIN_fnc_findPos;
+			[_quakePos] call HVP_fnc_quake;
 		};
 	};
 	
 //-----------------------------------
 //-NUKE	
 	
-	[] spawn {
-		private ["_posFound","_nukePos","_nuke","_posCheck","_posFound"];
+	[_nukeHeliSelection] spawn {
+		private ["_nukePos","_nuke"];
 		waitUntil {sleep 5; HVP_phase_num >= 1};
 		
 		while {true} do {
 			sleep HVP_rareEvent;
 			
-			_posFound = false;
-			while {!_posFound} do {
-				_nukePos = [HVP_phase_pos,0,(HVP_phase_radius * 0.9),0,0,0,0] call BIS_fnc_findSafePos;
-				_posCheck = [_nukePos] call SIN_fnc_checkPos;
-				if (_posCheck) then {
-					_posFound = true;
-					_nuke = createVehicle ["I_UAV_01_F",_nukePos, [], 0, "NONE"];
-					_nuke hideObjectGlobal true;
-					[_nuke,(HVP_phase_radius * 0.2),true,true,true,true] call HVP_fnc_nuke;
-				};
-			};
+			_nukePos = [HVP_phase_pos,0,(HVP_phase_radius * 0.5),0,0,0,0] call SIN_fnc_findPos;
+			[(_this select 0),_nukePos,(HVP_phase_radius * 0.33),true,true,true,true] call HVP_fnc_nuke;
+
 			sleep HVP_uncommonEvent;
 		};
 	};
@@ -199,34 +192,18 @@ if (isServer && HVPExtEvents isEqualTo 1) then {
 //-----------------------------------
 //-UAV
 
-	[] spawn {
-		private ["_temp","_uavScanSize","_uavTime","_uavUpdate","_posFound","_uavScanPos","_posCheck","_uavSpawnPos","_posCheck2"];
-		_temp = createVehicle ["I_UAV_01_F",[0,0,0], [], 0, "FLY"];
-		sleep 1;
-		deleteVehicle _temp;
-		
+	[_uavSelection] spawn {
+		private ["_uavScanSize","_uavTime","_uavUpdate","_uavScanPos"];		
 		while {true} do {
 		
-			waitUntil {sleep 5; HVP_phase_active isEqualTo "true"};
 			sleep HVP_rareEvent;
 			
 			_uavScanSize = (HVP_Phase_Radius * 0.2);
-			_uavTime = 60 +(random HVPPhaseTime);
+			_uavTime = ((60*2)+(random(60*3)));
 			_uavUpdate = 3;
 			
-			_posFound = false;
-			while {!_posFound} do {
-				_uavScanPos = [HVP_phase_pos,0,(HVP_phase_radius * 0.9),0,0,0,0] call BIS_fnc_findSafePos;
-				_posCheck = [_uavScanPos] call SIN_fnc_checkPos;
-				if (_posCheck) then {
-					_uavSpawnPos = [_uavScanPos,400,800,0,0,0,0] call BIS_fnc_findSafePos;
-					_posCheck2 = [_uavScanPos] call SIN_fnc_checkPos;
-					if (_posCheck2) then {
-						_posFound = true;
-						[_uavScanPos,_uavSpawnPos,_uavScanSize,_uavTime,_uavUpdate] call HVP_fnc_uav;
-					};
-				};
-			};
+			_uavScanPos = [HVP_phase_pos,0,(HVP_phase_radius * 0.9),0,0,0,0] call SIN_fnc_findPos;
+			[(_this select 0),_uavScanPos,_uavScanSize,_uavTime,_uavUpdate] call HVP_fnc_uav;
 		};
 	};
 
@@ -235,7 +212,8 @@ if (isServer && HVPExtEvents isEqualTo 1) then {
 //-----------------------------------
 //-PARANORMAL
 
-if (HVPParanormalEvent isEqualTo 1 && side player != sideLogic) then {
+HVPParanormalEvent = ["HVPParanormalEvent"] call HVP_fnc_getSetting;
+if (HVPParanormalEvent isEqualTo 1 && playerSide != sideLogic) then {
 	[] spawn HVP_fnc_paranormal;
 };
 

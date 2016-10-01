@@ -5,6 +5,13 @@
 */
 class HVP {
 	
+/* MAIN SETTINGS */
+
+	HVP_ZombieMode = true;				//Set to false to disable zombies
+	HVPDebugMode = false;				//Enable lots of debugging info
+	HVPStatMode = true;					//Set to false to disable stat saving
+	HVPantiCamp = 90;					//How long (SEC) players have until they are revealed on the map if camping
+	
 /* ADAPTIVE TIME SETTINGS */
 
 	daytimeMultiplier = 80;				//Time multiplier during the day	>> BOTH THESE SETTINGS HAVE A MAX OF 120 <<
@@ -12,7 +19,13 @@ class HVP {
 	
 /* SPAWN SETTINGS */
 
+	HVPSpawnType = 0;					//0:Random, 1:Ground, 2:HALO, 3:Helicopter, 4:Drop Pod
 	groundChanceUnconscious = 25;		//Chance of being unconscious during "Ground" spawn
+	
+/* EVENT SETTINGS */
+
+	HVPEventTime = 5;					//Time (MINS) randomiser for events
+	HVPParanormalEvent = true;			//Paranormal activity active?
 	
 /* LOADOUT SETTINGS */
 
@@ -33,6 +46,67 @@ class HVP {
 	nightVisionMinTime = 20;		//Effects both Night Vision Thief and Temporary Night Vision
 	nightVisionMaxTime = 40;		//Same as above
 	
+/* LOOT SETTINGS */
+
+	lootSpawn_HVPchance = 20;			//Chance (%) of loot spawning (HVP mode)
+	lootSpawn_CRUchance = 66;			//Chance (%) of loot spawning (CRU/PRED mode)
+	lootSpawn_mult = 1.5;				//Multiplier of area (radius) from position to spawn loot
+	lootSpawn_zAdjustHouse = 0.15;		//Height adjustment to prevent loot spawning in the floor
+	lootSpawn_zAdjustWild = 0.04;		//Same as above, but for wild loot
+	lootSpawn_gunsWithMag = true;		//Whether or not guns should spawn with appropriate mags on same area
+	lootSpawn_chanceWild = 20;			//% chance of loot spawning in the wild
+	
+	/* Loot chance table */
+
+	HVP_lootChance[] = {	//Hunter vs Prey Mode
+		5,		//weapons
+		20,		//magazines
+		8,		//items
+		4,		//medical
+		10,		//clothing
+		5,		//backpacks
+		0,		//ghillies & other special clothing
+		0,		//night vision
+		0		//suppressors
+	};
+	
+	CRU_lootChance[] = {	//Crucible & Predator mode
+		20,		//weapons
+		45,		//magazines
+		12,		//items
+		4.5,	//medical
+		25,		//clothing
+		8,		//backpacks
+		0.65,	//ghillies & other special clothing
+		1.9,	//night vision
+		2.35	//suppressors
+	};	
+	
+/* VEHICLE SPAWN SETTINGS */
+
+	vehicleCarMinDist = 250;			//Min distance (METERS) between car spawns
+	vehicleBoatMinDist = 100;			//Min distance (METERS) between boat spawns	
+	
+/* PHASE SETTINGS */
+
+	HVPPhaseType = 1;					//1:Multiple, 2:Single
+	HVPPhaseSpacing = 1;				//1:Breaks in Between, 2:Continuous
+	HVPZoneSizeMax = 0;					//0:Adaptive - Can be anything, note this will set the RADIUS not the DIAMETER
+
+	adaptiveZoneMinSize = 1000;			//Min Size of adaptive zone (RADIUS)
+	adaptiveZoneMaxSize = 4000;			//Max Size of adaptive zone (RADIUS)	
+	adaptiveZoneMinTime = 3;			//Min Time of adaptive zone (MIN)
+	adaptiveZoneMaxTime = 15;			//Max Time of adaptive zone (MIN)
+	
+	singlePhaseReduceSize = 0.5;		//Distance (METERS) single phase type will reduce by every second
+	singlePhaseShiftSize = 5;			//Distance (METERS) single phase type will move by every second
+	
+	phaseBreakTime = 0.5;				//Multiplier applied to active phase time to get inactive phase time	
+	phaseTimeDecay = 0.8;				//Multiplier applied to overall phase time after each phase
+	phaseSizeDecay = 0.8;				//Multiplier applied to phase size between each phase
+	
+/* MISC SETTINGS */	
+	
 	randomHeadgear[] = { "H_MilCap_ocamo","H_MilCap_mcamo","H_MilCap_oucamo","H_MilCap_rucamo","H_MilCap_gry","H_MilCap_dgtl","H_MilCap_blue","H_Bandanna_khk","H_Bandanna_khk_hs","H_Bandanna_cbr","H_Bandanna_sgg","H_Bandanna_gry","H_Beret_blk","H_Beret_red","H_Beret_grn","H_Beret_grn_SF","H_Beret_brn_SF","H_Beret_ocamo","H_Watchcap_blk","H_Watchcap_cbr","H_Watchcap_khk","H_Watchcap_camo","H_Watchcap_sgg" };
 	randomHeadgearAPEX[] = { "G_Balaclava_TI_blk_F","G_Balaclava_TI_tna_F","G_Balaclava_TI_G_blk_F","G_Balaclava_TI_G_tna_F" };
 	randomUniforms[] = { "U_IG_Guerilla1_1","U_IG_Guerilla2_1","U_IG_Guerilla2_2","U_IG_Guerilla2_3","U_IG_Guerilla3_1","U_IG_Guerilla3_2","U_I_G_Story_Protagonist_F","U_I_G_resistanceLeader_F","U_IG_Guerrilla_6_1" };
@@ -51,67 +125,13 @@ class HVP {
 	HVP_mines[] = { "APERSTripMine_Wire_Ammo","APERSBoundingMine_Range_Ammo","APERSMine_Range_Ammo","ATMine_Range_Ammo","ClaymoreDirectionalMine_Remote_Ammo","SLAMDirectionalMine_Wire_Ammo" };
 	/* Red Team "knockout" guns */
 	HVP_redGuns[] = { "hgun_P07_F" };
-	HVP_redAmmo[] = { "B_9x21_Ball_Tracer_Red" };
-	
-/* LOOT SETTINGS */
-
-	lootSpawn_mult = 1.5;				//Multiplier of area (radius) from position to spawn loot
-	lootSpawn_zAdjustHouse = 0.15;		//Height adjustment to prevent loot spawning in the floor
-	lootSpawn_zAdjustWild = 0.04;		//Same as above, but for wild loot
-	lootSpawn_gunsWithMag = true;		//Whether or not guns should spawn with appropriate mags on same area
-	lootSpawn_chanceWild = 20;			//% chance of loot spawning in the wild
-	
-	/* Loot chance table */
-
-	HVP_lootChance[] = {	//Hunter vs Prey Mode
-		5,		//weapons
-		20,		//magazines
-		8,		//items
-		4,		//medical
-		10,		//clothing
-		5,		//backpacks
-		0,		//ghillies & other special clothing
-		0,		//night vision
-		0		//mines
-	};
-	
-	CRU_lootChance[] = {	//Crucible & Predator mode
-		20,		//weapons
-		45,		//magazines
-		12,		//items
-		4.5,	//medical
-		10,		//clothing
-		8,		//backpacks
-		0.65,	//ghillies & other special clothing
-		1.9,	//night vision
-		1.35	//mines
-	};	
-	
-/* VEHICLE SPAWN SETTINGS */
-
-	vehicleCarMinDist = 250;			//Min distance (METERS) between car spawns
-	vehicleBoatMinDist = 100;			//Min distance (METERS) between boat spawns	
-	
-/* PHASE SETTINGS */
-
-	adaptiveZoneMinSize = 750;			//Min Size of adaptive zone (RADIUS)
-	adaptiveZoneMaxSize = 4000;			//Max Size of adaptive zone (RADIUS)	
-	adaptiveZoneMinTime = 180;			//Min Time of adaptive zone (SEC)
-	adaptiveZoneMaxTime = 900;			//Max Time of adaptive zone (SEC)
-	
-	singlePhaseReduceSize = 0.5;		//Distance (METERS) single phase type will reduce by every second
-	singlePhaseShiftSize = 5;			//Distance (METERS) single phase type will move by every second
-	
-	phaseBreakTime = 0.5;				//Multiplier applied to active phase time to get inactive phase time	
-	phaseTimeDecay = 0.75;				//Multiplier applied to overall phase time after each phase
-	phaseSizeDecay = 0.75;				//Multiplier applied to phase size between each phase
-	
+	HVP_redAmmo[] = { "B_9x21_Ball_Tracer_Red" };	
 };
 	
 class SMS {
 	SMS_maxBlood = 1000;				//Max blood level
 	SMS_bloodRegen = 5;					//How much blood to be replenished
-	SMS_bloodRegenRate = 10;			//How often to replenish (in sec)
+	SMS_bloodRegenRate = 5;				//How often to replenish (in sec)
 	SMS_bleedRate = 8;					//How often bleed ticks happen (in sec)
 	SMS_passOutNum = 0.40;				//At what % blood to pass out
 	SMS_passOutChance = 10;				//Chance of passing out each bleed tick
@@ -125,6 +145,7 @@ class Z {
 	HVP_maxZombies = 100;				//Total number of alive zombies
 	HVP_zhordeSize = 8; 				//Max num to spawn on each spawner
 	HVP_zSpawnChance = 75;				//Chance of a spawner spawning zombies (%)
+	HVP_zBossChance = 2.5;				//Chance of spawning a boss zombie (demon)
 	HVP_zDeleteDist = 300;				//Distance (METERS) from players to remove zombies
 };
 

@@ -1,5 +1,5 @@
 
-	private ["_drop","_weapon","_mag1","_mag2","_item","_clothes","_backpack","_nvRoll","_spRoll","_spClothes","_nvg","_mine"];
+	private ["_drop","_weapon","_mag1","_mag2","_item","_clothes","_backpack","_nvRoll","_spRoll","_spClothes","_nvg","_sns"];
 	_drop = _this select 0;
 	
 	clearMagazineCargoGlobal _drop;
@@ -22,7 +22,7 @@
 			_backpack = selectRandom (Sinspawn_lootList select 5);
 			_spClothes = selectRandom (Sinspawn_lootList select 6);
 			_nvg = selectRandom (Sinspawn_lootList select 7);
-			_mine = selectRandom (Sinspawn_lootList select 8);
+			_sns = selectRandom (Sinspawn_lootList select 8);
 			
 
 			_drop addWeaponCargoGlobal [_weapon, floor (random 2)];
@@ -46,7 +46,7 @@
 			_backpack = selectRandom (Sinspawn_lootList select 5);
 			_spClothes = selectRandom (Sinspawn_lootList select 6);
 			_nvg = selectRandom (Sinspawn_lootList select 7);
-			_mine = selectRandom (Sinspawn_lootList select 8);
+			_sns = selectRandom (Sinspawn_lootList select 8);
 		
 			_drop addWeaponCargoGlobal [_weapon, floor (random 2)];
 			_drop addMagazineCargoGlobal [_mag1, floor (random 3)];
@@ -62,7 +62,7 @@
 				_drop addItemCargoGlobal [_nvg, floor (random 2)];
 			};
 			if ((Sinspawn_lootChance select 8) > (random 100)) then {
-				_drop addMagazineCargoGlobal [_mine, floor (random 2)];
+				_drop addItemCargoGlobal [_sns, floor (random 2)];
 			};
 		};
 	};

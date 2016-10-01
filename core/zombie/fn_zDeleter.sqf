@@ -9,8 +9,8 @@ private ["_deleteDist","_playerPosArray","_zIndex","_index"];
 	_deleteDist = ["HVP_zDeleteDist"] call HVP_fnc_getSetting;;
 
 	while {true} do {
-		sleep 20;
-		waitUntil {sleep 20; (count HVP_zombieArray > 0)};
+		sleep 10;
+		waitUntil {sleep 10; (count HVP_zombieArray > 0)};
 		
 		_playerPosArray = [];
 		{
@@ -21,7 +21,7 @@ private ["_deleteDist","_playerPosArray","_zIndex","_index"];
 		
 		_zIndex = 0;
 		{
-			for "_index" from 0 to (count _playerPosArray) do {
+			for "_index" from 0 to ((count _playerPosArray)-1) do {
 				if (_x distance (_playerPosArray select _index) > _deleteDist && alive _x) then {
 					deleteVehicle _x;
 					HVP_zombieArray deleteAt _zIndex;

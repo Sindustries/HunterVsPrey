@@ -26,7 +26,6 @@
 					_magazineClass = selectRandom _magazines; 
 					_holder addMagazineCargoGlobal [_magazineClass, floor(random 3)];
 				};
-				Sinspawn_weaponsSpawned = Sinspawn_weaponsSpawned + 1;
 				if (HVPDebugMode isEqualTo 1) then {
 					_id = format ["%1",_pos];
 					_debug = createMarker [_id,_pos];
@@ -55,7 +54,6 @@
 						_holder addMagazineCargoGlobal [_magazineClass, floor 1];
 					};
 				};
-				Sinspawn_magsSpawned = Sinspawn_magsSpawned + 1;
 				if (HVPDebugMode isEqualTo 1) then {
 					_id = format ["%1",_pos];
 					_debug = createMarker [_id,_pos];
@@ -78,7 +76,6 @@
 						_holder addItemCargoGlobal [_item, 1];
 					};
 				};
-				Sinspawn_itemsSpawned = Sinspawn_itemsSpawned + 1;
 				if (HVPDebugMode isEqualTo 1) then {
 					_id = format ["%1",_pos];
 					_debug = createMarker [_id,_pos];
@@ -94,7 +91,6 @@
 			if (_lootType isEqualTo 3) then {
 				_med = selectRandom (Sinspawn_lootList select 3);
 				_holder addItemCargoGlobal [_med, 1];
-				Sinspawn_medSpawned = Sinspawn_medSpawned + 1;
 				if (HVPDebugMode isEqualTo 1) then {
 					_id = format ["%1",_pos];
 					_debug = createMarker [_id,_pos];
@@ -110,7 +106,6 @@
 			if (_lootType isEqualTo 4) then {
 				_clothing = selectRandom (Sinspawn_lootList select 4);
 				_holder addItemCargoGlobal [_clothing, 1];
-				Sinspawn_clothingSpawned = Sinspawn_clothingSpawned + 1;
 				if (HVPDebugMode isEqualTo 1) then {
 					_id = format ["%1",_pos];
 					_debug = createMarker [_id,_pos];
@@ -126,7 +121,6 @@
 			if (_lootType isEqualTo 5) then {
 				_backpack = selectRandom (Sinspawn_lootList select 5);
 				_holder addBackpackCargoGlobal [_backpack, 1];
-				Sinspawn_backpacksSpawned = Sinspawn_backpacksSpawned + 1;
 				if (HVPDebugMode isEqualTo 1) then {
 					_id = format ["%1",_pos];
 					_debug = createMarker [_id,_pos];
@@ -142,7 +136,6 @@
 			if (_lootType isEqualTo 6) then {
 				_clothing = selectRandom (Sinspawn_lootList select 6);
 				_holder addItemCargoGlobal [_clothing, 1];
-				Sinspawn_specialClothingSpawned = Sinspawn_specialClothingSpawned + 1;
 				if (HVPDebugMode isEqualTo 1) then {
 					_id = format ["%1",_pos];
 					_debug = createMarker [_id,_pos];
@@ -158,7 +151,6 @@
 			if (_lootType isEqualTo 7) then {
 				_clothing = selectRandom (Sinspawn_lootList select 7);
 				_holder addItemCargoGlobal [_clothing, 1];
-				Sinspawn_nightVisionSpawned = Sinspawn_nightVisionSpawned + 1;
 				if (HVPDebugMode isEqualTo 1) then {
 					_id = format ["%1",_pos];
 					_debug = createMarker [_id,_pos];
@@ -170,11 +162,10 @@
 				};
 			};
 			
-			//MINES
+			//SUPPRESSORS
 			if (_lootType isEqualTo 8) then {
 				_magazineClass = selectRandom (Sinspawn_lootList select 8);
-				_holder addMagazineCargoGlobal [_magazineClass, 1];
-				Sinspawn_magsSpawned = Sinspawn_magsSpawned + 1;
+				_holder addItemCargoGlobal [_magazineClass, 1];
 				if (HVPDebugMode isEqualTo 1) then {
 					_id = format ["%1",_pos];
 					_debug = createMarker [_id,_pos];

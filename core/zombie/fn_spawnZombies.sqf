@@ -13,19 +13,16 @@ private ["_pos","_zombieCount","_zombie","_group","_posFound","_spawnPos","_posC
 		
 	for "_zombieCount" from 0 to (floor(random _maxNum)+1) do {
 		if (HVP_zombieCount <= HVP_maxZombies) then {
-			_posFound = false;
-			while {!_posFound} do {
-				_spawnPos = [_pos,0,15,0,0,0,0] call BIS_fnc_findSafePos;
-				_posCheck = [_spawnPos] call SIN_fnc_checkPos;
-				if (_posCheck) then {
-					_posFound = true;
-					_zombie = _group createUnit [(selectRandom HVP_Zombies), _spawnPos, [], 0, "NONE"];
-					_zombie switchMove "AmovPercMstpSnonWnonDnon_SaluteOut";
-					HVP_zombieArray pushBack _zombie;
-					HVP_zombieCount = (count HVP_zombieArray);
-					publicVariable "HVP_zombieCount";
-				};
+			_spawnPos = [_pos,0,50,0,0,0,0] call SIN_fnc_findPos;
+			if ((random 100) < HVP_zBossChance) then {
+				_zombie = _group createUnit [(selectRandom HVP_BossZombies), _spawnPos, [], 0, "NONE"];
+			} else {
+				_zombie = _group createUnit [(selectRandom HVP_Zombies), _spawnPos, [], 0, "NONE"];
 			};
+			_zombie switchMove "AmovPercMstpSnonWnonDnon_SaluteOut";
+			HVP_zombieArray pushBack _zombie;
+			HVP_zombieCount = (count HVP_zombieArray);
+			publicVariable "HVP_zombieCount";
 		};
 	};
 

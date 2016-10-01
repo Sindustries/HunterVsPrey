@@ -41,10 +41,10 @@ sleep 20 + (random 30);
 
 for "_gas" from 0 to _gasCount do {
 	_smokepos = [(_pos select 0)+(random _size)-(random _size),(_pos select 1)+(random _size)-(random _size), 0];
-	_smoke = createVehicle ["SmokeShellRed", [_smokepos select 0, _smokepos select 1, (random 100)], [], 0, "NONE"];
+	_smoke = createVehicle ["SmokeShellRed", [_smokepos select 0, _smokepos select 1, (random 150)], [], 0, "NONE"];
 	if (HVPGameType == 1) then {
 		_smokepos = [(_pos select 0)+(random _size)-(random _size),(_pos select 1)+(random _size)-(random _size), 0];
-		_smoke = createVehicle ["SmokeShellBlue", [_smokepos select 0, _smokepos select 1, (random 100)], [], 0, "NONE"];
+		_smoke = createVehicle ["SmokeShellBlue", [_smokepos select 0, _smokepos select 1, (random 150)], [], 0, "NONE"];
 	};
 	sleep (random 1);
 };

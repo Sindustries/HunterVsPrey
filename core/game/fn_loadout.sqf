@@ -10,7 +10,7 @@ removeHeadgear player;
 removeBackpack player;
 removeAllWeapons player;
 removeAllAssignedItems player;
-if ((goggles player) in HVP_gasMasks) then {removeGoggles player};
+removeGoggles player;
 //-----------------------------------
 //-FIND LOADOUT
 
