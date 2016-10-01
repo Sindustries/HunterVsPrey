@@ -142,6 +142,4 @@ if (HVPZombieMode isEqualTo 1) then {
 	};
 };
 
-deleteVehicle _obj_nuke;
-
 //-----------------------------------
