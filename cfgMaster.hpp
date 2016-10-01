@@ -19,7 +19,7 @@ class HVP {
 	
 /* SPAWN SETTINGS */
 
-	HVPSpawnType = 4;					//0:Random, 1:Ground, 2:HALO, 3:Helicopter, 4:Drop Pod
+	HVPSpawnType = 0;					//0:Random, 1:Ground, 2:HALO, 3:Helicopter, 4:Drop Pod
 	groundChanceUnconscious = 25;		//Chance of being unconscious during "Ground" spawn
 	
 /* EVENT SETTINGS */
