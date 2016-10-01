@@ -239,6 +239,7 @@ for "_i" from 0 to ((count _cfg)-1) do {
 	if (isClass (_cfg select _i)) then {
 		_cfgName = configName (_cfg select _i);			
 		if (_cfgName isKindOf "Uniform_Base" && (getNumber ((_cfg select _i) >> "scope") == 2)) then {
+			systemChat format["%1",_cfgName];
 			if (!(_cfgName in Sinspawn_lootList select 6)) then {
 				(Sinspawn_lootList select 4) pushBackUnique _cfgName;
 			};
