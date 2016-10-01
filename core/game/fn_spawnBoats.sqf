@@ -20,7 +20,6 @@ _boatSelection = [];
 _cfg = (configFile >> "CfgVehicles");
 
 if (HVPGameType isEqualTo 1) then {
-	_cfg = (configFile >> "CfgVehicles");
 	for "_i" from 0 to ((count _cfg)-1) do {
 		if (isClass (_cfg select _i)) then {
 			_cfgName = configName (_cfg select _i);			
