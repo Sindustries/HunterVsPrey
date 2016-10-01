@@ -35,6 +35,7 @@ Sinspawn_lootList = [
 ], [ //ITEMS
 "ItemGPS",
 "ItemMap",
+"ACE_earplugs",
 "optic_Hamr",
 "optic_Aco",
 "optic_Holosight"
@@ -121,6 +122,7 @@ Sinspawn_lootList = [
 "Laserdesignator",
 "MineDetector",
 "ItemGPS",
+"ACE_earplugs",
 "optic_Arco",
 "optic_Hamr",
 "optic_Aco",
