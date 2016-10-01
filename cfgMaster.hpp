@@ -75,7 +75,7 @@ class HVP {
 		45,		//magazines
 		12,		//items
 		4.5,	//medical
-		15,		//clothing
+		25,		//clothing
 		8,		//backpacks
 		0.65,	//ghillies & other special clothing
 		1.9,	//night vision
