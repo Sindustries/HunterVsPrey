@@ -189,17 +189,21 @@ Sinspawn_lootList = [
 private ["_cfg","_exclusions","_i","_cfgName"];
 
 if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
+	private "_weapon";
 	_cfg = (configFile >> "CfgWeapons");
 	for "_i" from 0 to ((count _cfg)-1) do {
 		if (isClass (_cfg select _i)) then {
 			_cfgName = configName (_cfg select _i);			
 			if (_cfgName isKindOf "Rifle" && (getNumber ((_cfg select _i) >> "scope") == 2)) then {
 				//if (!(isNil (getText ((_cfg select _i) >> "baseWeapon")))) then {
-					(Sinspawn_lootList select 0) pushBackUnique (getText ((_cfg select _i) >> "baseWeapon"));
+					_weapon = (getText ((_cfg select _i) >> "baseWeapon"));
+					(Sinspawn_lootList select 0) pushBackUnique _weapon;
+					systemchat format["%1",_weapon];
 				//};
 			};
 		};
 	};
+	hint format["%1",(Sinspawn_lootList select 0)];
 };
 
 
