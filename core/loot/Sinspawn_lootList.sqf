@@ -194,15 +194,16 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 	for "_i" from 0 to ((count _cfg)-1) do {
 		if (isClass (_cfg select _i)) then {
 			_cfgName = configName (_cfg select _i);			
-			if (_cfgName isKindOf ["Rifle", configFile >> "CfgWeapons"] && (getNumber ((_cfg select _i) >> "scope") == 2)) then {
-				//if (!(isNil (getText ((_cfg select _i) >> "baseWeapon")))) then {
+			if (_cfgName isKindOf ["Rifle", configFile >> "CfgWeapons"] || _cfgName isKindOf ["Pistol", configFile >> "CfgWeapons"] || _cfgName isKindOf ["Launcher", configFile >> "CfgWeapons"]) then {
+				if ((getNumber ((_cfg select _i) >> "scope") == 2)) then {
 					_weapon = (getText ((_cfg select _i) >> "baseWeapon"));
-					(Sinspawn_lootList select 0) pushBackUnique _weapon;
-				//};
+					if (_weapon != "") then {
+						(Sinspawn_lootList select 0) pushBackUnique _weapon;
+					};
+				};
 			};
 		};
 	};
-	copyToClipboard str (Sinspawn_lootList select 0);
 };
 
 
