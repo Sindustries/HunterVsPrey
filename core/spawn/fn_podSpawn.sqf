@@ -38,7 +38,6 @@ player moveInCargo [_pod, 2];
 player allowDamage false;
 player setVariable ["HVP_spawned", true, true];
 
-
 //-----------------------------------
 //- WAIT UNTIL CRASH 
 
@@ -71,7 +70,8 @@ _sparks1 attachTo [_pod];
 	{deleteVehicle _x;} forEach (_fire getVariable ["effects", []]);
 	deleteVehicle _fire;
 };	
-sleep 6;
+waitUntil {velocityModelSpace _pod isEqualTo [0,0,0]};
+sleep 1;
 {
 	_x allowDamage true;
 	_x action ["Eject", _pod];
