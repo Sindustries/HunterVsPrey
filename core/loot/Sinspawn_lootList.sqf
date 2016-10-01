@@ -202,15 +202,17 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 	};
 };
 
+
 //Helmets
 _cfg = (configFile >> "CfgWeapons");
 _exclusions = ["H_HelmetO_ViperSP_hex_F","H_HelmetO_ViperSP_ghex_F"];
 for "_i" from 0 to ((count _cfg)-1) do {
 	if (isClass (_cfg select _i)) then {
-		_cfgName = configName (_cfg select _i);
-		_str = (configfile >> "CfgWeapons" >> _cfgName >> "_generalMacro");
-		if (_cfgName isKindOf "HelmetBase" && (getNumber ((_cfg select _i) >> "scope") == 2) && !(_str in Sinspawn_lootList select 6) && !(_str in _exclusions)) then {
-			(Sinspawn_lootList select 4) pushBackUnique _cfgName;
+		_cfgName = configName (_cfg select _i);	
+		if (_cfgName isKindOf "HelmetBase" && (getNumber ((_cfg select _i) >> "scope") == 2)) then {
+			if (!(_cfgName in Sinspawn_lootList select 6) || !(_cfgName in _exclusions)) then {
+				(Sinspawn_lootList select 4) pushBackUnique _cfgName;
+			};
 		};
 	};
 };
@@ -218,9 +220,8 @@ _cfg = (configFile >> "CfgWeapons");
 _exclusions = ["H_HelmetO_ViperSP_hex_F","H_HelmetO_ViperSP_ghex_F"];
 for "_i" from 0 to ((count _cfg)-1) do {
 	if (isClass (_cfg select _i)) then {
-		_cfgName = configName (_cfg select _i);
-		_str = (configfile >> "CfgWeapons" >> _cfgName >> "_generalMacro");
-		if (_cfgName isKindOf "H_HelmetB" && (getNumber ((_cfg select _i) >> "scope") == 2) && !(_str in Sinspawn_lootList select 6) && !(_str in _exclusions)) then {
+		_cfgName = configName (_cfg select _i);			
+		if (_cfgName isKindOf "H_HelmetB" && (getNumber ((_cfg select _i) >> "scope") == 2) && !(_cfgName in Sinspawn_lootList select 6) && !(_cfgName in _exclusions)) then {
 			(Sinspawn_lootList select 4) pushBackUnique _cfgName;
 		};
 	};
@@ -230,9 +231,8 @@ for "_i" from 0 to ((count _cfg)-1) do {
 _cfg = (configFile >> "CfgWeapons");
 for "_i" from 0 to ((count _cfg)-1) do {
 	if (isClass (_cfg select _i)) then {
-		_cfgName = configName (_cfg select _i);
-		_str = (configfile >> "CfgWeapons" >> _cfgName >> "_generalMacro");		
-		if (_cfgName isKindOf "Uniform_Base" && (getNumber ((_cfg select _i) >> "scope") == 2) && !(_str in Sinspawn_lootList select 6)) then {
+		_cfgName = configName (_cfg select _i);			
+		if (_cfgName isKindOf "Uniform_Base" && (getNumber ((_cfg select _i) >> "scope") == 2) && !(_cfgName in Sinspawn_lootList select 6)) then {
 			(Sinspawn_lootList select 4) pushBackUnique _cfgName;
 		};
 	};
@@ -242,8 +242,7 @@ for "_i" from 0 to ((count _cfg)-1) do {
 _cfg = (configFile >> "CfgVehicles");
 for "_i" from 0 to ((count _cfg)-1) do {
 	if (isClass (_cfg select _i)) then {
-		_cfgName = configName (_cfg select _i);		
-		_str = (configfile >> "CfgVehicles" >> _cfgName >> "_generalMacro");
+		_cfgName = configName (_cfg select _i);			
 		if (_cfgName isKindOf "Vest_Base_F" && (getNumber ((_cfg select _i) >> "scope") == 2)) then {
 			(Sinspawn_lootList select 4) pushBackUnique _cfgName;
 		};
@@ -254,8 +253,7 @@ for "_i" from 0 to ((count _cfg)-1) do {
 _cfg = (configFile >> "CfgVehicles");
 for "_i" from 0 to ((count _cfg)-1) do {
 	if (isClass (_cfg select _i)) then {
-		_cfgName = configName (_cfg select _i);
-		_str = (configfile >> "CfgVehicles" >> _cfgName >> "_generalMacro");
+		_cfgName = configName (_cfg select _i);			
 		if (_cfgName isKindOf "Bag_Base" && (getNumber ((_cfg select _i) >> "scope") == 2)) then {
 			(Sinspawn_lootList select 5) pushBackUnique _cfgName;
 		};
@@ -266,9 +264,8 @@ for "_i" from 0 to ((count _cfg)-1) do {
 _cfg = (configFile >> "CfgGlasses");
 for "_i" from 0 to ((count _cfg)-1) do {
 	if (isClass (_cfg select _i)) then {
-		_cfgName = configName (_cfg select _i);	
-		_str = (configfile >> "CfgGlasses" >> _cfgName >> "_generalMacro");
-		if (_cfgName isKindOf "None" && (getNumber ((_cfg select _i) >> "scope") == 2) && !(_str in Sinspawn_lootList select 6)) then {
+		_cfgName = configName (_cfg select _i);			
+		if (_cfgName isKindOf "None" && (getNumber ((_cfg select _i) >> "scope") == 2) && !(_cfgName in Sinspawn_lootList select 6)) then {
 			(Sinspawn_lootList select 5) pushBackUnique _cfgName;
 		};
 	};
