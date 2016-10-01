@@ -21,4 +21,6 @@
 		};		
 	};
 	
-	player action ["nvGogglesOff", player];
+	if (playerSide isEqualTo resistance) then {
+		player action ["nvGogglesOff", player];
+	};
