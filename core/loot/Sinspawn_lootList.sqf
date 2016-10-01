@@ -214,7 +214,7 @@ for "_i" from 0 to ((count _cfg)-1) do {
 	if (isClass (_cfg select _i)) then {
 		_cfgName = configName (_cfg select _i);	
 		if (_cfgName isKindof ["HelmetBase", configFile >> "CfgWeapons"] && (getNumber ((_cfg select _i) >> "scope") == 2)) then {
-			if ((!(_cfgName in Sinspawn_lootList select 6)) && (!(_cfgName in _exclusions))) then {
+			if (_cfgName in Sinspawn_lootList select 6 || _cfgName in _exclusions) then {} else {
 				(Sinspawn_lootList select 4) pushBackUnique _cfgName;
 			};
 		};
@@ -226,7 +226,7 @@ for "_i" from 0 to ((count _cfg)-1) do {
 	if (isClass (_cfg select _i)) then {
 		_cfgName = configName (_cfg select _i);			
 		if (_cfgName isKindOf ["H_HelmetB", configFile >> "CfgWeapons"] && (getNumber ((_cfg select _i) >> "scope") == 2)) then {
-			if ((!(_cfgName in Sinspawn_lootList select 6)) && (!(_cfgName in _exclusions))) then {
+			if (_cfgName in Sinspawn_lootList select 6 || _cfgName in _exclusions) then {} else {
 				(Sinspawn_lootList select 4) pushBackUnique _cfgName;
 			};
 		};
@@ -239,7 +239,7 @@ for "_i" from 0 to ((count _cfg)-1) do {
 	if (isClass (_cfg select _i)) then {
 		_cfgName = configName (_cfg select _i);			
 		if (_cfgName isKindOf ["Uniform_Base", configFile >> "CfgWeapons"] && (getNumber ((_cfg select _i) >> "scope") == 2)) then {
-			if ((!(_cfgName in Sinspawn_lootList select 6))) then {
+			if (_cfgName in Sinspawn_lootList select 6) then {} else {
 				(Sinspawn_lootList select 4) pushBackUnique _cfgName;
 			};
 		};
@@ -276,7 +276,7 @@ for "_i" from 0 to ((count _cfg)-1) do {
 	if (isClass (_cfg select _i)) then {
 		_cfgName = configName (_cfg select _i);			
 		if (_cfgName isKindOf "None" && (getNumber ((_cfg select _i) >> "scope") == 2)) then {
-			if ((!(_cfgName in Sinspawn_lootList select 6))) then {
+			if (_cfgName in Sinspawn_lootList select 6) then {} else {
 				(Sinspawn_lootList select 4) pushBackUnique _cfgName;
 			};
 		};
