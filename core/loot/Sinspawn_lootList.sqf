@@ -206,7 +206,6 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 	};
 };
 
-
 //Helmets
 _cfg = (configFile >> "CfgWeapons");
 _exclusions = ["H_HelmetO_ViperSP_hex_F","H_HelmetO_ViperSP_ghex_F"];
@@ -214,7 +213,7 @@ for "_i" from 0 to ((count _cfg)-1) do {
 	if (isClass (_cfg select _i)) then {
 		_cfgName = configName (_cfg select _i);	
 		if (_cfgName isKindof ["HelmetBase", configFile >> "CfgWeapons"] && (getNumber ((_cfg select _i) >> "scope") == 2)) then {
-			if (!(_cfgName in (Sinspawn_lootList select 6)) || !(_cfgName in _exclusions)) then { //} else {
+			if (!(_cfgName in (Sinspawn_lootList select 6)) || !(_cfgName in _exclusions)) then { 
 				(Sinspawn_lootList select 4) pushBackUnique _cfgName;
 			};
 		};
@@ -226,7 +225,7 @@ for "_i" from 0 to ((count _cfg)-1) do {
 	if (isClass (_cfg select _i)) then {
 		_cfgName = configName (_cfg select _i);			
 		if (_cfgName isKindOf ["H_HelmetB", configFile >> "CfgWeapons"] && (getNumber ((_cfg select _i) >> "scope") == 2)) then {
-			if (_cfgName in (Sinspawn_lootList select 6) || _cfgName in _exclusions) then {} else {
+			if (!(_cfgName in (Sinspawn_lootList select 6)) || !(_cfgName in _exclusions)) then { 
 				(Sinspawn_lootList select 4) pushBackUnique _cfgName;
 			};
 		};
@@ -239,7 +238,7 @@ for "_i" from 0 to ((count _cfg)-1) do {
 	if (isClass (_cfg select _i)) then {
 		_cfgName = configName (_cfg select _i);			
 		if (_cfgName isKindOf ["Uniform_Base", configFile >> "CfgWeapons"] && (getNumber ((_cfg select _i) >> "scope") == 2)) then {
-			if (_cfgName in (Sinspawn_lootList select 6)) then {} else {
+			if (!(_cfgName in (Sinspawn_lootList select 6))) then {
 				(Sinspawn_lootList select 4) pushBackUnique _cfgName;
 			};
 		};
@@ -273,8 +272,8 @@ _cfg = (configFile >> "CfgGlasses");
 for "_i" from 0 to ((count _cfg)-1) do {
 	if (isClass (_cfg select _i)) then {
 		_cfgName = configName (_cfg select _i);			
-		if (_cfgName isKindOf "None" && (getNumber ((_cfg select _i) >> "scope") == 2)) then {
-			if (_cfgName in (Sinspawn_lootList select 6)) then {} else {
+		if (_cfgName isKindOf ["None", configFile >> "CfgGlasses"] && (getNumber ((_cfg select _i) >> "scope") == 2)) then {
+			if (!(_cfgName in (Sinspawn_lootList select 6))) then {
 				(Sinspawn_lootList select 4) pushBackUnique _cfgName;
 			};
 		};
