@@ -209,7 +209,7 @@ _exclusions = ["H_HelmetO_ViperSP_hex_F","H_HelmetO_ViperSP_ghex_F"];
 for "_i" from 0 to ((count _cfg)-1) do {
 	if (isClass (_cfg select _i)) then {
 		_cfgName = configName (_cfg select _i);			
-		if (_cfgName isKindOf "HelmetBase" && (getNumber ((_cfg select _i) >> "scope") == 2) && !(_cfgName in Sinspawn_lootList select 6)) then {
+		if (_cfgName isKindOf "HelmetBase" && (getNumber ((_cfg select _i) >> "scope") == 2) && !((str _cfgName) in Sinspawn_lootList select 6) && !((str _cfgName) in _exclusions)) then {
 			(Sinspawn_lootList select 4) pushBackUnique _cfgName;
 		};
 	};
