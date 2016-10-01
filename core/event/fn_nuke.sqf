@@ -4,7 +4,7 @@
 	http://www.armaholic.com/page.php?id=30816
 	Spawns a nuclear blast
 */
-private ["_heliSelection","_nukePos","_radius","_damage_buildings_units","_weather_effect","_radiation","_fallout","_heliSpawnPos","_eventHeli","_pilot","_obj_nuke","_heliEndPos","_aMarkername","_aMarkername2","_nukeMarker","_nukeMarker2"];
+private ["_heliSelection","_nukePos","_radius","_damage_buildings_units","_weather_effect","_radiation","_fallout","_heliSpawnPos","_eventHeli","_pilot","_obj_nuke","_heliEndPos","_aMarkername","_aMarkername2","_nukeMarker","_nukeMarker2","_parachute","_eventheligroup"];
 //-----------------------------------
 //-VARIABLES
 
@@ -54,11 +54,11 @@ waitUntil {(_eventHeli distance2D _nukePos) < 100 && unitReady _pilot || !alive 
 if (!alive _eventHeli) exitWith {};
 {ropeCut [_x, 0.5]} forEach (ropes _eventHeli);
 
-if ((getPosATL _obj_nuke select 2) > 10) then {	//B_Parachute_02_F
-	_parachute = createVehicle ["NonSteerable_Parachute_F",[0,0,50], [], 0, "FLY"];
-	_parachute setPosATL [(getPosATL _obj_nuke select 0), (getPosATL _obj_nuke select 1), (getPosATL _obj_nuke select 2)];
-	_obj_nuke attachTo [_parachute,[0,0,0.5]];
-};
+//B_Parachute_02_F
+_parachute = createVehicle ["NonSteerable_Parachute_F",[0,0,50], [], 0, "FLY"];
+sleep 0.5;
+_parachute setPosATL [(getPosATL _obj_nuke select 0), (getPosATL _obj_nuke select 1), (getPosATL _obj_nuke select 2)];
+_obj_nuke attachTo [_parachute,[0,0,0.5]];
 
 //-----------------------------------
 //-FIND END LOCATION FOR HELI
@@ -75,7 +75,7 @@ _pilot doMove _heliEndPos;
 	deleteVehicle _pilot;
 };
 
-waitUntil {(getPos _obj_nuke select 2) < 1};
+waitUntil {(getPos _obj_nuke select 2) < 1 && velocityModelSpace _obj_nuke isEqualTo [0,0,0]};
 sleep 3;
 
 //-----------------------------------
@@ -135,10 +135,13 @@ _nukeMarker setMarkerAlpha 0.33;
 //_nukeMarker2 setMarkerAlpha 0.33;
 
 if (HVPZombieMode isEqualTo 1) then {
-	[(getMarkerPos _nukeMarker)] spawn Z_fnc_setSpawn;
-	[(getMarkerPos _nukeMarker)] spawn Z_fnc_setSpawn;
-	[(getMarkerPos _nukeMarker)] spawn Z_fnc_setSpawn;
-	[(getMarkerPos _nukeMarker)] spawn Z_fnc_setSpawn;
+	private ["_zPos","_count"];
+	for "_count" from 1 to 4 do {
+		_zPos = [(getMarkerPos _nukeMarker),0,_radius,0,0,0,0] call SIN_fnc_findPos;
+		[_zPos] spawn Z_fnc_setSpawn;
+	};
 };
+
+deleteVehicle _obj_nuke;
 
 //-----------------------------------
