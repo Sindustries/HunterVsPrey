@@ -29,7 +29,8 @@ _cfg = (configFile >> "CfgVehicles");
 for "_i" from 0 to ((count _cfg)-1) do {
 	if (isClass (_cfg select _i)) then {
 		_cfgName = configName (_cfg select _i);			
-		if (_cfgName isKindOf "Man" && (getNumber ((_cfg select _i) >> "scope") == 2) && (getText ((_cfg select _i) >> "faction") isEqualTo "Ryanzombiesfaction") && (!(_cfgName in _exclusions))) then {
+		if (_cfgName isKindOf "Man" && (getNumber ((_cfg select _i) >> "scope") == 2) && (getText ((_cfg select _i) >> "faction") isEqualTo "Ryanzombiesfaction") && (!(_cfgName in _exclusions)) &&
+		(!(_cfgName in HVP_BossZombies))) then {
 			HVP_zombies pushBackUnique _cfgName;
 		};
 	};
