@@ -66,6 +66,12 @@ if (HVPGameType isEqualTo 1) then {
 						};
 					};
 				};
+				if (_spawn isEqualTo "Heli") then {
+					[(side _x)] remoteExec ["HVP_fnc_heliSpawn",_x];
+				};
+				if (_spawn isEqualTo "Pod") then {
+					[(side _x)] remoteExec ["HVP_fnc_podSpawn",_x];
+				};
 			} forEach playableUnits;
 		};
 		if (HVPSpawnType isEqualTo 1) then {

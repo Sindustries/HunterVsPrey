@@ -60,7 +60,7 @@ class HVP {
 
 	HVP_lootChance[] = {	//Hunter vs Prey Mode
 		5,		//weapons
-		20,		//magazines
+		33,		//magazines
 		8,		//items
 		4,		//medical
 		10,		//clothing

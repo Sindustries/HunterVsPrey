@@ -181,6 +181,7 @@ for "_i" from 0 to ((count _cfg)-1) do {
 		
 		while {true} do {
 			sleep HVP_rareEvent;
+			if (HVP_phase_radius < 750) exitWith {};
 			
 			_nukePos = [HVP_phase_pos,0,(HVP_phase_radius * 0.5),0,0,0,0] call SIN_fnc_findPos;
 			[(_this select 0),_nukePos,(HVP_phase_radius * 0.33),true,true,true,true] call HVP_fnc_nuke;
