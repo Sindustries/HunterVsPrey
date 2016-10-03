@@ -325,9 +325,12 @@ switch (HVPGameType) do {
 		west setFriend [east, 0];
 		west setFriend [resistance, 0];
 		east setFriend [west, 0];
-		east setFriend [resistance, 1];
+		east setFriend [resistance, 0];
 		resistance setFriend [west, 0];
-		resistance setFriend [east, 1];
+		resistance setFriend [east, 0];
+		if (playerSide isEqualTo east) then {
+			player setCaptive true;
+		};
 	};
 	//-CRUCIBLE SETTINGS
 	case 2: {
@@ -348,18 +351,23 @@ switch (HVPGameType) do {
 		east setFriend [resistance, 0];
 		resistance setFriend [west, 0];
 		resistance setFriend [east, 0];
+		if (playerSide isEqualTo resistance) then {
+			player setCaptive true;
+		};
 		
-		_grp = createGroup WEST;
-		sleep 1;
-		{
-			if (isPlayer _x) then {
-				if (side _x isEqualTo WEST || side _x isEqualTo EAST) then {
-					[_x] joinSilent grpNull;
-					sleep 0.1;
-					[_x] joinSilent _grp;
+		if (isServer) then {
+			_grp = createGroup WEST;
+			sleep 1;
+			{
+				if (isPlayer _x) then {
+					if (side _x isEqualTo WEST || side _x isEqualTo EAST) then {
+						[_x] joinSilent grpNull;
+						sleep 0.1;
+						[_x] joinSilent _grp;
+					};
 				};
-			};
-		} forEach allUnits;	
+			} forEach playableUnits;	
+		};
 	};
 };
 [] call HVP_fnc_knockOutGun;
