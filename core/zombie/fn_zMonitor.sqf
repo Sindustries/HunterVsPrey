@@ -15,13 +15,13 @@ private ["_playerPosArray","_zIndex","_index"];
 				{
 					if (isPlayer _x && alive _x && side _x != sideLogic) then {
 						if (HVPGameType isEqualTo 1 && side _x != EAST) then {
-							_playerPosArray pushBack (getPos _x);
+							_playerPosArray pushBack [_x,(getPos _x)];
 						};
 						if (HVPGameType isEqualTo 2) then {
-							_playerPosArray pushBack (getPos _x);
+							_playerPosArray pushBack [_x,(getPos _x)];
 						};
 						if (HVPGameType isEqualTo 3 && side _x != RESISTANCE) then {
-							_playerPosArray pushBack (getPos _x);
+							_playerPosArray pushBack [_x,(getPos _x)];
 						};
 					};
 				} forEach playableUnits;
@@ -29,8 +29,8 @@ private ["_playerPosArray","_zIndex","_index"];
 				_zIndex = 0;
 				{
 					for "_index" from 0 to ((count _playerPosArray)-1) do {
-						if (_x distance (_playerPosArray select _index) < 80 && (random 100) < HVP_zSpawnChance) then {
-							[_x,HVP_zhordeSize] remoteExec ["z_fnc_spawnZombies", _x];
+						if (_x distance ((_playerPosArray select _index) select 1) < 80 && (random 100) < HVP_zSpawnChance) then {
+							[_x,HVP_zhordeSize] remoteExec ["z_fnc_spawnZombies", ((_playerPosArray select _index) select 0)];
 							HVP_usedSpawnerArray pushback _x;
 							HVP_spawnerArray deleteAt _zIndex;
 						};
