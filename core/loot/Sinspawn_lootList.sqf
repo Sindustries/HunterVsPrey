@@ -205,7 +205,7 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 					//_base = (configName (configFile >> "CfgWeapons" >> _classname >> "LinkedItems")) == "";
 					//_weapon = (configName ((_cfg select _i) >> "LinkedItems"));
 					//_weapon = ;
-					if (((_cfg select _i) >> "LinkedItems") isEqualTo "") then {
+					if (!(isClass ((_cfg select _i) >> "LinkedItems"))) then {
 						(Sinspawn_lootList select 0) pushBackUnique _weapon;
 					};
 				};
@@ -213,6 +213,16 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 		};
 	};
 };
+
+_weapon = primaryWeapon player;
+
+	_baseCfg = (configFile >> "cfgWeapons");
+
+	_cfg = _baseCfg >> _weapon;
+
+	
+
+	while {isClass (_cfg >> "LinkedItems") } do {
 
 copyToClipboard str (Sinspawn_lootList select 0);
 
