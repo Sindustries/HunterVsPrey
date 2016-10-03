@@ -37,10 +37,6 @@ private ["_playerPosArray","_zIndex","_index"];
 				};
 			};
 		};
-		if (isServer) then {
-			HVP_zombieCount = (count HVP_zombieArray);
-			publicVariable "HVP_zombieCount";
-		};
 		//remove dead or deleted Z's from client array
 		{
 			for "_index" from 0 to ((count HVP_zombieArrayClient)-1) do {
@@ -49,6 +45,7 @@ private ["_playerPosArray","_zIndex","_index"];
 				};
 			};					
 		} forEach HVP_zombieArrayClient;
+		HVP_zombieCount = (count HVP_zombieArrayClient);
 	};
 
 //-----------------------------------
