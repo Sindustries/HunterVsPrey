@@ -1,5 +1,5 @@
 
-	private ["_weapon","_magazines","_magazineClass","_item","_clothing","_backpack","_holder","_chance","_roll","_lootType","_id","_debug"];
+	private ["_weapon","_magazineClass","_item","_clothing","_backpack","_holder","_lootType","_id","_debug"];
 	_pos =	(_this select 0);
 	_pos0 =	(_pos select 0);
 	_pos1 =	(_pos select 1);
@@ -10,9 +10,8 @@
 	
 	_holder = createVehicle ["GroundWeaponHolder", _safePlace, [], 0, "CAN_COLLIDE"];
 				
-	for "_lootType" from 0 to 9 do {
-		_chance = floor(random 100);
-		if ((Sinspawn_lootChance select _lootType) > _chance) then {
+	for "_lootType" from 0 to ((count Sinspawn_lootList)-1) do {
+		if ((Sinspawn_lootChance select _lootType) > (random 100)) then {
 			_spawned = true;
 			
 			//WEAPONS
@@ -22,8 +21,7 @@
 				_holder addWeaponCargoGlobal [_weapon, 1];
 			
 				if (_gunsWithMag isEqualTo 1) then {
-					_magazines = getArray (configFile >> "CfgWeapons" >> _weapon >> "magazines");
-					_magazineClass = selectRandom _magazines; 
+					_magazineClass = selectRandom (getArray (configFile >> "CfgWeapons" >> _weapon >> "magazines")); 
 					_holder addMagazineCargoGlobal [_magazineClass, floor(random 3)];
 				};
 				if (HVPDebugMode isEqualTo 1) then {
@@ -39,21 +37,8 @@
 
 			//MAGAZINES
 			if (_lootType isEqualTo 1) then {
-				if (HVPGameType isEqualTo 1) then {
-					_magazineClass = selectRandom (Sinspawn_lootList select 1);
-					_holder addMagazineCargoGlobal [_magazineClass, 1];
-				};
-				if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
-					_weapon = selectRandom (Sinspawn_lootList select 0);
-					_magazines = getArray (configFile >> "CfgWeapons" >> _weapon >> "magazines");
-					_magazineClass = selectRandom _magazines;
-					_holder addMagazineCargoGlobal [_magazineClass, floor (random 2)];
-					_roll = (random 100);
-					if (_roll < 50) then {
-						_magazineClass = selectRandom (Sinspawn_lootList select 1);
-						_holder addMagazineCargoGlobal [_magazineClass, floor 1];
-					};
-				};
+				_magazineClass = selectRandom (Sinspawn_lootList select 1);
+				_holder addMagazineCargoGlobal [_magazineClass, floor(random 2)];
 				if (HVPDebugMode isEqualTo 1) then {
 					_id = format ["%1",_pos];
 					_debug = createMarker [_id,_pos];
