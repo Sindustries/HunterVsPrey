@@ -64,8 +64,8 @@ class HVP {
 		8,		//items
 		4,		//medical
 		10,		//clothing
-		5,		//vests
-		5,		//backpacks
+		3,		//vests
+		6,		//backpacks
 		0,		//ghillies & other special clothing
 		0,		//night vision
 		0		//suppressors
@@ -77,7 +77,7 @@ class HVP {
 		12,		//items
 		4.5,	//medical
 		25,		//clothing
-		15,		//vests
+		3,		//vests
 		8,		//backpacks
 		0.65,	//ghillies & other special clothing
 		1.9,	//night vision
@@ -144,7 +144,7 @@ class SMS {
 };
 	
 class Z {
-	HVP_maxZombies = 100;				//Total number of alive zombies
+	HVP_maxZombies = 40;				//Total number of alive zombies (per player)
 	HVP_zhordeSize = 8; 				//Max num to spawn on each spawner
 	HVP_zSpawnChance = 75;				//Chance of a spawner spawning zombies (%)
 	HVP_zBossChance = 2.5;				//Chance of spawning a boss zombie (demon)
