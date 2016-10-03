@@ -156,7 +156,7 @@ if (isServer) then {
 			_posFound = false;
 			while {!_posFound} do {
 				HVP_Pos = [(getPos player),0,99999,0,0,0,0] call SIN_fnc_findPos;
-				_objects = nearestObjects [HVP_Pos, [], 200];
+				_objects = nearestObjects [HVP_Pos, ["All"], 200];
 				if ((count _objects) > 0) then {
 					_posFound = true;
 				};
