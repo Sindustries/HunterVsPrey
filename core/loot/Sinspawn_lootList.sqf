@@ -205,14 +205,14 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 					//_base = (configName (configFile >> "CfgWeapons" >> _classname >> "LinkedItems")) == "";
 					//_weapon = (configName ((_cfg select _i) >> "LinkedItems"));
 					//_weapon = ;
-					if (!(isClass ((_cfg select _i) >> "LinkedItems"))) then {
-						(Sinspawn_lootList select 0) pushBackUnique _weapon;
-					};
+					(Sinspawn_lootList select 0) pushBackUnique (inheritsFrom ((_cfg select _i)));
 				};
 			};
 		};
 	};
 };
+
+
 
 copyToClipboard str (Sinspawn_lootList select 0);
 
