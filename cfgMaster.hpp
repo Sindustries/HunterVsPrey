@@ -10,7 +10,7 @@ class HVP {
 	HVP_ZombieMode = true;				//Set to false to disable zombies
 	HVPDebugMode = false;				//Enable lots of debugging info
 	HVPStatMode = true;					//Set to false to disable stat saving
-	HVPantiCamp = 90;					//How long (SEC) players have until they are revealed on the map if camping
+	HVPantiCamp = 90;					//0:Disabled - How long (SEC) players have until they are revealed on the map if camping
 	
 /* ADAPTIVE TIME SETTINGS */
 
@@ -41,10 +41,10 @@ class HVP {
 	invincibilityMaxTime = 30;
 	cloakMinTime = 30;
 	cloakMaxTime = 60;
-	fatigueFreeMinTime = 30;		//Effects both Fatigue Free and Healing Aura
-	fatigueFreeMaxTime = 60;		//Same as above
-	nightVisionMinTime = 20;		//Effects both Night Vision Thief and Temporary Night Vision
-	nightVisionMaxTime = 40;		//Same as above
+	fatigueFreeMinTime = 30;			//Effects both Fatigue Free and Healing Aura
+	fatigueFreeMaxTime = 60;			//Same as above
+	nightVisionMinTime = 20;			//Effects both Night Vision Thief and Temporary Night Vision
+	nightVisionMaxTime = 40;			//Same as above
 	
 /* LOOT SETTINGS */
 
