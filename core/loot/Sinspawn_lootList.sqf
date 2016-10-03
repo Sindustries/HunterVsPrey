@@ -203,8 +203,9 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 			if (_cfgName isKindOf ["Rifle", configFile >> "CfgWeapons"] || _cfgName isKindOf ["Pistol", configFile >> "CfgWeapons"] || _cfgName isKindOf ["Launcher", configFile >> "CfgWeapons"]) then {
 				if ((getNumber ((_cfg select _i) >> "scope") == 2)) then {
 					//_base = (configName (configFile >> "CfgWeapons" >> _classname >> "LinkedItems")) == "";
-					_weapon = (configName ((_cfg select _i) >> "LinkedItems"));
-					if (_weapon isEqualTo "") then {
+					//_weapon = (configName ((_cfg select _i) >> "LinkedItems"));
+					//_weapon = ;
+					if (((_cfg select _i) >> "LinkedItems") isEqualTo "") then {
 						(Sinspawn_lootList select 0) pushBackUnique _weapon;
 					};
 				};
