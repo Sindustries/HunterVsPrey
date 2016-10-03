@@ -81,43 +81,8 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 Sinspawn_lootList = [
 [ //WEAPONS	-- AUTO FILLED - See below
 
-], [ //MAGAZINES
-"10Rnd_50BW_Mag_F",
-"1Rnd_HE_Grenade_shell",
-"1Rnd_Smoke_Grenade_shell",
-"1Rnd_SmokeRed_Grenade_shell",
-"1Rnd_SmokeGreen_Grenade_shell",
-"1Rnd_SmokeYellow_Grenade_shell",
-"1Rnd_SmokePurple_Grenade_shell",
-"1Rnd_SmokeBlue_Grenade_shell",
-"1Rnd_SmokeOrange_Grenade_shell",
-"UGL_FlareWhite_F",
-"UGL_FlareGreen_F",
-"UGL_FlareRed_F",
-"UGL_FlareYellow_F",
-"UGL_FlareCIR_F",
-"HandGrenade",
-"APERSBoundingMine_Range_Mag",
-"DemoCharge_Remote_Mag",
-"APERSTripMine_Wire_Mag",
-"ClaymoreDirectionalMine_Remote_Mag",
-"SmokeShell",
-"SmokeShellRed",
-"SmokeShellGreen",
-"SmokeShellYellow",
-"SmokeShellPurple",
-"SmokeShellBlue",
-"SmokeShellOrange",
-"ACE_Chemlight_HiOrange",
-"ACE_Chemlight_HiRed",
-"ACE_Chemlight_HiWhite",
-"ACE_Chemlight_HiYellow",
-"ACE_HandFlare_White",
-"ACE_HandFlare_Red",
-"ACE_HandFlare_Green",
-"ACE_HandFlare_Yellow",
-"ACE_M84",
-"ACE_M14"
+], [ //MAGAZINES -- AUTO FILLED - See below
+
 ], [ //ITEMS
 "Rangefinder",
 "Binocular",
@@ -195,6 +160,7 @@ Sinspawn_lootList = [
 private ["_cfg","_exclusions","_i","_cfgName"];
 
 if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
+	//Weapons
 	private "_weapon";
 	_cfg = (configFile >> "CfgWeapons");
 	for "_i" from 0 to ((count _cfg)-1) do {
@@ -210,20 +176,20 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 			};
 		};
 	};
+	//Magazines
+	_exclusions = ["ATMine_Range_Mag","APERSMine_Range_Mag","SLAMDirectionalMine_Wire_Mag","SatchelCharge_Remote_Mag","IEDUrbanBig_Remote_Mag","IEDLandBig_Remote_Mag","IEDUrbanSmall_Remote_Mag","IEDLandSmall_Remote_Mag"];
 	_cfg = (configFile >> "CfgMagazines");
 	for "_i" from 0 to ((count _cfg)-1) do {
 		if (isClass (_cfg select _i)) then {
 			_cfgName = configName (_cfg select _i);			
 			if (_cfgName isKindOf ["CA_Magazine", configFile >> "CfgMagazines"] && !(_cfgName isKindOf ["VehicleMagazine", configFile >> "CfgMagazines"])) then {
-				if ((getNumber ((_cfg select _i) >> "scope") == 2)) then {
+				if ((getNumber ((_cfg select _i) >> "scope") == 2) && !(_cfgName in _exclusions)) then {
 					(Sinspawn_lootList select 1) pushBackUnique _cfgName;					
 				};
 			};
 		};
 	};
 };
-
-copyToClipboard str (sinspawn_lootlist select 1);
 
 //Helmets
 _cfg = (configFile >> "CfgWeapons");
