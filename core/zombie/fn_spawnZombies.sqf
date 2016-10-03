@@ -1,7 +1,7 @@
 /*
-	fn_zDeleter
+	fn_spawnZombies
 	Author: Sinbane
-	Deletes zombies further than a distance from players
+	Spawn the zombees!
 */
 if (HVP_zombieCount >= HVP_maxZombies) exitWith {};
 private ["_pos","_zombieCount","_zombie","_group","_posFound","_spawnPos","_posCheck"];
@@ -19,10 +19,11 @@ private ["_pos","_zombieCount","_zombie","_group","_posFound","_spawnPos","_posC
 			} else {
 				_zombie = _group createUnit [(selectRandom HVP_Zombies), _spawnPos, [], 0, "NONE"];
 			};
-			_zombie switchMove "AmovPercMstpSnonWnonDnon_SaluteOut";
+			[_zombie,"AmovPercMstpSnonWnonDnon_SaluteOut"] remoteExec ["switchMove", 0];
 			HVP_zombieArray pushBack _zombie;
 			HVP_zombieCount = (count HVP_zombieArray);
 			publicVariable "HVP_zombieCount";
+			publicVariable "HVP_zombieArray";
 		};
 	};
 

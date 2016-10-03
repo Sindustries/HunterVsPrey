@@ -213,9 +213,9 @@ uiNameSpace getVariable "PBarProgress" ctrlSetTextColor [0.2, 0.5, 0.9, 1];
 
 if (HVPZombieMode isEqualTo 1) then {
 	cutText ["RAISING THE DEAD", "BLACK FADED", 999];
+	["Z"] call HVP_fnc_getSettings;
+	[] call z_fnc_init;
 	if (isServer) then {
-		["Z"] call HVP_fnc_getSettings;
-		[] call z_fnc_init;
 		HVPzombiesLoaded = true;
 		publicVariable "HVPZombiesLoaded";
 	} else {

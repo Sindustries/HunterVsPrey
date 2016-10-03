@@ -3,14 +3,15 @@
 	Author: Sinbane
 	Deletes zombies further than a distance from players
 */
-private ["_deleteDist","_playerPosArray","_zIndex","_index"];
+private ["_deleteDist","_delCount","_playerPosArray","_zIndex","_index"];
 //-----------------------------------
 
-	_deleteDist = ["HVP_zDeleteDist"] call HVP_fnc_getSetting;;
+	_deleteDist = ["HVP_zDeleteDist"] call HVP_fnc_getSetting;
 
 	while {true} do {
 		sleep 10;
 		waitUntil {sleep 10; (count HVP_zombieArray > 0)};
+		_delCount = 0;
 		
 		_playerPosArray = [];
 		{
@@ -23,15 +24,19 @@ private ["_deleteDist","_playerPosArray","_zIndex","_index"];
 		{
 			for "_index" from 0 to ((count _playerPosArray)-1) do {
 				if (_x distance (_playerPosArray select _index) > _deleteDist && alive _x) then {
-					deleteVehicle _x;
-					HVP_zombieArray deleteAt _zIndex;
-				};
-				if (!alive _x) then {
-					HVP_zombieArray deleteAt _zIndex;
+					_delCount = _delCount + 1;
 				};
 			};
-			_zIndex = _zIndex + 1;
-		} forEach HVP_zombieArray;
+			if (_delCount isEqualTo (count _playerPosArray)) then {
+				deleteVehicle _x;
+				HVP_zombieArray deleteAt _zIndex;
+				publicVariable "HVP_zombieArray";
+			};
+			if (!alive _x) then {
+				HVP_zombieArray deleteAt _zIndex;
+				publicVariable "HVP_zombieArray";
+			};
+		};
 	};
 
 //-----------------------------------

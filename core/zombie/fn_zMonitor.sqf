@@ -1,7 +1,7 @@
 /*
-	fn_zSpawn
+	fn_zMonitor
 	Author: Sinbane
-	Spawns zombies on a defined pos if a player gets too close to it
+	Monitors players distance to spawners and spawns zombies if they get close enough
 */
 private ["_playerPosArray","_zIndex","_index"];
 //-----------------------------------
@@ -28,9 +28,9 @@ private ["_playerPosArray","_zIndex","_index"];
 				
 				_zIndex = 0;
 				{
-					for "_index" from 0 to (count _playerPosArray) do {
+					for "_index" from 0 to ((count _playerPosArray)-1) do {
 						if (_x distance (_playerPosArray select _index) < 80 && (random 100) < HVP_zSpawnChance) then {
-							[_x,HVP_zhordeSize] call z_fnc_spawnZombies;
+							[_x,HVP_zhordeSize] remoteExec ["z_fnc_spawnZombies", _x];
 							HVP_usedSpawnerArray pushback _x;
 							HVP_spawnerArray deleteAt _zIndex;
 						};
@@ -40,7 +40,7 @@ private ["_playerPosArray","_zIndex","_index"];
 			} else {
 				_zIndex = 0;
 				{
-					for "_index" from 0 to (count HVP_usedSpawnerArray) do {
+					for "_index" from 0 to ((count HVP_usedSpawnerArray)-1) do {
 						HVP_spawnerArray pushback _x;
 						HVP_usedSpawnerArray deleteAt _zIndex;
 					};

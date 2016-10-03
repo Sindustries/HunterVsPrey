@@ -1,4 +1,3 @@
-#define LIFE_SETTINGS(TYPE,SETTING) TYPE(missionConfigFile >> "Life_Settings" >> SETTING);
 /*
 	HVP Zombie Spawner
 	Author: Sinbane
@@ -18,6 +17,8 @@ HVP_usedSpawnerArray = [];
 HVP_zombies = [];
 HVP_zombieArray = [];
 HVP_zombieCount = 0;
+
+if (!isServer) exitWith {};
 //-----------------------------------
 //-GET ZOMBIES
 
@@ -35,6 +36,9 @@ for "_i" from 0 to ((count _cfg)-1) do {
 		};
 	};
 };
+
+publicVariable "HVP_BossZombies";
+publicVariable "HVP_zombies";
 
 //-SPAWN EACH ZOMBIE ONCE AND DELETE (TO CACHE)
 _counter = (count HVP_zombies);
