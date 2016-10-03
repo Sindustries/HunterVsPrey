@@ -210,7 +210,20 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 			};
 		};
 	};
+	_cfg = (configFile >> "CfgMagazines");
+	for "_i" from 0 to ((count _cfg)-1) do {
+		if (isClass (_cfg select _i)) then {
+			_cfgName = configName (_cfg select _i);			
+			if (_cfgName isKindOf ["CA_Magazine", configFile >> "CfgMagazines"] && !(_cfgName isKindOf ["VehicleMagazine", configFile >> "CfgMagazines"])) then {
+				if ((getNumber ((_cfg select _i) >> "scope") == 2)) then {
+					(Sinspawn_lootList select 1) pushBackUnique _cfgName;					
+				};
+			};
+		};
+	};
 };
+
+copyToClipboard str (sinspawn_lootlist select 1);
 
 //Helmets
 _cfg = (configFile >> "CfgWeapons");
