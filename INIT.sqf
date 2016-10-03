@@ -10,6 +10,7 @@ waitUntil {isPlayer player};
 enableSaving [false, false];
 enableSentences false;
 enableEnvironment false;
+setTimeMultiplier 0;
 player enableSimulation false;
 player allowDamage false;
 player enableStamina false;
