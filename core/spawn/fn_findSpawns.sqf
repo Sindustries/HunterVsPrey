@@ -22,154 +22,14 @@ while {_readyPlayers != _allPlayers} do {
 waitUntil {_readyPlayers isEqualTo _allPlayers};
 
 //-----------------------------------
-//-TEAM MODE
+//-SPAWN !
 
-if (HVPGameType isEqualTo 1) then {
-	if (isServer) then {
-		_mercAlive = {isPlayer _x && alive _x && side _x isEqualTo resistance} count playableUnits;
+{
+	if (isPlayer _x && alive _x) then {
 		if (HVPSpawnType isEqualTo 0) then {
 			_spawns = ["Ground","HALO","Heli","Pod"];
-			{
-				_spawn = selectRandom _spawns;
-				if (_spawn isEqualTo "Ground") then {
-					if (isPlayer _x && alive _x) then {
-						_spawnFound = false;
-						while {!_spawnFound} do {
-							_spawnPos = [HVP_Pos,0,(HVPZoneSizeMax * 0.8),0.25,0,0,0] call SIN_fnc_findPos;
-							_distCheck = [_spawnPos,_usedSpawnPos,((HVPZoneSizeMax*2)/_allPlayers)] call SIN_fnc_checkDist;
-							if (_distCheck) then {
-								_spawnFound = true;
-								_usedSpawnPos pushBack _spawnPos;
-								_x setPos [_spawnPos select 0,_spawnPos select 1,0];
-								_x setDir (random 360);
-								if ((random 100) < _unconsciousChance && HVPTestMode isEqualTo 0) then {
-									_x enableSimulation true;
-									[_x, 10] remoteExec ["SMS_fnc_setUnconscious", _x];
-								};
-								_x setVariable ["HVP_spawned",true,true];
-							};
-						};
-					};
-				};
-				if (_spawn isEqualTo "HALO") then {
-					if (isPlayer _x && alive _x) then {
-						_spawnFound = false;
-						while {!_spawnFound} do {
-							_spawnPos = [HVP_Pos,0,(HVPZoneSizeMax * 0.8),0,0,0,0] call SIN_fnc_findPos;
-							_distCheck = [_spawnPos,_usedSpawnPos,((HVPZoneSizeMax*2)/_allPlayers)] call SIN_fnc_checkDist;
-							if (_distCheck) then {
-								_spawnFound = true;
-								_usedSpawnPos pushBack _spawnPos;
-								[_spawnPos] remoteExec ["HVP_fnc_haloSpawn", _x];
-								_x setVariable ["HVP_spawned",true,true];
-							};
-						};
-					};
-				};
-				if (_spawn isEqualTo "Heli") then {
-					[(side _x)] remoteExec ["HVP_fnc_heliSpawn",_x];
-				};
-				if (_spawn isEqualTo "Pod") then {
-					[(side _x)] remoteExec ["HVP_fnc_podSpawn",_x];
-				};
-			} forEach playableUnits;
-		};
-		if (HVPSpawnType isEqualTo 1) then {
-			{
-				if (isPlayer _x && alive _x) then {
-					_spawnFound = false;
-					while {!_spawnFound} do {
-						_spawnPos = [HVP_Pos,0,(HVPZoneSizeMax * 0.8),0.25,0,0,0] call SIN_fnc_findPos;
-						_distCheck = [_spawnPos,_usedSpawnPos,((HVPZoneSizeMax*2)/_allPlayers)] call SIN_fnc_checkDist;
-						if (_distCheck) then {
-							_spawnFound = true;
-							_usedSpawnPos pushBack _spawnPos;
-							_x setPos [_spawnPos select 0,_spawnPos select 1,0];
-							_x setDir (random 360);
-							if ((random 100) < _unconsciousChance && HVPTestMode isEqualTo 0) then {
-								_x enableSimulation true;
-								[_x, 10] remoteExec ["SMS_fnc_setUnconscious", _x];
-							};
-							_x setVariable ["HVP_spawned",true,true];
-						};
-					};
-				};
-			} forEach playableUnits;
-		};
-		if (HVPSpawnType isEqualTo 2) then {
-			{
-				if (isPlayer _x && alive _x) then {
-					_spawnFound = false;
-					while {!_spawnFound} do {
-						_spawnPos = [HVP_Pos,0,(HVPZoneSizeMax * 0.8),0,0,0,0] call SIN_fnc_findPos;
-						_distCheck = [_spawnPos,_usedSpawnPos,((HVPZoneSizeMax*2)/_allPlayers)]  call SIN_fnc_checkDist;
-						if (_distCheck) then {
-							_spawnFound = true;
-							_usedSpawnPos pushBack _spawnPos;
-							[_spawnPos] remoteExec ["HVP_fnc_haloSpawn", _x];
-							_x setVariable ["HVP_spawned",true,true];
-						};
-					};
-				};
-			} forEach playableUnits;
-		};
-		if (HVPSpawnType isEqualTo 3) then {
-			[(side _x)] remoteExec ["HVP_fnc_heliSpawn",_x];
-		};
-		if (HVPSpawnType isEqualTo 4) then {
-			[(side _x)] remoteExec ["HVP_fnc_podSpawn",_x]
-		};
-	};
-};
-
-//-----------------------------------
-//-CRUCIBLE & PREDATOR MODE
-
-if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
-	{
-		if (isPlayer _x && alive _x) then {
-			if (HVPSpawnType isEqualTo 0) then {
-				_spawns = ["Ground","HALO","Heli","Pod"];
-				_spawn = selectRandom _spawns;
-				if (_spawn isEqualTo "Ground") then {
-					_spawnFound = false;
-					while {!_spawnFound} do {
-						_spawnPos = [HVP_Pos,0,(HVPZoneSizeMax * 0.8),0.25,0,0,0] call SIN_fnc_findPos;
-						_distCheck = [_spawnPos,_usedSpawnPos,((HVPZoneSizeMax*2)/_allPlayers)] call SIN_fnc_checkDist;
-						if (_distCheck) then {
-							_spawnFound = true;
-							_usedSpawnPos pushBack _spawnPos;
-							_x setPos [_spawnPos select 0,_spawnPos select 1,0];
-							_x setDir (random 360);
-							if ((random 100) < _unconsciousChance && HVPTestMode isEqualTo 0) then {
-								_x enableSimulation true;
-								[_x, 10] remoteExec ["SMS_fnc_setUnconscious", _x];
-							};
-							_x setVariable ["HVP_spawned", true, true];
-						};
-					};
-				};
-				if (_spawn isEqualTo "HALO") then {
-					_spawnFound = false;
-					while {!_spawnFound} do {
-						_spawnPos = [HVP_Pos,0,(HVPZoneSizeMax * 0.8),0,0,0,0] call SIN_fnc_findPos;
-						_distCheck = [_spawnPos,_usedSpawnPos,((HVPZoneSizeMax*2)/_allPlayers)] call SIN_fnc_checkDist;
-						if (_distCheck) then {
-							_spawnFound = true;
-							_usedSpawnPos pushBack _spawnPos;
-							[_spawnPos] remoteExec ["HVP_fnc_haloSpawn", _x];
-							_x setVariable ["HVP_spawned", true, true];
-						};
-					};
-				};
-				if (_spawn isEqualTo "Heli") then {
-					[(side _x)] remoteExec ["HVP_fnc_heliSpawn", _x];
-				};
-				if (_spawn isEqualTo "Pod") then {
-					[(side _x)] remoteExec ["HVP_fnc_podSpawn", _x];
-				};
-			};
-			if (HVPSpawnType isEqualTo 1) then {
+			_spawn = selectRandom _spawns;
+			if (_spawn isEqualTo "Ground") then {
 				_spawnFound = false;
 				while {!_spawnFound} do {
 					_spawnPos = [HVP_Pos,0,(HVPZoneSizeMax * 0.8),0.25,0,0,0] call SIN_fnc_findPos;
@@ -187,7 +47,7 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 					};
 				};
 			};
-			if (HVPSpawnType isEqualTo 2) then {
+			if (_spawn isEqualTo "HALO") then {
 				_spawnFound = false;
 				while {!_spawnFound} do {
 					_spawnPos = [HVP_Pos,0,(HVPZoneSizeMax * 0.8),0,0,0,0] call SIN_fnc_findPos;
@@ -200,14 +60,52 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 					};
 				};
 			};
-			if (HVPSpawnType isEqualTo 3) then {
+			if (_spawn isEqualTo "Heli") then {
 				[(side _x)] remoteExec ["HVP_fnc_heliSpawn", _x];
 			};
-			if (HVPSpawnType isEqualTo 4) then {
+			if (_spawn isEqualTo "Pod") then {
 				[(side _x)] remoteExec ["HVP_fnc_podSpawn", _x];
 			};
 		};
-	} forEach playableUnits;
-};
+		if (HVPSpawnType isEqualTo 1) then {
+			_spawnFound = false;
+			while {!_spawnFound} do {
+				_spawnPos = [HVP_Pos,0,(HVPZoneSizeMax * 0.8),0.25,0,0,0] call SIN_fnc_findPos;
+				_distCheck = [_spawnPos,_usedSpawnPos,((HVPZoneSizeMax*2)/_allPlayers)] call SIN_fnc_checkDist;
+				if (_distCheck) then {
+					_spawnFound = true;
+					_usedSpawnPos pushBack _spawnPos;
+					_x setPos [_spawnPos select 0,_spawnPos select 1,0];
+					_x setDir (random 360);
+					if ((random 100) < _unconsciousChance && HVPTestMode isEqualTo 0) then {
+						_x enableSimulation true;
+						[_x, 10] remoteExec ["SMS_fnc_setUnconscious", _x];
+					};
+					_x setVariable ["HVP_spawned", true, true];
+				};
+			};
+		};
+		if (HVPSpawnType isEqualTo 2) then {
+			_spawnFound = false;
+			while {!_spawnFound} do {
+				_spawnPos = [HVP_Pos,0,(HVPZoneSizeMax * 0.8),0,0,0,0] call SIN_fnc_findPos;
+				_distCheck = [_spawnPos,_usedSpawnPos,((HVPZoneSizeMax*2)/_allPlayers)] call SIN_fnc_checkDist;
+				if (_distCheck) then {
+					_spawnFound = true;
+					_usedSpawnPos pushBack _spawnPos;
+					[_spawnPos] remoteExec ["HVP_fnc_haloSpawn", _x];
+					_x setVariable ["HVP_spawned", true, true];
+				};
+			};
+		};
+		if (HVPSpawnType isEqualTo 3) then {
+			[(side _x)] remoteExec ["HVP_fnc_heliSpawn", _x];
+		};
+		if (HVPSpawnType isEqualTo 4) then {
+			[(side _x)] remoteExec ["HVP_fnc_podSpawn", _x];
+		};
+	};
+} forEach playableUnits;
+
 	
 //-----------------------------------
