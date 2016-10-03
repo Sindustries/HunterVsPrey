@@ -10,7 +10,7 @@
 	
 	_holder = createVehicle ["GroundWeaponHolder", _safePlace, [], 0, "CAN_COLLIDE"];
 				
-	for "_lootType" from 0 to 8 do {
+	for "_lootType" from 0 to 9 do {
 		_chance = floor(random 100);
 		if ((Sinspawn_lootChance select _lootType) > _chance) then {
 			_spawned = true;
@@ -116,10 +116,25 @@
 					_debug setMarkerColor "ColorGreen";
 				};
 			};
+			
+			//VEST
+			if (_lootType isEqualTo 5) then {
+				_clothing = selectRandom (Sinspawn_lootList select 5);
+				_holder addItemCargoGlobal [_clothing, 1];
+				if (HVPDebugMode isEqualTo 1) then {
+					_id = format ["%1",_pos];
+					_debug = createMarker [_id,_pos];
+					_debug setMarkerShape "ICON";
+					_debug setMarkerType "hd_dot";
+					_debug setMarkerSize [0.5,0.5];
+					_debug setMarkerAlpha 0.5;
+					_debug setMarkerColor "ColorGreen";
+				};
+			};
 
 			//BACKPACKS
-			if (_lootType isEqualTo 5) then {
-				_backpack = selectRandom (Sinspawn_lootList select 5);
+			if (_lootType isEqualTo 6) then {
+				_backpack = selectRandom (Sinspawn_lootList select 6);
 				_holder addBackpackCargoGlobal [_backpack, 1];
 				if (HVPDebugMode isEqualTo 1) then {
 					_id = format ["%1",_pos];
@@ -133,8 +148,8 @@
 			};
 			
 			//SPECIAL CLOTHING
-			if (_lootType isEqualTo 6) then {
-				_clothing = selectRandom (Sinspawn_lootList select 6);
+			if (_lootType isEqualTo 7) then {
+				_clothing = selectRandom (Sinspawn_lootList select 7);
 				_holder addItemCargoGlobal [_clothing, 1];
 				if (HVPDebugMode isEqualTo 1) then {
 					_id = format ["%1",_pos];
@@ -148,8 +163,8 @@
 			};
 			
 			//NIGHT VISION
-			if (_lootType isEqualTo 7) then {
-				_clothing = selectRandom (Sinspawn_lootList select 7);
+			if (_lootType isEqualTo 8) then {
+				_clothing = selectRandom (Sinspawn_lootList select 8);
 				_holder addItemCargoGlobal [_clothing, 1];
 				if (HVPDebugMode isEqualTo 1) then {
 					_id = format ["%1",_pos];
@@ -163,8 +178,8 @@
 			};
 			
 			//SUPPRESSORS
-			if (_lootType isEqualTo 8) then {
-				_magazineClass = selectRandom (Sinspawn_lootList select 8);
+			if (_lootType isEqualTo 9) then {
+				_magazineClass = selectRandom (Sinspawn_lootList select 9);
 				_holder addItemCargoGlobal [_magazineClass, 1];
 				if (HVPDebugMode isEqualTo 1) then {
 					_id = format ["%1",_pos];
