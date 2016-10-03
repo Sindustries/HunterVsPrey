@@ -17,6 +17,7 @@ HVP_usedSpawnerArray = [];
 HVP_zombies = [];
 HVP_zombieArray = [];
 HVP_zombieCount = 0;
+HVP_zombieArrayClient = [];
 
 //-----------------------------------
 //-GET ZOMBIES

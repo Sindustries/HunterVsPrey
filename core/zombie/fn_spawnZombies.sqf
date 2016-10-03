@@ -21,8 +21,8 @@ private ["_pos","_zombieCount","_zombie","_group","_posFound","_spawnPos","_posC
 			};
 			[_zombie,"AmovPercMstpSnonWnonDnon_SaluteOut"] remoteExec ["switchMove", 0];
 			HVP_zombieArray pushBack _zombie;
-			HVP_zombieCount = (count HVP_zombieArray);
-			publicVariable "HVP_zombieCount";
+			HVP_zombieArrayClient pushBack _zombie;
+			HVP_zombieCount = (count HVP_zombieArrayClient);
 			publicVariable "HVP_zombieArray";
 		};
 	};

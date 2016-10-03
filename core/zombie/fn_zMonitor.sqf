@@ -9,7 +9,7 @@ private ["_playerPosArray","_zIndex","_index"];
 	while {true} do {
 		sleep 10;	
 		
-		if (HVP_phase_active isEqualTo "true") then {
+		if (HVP_phase_active isEqualTo "true" && alive player) then {
 			if (sunOrMoon isEqualTo 0 || fog >= 0.5 || overcast >= 0.7) then {
 				_zIndex = 0;
 				{
@@ -37,6 +37,18 @@ private ["_playerPosArray","_zIndex","_index"];
 				};
 			};
 		};
+		if (isServer) then {
+			HVP_zombieCount = (count HVP_zombieArray);
+			publicVariable "HVP_zombieCount";
+		};
+		//remove dead or deleted Z's from client array
+		{
+			for "_index" from 0 to ((count HVP_zombieArrayClient)-1) do {
+				if (!alive _x || isNull _x) then {
+					HVP_zombieArrayClient deleteAt _index;
+				};
+			};					
+		} forEach HVP_zombieArrayClient;
 	};
 
 //-----------------------------------
