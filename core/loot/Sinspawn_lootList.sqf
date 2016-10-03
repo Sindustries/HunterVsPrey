@@ -214,16 +214,6 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 	};
 };
 
-_weapon = primaryWeapon player;
-
-	_baseCfg = (configFile >> "cfgWeapons");
-
-	_cfg = _baseCfg >> _weapon;
-
-	
-
-	while {isClass (_cfg >> "LinkedItems") } do {
-
 copyToClipboard str (Sinspawn_lootList select 0);
 
 //Helmets
