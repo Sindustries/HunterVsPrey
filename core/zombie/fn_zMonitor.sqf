@@ -31,7 +31,6 @@ private ["_playerPosArray","_zIndex","_index"];
 					for "_index" from 0 to ((count _playerPosArray)-1) do {
 						if (_x distance (_playerPosArray select _index) < 80 && (random 100) < HVP_zSpawnChance) then {
 							[_x,HVP_zhordeSize] remoteExec ["z_fnc_spawnZombies", _x];
-							hint "pew";
 							HVP_usedSpawnerArray pushback _x;
 							HVP_spawnerArray deleteAt _zIndex;
 						};

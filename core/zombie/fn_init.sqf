@@ -57,7 +57,6 @@ _counter = (count HVP_zombies);
 	[] spawn z_fnc_zMonitor;
 	[] spawn z_fnc_zDeleter;
 	[] spawn z_fnc_zSunDamage;
-	systemchat "Monitor, Deleter, SunDamage :: Active";
 };
 
 //-----------------------------------

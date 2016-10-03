@@ -6,7 +6,6 @@
 if (HVP_zombieCount >= HVP_maxZombies) exitWith {};
 private ["_pos","_zombieCount","_zombie","_group","_posFound","_spawnPos","_posCheck"];
 //-----------------------------------
-	hint "pew2";
 
 	_pos = _this select 0;
 	_maxNum = _this select 1;
