@@ -151,8 +151,16 @@ if (!isServer) then {
 if (isServer) then {
 	switch (HVPManual) do {
 		case 0: {
+			private ["_posFound","_objects"];
 			cutText ["FINDING GAME LOCATION", "BLACK FADED", 999];
-			HVP_Pos = [(getPos player),0,99999,0,0,0,0] call SIN_fnc_findPos;
+			_posFound = false;
+			while (!_posFound) do {
+				HVP_Pos = [(getPos player),0,99999,0,0,0,0] call SIN_fnc_findPos;
+				_objects = nearestObjects [HVP_Pos, [], 200];
+				if ((count _objects) > 0) then {
+					_posFound = true;
+				};
+			};				
 			HVP_Pos_Found = true;
 			publicVariable "HVP_Pos_Found";		
 		};
