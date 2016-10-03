@@ -212,8 +212,6 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 	};
 };
 
-copyToClipboard str (Sinspawn_lootList select 0);
-
 //Helmets
 _cfg = (configFile >> "CfgWeapons");
 _exclusions = ["H_HelmetO_ViperSP_hex_F","H_HelmetO_ViperSP_ghex_F"];
