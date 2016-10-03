@@ -54,12 +54,12 @@ for "_ai" from 0 to floor(random 11) do {
 
 waitUntil {isTouchingGround _pod};
 //[_pod,["vehicle_collision",150]] remoteExec ["say", 0];
-[_pod,"vehicle_collision"] remoteExec ["say", 0];
+[_pod,"vehicle_collision"] remoteExec ["say3D", 0];
 _pod setDamage 0.97; // test_EmptyObjectForSmoke // test_EmptyObjectForFireBig
 {deleteVehicle _x;} forEach (_fire getVariable ["effects", []]);
 deleteVehicle _fire;
 
-_crater = createVehicle ["CraterLong_small", (getPos _pod),[], 0, "NONE"];
+_crater = createVehicle ["CraterLong_small", [(getPos _pod select 0),(getPos _pod select 1),0],[], 0, "NONE"];
 _fire = createVehicle ["test_EmptyObjectForSmoke", (getPos _pod),[], 0, "NONE"];
 _alarm = createSoundSource ["Sound_Alarm", (getPos _pod), [], 0];
 _sparks1 = createSoundSource ["Sound_SparklesWreck1", (getPos _pod), [], 0];
