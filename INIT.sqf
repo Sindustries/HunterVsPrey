@@ -154,7 +154,7 @@ if (isServer) then {
 			private ["_posFound","_objects"];
 			cutText ["FINDING GAME LOCATION", "BLACK FADED", 999];
 			_posFound = false;
-			while (!_posFound) do {
+			while {!_posFound} do {
 				HVP_Pos = [(getPos player),0,99999,0,0,0,0] call SIN_fnc_findPos;
 				_objects = nearestObjects [HVP_Pos, [], 200];
 				if ((count _objects) > 0) then {
