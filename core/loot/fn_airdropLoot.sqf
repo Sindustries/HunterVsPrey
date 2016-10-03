@@ -19,10 +19,11 @@
 			_item = selectRandom (Sinspawn_lootList select 2);
 			_med = selectRandom (Sinspawn_lootList select 3);
 			_clothes = selectRandom (Sinspawn_lootList select 4);
-			_backpack = selectRandom (Sinspawn_lootList select 5);
-			_spClothes = selectRandom (Sinspawn_lootList select 6);
-			_nvg = selectRandom (Sinspawn_lootList select 7);
-			_sns = selectRandom (Sinspawn_lootList select 8);
+			_vest = selectRandom (Sinspawn_lootList select 5);
+			_backpack = selectRandom (Sinspawn_lootList select 6);
+			_spClothes = selectRandom (Sinspawn_lootList select 7);
+			_nvg = selectRandom (Sinspawn_lootList select 8);
+			_sns = selectRandom (Sinspawn_lootList select 9);
 			
 
 			_drop addWeaponCargoGlobal [_weapon, floor (random 2)];
@@ -31,6 +32,7 @@
 			_drop addItemCargoGlobal [_item, floor (random 2)];
 			_drop addItemCargoGlobal [_med, floor (random 2)];
 			_drop addItemCargoGlobal [_clothes, floor (random 2)];
+			_drop addItemCargoGlobal [_vest, floor (random 2)];
 			_drop addBackpackCargoGlobal [_backpack, floor (random 2)];
 		};
 	};
@@ -43,10 +45,11 @@
 			_item = selectRandom (Sinspawn_lootList select 2);
 			_med = selectRandom (Sinspawn_lootList select 3);
 			_clothes = selectRandom (Sinspawn_lootList select 4);
-			_backpack = selectRandom (Sinspawn_lootList select 5);
-			_spClothes = selectRandom (Sinspawn_lootList select 6);
-			_nvg = selectRandom (Sinspawn_lootList select 7);
-			_sns = selectRandom (Sinspawn_lootList select 8);
+			_vest = selectRandom (Sinspawn_lootList select 5);
+			_backpack = selectRandom (Sinspawn_lootList select 6);
+			_spClothes = selectRandom (Sinspawn_lootList select 7);
+			_nvg = selectRandom (Sinspawn_lootList select 8);
+			_sns = selectRandom (Sinspawn_lootList select 9);
 		
 			_drop addWeaponCargoGlobal [_weapon, floor (random 2)];
 			_drop addMagazineCargoGlobal [_mag1, floor (random 3)];
@@ -54,6 +57,7 @@
 			_drop addItemCargoGlobal [_item, floor (random 2)];
 			_drop addItemCargoGlobal [_med, floor (random 2)];
 			_drop addItemCargoGlobal [_clothes, floor (random 2)];
+			_drop addItemCargoGlobal [_vest, floor (random 2)];
 			_drop addBackpackCargoGlobal [_backpack, floor (random 2)];
 			if (((Sinspawn_lootChance select 6)*2) > _spRoll) then {
 				_drop addItemCargoGlobal [_spClothes, floor (random 2)];

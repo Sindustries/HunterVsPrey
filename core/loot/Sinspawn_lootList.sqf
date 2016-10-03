@@ -43,6 +43,8 @@ Sinspawn_lootList = [
 "FirstAidKit"
 ], [ //CLOTHING -- AUTO FILLED! see below
 
+], [ //VESTS -- AUTO FILLED! see below
+
 ], [ //BACKPACKS -- AUTO FILLED! see below
 
 ], [ //SPECIAL CLOTHING
@@ -146,6 +148,8 @@ Sinspawn_lootList = [
 "FirstAidKit"
 ], [ //CLOTHING	-- AUTO FILLED! see below
 
+], [ //VESTS -- AUTO FILLED! see below
+
 ], [ //BACKPACKS -- AUTO FILLED! see below
 
 ], [ //SPECIAL CLOTHING
@@ -247,13 +251,26 @@ for "_i" from 0 to ((count _cfg)-1) do {
 	};
 };
 
+//Glasses/Goggles/Masks
+_cfg = (configFile >> "CfgGlasses");
+for "_i" from 0 to ((count _cfg)-1) do {
+	if (isClass (_cfg select _i)) then {
+		_cfgName = configName (_cfg select _i);			
+		if (_cfgName isKindOf ["None", configFile >> "CfgGlasses"] && (getNumber ((_cfg select _i) >> "scope") == 2)) then {
+			if (!(_cfgName in (Sinspawn_lootList select 6))) then {
+				(Sinspawn_lootList select 4) pushBackUnique _cfgName;
+			};
+		};
+	};
+};
+
 //Vests
 _cfg = (configFile >> "CfgVehicles");
 for "_i" from 0 to ((count _cfg)-1) do {
 	if (isClass (_cfg select _i)) then {
 		_cfgName = configName (_cfg select _i);			
 		if (_cfgName isKindOf "Vest_Base_F" && (getNumber ((_cfg select _i) >> "scope") == 2)) then {
-			(Sinspawn_lootList select 4) pushBackUnique _cfgName;
+			(Sinspawn_lootList select 5) pushBackUnique _cfgName;
 		};
 	};
 };
@@ -264,20 +281,7 @@ for "_i" from 0 to ((count _cfg)-1) do {
 	if (isClass (_cfg select _i)) then {
 		_cfgName = configName (_cfg select _i);			
 		if (_cfgName isKindOf "Bag_Base" && (getNumber ((_cfg select _i) >> "scope") == 2) && (getText ((_cfg select _i) >> "faction") isEqualTo "Default")) then {
-			(Sinspawn_lootList select 5) pushBackUnique _cfgName;
-		};
-	};
-};
-
-//Glasses/Goggles/Masks
-_cfg = (configFile >> "CfgGlasses");
-for "_i" from 0 to ((count _cfg)-1) do {
-	if (isClass (_cfg select _i)) then {
-		_cfgName = configName (_cfg select _i);			
-		if (_cfgName isKindOf ["None", configFile >> "CfgGlasses"] && (getNumber ((_cfg select _i) >> "scope") == 2)) then {
-			if (!(_cfgName in (Sinspawn_lootList select 6))) then {
-				(Sinspawn_lootList select 4) pushBackUnique _cfgName;
-			};
+			(Sinspawn_lootList select 6) pushBackUnique _cfgName;
 		};
 	};
 };

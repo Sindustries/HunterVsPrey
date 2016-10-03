@@ -64,6 +64,7 @@ class HVP {
 		8,		//items
 		4,		//medical
 		10,		//clothing
+		5,		//vests
 		5,		//backpacks
 		0,		//ghillies & other special clothing
 		0,		//night vision
@@ -76,6 +77,7 @@ class HVP {
 		12,		//items
 		4.5,	//medical
 		25,		//clothing
+		15,		//vests
 		8,		//backpacks
 		0.65,	//ghillies & other special clothing
 		1.9,	//night vision
