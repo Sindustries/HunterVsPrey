@@ -202,8 +202,9 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 			_cfgName = configName (_cfg select _i);			
 			if (_cfgName isKindOf ["Rifle", configFile >> "CfgWeapons"] || _cfgName isKindOf ["Pistol", configFile >> "CfgWeapons"] || _cfgName isKindOf ["Launcher", configFile >> "CfgWeapons"]) then {
 				if ((getNumber ((_cfg select _i) >> "scope") == 2)) then {
-					_weapon = (getText ((_cfg select _i) >> "baseWeapon"));
-					if (_weapon != "") then {
+					//_base = (configName (configFile >> "CfgWeapons" >> _classname >> "LinkedItems")) == "";
+					_weapon = (configName ((_cfg select _i) >> "LinkedItems"));
+					if (_weapon isEqualTo "") then {
 						(Sinspawn_lootList select 0) pushBackUnique _weapon;
 					};
 				};
@@ -211,6 +212,8 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 		};
 	};
 };
+
+copyToClipboard str (Sinspawn_lootList select 0);
 
 //Helmets
 _cfg = (configFile >> "CfgWeapons");
@@ -265,12 +268,14 @@ for "_i" from 0 to ((count _cfg)-1) do {
 };
 
 //Vests
-_cfg = (configFile >> "CfgVehicles");
+_cfg = (configFile >> "CfgWeapons");
 for "_i" from 0 to ((count _cfg)-1) do {
 	if (isClass (_cfg select _i)) then {
 		_cfgName = configName (_cfg select _i);			
-		if (_cfgName isKindOf "Vest_Base_F" && (getNumber ((_cfg select _i) >> "scope") == 2)) then {
-			(Sinspawn_lootList select 5) pushBackUnique _cfgName;
+		if (_cfgName isKindOf ["Vest_NoCamo_Base", configFile >> "CfgWeapons"] || _cfgName isKindOf ["Vest_Camo_Base", configFile >> "CfgWeapons"]) then {
+			if ((getNumber ((_cfg select _i) >> "scope") == 2)) then {
+				(Sinspawn_lootList select 5) pushBackUnique _cfgName;
+			};
 		};
 	};
 };
