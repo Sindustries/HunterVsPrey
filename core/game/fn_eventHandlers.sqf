@@ -52,7 +52,7 @@ player addEventHandler ["InventoryOpened", {
 		_location = ((nearestLocations [position player, ["Airport", "NameVillage", "NameCity", "NameCityCapital"], 20000]) select 0);
 		_locName = text _location;
 		_locPos = locationPosition _location;
-		if ((getPos player) distance2D _locPos >= 250) then {
+		if (player distance2D _locPos >= 250) then {
 			_locStr = format["Near %1",_locName];
 		} else {
 			_locStr = format["%1",_locName];
@@ -69,7 +69,12 @@ player addEventHandler ["InventoryOpened", {
 		
 		//DISPLAY
 		[_time, _locStr] spawn BIS_fnc_infoText;
-		sleep 120;
+		waitUntil {
+			sleep 3;
+			player distance2D _locPos >= 250 ||
+			player distance2D _locPos <= 100 ||
+			_locName != text ((nearestLocations [position player, ["Airport", "NameVillage", "NameCity", "NameCityCapital"], 20000]) select 0)
+		};
 	};
 };
 
