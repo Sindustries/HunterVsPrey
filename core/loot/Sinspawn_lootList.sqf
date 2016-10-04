@@ -171,6 +171,7 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 					while {isClass (_cfg >> _cfgName >> "LinkedItems")} do {
 						_weapon = (configName (inheritsFrom ((_cfg select _i))));
 						_cfgName = _weapon;
+						systemchat format["%1 %2 %3",_weapon,_cfgName,(isClass (_cfg >> _cfgName >> "LinkedItems"))];
 					};
 					(Sinspawn_lootList select 0) pushBackUnique _cfgName;
 				};
