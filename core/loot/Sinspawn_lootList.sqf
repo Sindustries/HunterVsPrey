@@ -169,7 +169,8 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 			if (_cfgName isKindOf ["Rifle", configFile >> "CfgWeapons"] || _cfgName isKindOf ["Pistol", configFile >> "CfgWeapons"]) then {
 				if ((getNumber ((_cfg select _i) >> "scope") == 2)) then {
 					while {isClass (_cfg >> _cfgName >> "LinkedItems")} do {
-						_cfgName = (configName (inheritsFrom ((_cfg select _i))));
+						_weapon = (configName (inheritsFrom ((_cfg select _i))));
+						_cfgName = _weapon;
 					};
 					(Sinspawn_lootList select 0) pushBackUnique _cfgName;
 				};
