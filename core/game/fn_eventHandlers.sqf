@@ -68,7 +68,9 @@ player addEventHandler ["InventoryOpened", {
 		_time = format["%1:%2",_hour,_min];
 		
 		//DISPLAY
-		[_time, _locStr] spawn BIS_fnc_infoText;
+		if (_locName != "") then {
+			[_time, _locStr] spawn BIS_fnc_infoText;
+		};
 		
 		//WAIT CONDITIONS
 		if (player distance2D _locPos >= 250) then {
