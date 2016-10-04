@@ -18,12 +18,12 @@ if (isServer) then {
 //-----------------------------------
 //-PREVENT LOOTING ENEMIES
 
-if (HVPGameType isEqualTo 1) then {
-	player addEventHandler ["InventoryOpened", {
-		private ["_unit","_container"];
-		_unit = _this select 0;
-		_container = _this select 1;
-		
+player addEventHandler ["InventoryOpened", {
+	private ["_unit","_container"];
+	_unit = _this select 0;
+	_container = _this select 1;
+	
+	if (HVPGameType isEqualTo 1) then {
 		if (_container isKindOf "man" && !alive _container && side (group _container) != side _unit) exitWith {
 			[] spawn {
 				waitUntil {dialog};
@@ -31,8 +31,15 @@ if (HVPGameType isEqualTo 1) then {
 				titleText ["YOU CAN'T LOOT THE ENEMY TEAM!", "PLAIN DOWN", 3];
 			};
 		};
-	}];
-};
+	};
+	if (HVPZombieMode isEqualTo 1 && (typeOf _container) in ((HVP_zombies)+(HVP_BossZombies))) then {
+		[] spawn {
+			waitUntil {dialog};
+			closeDialog 106;
+			titleText ["YOU CAN'T LOOT ZOMBIES!", "PLAIN DOWN", 3];
+		};
+	};
+}];
 
 //-----------------------------------
 //-LOCATION DISPLAY
