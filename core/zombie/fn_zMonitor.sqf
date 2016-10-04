@@ -3,7 +3,7 @@
 	Author: Sinbane
 	Monitors player distance to spawners and spawns zombies if they get close enough
 */
-private ["_playerPosArray","_zIndex","_index"];
+private ["_zIndex","_index"];
 //-----------------------------------
 
 	while {true} do {
@@ -43,7 +43,6 @@ private ["_playerPosArray","_zIndex","_index"];
 				};
 			};					
 		} forEach HVP_zombieArrayClient;
-		HVP_zombieCount = (count HVP_zombieArrayClient);
 	};
 
 //-----------------------------------

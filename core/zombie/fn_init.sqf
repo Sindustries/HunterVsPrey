@@ -16,7 +16,6 @@ HVP_spawnerArray = [];
 HVP_usedSpawnerArray = [];
 HVP_zombies = [];
 HVP_zombieArray = [];
-HVP_zombieCount = 0;
 HVP_zombieArrayClient = [];
 
 //-----------------------------------
@@ -59,6 +58,11 @@ if (isServer) then {
 	if (isServer) then {
 		[] spawn z_fnc_zDeleter;
 		[] spawn z_fnc_zSunDamage;
+		while {true} do {
+			hintSilent format["%1",(count HVP_zombieArrayClient)];
+			sleep 1;
+		};
+		};
 	};
 };
 
