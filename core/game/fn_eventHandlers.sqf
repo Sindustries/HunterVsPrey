@@ -69,7 +69,7 @@ player addEventHandler ["InventoryOpened", {
 		
 		//DISPLAY
 		[_time, _locStr] spawn BIS_fnc_infoText;
-		waitUntil {sleep 1; _location != ((nearestLocations [position player, ["Airport", "NameVillage", "NameCity", "NameCityCapital"], 20000]) select 0)};
+		sleep 120;
 	};
 };
 
