@@ -28,7 +28,7 @@ player addEventHandler ["InventoryOpened", {
 			[] spawn {
 				waitUntil {dialog};
 				closeDialog 106;
-				titleText ["YOU CAN'T LOOT THE ENEMY TEAM!", "PLAIN DOWN", 3];
+				titleText ["YOU CAN'T LOOT THE ENEMY TEAM!", "PLAIN DOWN", 1];
 			};
 		};
 	};
@@ -36,7 +36,7 @@ player addEventHandler ["InventoryOpened", {
 		[] spawn {
 			waitUntil {dialog};
 			closeDialog 106;
-			titleText ["YOU CAN'T LOOT ZOMBIES!", "PLAIN DOWN", 3];
+			titleText ["YOU CAN'T LOOT ZOMBIES!", "PLAIN DOWN", 1];
 		};
 	};
 }];
