@@ -69,11 +69,13 @@ player addEventHandler ["InventoryOpened", {
 		
 		//DISPLAY
 		[_time, _locStr] spawn BIS_fnc_infoText;
-		waitUntil {
-			sleep 3;
-			player distance2D _locPos >= 250 ||
-			player distance2D _locPos <= 100 ||
-			_locName != text ((nearestLocations [position player, ["Mount", "Airport", "NameVillage", "NameCity", "NameCityCapital"], 20000]) select 0)
+		
+		//WAIT CONDITIONS
+		if (player distance2D _locPos >= 250) then {
+			waitUntil {sleep 3; player distance2D _locPos <= 100 || _location != ((nearestLocations [position player, ["Mount", "Airport", "NameVillage", "NameCity", "NameCityCapital"], 20000]) select 0)};
+		};
+		if (player distance2D _locPos < 100) then {
+			waitUntil {sleep 3; player distance2D _locPos >= 250 || _location != ((nearestLocations [position player, ["Mount", "Airport", "NameVillage", "NameCity", "NameCityCapital"], 20000]) select 0)};
 		};
 	};
 };
