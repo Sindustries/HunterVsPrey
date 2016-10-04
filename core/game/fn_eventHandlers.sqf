@@ -72,7 +72,7 @@ player addEventHandler ["InventoryOpened", {
 			_location = _locations select 0;
 			_locName = text _location;
 			_locPos = locationPosition _location;
-			if (player in _location) then {
+			if ((getPos player) in _location) then {
 				_locStr = format["%1",_locName];
 			} else {
 				_locStr = format["Near %1",_locName];
@@ -82,10 +82,10 @@ player addEventHandler ["InventoryOpened", {
 			[_time, _locStr] spawn BIS_fnc_infoText;
 		
 			//WAIT CONDITIONS
-			if (player in _location) then {
-				waitUntil {sleep 3; !(player in _location) || _location != ((nearestLocations [position player, ["NameCity","NameCityCapital","NameLocal","NameMarine","NameVillage"], 1000]) select 0)};
+			if ((getPos player) in _location) then {
+				waitUntil {sleep 3; !((getPos player) in _location) || _location != ((nearestLocations [position player, ["NameCity","NameCityCapital","NameLocal","NameMarine","NameVillage"], 1000]) select 0)};
 			} else {
-				waitUntil {sleep 3; player in _location || _location != ((nearestLocations [position player, ["NameCity","NameCityCapital","NameLocal","NameMarine","NameVillage"], 1000]) select 0)};
+				waitUntil {sleep 3; (getPos player) in _location || _location != ((nearestLocations [position player, ["NameCity","NameCityCapital","NameLocal","NameMarine","NameVillage"], 1000]) select 0)};
 			};
 		} else {
 			waitUntil {sleep 3; (count nearestLocations [position player, ["NameCity","NameCityCapital","NameLocal","NameMarine","NameVillage"], 1000]) > 0};
