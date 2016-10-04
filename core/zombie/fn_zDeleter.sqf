@@ -35,7 +35,7 @@ private ["_deleteDist","_delCount","_playerPosArray","_index"];
 					_delCount = _delCount + 1;
 				};
 			};
-			if (_delCount isEqualTo (count _playerPosArray) then {
+			if (_delCount isEqualTo (count _playerPosArray)) then {
 				deleteVehicle _x;
 			};
 		} forEach HVP_zombieArray;
