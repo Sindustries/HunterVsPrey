@@ -160,6 +160,8 @@ Sinspawn_lootList = [
 private ["_cfg","_exclusions","_i","_cfgName"];
 
 if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
+	private "_wepMagazines";
+	_wepMagazines = [];
 	//Weapons
 	private "_weapon";
 	_exclusions = ["bv_FlashLight"];
@@ -170,6 +172,9 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 			if (_cfgName isKindOf ["Rifle", configFile >> "CfgWeapons"] || _cfgName isKindOf ["Pistol", configFile >> "CfgWeapons"]) then {
 				if ((getNumber ((_cfg select _i) >> "scope") == 2) && !(_cfgName in _exclusions)) then {
 					_weapon = [_cfgName] call BIS_fnc_baseWeapon;
+					{
+						_wepMagazines pushBackUnique _x;
+					} forEach (getArray (configFile >> "CfgWeapons" >> _weapon >> "magazines"));
 					(Sinspawn_lootList select 0) pushBackUnique _weapon;
 				};
 			};
@@ -182,7 +187,7 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 		if (isClass (_cfg select _i)) then {
 			_cfgName = configName (_cfg select _i);			
 			if (_cfgName isKindOf ["CA_Magazine", configFile >> "CfgMagazines"] && !(_cfgName isKindOf ["VehicleMagazine", configFile >> "CfgMagazines"]) && !(_cfgName isKindOf ["CA_LauncherMagazine", configFile >> "CfgMagazines"])) then {
-				if ((getNumber ((_cfg select _i) >> "scope") == 2) && !(_cfgName in _exclusions)) then {
+				if ((getNumber ((_cfg select _i) >> "scope") == 2) && !(_cfgName in _exclusions) && !(_cfgName in _wepMagazines)) then {
 					(Sinspawn_lootList select 1) pushBackUnique _cfgName;					
 				};
 			};
