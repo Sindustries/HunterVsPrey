@@ -24,15 +24,13 @@ private ["_playerPosArray","_zIndex","_index"];
 				} forEach HVP_spawnerArray;
 			} else {
 				if (isServer) then {
-					_zIndex = 0;
 					{
 						for "_index" from 0 to ((count HVP_usedSpawnerArray)-1) do {
 							HVP_spawnerArray pushback _x;
-							HVP_usedSpawnerArray deleteAt _zIndex;
+							HVP_usedSpawnerArray deleteAt _index;
 							publicVariable "HVP_usedSpawnerArray";
 							publicVariable "HVP_spawnerArray";
 						};
-						_zIndex = _zIndex + 1;
 					} forEach HVP_usedSpawnerArray;
 				};
 			};
