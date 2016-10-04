@@ -166,7 +166,7 @@ for "_i" from 0 to ((count _cfg)-1) do {
 		while {true} do {
 			sleep HVP_uncommonEvent;			
 			_quakePos = [HVP_phase_pos,0,(HVP_phase_radius * 0.9),0,1,0,0] call SIN_fnc_findPos;
-			[_quakePos] call HVP_fnc_quake;
+			[_quakePos,(HVP_phase_radius * 0.2)] call HVP_fnc_quake;
 		};
 	};
 	
