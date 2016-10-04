@@ -166,16 +166,17 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 	for "_i" from 0 to ((count _cfg)-1) do {
 		if (isClass (_cfg select _i)) then {
 			_cfgName = configName (_cfg select _i);			
-			if (_cfgName isKindOf ["Rifle", configFile >> "CfgWeapons"] || _cfgName isKindOf ["Pistol", configFile >> "CfgWeapons"] || _cfgName isKindOf ["Launcher", configFile >> "CfgWeapons"]) then {
-				if ((getNumber ((_cfg select _i) >> "scope") == 2)) then {
-					_weapon = (configName (inheritsFrom ((_cfg select _i))));
-					if ((getNumber (_cfg >> _weapon >> "scope") == 2)) then {
+			if (_cfgName isKindOf ["Rifle", configFile >> "CfgWeapons"] || _cfgName isKindOf ["Pistol", configFile >> "CfgWeapons"]) then {
+				//if ((getNumber ((_cfg select _i) >> "scope") == 2)) then {
+					//_weapon = (configName (inheritsFrom ((_cfg select _i))));
+					if ((getNumber (_cfg >> _weapon >> "scope") == 2) && (configName (configFile >> "CfgWeapons" >> _cfgName >> "LinkedItems")) isEqualTo "") then {
 						(Sinspawn_lootList select 0) pushBackUnique _weapon;
 					};						
-				};
+				//};
 			};
 		};
 	};
+	copyToClipboard str (Sinspawn_lootList select 0);
 	//Magazines
 	_exclusions = ["ATMine_Range_Mag","APERSMine_Range_Mag","SLAMDirectionalMine_Wire_Mag","SatchelCharge_Remote_Mag","IEDUrbanBig_Remote_Mag","IEDLandBig_Remote_Mag","IEDUrbanSmall_Remote_Mag","IEDLandSmall_Remote_Mag"];
 	_cfg = (configFile >> "CfgMagazines");
@@ -198,7 +199,7 @@ for "_i" from 0 to ((count _cfg)-1) do {
 	if (isClass (_cfg select _i)) then {
 		_cfgName = configName (_cfg select _i);	
 		if (_cfgName isKindof ["HelmetBase", configFile >> "CfgWeapons"] && (getNumber ((_cfg select _i) >> "scope") == 2)) then {
-			if (!(_cfgName in (Sinspawn_lootList select 7)) || !(_cfgName in _exclusions)) then { 
+			if (!(_cfgName in (Sinspawn_lootList select 7)) && !(_cfgName in _exclusions)) then { 
 				(Sinspawn_lootList select 4) pushBackUnique _cfgName;
 			};
 		};
@@ -209,7 +210,7 @@ for "_i" from 0 to ((count _cfg)-1) do {
 	if (isClass (_cfg select _i)) then {
 		_cfgName = configName (_cfg select _i);			
 		if (_cfgName isKindOf ["H_HelmetB", configFile >> "CfgWeapons"] && (getNumber ((_cfg select _i) >> "scope") == 2)) then {
-			if (!(_cfgName in (Sinspawn_lootList select 7)) || !(_cfgName in _exclusions)) then { 
+			if (!(_cfgName in (Sinspawn_lootList select 7)) && !(_cfgName in _exclusions)) then { 
 				(Sinspawn_lootList select 4) pushBackUnique _cfgName;
 			};
 		};
