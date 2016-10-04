@@ -85,7 +85,7 @@ _aMarkername = format["nuke%1",(getPos _obj_nuke)];
 _nukeMarker = createMarker [_aMarkername, (getPos _obj_nuke)];
 _nukeMarker setMarkerShape "ELLIPSE";
 _nukeMarker setMarkerBrush "Grid";
-_nukeMarker setMarkerColor "ColorOpfor";
+_nukeMarker setMarkerColor "ColorOrange";
 _nukeMarker setMarkerSize [_radius,_radius];
 _nukeMarker setMarkerAlpha 1;
 
@@ -98,10 +98,10 @@ _nukeMarker2 setMarkerSize [0.75,0.75];
 _nukeMarker2 setMarkerAlpha 1;
 
 {titleText ["NUCLEAR DEVICE DETECTED", "PLAIN DOWN", 0.5];} remoteExec ["bis_fnc_call", 0];
-"WARNING: A nuclear device has been located in the red area marked by a green skull. It will detonate in approx 2 minutes." remoteExec ["systemChat", 0];
+"WARNING: A nuclear device has been located in the orange area marked by a green skull. It will detonate in approx 2 minutes." remoteExec ["systemChat", 0];
 true remoteExec ["showChat", 0];
 sleep 60;
-"WARNING: A nuclear device has been located in the red area marked by a green skull. It will detonate in approx 1 minute." remoteExec ["systemChat", 0];
+"WARNING: A nuclear device has been located in the orange area marked by a green skull. It will detonate in approx 1 minute." remoteExec ["systemChat", 0];
 true remoteExec ["showChat", 0];
 sleep 60;
 
@@ -128,8 +128,8 @@ if (_fallout) then {
 [_obj_nuke] spawn HVP_fnc_nukeFXfalling;
 
 _nukeMarker setMarkerAlpha 0.33;
-_nukeMarker setMarkerColor "ColorYellow";
-deleteMarker _nukeMarker2;
+_nukeMarker setMarkerColor "ColorOrange";
+_nukeMarker setMarkerBrush "Solid";
 
 _location = createLocation ["NameVillage", (getPos _obj_nuke), _radius, _radius];
 _location setText "Radiation Zone";
