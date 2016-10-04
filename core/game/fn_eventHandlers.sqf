@@ -45,19 +45,9 @@ player addEventHandler ["InventoryOpened", {
 //-LOCATION DISPLAY
 
 [] spawn {
-	private ["_location","_locName","_locPos","_locStr","_now","_hour","_min","_time"];
+	private ["_locations","_location","_locName","_locPos","_locStr","_now","_hour","_min","_time"];
 	waitUntil {(player getVariable "HVP_spawned") isEqualTo true};
 	while {alive player} do {
-		//GET LOCATION
-		_location = ((nearestLocations [position player, ["Mount", "Airport", "NameVillage", "NameCity", "NameCityCapital"], 20000]) select 0);
-		_locName = text _location;
-		_locPos = locationPosition _location;
-		if (player distance2D _locPos >= 250) then {
-			_locStr = format["Near %1",_locName];
-		} else {
-			_locStr = format["%1",_locName];
-		};
-		
 		//GET TIME		
 		_now = date;
 		_hour = (_now select 3);
@@ -67,17 +57,38 @@ player addEventHandler ["InventoryOpened", {
 		};
 		_time = format["%1:%2",_hour,_min];
 		
-		//DISPLAY
-		if (_locName != "") then {
-			[_time, _locStr] spawn BIS_fnc_infoText;
-		};
+		//GET LOCATION
+		_locations = [];
+		_locations = nearestLocations [position player, ["NameCity","NameCityCapital","NameLocal","NameMarine","NameVillage"], 1000];
+		//filter-out locations without names
+		{
+			if (text _x == "") then	{
+				locations set [_forEachIndex, objNull];
+			};
+		} forEach _locations;
+		_locations = _locations - [objNull];
 		
-		//WAIT CONDITIONS
-		if (player distance2D _locPos >= 250) then {
-			waitUntil {sleep 3; player distance2D _locPos <= 100 || _location != ((nearestLocations [position player, ["Mount", "Airport", "NameVillage", "NameCity", "NameCityCapital"], 20000]) select 0)};
-		};
-		if (player distance2D _locPos < 100) then {
-			waitUntil {sleep 3; player distance2D _locPos >= 250 || _location != ((nearestLocations [position player, ["Mount", "Airport", "NameVillage", "NameCity", "NameCityCapital"], 20000]) select 0)};
+		if (count _locations > 0) then {
+			_location = _locations select 0;
+			_locName = text _location;
+			_locPos = locationPosition _location;
+			if (player in _location) then {
+				_locStr = format["%1",_locName];
+			} else {
+				_locStr = format["Near %1",_locName];
+			};
+			
+			//DISPLAY
+			[_time, _locStr] spawn BIS_fnc_infoText;
+		
+			//WAIT CONDITIONS
+			if (player in _location) then {
+				waitUntil {sleep 3; !(player in _location) || _location != ((nearestLocations [position player, ["NameCity","NameCityCapital","NameLocal","NameMarine","NameVillage"], 1000]) select 0)};
+			} else {
+				waitUntil {sleep 3; player in _location || _location != ((nearestLocations [position player, ["NameCity","NameCityCapital","NameLocal","NameMarine","NameVillage"], 1000]) select 0)};
+			};
+		} else {
+			waitUntil {sleep 3; (count nearestLocations [position player, ["NameCity","NameCityCapital","NameLocal","NameMarine","NameVillage"], 1000]) > 0};
 		};
 	};
 };
