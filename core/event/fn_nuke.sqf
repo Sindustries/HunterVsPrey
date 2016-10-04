@@ -130,6 +130,7 @@ if (_fallout) then {
 _nukeMarker setMarkerAlpha 0.33;
 _nukeMarker setMarkerColor "ColorOrange";
 _nukeMarker setMarkerBrush "Solid";
+deleteMarker _nukeMarker2;
 
 _location = createLocation ["NameVillage", (getPos _obj_nuke), _radius, _radius];
 _location setText "Radiation Zone";
