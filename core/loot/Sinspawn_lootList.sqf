@@ -168,10 +168,9 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 			_cfgName = configName (_cfg select _i);			
 			if (_cfgName isKindOf ["Rifle", configFile >> "CfgWeapons"] || _cfgName isKindOf ["Pistol", configFile >> "CfgWeapons"]) then {
 				if ((getNumber ((_cfg select _i) >> "scope") == 2)) then {
-					while {isClass (_cfg >> _cfgName >> "LinkedItems")} do {
+					while {(_cfg >> _cfgName >> "LinkedItems") != ""} do {
 						_weapon = (configName (inheritsFrom ((_cfg select _i))));
 						_cfgName = _weapon;
-						systemchat format["%1 %2 %3",_weapon,_cfgName,(isClass (_cfg >> _cfgName >> "LinkedItems"))];
 					};
 					(Sinspawn_lootList select 0) pushBackUnique _cfgName;
 				};
