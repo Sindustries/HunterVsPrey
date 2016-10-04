@@ -99,6 +99,7 @@ for "_i" from 0 to ((count _cfg)-1) do {
 
 		while {true} do {
 			sleep HVP_uncommonEvent;
+			if (HVP_suddenDeath) exitWith {};
 			_dropPos = [HVP_phase_pos,0,(HVP_phase_radius * 0.9),0,0,0,0] call SIN_fnc_findPos;
 			[_dropPos] call HVP_fnc_dropPod;
 		};
@@ -113,6 +114,7 @@ for "_i" from 0 to ((count _cfg)-1) do {
 		
 		while {true} do {
 			sleep HVP_rareEvent;
+			if (HVP_suddenDeath) exitWith {};
 			_helicrash_pos = [HVP_phase_pos,0,(HVP_phase_radius * 0.9),0,0,0,0] call SIN_fnc_findPos;
 			[(_this select 0),_helicrash_pos] call HVP_fnc_heliCrash;
 		};
@@ -133,9 +135,8 @@ for "_i" from 0 to ((count _cfg)-1) do {
 		_missileCount = _this select 1;
 
 		while {true} do {
-
 			sleep HVP_uncommonEvent;
-			
+			if (HVP_suddenDeath) exitWith {};
 			_artyPos = [HVP_phase_pos,0,(HVP_phase_radius * 0.9),0,0,0,0] call SIN_fnc_findPos;
 			[_artyPos,_vehCount,_missileCount] call HVP_fnc_artillery;
 		};
@@ -147,11 +148,9 @@ for "_i" from 0 to ((count _cfg)-1) do {
 	[] spawn {
 		private ["_size","_gasCount","_chemPos"];
 		while {true} do {
-			sleep HVP_commonEvent;
-			
+			sleep HVP_commonEvent;			
 			_size = (HVP_Phase_Radius * 0.05);
-			_gasCount = (_size / 1.25);
-			
+			_gasCount = (_size / 1.25);			
 			_chemPos = [HVP_phase_pos,0,(HVP_phase_radius * 0.9),0,0,0,0] call SIN_fnc_findPos;
 			[_chemPos,_size,_gasCount] call HVP_fnc_chemAttack;
 		};
@@ -165,8 +164,7 @@ for "_i" from 0 to ((count _cfg)-1) do {
 		waitUntil {sleep 5; HVP_phase_num >= 1};
 		
 		while {true} do {
-			sleep HVP_uncommonEvent;
-			
+			sleep HVP_uncommonEvent;			
 			_quakePos = [HVP_phase_pos,0,(HVP_phase_radius * 0.9),0,1,0,0] call SIN_fnc_findPos;
 			[_quakePos] call HVP_fnc_quake;
 		};
@@ -181,8 +179,7 @@ for "_i" from 0 to ((count _cfg)-1) do {
 		
 		while {true} do {
 			sleep HVP_rareEvent;
-			if (HVP_phase_radius < 750) exitWith {};
-			
+			if (HVP_suddenDeath) exitWith {};			
 			_nukePos = [HVP_phase_pos,0,(HVP_phase_radius * 0.5),0,0,0,0] call SIN_fnc_findPos;
 			[(_this select 0),_nukePos,(HVP_phase_radius * 0.33),true,true,true,true] call HVP_fnc_nuke;
 
@@ -195,14 +192,12 @@ for "_i" from 0 to ((count _cfg)-1) do {
 
 	[_uavSelection] spawn {
 		private ["_uavScanSize","_uavTime","_uavUpdate","_uavScanPos"];		
-		while {true} do {
-		
+		while {true} do {		
 			sleep HVP_rareEvent;
-			
+			if (HVP_suddenDeath) exitWith {};
 			_uavScanSize = (HVP_Phase_Radius * 0.2);
 			_uavTime = ((60*2)+(random(60*3)));
-			_uavUpdate = 3;
-			
+			_uavUpdate = 3;			
 			_uavScanPos = [HVP_phase_pos,0,(HVP_phase_radius * 0.9),0,0,0,0] call SIN_fnc_findPos;
 			[(_this select 0),_uavScanPos,_uavScanSize,_uavTime,_uavUpdate] call HVP_fnc_uav;
 		};

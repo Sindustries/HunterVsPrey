@@ -39,9 +39,9 @@
 
 		HVP_phase_active = "true";
 		publicVariable "HVP_phase_active";
-
-		if (HVPPhaseType isEqualTo 2) then {
-			while {HVP_phase_radius >= 2} do {
+		
+		if (HVP_suddenDeath) then {
+			while {HVP_phase_radius > 2} do {
 				HVP_phase_radius = HVP_phase_radius - _sizeDrop;
 				publicVariable "HVP_phase_radius";
 				str(_markername) setMarkerSize [HVP_phase_radius, HVP_phase_radius];
@@ -50,9 +50,22 @@
 				str(_markername) setMarkerPos HVP_phase_pos;
 				sleep 1;
 			};
-			if (HVP_phase_radius isEqualTo 2) exitWith {};
+			if (HVP_phase_radius <= 2) exitWith {};
 		};
-		if (HVP_phase_radius isEqualTo 2) exitWith {};
+
+		if (HVPPhaseType isEqualTo 2) then {
+			while {HVP_phase_radius > 2} do {
+				HVP_phase_radius = HVP_phase_radius - _sizeDrop;
+				publicVariable "HVP_phase_radius";
+				str(_markername) setMarkerSize [HVP_phase_radius, HVP_phase_radius];
+				HVP_phase_pos = [HVP_phase_pos,0,_shiftPos,0,0,0,0] call SIN_fnc_findPos;
+				publicVariable "HVP_phase_pos";
+				str(_markername) setMarkerPos HVP_phase_pos;
+				sleep 1;
+			};
+			if (HVP_phase_radius <= 2) exitWith {};
+		};
+		if (HVP_phase_radius <= 2) exitWith {};
 		
 		//-----------------------------------
 		//-CREATE GHOST OF WHERE ZONE WILL MOVE TO
@@ -96,6 +109,11 @@
 		
 		HVPPhaseTime = (HVPPhaseTime * _timeDecay);
 		publicVariable "HVPPhaseTime";
+		
+		if (HVPPhaseType isEqualTo 1 && HVP_phase_radius < 500) then {
+			HVP_suddenDeath = true;
+			publicVariable "HVP_suddenDeath";
+		};
 		
 		//-----------------------------------
 		//-CLOSE LOOP

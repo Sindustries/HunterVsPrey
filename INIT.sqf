@@ -40,6 +40,7 @@ if (HVPDebugMode isEqualTo 1) then {
 //-----------------------------------
 HVPErrorPos = (getArray(configFile >> "CfgWorlds" >> worldName >> "centerPosition"));
 HVP_Pos_Found = false;
+HVP_suddenDeath = false;
 HVPZombiesLoaded = false;
 HVPLootLoaded = false;
 HVPCarsLoaded = false;

@@ -14,6 +14,7 @@ if (HVPGameType isEqualTo 1) then {
 //-ROLL FOR EVENT
 
 		sleep HVP_rareEvent;
+		if (HVP_suddenDeath) exitWith {};
 
 		if (sunOrMoon isEqualTo 0) then {
 			if (vehicle player isEqualTo player) then {

@@ -49,13 +49,18 @@ while {alive player} do {
 		_task1 setTaskState "Failed";
 		["TaskFailed",["",_txt]] call bis_fnc_showNotification;
 	};
+	
+	if (HVP_suddenDeath) exitWith {
+		_msg = format ["SUDDEN DEATH HAS BEGUN",HVP_phase_num];
+		[[[_msg,"<t align = 'center' shadow = '1' size = '0.6' font='PuristaBold'>%1</t><br/>", 25]]] spawn BIS_fnc_typeText;
+	} else {
+		_msg = format ["PHASE %1 IS NOW IN EFFECT",HVP_phase_num];
+		[[[_msg,"<t align = 'center' shadow = '1' size = '0.6' font='PuristaBold'>%1</t><br/>", 25]]] spawn BIS_fnc_typeText;
+	};
 
-	_msg = format ["PHASE %1 IS NOW IN EFFECT",HVP_phase_num];
-	[[[_msg,"<t align = 'center' shadow = '1' size = '0.6' font='PuristaBold'>%1</t><br/>", 25]]] spawn BIS_fnc_typeText;
-		
 	_currentPhase = HVP_phase_num;
 	waitUntil {sleep 1; HVP_phase_num isEqualTo (_currentPhase + 1) || !alive player};
-
+	
 	if (!alive player) exitWith {
 		_task1 setTaskState "Failed";
 		["TaskFailed",["",_txt]] call bis_fnc_showNotification;
