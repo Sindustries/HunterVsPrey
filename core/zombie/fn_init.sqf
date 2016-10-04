@@ -47,7 +47,7 @@ if (isServer) then {
 		deleteVehicle _temp;
 		_counter = _counter - 1;
 		[_counter,(count HVP_zombies)] remoteExec ["HVP_fnc_updateProgressBar", 0];
-	} forEach HVP_zombies;
+	} forEach (HVP_zombies+HVP_BossZombies);
 };
 //-----------------------------------
 //-LAUNCH FUNCS
