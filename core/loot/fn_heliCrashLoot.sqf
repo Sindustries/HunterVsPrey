@@ -36,9 +36,15 @@
 		_drop addBackpackCargoGlobal [_backpack, floor (random 2)];
 		
 		if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
-			_drop addItemCargoGlobal [_spClothes, floor (random 2)];
-			_drop addItemCargoGlobal [_nvg, floor (random 2)];
-			_drop addItemCargoGlobal [_sns, floor (random 2)];
+			if ((random 100) < ((Sinspawn_lootChance select 7)*2)) then {
+				_drop addItemCargoGlobal [_spClothes, floor (random 2)];
+			};
+			if ((random 100) < ((Sinspawn_lootChance select 8)*2)) then {
+				_drop addItemCargoGlobal [_nvg, floor (random 2)];
+			};
+			if ((random 100) < ((Sinspawn_lootChance select 9)*2)) then {
+				_drop addItemCargoGlobal [_sns, floor (random 2)];
+			};
 			if ((random 100) <= 2.5) then {
 				_drop addItemCargoGlobal [(selectRandom _specItems), 1];
 			};
