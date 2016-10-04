@@ -20,7 +20,7 @@
 	_quakemarker2 setMarkerAlpha 1;
 	
 	_quakemarker3 = createMarker ["quakeMarker3", _pos];
-	_quakemarker3 setMarkerShape "ICON";
+	_quakemarker3 setMarkerShape "ELLIPSE";
 	_quakemarker3 setMarkerType "EMPTY";
 	_quakemarker3 setMarkerBrush "Border";
 	_quakemarker3 setMarkerColor "ColorOpfor";
