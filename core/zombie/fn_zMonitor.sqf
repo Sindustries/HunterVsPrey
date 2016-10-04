@@ -3,7 +3,7 @@
 	Author: Sinbane
 	Monitors player distance to spawners and spawns zombies if they get close enough
 */
-private ["_zIndex","_index"];
+private ["_zIndex","_index","_toDelete"];
 //-----------------------------------
 
 	while {true} do {
@@ -36,13 +36,13 @@ private ["_zIndex","_index"];
 			};
 		};
 		//remove dead or deleted Z's from client array
+		_toDelete = [];
 		{
-			for "_index" from 0 to ((count HVP_zombieArrayClient)-1) do {
-				if (!alive _x || isNull _x) then {
-					HVP_zombieArrayClient deleteAt _index;
-				};
-			};					
+			if (!alive _x || isNull _x) then {
+				_toDelete pushBack _x;
+			};				
 		} forEach HVP_zombieArrayClient;
+		HVP_zombieArrayClient = HVP_zombieArrayClient - _toDelete;
 	};
 
 //-----------------------------------
