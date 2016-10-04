@@ -168,7 +168,7 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 			_cfgName = configName (_cfg select _i);			
 			if (_cfgName isKindOf ["Rifle", configFile >> "CfgWeapons"] || _cfgName isKindOf ["Pistol", configFile >> "CfgWeapons"]) then {
 				if ((getNumber ((_cfg select _i) >> "scope") == 2)) then {
-					while {(count (_cfg >> _cfgName >> "LinkedItems")) > 0} do {
+					while {(count (_cfg >> _cfgName >> "LinkedItems")) > 1} do {
 						_cfgName = (configName (inheritsFrom ((_cfg select _i))));
 						systemChat format["%1",(count (_cfg >> _cfgName >> "LinkedItems"))];
 					};
