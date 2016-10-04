@@ -62,7 +62,6 @@ if (isServer) then {
 			hintSilent format["%1",(count HVP_zombieArrayClient)];
 			sleep 1;
 		};
-		};
 	};
 };
 
