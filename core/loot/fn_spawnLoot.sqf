@@ -39,6 +39,10 @@
 			if (_lootType isEqualTo 1) then {
 				_magazineClass = selectRandom (Sinspawn_lootList select 1);
 				_holder addMagazineCargoGlobal [_magazineClass, floor(random 2)];
+				if ((random 100) < 10) then {
+					_magazineClass = selectRandom (getArray (configFile >> "CfgWeapons" >> (selectRandom (Sinspawn_lootList select 0)) >> "magazines"));
+					_holder addMagazineCargoGlobal [_magazineClass, floor(random 2)];
+				};
 				if (HVPDebugMode isEqualTo 1) then {
 					_id = format ["%1",_pos];
 					_debug = createMarker [_id,_pos];
