@@ -4,7 +4,7 @@
 	http://www.armaholic.com/page.php?id=30816
 	Spawns a nuclear blast
 */
-private ["_heliSelection","_nukePos","_radius","_damage_buildings_units","_weather_effect","_radiation","_fallout","_heliSpawnPos","_eventHeli","_pilot","_obj_nuke","_heliEndPos","_aMarkername","_aMarkername2","_nukeMarker","_nukeMarker2","_parachute","_eventheligroup"];
+private ["_heliSelection","_nukePos","_radius","_damage_buildings_units","_weather_effect","_radiation","_fallout","_heliSpawnPos","_eventHeli","_pilot","_obj_nuke","_heliEndPos","_aMarkername","_aMarkername2","_nukeMarker","_nukeMarker2","_parachute","_eventheligroup","_location"];
 //-----------------------------------
 //-VARIABLES
 
@@ -127,12 +127,14 @@ if (_fallout) then {
 };
 [_obj_nuke] spawn HVP_fnc_nukeFXfalling;
 
-//-----------------------------------
-
-sleep 60;
-
 _nukeMarker setMarkerAlpha 0.33;
-//_nukeMarker2 setMarkerAlpha 0.33;
+_nukeMarker setMarkerColor "ColorYellow";
+deleteMarker _nukeMarker2;
+
+_location = createLocation ["NameVillage", (getPos _obj_nuke), _radius, _radius];
+_location setText "Radiation Zone";
+
+//-----------------------------------
 
 if (HVPZombieMode isEqualTo 1) then {
 	private ["_zPos","_count"];
