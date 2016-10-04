@@ -193,7 +193,7 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 
 //Helmets
 _cfg = (configFile >> "CfgWeapons");
-_exclusions = ["H_HelmetO_ViperSP_hex_F","H_HelmetO_ViperSP_ghex_F"];
+_exclusions = ["H_HelmetO_ViperSP_hex_F","H_HelmetO_ViperSP_ghex_F","H_PilotHelmetFighter_B","H_PilotHelmetFighter_O","H_PilotHelmetFighter_I"];
 for "_i" from 0 to ((count _cfg)-1) do {
 	if (isClass (_cfg select _i)) then {
 		_cfgName = configName (_cfg select _i);	
@@ -205,7 +205,6 @@ for "_i" from 0 to ((count _cfg)-1) do {
 	};
 };
 _cfg = (configFile >> "CfgWeapons");
-_exclusions = ["H_HelmetO_ViperSP_hex_F","H_HelmetO_ViperSP_ghex_F"];
 for "_i" from 0 to ((count _cfg)-1) do {
 	if (isClass (_cfg select _i)) then {
 		_cfgName = configName (_cfg select _i);			
