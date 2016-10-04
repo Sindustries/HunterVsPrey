@@ -41,7 +41,7 @@ if (HVPGameType isEqualTo 1) then {
 	private ["_loc","_now","_hour","_min","_time"];
 	waitUntil {sleep 5; HVP_phase_num isEqualTo 1};
 	while {alive player} do {
-		_loc = text ((nearestLocations [position player, ["Airport", "NameLocal", "NameVillage", "NameCity", "NameCityCapital", "NameMarine"], 20000]) select 0);
+		_loc = text ((nearestLocations [position player, ["Airport", "NameLocal", "NameVillage", "NameCity", "NameCityCapital"], 20000]) select 0);
 		_now = date;
 		_hour = (_now select 3);
 		_min = (_now select 4);
@@ -50,7 +50,7 @@ if (HVPGameType isEqualTo 1) then {
 		};
 		_time = format["%1:%2",_hour,_min];
 		[_time, _loc] spawn BIS_fnc_infoText;
-		waitUntil {sleep 1; _loc != _loc};
+		waitUntil {sleep 1; _loc != (text ((nearestLocations [position player, ["Airport", "NameLocal", "NameVillage", "NameCity", "NameCityCapital"], 20000]) select 0))};
 	};
 };
 
