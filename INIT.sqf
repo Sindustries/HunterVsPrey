@@ -382,6 +382,7 @@ switch (HVPGameType) do {
 [] call HVP_fnc_knockOutGun;
 [] spawn HVP_fnc_mineDetector;
 [] spawn HVP_fnc_toxicGas;
+[] call HVP_fnc_eventHandlers;
 //-----------------------------------
 waitUntil {(player getVariable "HVP_spawned") isEqualTo true};
 //-----------------------------------
