@@ -49,7 +49,7 @@ player addEventHandler ["InventoryOpened", {
 	waitUntil {(player getVariable "HVP_spawned") isEqualTo true};
 	while {alive player} do {
 		//GET LOCATION
-		_location = ((nearestLocations [position player, ["Airport", "NameVillage", "NameCity", "NameCityCapital"], 20000]) select 0);
+		_location = ((nearestLocations [position player, ["Mount", "Airport", "NameVillage", "NameCity", "NameCityCapital"], 20000]) select 0);
 		_locName = text _location;
 		_locPos = locationPosition _location;
 		if (player distance2D _locPos >= 250) then {
@@ -73,7 +73,7 @@ player addEventHandler ["InventoryOpened", {
 			sleep 3;
 			player distance2D _locPos >= 250 ||
 			player distance2D _locPos <= 100 ||
-			_locName != text ((nearestLocations [position player, ["Airport", "NameVillage", "NameCity", "NameCityCapital"], 20000]) select 0)
+			_locName != text ((nearestLocations [position player, ["Mount", "Airport", "NameVillage", "NameCity", "NameCityCapital"], 20000]) select 0)
 		};
 	};
 };
