@@ -175,6 +175,7 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 			};
 		};
 	};
+	//Magazines/grenades
 	_exclusions = ["ATMine_Range_Mag","APERSMine_Range_Mag","SLAMDirectionalMine_Wire_Mag","SatchelCharge_Remote_Mag","IEDUrbanBig_Remote_Mag","IEDLandBig_Remote_Mag","IEDUrbanSmall_Remote_Mag","IEDLandSmall_Remote_Mag"];
 	_cfg = (configFile >> "CfgMagazines");
 	for "_i" from 0 to ((count _cfg)-1) do {
