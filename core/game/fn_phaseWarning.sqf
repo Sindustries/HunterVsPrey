@@ -50,7 +50,7 @@ while {alive player} do {
 		["TaskFailed",["",_txt]] call bis_fnc_showNotification;
 	};
 	
-	if (HVP_suddenDeath) exitWith {
+	if (HVP_suddenDeath) then {
 		_msg = format ["SUDDEN DEATH HAS BEGUN",HVP_phase_num];
 		[[[_msg,"<t align = 'center' shadow = '1' size = '0.6' font='PuristaBold'>%1</t><br/>", 25]]] spawn BIS_fnc_typeText;
 	} else {
