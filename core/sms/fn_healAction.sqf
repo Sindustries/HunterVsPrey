@@ -37,10 +37,6 @@
 					SMS_healAction = false;
 					_unit removeAction _healAction;
 				};
-				if (vehicle player != player) then {
-					SMS_healAction = false;
-					_unit removeAction _healAction;
-				};
 				sleep 0.5;
 			};
 		};

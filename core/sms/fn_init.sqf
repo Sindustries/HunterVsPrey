@@ -11,7 +11,6 @@ SMS_maxBlood = ["SMS_maxBlood"] call HVP_fnc_getSetting;
 SMS_bloodRegen = ["SMS_bloodRegen"] call HVP_fnc_getSetting;
 SMS_bloodRegenRate = ["SMS_bloodRegenRate"] call HVP_fnc_getSetting;
 SMS_bleedRate = ["SMS_bleedRate"] call HVP_fnc_getSetting;
-SMS_bleedRateMax = ["SMS_bleedRateMax"] call HVP_fnc_getSetting;
 SMS_passOutNum = ["SMS_passOutNum"] call HVP_fnc_getSetting;
 SMS_passOutChance = ["SMS_passOutChance"] call HVP_fnc_getSetting;
 SMS_bleedOutNum = ["SMS_bleedOutNum"] call HVP_fnc_getSetting;
