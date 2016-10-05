@@ -11,6 +11,7 @@ _pos = [(getpos Player),25,60,0,0,0,0] call SIN_fnc_findPos;
 
 cutText ["", "BLACK FADED", 999];
 player enableSimulation false;
+player setCaptive true;
 [player,true] remoteExec ["hideObject", 0];
 player setPos [(_pos select 0),(_pos select 1),0];
 player setDir (random 360);
@@ -31,5 +32,6 @@ sleep 10;
 cutText ["", "BLACK IN", 5];
 [player,false] remoteExec ["hideObject", 0];
 player enableSimulation true;
+player setCaptive false;
 
 //-----------------------------------
