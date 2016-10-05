@@ -199,7 +199,7 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 	for "_i" from 0 to ((count _cfg)-1) do {
 		if (isClass (_cfg select _i)) then {
 			_cfgName = configName (_cfg select _i);			
-			if (_cfgName isKindOf ["CA_Magazine", configFile >> "CfgMagazines"] && _cfgName isKindOf ["ATMine_Range_Mag", configFile >> "CfgMagazines"] && !(_cfgName isKindOf ["SatchelCharge_Remote_Mag", configFile >> "CfgMagazines"]) ) then {
+			if (_cfgName isKindOf ["ATMine_Range_Mag", configFile >> "CfgMagazines"] || _cfgName isKindOf ["SatchelCharge_Remote_Mag", configFile >> "CfgMagazines"]) then {
 				if (!(_cfgName isKindOf ["VehicleMagazine", configFile >> "CfgMagazines"]) && !(_cfgName isKindOf ["CA_LauncherMagazine", configFile >> "CfgMagazines"])) then {
 					if ((getNumber ((_cfg select _i) >> "scope") == 2) && !(_cfgName in _wepMagazines)) then {
 						(Sinspawn_lootList select 1) pushBackUnique _cfgName;
@@ -209,9 +209,6 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 			};
 		};
 	};
-	
-	copyToClipboard str (Sinspawn_lootList select 1);
-	systemChat format["%1",HVP_mines];
 };
 
 //Helmets
