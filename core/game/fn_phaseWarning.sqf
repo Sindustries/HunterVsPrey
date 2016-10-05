@@ -53,7 +53,7 @@ while {alive player} do {
 	if (HVP_suddenDeath) then {
 		_msg = format ["SUDDEN DEATH HAS BEGUN",HVP_phase_num];
 		[[[_msg,"<t align = 'center' shadow = '1' size = '0.6' font='PuristaBold'>%1</t><br/>", 25]]] spawn BIS_fnc_typeText;
-		uiNameSpace getVariable "HVP_HUD_PhaseTitle" ctrlSetText "SUDDEN DEATH";
+		uiNameSpace getVariable "HVP_HUD_PhaseTitle" ctrlSetText "SD";
 		uiNameSpace getVariable "HVP_HUD_PhaseTitle" ctrlSetTextColor [1, 0, 0, 1];
 	} else {
 		_msg = format ["PHASE %1 IS NOW IN EFFECT",HVP_phase_num];
