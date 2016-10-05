@@ -202,7 +202,7 @@ for "_i" from 0 to ((count _cfg)-1) do {
 	if (isClass (_cfg select _i)) then {
 		_cfgName = configName (_cfg select _i);	
 		if (_cfgName isKindof ["HelmetBase", configFile >> "CfgWeapons"] || _cfgName isKindOf ["H_HelmetB", configFile >> "CfgWeapons"]) then {
-			if ((getNumber ((_cfg select _i) >> "scope") == 2) && !(_cfgName in (Sinspawn_lootList select 7)) && !(isClass (_cfg >> _cfgName >> "subItems"))) then { 
+			if ((getNumber ((_cfg select _i) >> "scope") == 2) && !(_cfgName in (Sinspawn_lootList select 7)) && (count (getArray ((_cfg select _i) >> "subItems")) isEqualTo 0)) then { 
 				(Sinspawn_lootList select 4) pushBackUnique _cfgName;
 			};
 		};
