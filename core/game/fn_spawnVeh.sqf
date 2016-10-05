@@ -72,6 +72,23 @@ if (isServer) then {
 				[_spawnPos] spawn Z_fnc_setSpawn;
 			};
 			
+			_spawncar addEventHandler ["HandleDamage", {
+				[(_this select 0),(_this select 1),(_this select 2),(_this select 3),(_this select 4)] spawn {
+					private ["_veh","_selectionName","_damage","_source","_projectile"];
+					_veh = _this select 0;
+					_selectionName = _this select 1;
+					_damage = _this select 2;
+					_source = _this select 3;
+					_projectile = _this select 4;
+					
+					if (_projectile in HVP_mines) then {
+						_damage = 0;
+					} else {
+						_veh setHit [_selectionName,_damage];
+					};
+				};
+			}];
+			
 			if (HVPDebugMode isEqualTo 1) then {
 				_markername = format["car%1",_vehCreated];
 				_markerstr = createMarker [str(_markername), getPos _spawncar];
