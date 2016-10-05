@@ -13,9 +13,6 @@
 	
 	if (_unit != player) exitWith {};
 	_unit setVariable ["SMS_bleedingRate", ((_unit getVariable "SMS_bleedingRate") + _amount)];
-	if ((_unit getVariable "SMS_bleedingRate") > SMS_bleedRateMax) then {
-		_unit setVariable ["SMS_bleedingRate", SMS_bleedRateMax];
-	};
 	
 	("HUDBLOODLayer" call BIS_fnc_rscLayer) cutRsc ["HVPHUD_blood","PLAIN",-1,false];
 	
