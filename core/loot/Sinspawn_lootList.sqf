@@ -181,14 +181,16 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 		};
 	};
 	//Magazines/grenades
-	_exclusions = ["ATMine_Range_Mag","APERSMine_Range_Mag","SLAMDirectionalMine_Wire_Mag","SatchelCharge_Remote_Mag","IEDUrbanBig_Remote_Mag","IEDLandBig_Remote_Mag","IEDUrbanSmall_Remote_Mag","IEDLandSmall_Remote_Mag"];
+	_exclusions = [/*"ATMine_Range_Mag","APERSMine_Range_Mag","SLAMDirectionalMine_Wire_Mag","SatchelCharge_Remote_Mag","IEDUrbanBig_Remote_Mag","IEDLandBig_Remote_Mag","IEDUrbanSmall_Remote_Mag","IEDLandSmall_Remote_Mag"*/];
 	_cfg = (configFile >> "CfgMagazines");
 	for "_i" from 0 to ((count _cfg)-1) do {
 		if (isClass (_cfg select _i)) then {
 			_cfgName = configName (_cfg select _i);			
-			if (_cfgName isKindOf ["CA_Magazine", configFile >> "CfgMagazines"] && !(_cfgName isKindOf ["VehicleMagazine", configFile >> "CfgMagazines"]) && !(_cfgName isKindOf ["CA_LauncherMagazine", configFile >> "CfgMagazines"])) then {
-				if ((getNumber ((_cfg select _i) >> "scope") == 2) && !(_cfgName in _exclusions) && !(_cfgName in _wepMagazines)) then {
-					(Sinspawn_lootList select 1) pushBackUnique _cfgName;					
+			if (_cfgName isKindOf ["CA_Magazine", configFile >> "CfgMagazines"] || _cfgName isKindOf ["ATMine_Range_Mag", configFile >> "CfgMagazines"] ) then {
+				if (!(_cfgName isKindOf ["VehicleMagazine", configFile >> "CfgMagazines"]) && !(_cfgName isKindOf ["CA_LauncherMagazine", configFile >> "CfgMagazines"])) then {
+					if ((getNumber ((_cfg select _i) >> "scope") == 2) && !(_cfgName in _exclusions) && !(_cfgName in _wepMagazines)) then {
+						(Sinspawn_lootList select 1) pushBackUnique _cfgName;					
+					};
 				};
 			};
 		};
