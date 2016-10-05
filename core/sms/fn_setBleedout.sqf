@@ -3,6 +3,7 @@
 	Author: Sinbane
 	Set's a unit unconcious until dead
 */
+if (vehicle player != player) exitWith {};
 //-----------------------------------
 
 	private ["_unit"];

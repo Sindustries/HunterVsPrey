@@ -3,6 +3,7 @@
 	Author: Sinbane
 	Set's a unit unconcious for a max duration
 */
+if (vehicle player != player) exitWith {};
 //-----------------------------------
 
 	private ["_unit","_duration"];
