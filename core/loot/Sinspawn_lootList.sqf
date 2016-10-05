@@ -195,30 +195,20 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 	};
 };
 
-//Helmets
+//Helmets		configfile >> "CfgWeapons" >> "H_HelmetO_ViperSP_ghex_F" >> "subItems"
 _cfg = (configFile >> "CfgWeapons");
 _exclusions = ["H_HelmetO_ViperSP_hex_F","H_HelmetO_ViperSP_ghex_F","H_PilotHelmetFighter_B","H_PilotHelmetFighter_O","H_PilotHelmetFighter_I"];
 for "_i" from 0 to ((count _cfg)-1) do {
 	if (isClass (_cfg select _i)) then {
 		_cfgName = configName (_cfg select _i);	
-		if (_cfgName isKindof ["HelmetBase", configFile >> "CfgWeapons"] && (getNumber ((_cfg select _i) >> "scope") == 2)) then {
-			if (!(_cfgName in (Sinspawn_lootList select 7)) && !(_cfgName in _exclusions)) then { 
+		if (_cfgName isKindof ["HelmetBase", configFile >> "CfgWeapons"] || _cfgName isKindOf ["H_HelmetB", configFile >> "CfgWeapons"]) then {
+			if ((getNumber ((_cfg select _i) >> "scope") == 2) && !(_cfgName in (Sinspawn_lootList select 7)) && !(isClass ((_cfg select _i) "subItems"))) then { 
 				(Sinspawn_lootList select 4) pushBackUnique _cfgName;
 			};
 		};
 	};
 };
-_cfg = (configFile >> "CfgWeapons");
-for "_i" from 0 to ((count _cfg)-1) do {
-	if (isClass (_cfg select _i)) then {
-		_cfgName = configName (_cfg select _i);			
-		if (_cfgName isKindOf ["H_HelmetB", configFile >> "CfgWeapons"] && (getNumber ((_cfg select _i) >> "scope") == 2)) then {
-			if (!(_cfgName in (Sinspawn_lootList select 7)) && !(_cfgName in _exclusions)) then { 
-				(Sinspawn_lootList select 4) pushBackUnique _cfgName;
-			};
-		};
-	};
-};
+copyToClipboard str (Sinspawn_lootList select 4);
 
 //Uniform
 _cfg = (configFile >> "CfgWeapons");
