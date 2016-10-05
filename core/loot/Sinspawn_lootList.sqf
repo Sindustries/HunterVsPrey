@@ -71,6 +71,8 @@ Sinspawn_lootList = [
 
 ], [ //SUPPRESORS
 
+], [ //THERMALS
+
 ]];
 };
 
@@ -138,9 +140,7 @@ Sinspawn_lootList = [
 "Mask_M40",
 "Mask_M40_OD"
 ], [ //NIGHT VISION
-"NVGoggles_OPFOR",
-"NVGoggles_blk_F",
-"O_NVGoggles_urb_F"
+
 ], [ //SUPPRESSORS
 "muzzle_snds_H",
 "muzzle_snds_L",
@@ -152,6 +152,10 @@ Sinspawn_lootList = [
 "muzzle_snds_93mmg",
 "muzzle_snds_58_blk_F",
 "muzzle_snds_65_TI_blk_F"
+], [ //THERMALS
+"optic_Nightstalker",
+"optic_tws",
+"optic_tws_mg"
 ]];
 };
 
@@ -221,8 +225,12 @@ for "_i" from 0 to ((count _cfg)-1) do {
 	if (isClass (_cfg select _i)) then {
 		_cfgName = configName (_cfg select _i);	
 		if (_cfgName isKindof ["HelmetBase", configFile >> "CfgWeapons"] || _cfgName isKindOf ["H_HelmetB", configFile >> "CfgWeapons"]) then {
-			if ((getNumber ((_cfg select _i) >> "scope") == 2) && !(_cfgName in (Sinspawn_lootList select 7)) && (count (getArray ((_cfg select _i) >> "subItems")) isEqualTo 0)) then { 
-				(Sinspawn_lootList select 4) pushBackUnique _cfgName;
+			if ((getNumber ((_cfg select _i) >> "scope") == 2) && !(_cfgName in (Sinspawn_lootList select 7))) then {
+				if ((count (getArray ((_cfg select _i) >> "subItems"))) isEqualTo 0) then {
+					(Sinspawn_lootList select 4) pushBackUnique _cfgName;
+				} else {
+					(Sinspawn_lootList select 10) pushBackUnique _cfgName;
+				};
 			};
 		};
 	};
@@ -234,7 +242,7 @@ for "_i" from 0 to ((count _cfg)-1) do {
 	if (isClass (_cfg select _i)) then {
 		_cfgName = configName (_cfg select _i);			
 		if (_cfgName isKindOf ["Uniform_Base", configFile >> "CfgWeapons"] && (getNumber ((_cfg select _i) >> "scope") == 2)) then {
-			if (!(_cfgName in (Sinspawn_lootList select 6))) then {
+			if (!(_cfgName in (Sinspawn_lootList select 7))) then {
 				(Sinspawn_lootList select 4) pushBackUnique _cfgName;
 			};
 		};
@@ -247,7 +255,7 @@ for "_i" from 0 to ((count _cfg)-1) do {
 	if (isClass (_cfg select _i)) then {
 		_cfgName = configName (_cfg select _i);			
 		if (_cfgName isKindOf ["None", configFile >> "CfgGlasses"] && (getNumber ((_cfg select _i) >> "scope") == 2)) then {
-			if (!(_cfgName in (Sinspawn_lootList select 6))) then {
+			if (!(_cfgName in (Sinspawn_lootList select 7))) then {
 				(Sinspawn_lootList select 4) pushBackUnique _cfgName;
 			};
 		};
@@ -274,6 +282,23 @@ for "_i" from 0 to ((count _cfg)-1) do {
 		_cfgName = configName (_cfg select _i);			
 		if (_cfgName isKindOf "Bag_Base" && (getNumber ((_cfg select _i) >> "scope") == 2) && (getText ((_cfg select _i) >> "faction") isEqualTo "Default")) then {
 			(Sinspawn_lootList select 6) pushBackUnique _cfgName;
+		};
+	};
+};
+
+//Night vision -- configfile >> "CfgWeapons" >> "O_NVGoggles_ghex_F" >> "visionMode" array
+_cfg = (configFile >> "CfgWeapons");
+for "_i" from 0 to ((count _cfg)-1) do {
+	if (isClass (_cfg select _i)) then {
+		_cfgName = configName (_cfg select _i);			
+		if (_cfgName isKindOf ["NVGoggles", configFile >> "CfgWeapons"]) then {
+			if ((getNumber ((_cfg select _i) >> "scope") == 2)) then {
+				if ("TI" in (getArray ((_cfg select _i) >> "visionMode"))) then {
+					(Sinspawn_lootList select 10) pushBackUnique _cfgName;
+				} else {
+					(Sinspawn_lootList select 8) pushBackUnique _cfgName;
+				};
+			};
 		};
 	};
 };

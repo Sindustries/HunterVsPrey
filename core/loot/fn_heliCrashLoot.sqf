@@ -1,6 +1,6 @@
 
 	
-	private ["_drop","_dropRate","_specItems","_weapon","_mag1","_mag2","_item","_clothes","_backpack","_nvRoll","_spRoll","_spClothes","_nvg","_sns"];
+	private ["_drop","_dropRate","_specItems","_weapon","_mag1","_mag2","_item","_clothes","_backpack","_nvRoll","_spRoll","_spClothes","_nvg","_sns","_ti"];
 	_drop = _this select 0;
 	
 	if (HVPGameType isEqualTo 1) then { _dropRate = 3; };
@@ -10,8 +10,6 @@
 	clearMagazineCargoGlobal _drop;
 	clearItemCargoGlobal _drop;
 	clearBackpackCargoGlobal _drop;
-	
-	_specItems = ["H_HelmetO_ViperSP_hex_F","H_HelmetO_ViperSP_ghex_F","optic_Nightstalker","optic_tws","optic_tws_mg","NVGoggles_blk_F"];
 	
 	for "_i" from 0 to _dropRate do {
 		_weapon = selectRandom (Sinspawn_lootList select 0);
@@ -25,6 +23,7 @@
 		_spClothes = selectRandom (Sinspawn_lootList select 7);
 		_nvg = selectRandom (Sinspawn_lootList select 8);
 		_sns = selectRandom (Sinspawn_lootList select 9);
+		_ti = selectRandom (Sinspawn_lootList select 10);
 		
 		_drop addWeaponCargoGlobal [_weapon, floor (random 2)];
 		_drop addMagazineCargoGlobal [_mag1, floor (random 2)];
@@ -46,7 +45,7 @@
 				_drop addItemCargoGlobal [_sns, floor (random 2)];
 			};
 			if ((random 100) <= 2.5) then {
-				_drop addItemCargoGlobal [(selectRandom _specItems), 1];
+				_drop addItemCargoGlobal [_ti, floor (random 2)];
 			};
 		};		
 	};

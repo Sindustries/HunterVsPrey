@@ -68,7 +68,8 @@ class HVP {
 		6,		//backpacks
 		0,		//ghillies & other special clothing
 		0,		//night vision
-		0		//suppressors
+		0,		//suppressors
+		0		//thermals
 	};
 	
 	CRU_lootChance[] = {	//Crucible & Predator mode
@@ -82,6 +83,7 @@ class HVP {
 		0.33,	//ghillies & other special clothing
 		1.9,	//night vision
 		2.35	//suppressors
+		0		//thermals
 	};	
 	
 /* VEHICLE SPAWN SETTINGS */
