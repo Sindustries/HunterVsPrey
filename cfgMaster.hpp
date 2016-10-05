@@ -82,7 +82,7 @@ class HVP {
 		8,		//backpacks
 		0.33,	//ghillies & other special clothing
 		1.9,	//night vision
-		2.35	//suppressors
+		2.35,	//suppressors
 		0		//thermals
 	};	
 	
