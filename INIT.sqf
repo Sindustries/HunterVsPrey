@@ -27,7 +27,6 @@ HVPSpawnType = ["HVPSpawnType"] call HVP_fnc_getSetting;
 SIN_adminUIDs = ["SIN_adminUIDs"] call HVP_fnc_getSetting;
 HVP_music = ["HVP_music"] call HVP_fnc_getSetting;
 HVP_gasMasks = ["HVP_gasMasks"] call HVP_fnc_getSetting;
-HVP_mines = ["HVP_mines"] call HVP_fnc_getSetting;
 HVP_redGuns = ["HVP_redGuns"] call HVP_fnc_getSetting;
 HVP_redAmmo = ["HVP_redAmmo"] call HVP_fnc_getSetting;
 HVPZombieMode = ["HVP_ZombieMode"] call HVP_fnc_getSetting;
@@ -45,6 +44,7 @@ HVPZombiesLoaded = false;
 HVPLootLoaded = false;
 HVPCarsLoaded = false;
 HVPBoatsLoaded = false;
+HVP_mines = [];
 //-----------------------------------
 /* Admin Menu */
 if ((getPlayerUID player) in SIN_adminUIDs) then {

@@ -202,7 +202,8 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 			if (_cfgName isKindOf ["CA_Magazine", configFile >> "CfgMagazines"] && _cfgName isKindOf ["ATMine_Range_Mag", configFile >> "CfgMagazines"] && !(_cfgName isKindOf ["SatchelCharge_Remote_Mag", configFile >> "CfgMagazines"]) ) then {
 				if (!(_cfgName isKindOf ["VehicleMagazine", configFile >> "CfgMagazines"]) && !(_cfgName isKindOf ["CA_LauncherMagazine", configFile >> "CfgMagazines"])) then {
 					if ((getNumber ((_cfg select _i) >> "scope") == 2) && !(_cfgName in _wepMagazines)) then {
-						(Sinspawn_lootList select 1) pushBackUnique _cfgName;					
+						(Sinspawn_lootList select 1) pushBackUnique _cfgName;
+						HVP_mines pushBackUnique (getText ((_cfg select _i) >> "ammo"));
 					};
 				};
 			};
@@ -210,9 +211,7 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 	};
 	
 	copyToClipboard str (Sinspawn_lootList select 1);
-	
-	["1Rnd_HE_Grenade_shell","3Rnd_HE_Grenade_shell","1Rnd_Smoke_Grenade_shell","3Rnd_Smoke_Grenade_shell","1Rnd_SmokeRed_Grenade_shell","3Rnd_SmokeRed_Grenade_shell","1Rnd_SmokeGreen_Grenade_shell","3Rnd_SmokeGreen_Grenade_shell","1Rnd_SmokeYellow_Grenade_shell","3Rnd_SmokeYellow_Grenade_shell","1Rnd_SmokePurple_Grenade_shell","3Rnd_SmokePurple_Grenade_shell","1Rnd_SmokeBlue_Grenade_shell","3Rnd_SmokeBlue_Grenade_shell","1Rnd_SmokeOrange_Grenade_shell","3Rnd_SmokeOrange_Grenade_shell","HandGrenade","MiniGrenade","SmokeShell","SmokeShellRed","SmokeShellGreen","SmokeShellYellow","SmokeShellPurple","SmokeShellBlue","SmokeShellOrange","Chemlight_green","Chemlight_red","Chemlight_yellow","Chemlight_blue","UGL_FlareWhite_F","3Rnd_UGL_FlareWhite_F","UGL_FlareGreen_F","3Rnd_UGL_FlareGreen_F","UGL_FlareRed_F","3Rnd_UGL_FlareRed_F","UGL_FlareYellow_F","3Rnd_UGL_FlareYellow_F","UGL_FlareCIR_F","3Rnd_UGL_FlareCIR_F","FlareWhite_F","FlareGreen_F","FlareRed_F","FlareYellow_F","Laserbatteries","30Rnd_45ACP_Mag_SMG_01_Tracer_Green","150Rnd_762x51_Box","150Rnd_762x51_Box_Tracer","10Rnd_762x51_Mag","B_IR_Grenade","O_IR_Grenade","I_IR_Grenade","ATMine_Range_Mag","APERSMine_Range_Mag","APERSBoundingMine_Range_Mag","SLAMDirectionalMine_Wire_Mag","APERSTripMine_Wire_Mag","ClaymoreDirectionalMine_Remote_Mag","SatchelCharge_Remote_Mag","DemoCharge_Remote_Mag","IEDUrbanBig_Remote_Mag","IEDLandBig_Remote_Mag","IEDUrbanSmall_Remote_Mag","IEDLandSmall_Remote_Mag","10Rnd_50BW_Mag_F","ACE_HandFlare_White","ACE_HandFlare_Red","ACE_HandFlare_Green","ACE_HandFlare_Yellow","ACE_M84","ACE_M14","ACE_Chemlight_Orange","ACE_Chemlight_White","ACE_Chemlight_HiRed","ACE_Chemlight_HiYellow","ACE_Chemlight_HiOrange","ACE_Chemlight_HiWhite","ACE_Chemlight_IR"]
-	
+	systemChat format["%1",HVP_mines];
 };
 
 //Helmets
