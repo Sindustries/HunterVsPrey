@@ -215,8 +215,6 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 	};
 };
 
-copyToClipboard str HVP_mines;
-
 //Helmets
 _cfg = (configFile >> "CfgWeapons");
 for "_i" from 0 to ((count _cfg)-1) do {
