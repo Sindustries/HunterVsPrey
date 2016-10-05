@@ -156,7 +156,6 @@ class Zombies {
 		class spawnZombies {};
 		class zDeleter {};
 		class zMonitor {};
-		class zSunDamage {};
 	};
 };
 

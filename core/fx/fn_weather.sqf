@@ -62,7 +62,7 @@ setWind [0, 0, true];
 //-TEAM MODE
 
 if (HVPGameType isEqualTo 1) exitWith {
-	0 setOvercast 0.7;
+	0 setOvercast 1;
 	0 setFog 0.8;
 	0 setRain (random 0.25);
 	forceWeatherChange;

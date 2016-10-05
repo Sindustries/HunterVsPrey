@@ -3,7 +3,7 @@
 	By Sin
 	Displays random tips in systemchat every 2-3 minutes
 */
-private ["_tip","_tips","_tipsTeam","_tipsCru","_tipsPred"];
+private ["_tips","_tipsTeam","_tipsCru","_tipsPred","_zTips"];
 //-----------------------------------
 
 _tips = [
@@ -11,7 +11,6 @@ _tips = [
 "Never trust a Norweigan with your longboat.",
 "You may find extra supplies in buildings.",
 "If you are bleeding you may pass out when you have lower than 40% blood and enter state of bleedout at 10%",
-"Check how much ammo you have left by pressing CONTROL + R.",
 "Cloaked players still emit a slight shimmer.",
 "Supply Drops (marked green on the map) are a good source of loot.",
 "You can configure most keybinds by going to CONTROLS -> CONFIGURE ADDONS.",
@@ -51,6 +50,7 @@ if (HVPGameType isEqualTo 2) then {
 	{_tips pushBack _x} forEach _tipsCru;
 };
 if (HVPGameType isEqualTo 3) then {
+//PREDATOR SPECIFIC
 	_tipsPred = [
 	"Red Smoke grenades are toxic towards The Prey. The Predator can't be effected by such things.",
 	"If AntiCamp is enabled you won't be able to stay in the same area for very long before your location is revealed to everybody",
@@ -59,6 +59,15 @@ if (HVPGameType isEqualTo 3) then {
 	];
 	{_tips pushBack _x} forEach _tipsPred;
 };
+if (HVPZombieMode isEqualTo 1) then {
+//ZOMBIE SPECIFIC
+	_zTips = [
+	"If you are attacked by a zombie and you survive, there is a chance you'll become infected, and will eventually die. Use a cure to counteract this.",
+	"Zombies will slowly die from sunlight",
+	"Using too much ammo on zombies? Carry 2 primary weapons!"
+	];
+	{_tips pushBack _x} forEach _zTips;
+};
 //-----------------------------------
 //-OPEN LOOP
 while {alive player} do {
@@ -66,8 +75,7 @@ while {alive player} do {
 
 sleep 120 + (random 60);
 
-_tip = selectRandom _tips;
-systemChat format["TIP: %1",_tip];
+systemChat format["TIP: %1",(selectRandom _tips)];
 
 //-----------------------------------
 //-CLOSE LOOP

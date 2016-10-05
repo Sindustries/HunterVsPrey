@@ -4,12 +4,13 @@
 	Description: Horror based Battle Royale style Team Deathmatch with custom classes, events & abilities
 */
 private "_version";
-_version = "8.1.4";
+_version = "8.9.16";
 //-----------------------------------
 waitUntil {isPlayer player};
 enableSaving [false, false];
 enableSentences false;
 enableEnvironment false;
+setTimeMultiplier 0;
 player enableSimulation false;
 player allowDamage false;
 player enableStamina false;
@@ -26,7 +27,6 @@ HVPSpawnType = ["HVPSpawnType"] call HVP_fnc_getSetting;
 SIN_adminUIDs = ["SIN_adminUIDs"] call HVP_fnc_getSetting;
 HVP_music = ["HVP_music"] call HVP_fnc_getSetting;
 HVP_gasMasks = ["HVP_gasMasks"] call HVP_fnc_getSetting;
-HVP_mines = ["HVP_mines"] call HVP_fnc_getSetting;
 HVP_redGuns = ["HVP_redGuns"] call HVP_fnc_getSetting;
 HVP_redAmmo = ["HVP_redAmmo"] call HVP_fnc_getSetting;
 HVPZombieMode = ["HVP_ZombieMode"] call HVP_fnc_getSetting;
@@ -39,10 +39,12 @@ if (HVPDebugMode isEqualTo 1) then {
 //-----------------------------------
 HVPErrorPos = (getArray(configFile >> "CfgWorlds" >> worldName >> "centerPosition"));
 HVP_Pos_Found = false;
+HVP_suddenDeath = false;
 HVPZombiesLoaded = false;
 HVPLootLoaded = false;
 HVPCarsLoaded = false;
 HVPBoatsLoaded = false;
+HVP_mines = [];
 //-----------------------------------
 /* Admin Menu */
 if ((getPlayerUID player) in SIN_adminUIDs) then {
@@ -150,8 +152,16 @@ if (!isServer) then {
 if (isServer) then {
 	switch (HVPManual) do {
 		case 0: {
+			private ["_posFound","_objects"];
 			cutText ["FINDING GAME LOCATION", "BLACK FADED", 999];
-			HVP_Pos = [(getPos player),0,99999,0,0,0,0] call SIN_fnc_findPos;
+			_posFound = false;
+			while {!_posFound} do {
+				HVP_Pos = [(getPos player),0,99999,0,0,0,0] call SIN_fnc_findPos;
+				_objects = nearestObjects [HVP_Pos, ["All"], HVP_phase_radius];
+				if ((count _objects) >= 100) then {
+					_posFound = true;
+				};
+			};				
 			HVP_Pos_Found = true;
 			publicVariable "HVP_Pos_Found";		
 		};
@@ -213,9 +223,9 @@ uiNameSpace getVariable "PBarProgress" ctrlSetTextColor [0.2, 0.5, 0.9, 1];
 
 if (HVPZombieMode isEqualTo 1) then {
 	cutText ["RAISING THE DEAD", "BLACK FADED", 999];
+	["Z"] call HVP_fnc_getSettings;
+	[] call z_fnc_init;
 	if (isServer) then {
-		["Z"] call HVP_fnc_getSettings;
-		[] call z_fnc_init;
 		HVPzombiesLoaded = true;
 		publicVariable "HVPZombiesLoaded";
 	} else {
@@ -325,9 +335,12 @@ switch (HVPGameType) do {
 		west setFriend [east, 0];
 		west setFriend [resistance, 0];
 		east setFriend [west, 0];
-		east setFriend [resistance, 1];
+		east setFriend [resistance, 0];
 		resistance setFriend [west, 0];
-		resistance setFriend [east, 1];
+		resistance setFriend [east, 0];
+		if (playerSide isEqualTo east) then {
+			player setCaptive true;
+		};
 	};
 	//-CRUCIBLE SETTINGS
 	case 2: {
@@ -348,23 +361,29 @@ switch (HVPGameType) do {
 		east setFriend [resistance, 0];
 		resistance setFriend [west, 0];
 		resistance setFriend [east, 0];
+		if (playerSide isEqualTo resistance) then {
+			player setCaptive true;
+		};
 		
-		_grp = createGroup WEST;
-		sleep 1;
-		{
-			if (isPlayer _x) then {
-				if (side _x isEqualTo WEST || side _x isEqualTo EAST) then {
-					[_x] joinSilent grpNull;
-					sleep 0.1;
-					[_x] joinSilent _grp;
+		if (isServer) then {
+			_grp = createGroup WEST;
+			sleep 1;
+			{
+				if (isPlayer _x) then {
+					if (side _x isEqualTo WEST || side _x isEqualTo EAST) then {
+						[_x] joinSilent grpNull;
+						sleep 0.1;
+						[_x] joinSilent _grp;
+					};
 				};
-			};
-		} forEach allUnits;	
+			} forEach playableUnits;	
+		};
 	};
 };
 [] call HVP_fnc_knockOutGun;
 [] spawn HVP_fnc_mineDetector;
 [] spawn HVP_fnc_toxicGas;
+[] call HVP_fnc_eventHandlers;
 //-----------------------------------
 waitUntil {(player getVariable "HVP_spawned") isEqualTo true};
 //-----------------------------------

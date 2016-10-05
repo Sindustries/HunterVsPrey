@@ -1,52 +1,45 @@
 /*
-	fn_zSpawn
+	fn_zMonitor
 	Author: Sinbane
-	Spawns zombies on a defined pos if a player gets too close to it
+	Monitors player distance to spawners and spawns zombies if they get close enough
 */
-private ["_playerPosArray","_zIndex","_index"];
+private ["_zIndex","_index","_toDelete"];
 //-----------------------------------
 
 	while {true} do {
 		sleep 10;	
 		
-		if (HVP_phase_active isEqualTo "true") then {
+		if (HVP_phase_active isEqualTo "true" && alive player) then {
 			if (sunOrMoon isEqualTo 0 || fog >= 0.5 || overcast >= 0.7) then {
-				_playerPosArray = [];
 				{
-					if (isPlayer _x && alive _x && side _x != sideLogic) then {
-						if (HVPGameType isEqualTo 1 && side _x != EAST) then {
-							_playerPosArray pushBack (getPos _x);
-						};
-						if (HVPGameType isEqualTo 2) then {
-							_playerPosArray pushBack (getPos _x);
-						};
-						if (HVPGameType isEqualTo 3 && side _x != RESISTANCE) then {
-							_playerPosArray pushBack (getPos _x);
-						};
+					if (_x distance player < 80 && (random 100) < HVP_zSpawnChance && !(_x in HVP_usedSpawnerArray)) then {
+						[_x,HVP_zhordeSize] call z_fnc_spawnZombies;
+						HVP_usedSpawnerArray pushBack _x;
 					};
-				} forEach playableUnits;
-				
-				_zIndex = 0;
-				{
-					for "_index" from 0 to (count _playerPosArray) do {
-						if (_x distance (_playerPosArray select _index) < 80 && (random 100) < HVP_zSpawnChance) then {
-							[_x,HVP_zhordeSize] call z_fnc_spawnZombies;
-							HVP_usedSpawnerArray pushback _x;
-							HVP_spawnerArray deleteAt _zIndex;
-						};
-					};
-					_zIndex = _zIndex + 1;
 				} forEach HVP_spawnerArray;
+				publicVariable "HVP_usedSpawnerArray";
 			} else {
-				_zIndex = 0;
-				{
-					for "_index" from 0 to (count HVP_usedSpawnerArray) do {
-						HVP_spawnerArray pushback _x;
-						HVP_usedSpawnerArray deleteAt _zIndex;
-					};
-					_zIndex = _zIndex + 1;
-				} forEach HVP_usedSpawnerArray;
+				if (isServer) then {
+					HVP_usedSpawnerArray = [];
+					publicVariable "HVP_usedSpawnerArray";
+				};
 			};
+		};
+		if ((count HVP_zombieArrayClient) > 0) then {
+			//Sun Damage
+			if (sunOrMoon isEqualTo 1 && fog < 0.5 && overcast < 0.7) then {
+				{
+					_x setDamage ((damage _x) + (random 0.1));
+				} forEach HVP_zombieArrayClient;
+			};
+			//remove dead or deleted Z's from client array
+			_toDelete = [];
+			{
+				if (!alive _x || isNull _x) then {
+					_toDelete pushBack _x;
+				};				
+			} forEach HVP_zombieArrayClient;
+			HVP_zombieArrayClient = HVP_zombieArrayClient - _toDelete;
 		};
 	};
 

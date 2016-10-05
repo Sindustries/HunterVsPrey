@@ -43,6 +43,8 @@ Sinspawn_lootList = [
 "FirstAidKit"
 ], [ //CLOTHING -- AUTO FILLED! see below
 
+], [ //VESTS -- AUTO FILLED! see below
+
 ], [ //BACKPACKS -- AUTO FILLED! see below
 
 ], [ //SPECIAL CLOTHING
@@ -79,43 +81,8 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 Sinspawn_lootList = [
 [ //WEAPONS	-- AUTO FILLED - See below
 
-], [ //MAGAZINES
-"10Rnd_50BW_Mag_F",
-"1Rnd_HE_Grenade_shell",
-"1Rnd_Smoke_Grenade_shell",
-"1Rnd_SmokeRed_Grenade_shell",
-"1Rnd_SmokeGreen_Grenade_shell",
-"1Rnd_SmokeYellow_Grenade_shell",
-"1Rnd_SmokePurple_Grenade_shell",
-"1Rnd_SmokeBlue_Grenade_shell",
-"1Rnd_SmokeOrange_Grenade_shell",
-"UGL_FlareWhite_F",
-"UGL_FlareGreen_F",
-"UGL_FlareRed_F",
-"UGL_FlareYellow_F",
-"UGL_FlareCIR_F",
-"HandGrenade",
-"APERSBoundingMine_Range_Mag",
-"DemoCharge_Remote_Mag",
-"APERSTripMine_Wire_Mag",
-"ClaymoreDirectionalMine_Remote_Mag",
-"SmokeShell",
-"SmokeShellRed",
-"SmokeShellGreen",
-"SmokeShellYellow",
-"SmokeShellPurple",
-"SmokeShellBlue",
-"SmokeShellOrange",
-"ACE_Chemlight_HiOrange",
-"ACE_Chemlight_HiRed",
-"ACE_Chemlight_HiWhite",
-"ACE_Chemlight_HiYellow",
-"ACE_HandFlare_White",
-"ACE_HandFlare_Red",
-"ACE_HandFlare_Green",
-"ACE_HandFlare_Yellow",
-"ACE_M84",
-"ACE_M14"
+], [ //MAGAZINES -- AUTO FILLED - See below
+
 ], [ //ITEMS
 "Rangefinder",
 "Binocular",
@@ -145,6 +112,8 @@ Sinspawn_lootList = [
 ], [ //MEDICAL
 "FirstAidKit"
 ], [ //CLOTHING	-- AUTO FILLED! see below
+
+], [ //VESTS -- AUTO FILLED! see below
 
 ], [ //BACKPACKS -- AUTO FILLED! see below
 
@@ -191,16 +160,54 @@ Sinspawn_lootList = [
 private ["_cfg","_exclusions","_i","_cfgName"];
 
 if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
+	private "_wepMagazines";
+	_wepMagazines = [];
+	//Weapons
 	private "_weapon";
+	_exclusions = ["bv_FlashLight"];
 	_cfg = (configFile >> "CfgWeapons");
 	for "_i" from 0 to ((count _cfg)-1) do {
 		if (isClass (_cfg select _i)) then {
 			_cfgName = configName (_cfg select _i);			
 			if (_cfgName isKindOf ["Rifle", configFile >> "CfgWeapons"] || _cfgName isKindOf ["Pistol", configFile >> "CfgWeapons"] || _cfgName isKindOf ["Launcher", configFile >> "CfgWeapons"]) then {
-				if ((getNumber ((_cfg select _i) >> "scope") == 2)) then {
-					_weapon = (getText ((_cfg select _i) >> "baseWeapon"));
-					if (_weapon != "") then {
-						(Sinspawn_lootList select 0) pushBackUnique _weapon;
+				if ((getNumber ((_cfg select _i) >> "scope") == 2) && !(_cfgName in _exclusions)) then {
+					_weapon = [_cfgName] call BIS_fnc_baseWeapon;
+					{
+						_wepMagazines pushBackUnique _x;
+						if (_x isKindOf ["CA_LauncherMagazine", configFile >> "CfgMagazines"]) then {
+							HVP_mines pushBackUnique (getText (configFile >> "CfgMagazines" >> _x >> "ammo"));
+						};
+					} forEach (getArray (configFile >> "CfgWeapons" >> _weapon >> "magazines"));
+					(Sinspawn_lootList select 0) pushBackUnique _weapon;
+				};
+			};
+		};
+	};
+	//Magazines/grenades
+	_cfg = (configFile >> "CfgMagazines");
+	for "_i" from 0 to ((count _cfg)-1) do {
+		if (isClass (_cfg select _i)) then {
+			_cfgName = configName (_cfg select _i);			
+			if (_cfgName isKindOf ["CA_Magazine", configFile >> "CfgMagazines"] && !(_cfgName isKindOf ["ATMine_Range_Mag", configFile >> "CfgMagazines"]) && !(_cfgName isKindOf ["SatchelCharge_Remote_Mag", configFile >> "CfgMagazines"]) && !(_cfgName isKindOf ["VehicleMagazine", configFile >> "CfgMagazines"])) then {
+				if ((getNumber ((_cfg select _i) >> "scope") == 2) && !(_cfgName in _wepMagazines)) then {
+					(Sinspawn_lootList select 1) pushBackUnique _cfgName;
+					if (_cfgName isKindOf ["CA_LauncherMagazine", configFile >> "CfgMagazines"]) then {
+						HVP_mines pushBackUnique (getText ((_cfg select _i) >> "ammo"));
+					};
+				};
+			};
+		};
+	};
+	//Mines
+	_cfg = (configFile >> "CfgMagazines");
+	for "_i" from 0 to ((count _cfg)-1) do {
+		if (isClass (_cfg select _i)) then {
+			_cfgName = configName (_cfg select _i);			
+			if (_cfgName isKindOf ["ATMine_Range_Mag", configFile >> "CfgMagazines"] || _cfgName isKindOf ["SatchelCharge_Remote_Mag", configFile >> "CfgMagazines"] || _cfgName isKindOf ["CA_LauncherMagazine", configFile >> "CfgMagazines"]) then {
+				if (!(_cfgName isKindOf ["VehicleMagazine", configFile >> "CfgMagazines"])) then {
+					if ((getNumber ((_cfg select _i) >> "scope") == 2) && !(_cfgName in _wepMagazines)) then {
+						(Sinspawn_lootList select 1) pushBackUnique _cfgName;
+						HVP_mines pushBackUnique (getText ((_cfg select _i) >> "ammo"));
 					};
 				};
 			};
@@ -210,24 +217,11 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 
 //Helmets
 _cfg = (configFile >> "CfgWeapons");
-_exclusions = ["H_HelmetO_ViperSP_hex_F","H_HelmetO_ViperSP_ghex_F"];
 for "_i" from 0 to ((count _cfg)-1) do {
 	if (isClass (_cfg select _i)) then {
 		_cfgName = configName (_cfg select _i);	
-		if (_cfgName isKindof ["HelmetBase", configFile >> "CfgWeapons"] && (getNumber ((_cfg select _i) >> "scope") == 2)) then {
-			if (!(_cfgName in (Sinspawn_lootList select 6)) || !(_cfgName in _exclusions)) then { 
-				(Sinspawn_lootList select 4) pushBackUnique _cfgName;
-			};
-		};
-	};
-};
-_cfg = (configFile >> "CfgWeapons");
-_exclusions = ["H_HelmetO_ViperSP_hex_F","H_HelmetO_ViperSP_ghex_F"];
-for "_i" from 0 to ((count _cfg)-1) do {
-	if (isClass (_cfg select _i)) then {
-		_cfgName = configName (_cfg select _i);			
-		if (_cfgName isKindOf ["H_HelmetB", configFile >> "CfgWeapons"] && (getNumber ((_cfg select _i) >> "scope") == 2)) then {
-			if (!(_cfgName in (Sinspawn_lootList select 6)) || !(_cfgName in _exclusions)) then { 
+		if (_cfgName isKindof ["HelmetBase", configFile >> "CfgWeapons"] || _cfgName isKindOf ["H_HelmetB", configFile >> "CfgWeapons"]) then {
+			if ((getNumber ((_cfg select _i) >> "scope") == 2) && !(_cfgName in (Sinspawn_lootList select 7)) && (count (getArray ((_cfg select _i) >> "subItems")) isEqualTo 0)) then { 
 				(Sinspawn_lootList select 4) pushBackUnique _cfgName;
 			};
 		};
@@ -247,13 +241,28 @@ for "_i" from 0 to ((count _cfg)-1) do {
 	};
 };
 
-//Vests
-_cfg = (configFile >> "CfgVehicles");
+//Glasses/Goggles/Masks
+_cfg = (configFile >> "CfgGlasses");
 for "_i" from 0 to ((count _cfg)-1) do {
 	if (isClass (_cfg select _i)) then {
 		_cfgName = configName (_cfg select _i);			
-		if (_cfgName isKindOf "Vest_Base_F" && (getNumber ((_cfg select _i) >> "scope") == 2)) then {
-			(Sinspawn_lootList select 4) pushBackUnique _cfgName;
+		if (_cfgName isKindOf ["None", configFile >> "CfgGlasses"] && (getNumber ((_cfg select _i) >> "scope") == 2)) then {
+			if (!(_cfgName in (Sinspawn_lootList select 6))) then {
+				(Sinspawn_lootList select 4) pushBackUnique _cfgName;
+			};
+		};
+	};
+};
+
+//Vests
+_cfg = (configFile >> "CfgWeapons");
+for "_i" from 0 to ((count _cfg)-1) do {
+	if (isClass (_cfg select _i)) then {
+		_cfgName = configName (_cfg select _i);			
+		if (_cfgName isKindOf ["Vest_NoCamo_Base", configFile >> "CfgWeapons"] || _cfgName isKindOf ["Vest_Camo_Base", configFile >> "CfgWeapons"]) then {
+			if ((getNumber ((_cfg select _i) >> "scope") == 2)) then {
+				(Sinspawn_lootList select 5) pushBackUnique _cfgName;
+			};
 		};
 	};
 };
@@ -264,20 +273,7 @@ for "_i" from 0 to ((count _cfg)-1) do {
 	if (isClass (_cfg select _i)) then {
 		_cfgName = configName (_cfg select _i);			
 		if (_cfgName isKindOf "Bag_Base" && (getNumber ((_cfg select _i) >> "scope") == 2) && (getText ((_cfg select _i) >> "faction") isEqualTo "Default")) then {
-			(Sinspawn_lootList select 5) pushBackUnique _cfgName;
-		};
-	};
-};
-
-//Glasses/Goggles/Masks
-_cfg = (configFile >> "CfgGlasses");
-for "_i" from 0 to ((count _cfg)-1) do {
-	if (isClass (_cfg select _i)) then {
-		_cfgName = configName (_cfg select _i);			
-		if (_cfgName isKindOf ["None", configFile >> "CfgGlasses"] && (getNumber ((_cfg select _i) >> "scope") == 2)) then {
-			if (!(_cfgName in (Sinspawn_lootList select 6))) then {
-				(Sinspawn_lootList select 4) pushBackUnique _cfgName;
-			};
+			(Sinspawn_lootList select 6) pushBackUnique _cfgName;
 		};
 	};
 };

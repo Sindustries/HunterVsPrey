@@ -15,6 +15,7 @@ _source setParticleRandom [0, [0, 0.1, 1], [0.1, 0, 0.1], 0, 0.1, [0, 0, 0, 0.1]
 _source setParticleParams [["\A3\data_f\ParticleEffects\Universal\Refract", 1, 0, 1], "", "Billboard", 1, 4, [0, 0, 0], [0, 0, 0.5], 9, 10, 7.9, 0.1, [0.6, 1, 0.9, 0.8], [[0.1, 0.1, 0.1, 1], [0.25, 0.25, 0.25, 0.5], [0.5, 0.5, 0.5, 0]], [0, 0.1, 0.2, 0.5, 0.1, 0.1], 0, 0, "", "", player]; 
 _source setDropInterval 0.1;  
 _source attachto [player,[0,0,0]];
+player setCaptive true;
 
 for "_timer" from 1 to _time do {
 	if ((velocityModelSpace player select 1) isEqualTo 0 && (stance player) != "PRONE") then {
@@ -32,6 +33,7 @@ for "_timer" from 1 to _time do {
 	sleep 1;
 };
 
+player setCaptive false;
 deleteVehicle _source;
 [player,false] remoteExec ["hideObject", 0];
 

@@ -5,17 +5,17 @@
 */
 //-----------------------------------
 
-private ["_pos"];
+private ["_pos","_radius"];
 _pos = _this select 0;
-if (player distance _pos <= 500) then {
+_radius = _this select 1;
+if (player distance _pos <= _radius) then {
 	enableCamShake true;
 	addCamShake [8, 16, 25];
 	playsound "Earthquake_01";
 	player forceWalk true;
 	sleep 7;
 	player forceWalk false;
-};
-if (player distance _pos > 500) then {
+} else {
 	enableCamShake true;
 	addCamShake [10, 16, 4];
 	playsound "Earthquake_01";

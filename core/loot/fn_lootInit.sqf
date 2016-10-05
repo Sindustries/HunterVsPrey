@@ -6,7 +6,6 @@ disableSerialization;
 */
 private ["_pos","_sizeMult","_size","_lootChance","_zAdjustHouse","_zAdjustWild","_safePlace","_gunsWithMag","_chanceWild"];
 if (!isServer) exitwith {};
-if (HVPLegacyMode == 1) exitWith {systemChat "Sinspawn:: Legacy Mode enabled, shutting down.."};
 //-----------------------------------
 //-CONFIG
 

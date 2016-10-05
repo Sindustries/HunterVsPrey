@@ -10,7 +10,7 @@ class HVP {
 	HVP_ZombieMode = true;				//Set to false to disable zombies
 	HVPDebugMode = false;				//Enable lots of debugging info
 	HVPStatMode = true;					//Set to false to disable stat saving
-	HVPantiCamp = 90;					//How long (SEC) players have until they are revealed on the map if camping
+	HVPantiCamp = 90;					//0:Disabled - How long (SEC) players have until they are revealed on the map if camping
 	
 /* ADAPTIVE TIME SETTINGS */
 
@@ -41,10 +41,10 @@ class HVP {
 	invincibilityMaxTime = 30;
 	cloakMinTime = 30;
 	cloakMaxTime = 60;
-	fatigueFreeMinTime = 30;		//Effects both Fatigue Free and Healing Aura
-	fatigueFreeMaxTime = 60;		//Same as above
-	nightVisionMinTime = 20;		//Effects both Night Vision Thief and Temporary Night Vision
-	nightVisionMaxTime = 40;		//Same as above
+	fatigueFreeMinTime = 30;			//Effects both Fatigue Free and Healing Aura
+	fatigueFreeMaxTime = 60;			//Same as above
+	nightVisionMinTime = 20;			//Effects both Night Vision Thief and Temporary Night Vision
+	nightVisionMaxTime = 40;			//Same as above
 	
 /* LOOT SETTINGS */
 
@@ -64,7 +64,8 @@ class HVP {
 		8,		//items
 		4,		//medical
 		10,		//clothing
-		5,		//backpacks
+		3,		//vests
+		6,		//backpacks
 		0,		//ghillies & other special clothing
 		0,		//night vision
 		0		//suppressors
@@ -76,8 +77,9 @@ class HVP {
 		12,		//items
 		4.5,	//medical
 		25,		//clothing
+		3,		//vests
 		8,		//backpacks
-		0.65,	//ghillies & other special clothing
+		0.33,	//ghillies & other special clothing
 		1.9,	//night vision
 		2.35	//suppressors
 	};	
@@ -93,7 +95,7 @@ class HVP {
 	HVPPhaseSpacing = 1;				//1:Breaks in Between, 2:Continuous
 	HVPZoneSizeMax = 0;					//0:Adaptive - Can be anything, note this will set the RADIUS not the DIAMETER
 
-	adaptiveZoneMinSize = 1000;			//Min Size of adaptive zone (RADIUS)
+	adaptiveZoneMinSize = 1250;			//Min Size of adaptive zone (RADIUS)
 	adaptiveZoneMaxSize = 4000;			//Max Size of adaptive zone (RADIUS)	
 	adaptiveZoneMinTime = 3;			//Min Time of adaptive zone (MIN)
 	adaptiveZoneMaxTime = 15;			//Max Time of adaptive zone (MIN)
@@ -121,8 +123,6 @@ class HVP {
 	HVP_music[] = { "AmbientTrack01_F_EXP","AmbientTrack01a_F_EXP","AmbientTrack01b_F_EXP","Fallout","Wasteland","MAD","BackgroundTrack01_F_EPC","AmbientTrack01_F_EPB" };
 	/* Gas Masks */
 	HVP_gasMasks[] = { "H_PilotHelmetFighter_B","H_PilotHelmetFighter_O","H_PilotHelmetFighter_I","H_CrewHelmetHeli_B","H_CrewHelmetHeli_O","H_CrewHelmetHeli_I","H_Shemag_khk","H_Shemag_tan","H_Shemag_olive","H_Shemag_olive_hs","H_ShemagOpen_khk","H_ShemagOpen_tan","H_RacingHelmet_1_F","H_RacingHelmet_2_F","H_RacingHelmet_3_F","H_RacingHelmet_4_F","H_RacingHelmet_1_black_F","H_RacingHelmet_1_blue_F","H_RacingHelmet_1_green_F","H_RacingHelmet_1_red_F","H_RacingHelmet_1_white_F","H_RacingHelmet_1_yellow_F","H_RacingHelmet_1_orange_F","G_Bandanna_aviator","G_Bandanna_beast","G_Bandanna_blk","G_Bandanna_khk","G_Bandanna_oli","G_Bandanna_shades","G_Bandanna_sport","G_Bandanna_tan","H_HelmetO_ViperSP_hex_F","H_HelmetO_ViperSP_ghex_F","G_Balaclava_TI_blk_F","G_Balaclava_TI_G_blk_F","G_Balaclava_TI_G_tna_F","G_Balaclava_TI_tna_F","Mask_M50","Mask_M40","Mask_M40_OD" };
-	/* Non-lethal mines */
-	HVP_mines[] = { "APERSTripMine_Wire_Ammo","APERSBoundingMine_Range_Ammo","APERSMine_Range_Ammo","ATMine_Range_Ammo","ClaymoreDirectionalMine_Remote_Ammo","SLAMDirectionalMine_Wire_Ammo" };
 	/* Red Team "knockout" guns */
 	HVP_redGuns[] = { "hgun_P07_F" };
 	HVP_redAmmo[] = { "B_9x21_Ball_Tracer_Red" };	
@@ -142,7 +142,7 @@ class SMS {
 };
 	
 class Z {
-	HVP_maxZombies = 100;				//Total number of alive zombies
+	HVP_maxZombies = 40;				//Total number of alive zombies (per player)
 	HVP_zhordeSize = 8; 				//Max num to spawn on each spawner
 	HVP_zSpawnChance = 75;				//Chance of a spawner spawning zombies (%)
 	HVP_zBossChance = 2.5;				//Chance of spawning a boss zombie (demon)

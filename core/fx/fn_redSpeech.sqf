@@ -43,7 +43,7 @@ SIN_fnc_say = {
 	_SFX = selectRandom _selection;	
 	_speaker = player;
 	//[_speaker,[_SFX,150]] remoteExec ["say", 0];
-	[_speaker,_SFX] remoteExec ["say", 0];
+	[_speaker,_SFX] remoteExec ["say3D", 0];
 	
 	sleep 120;
 	
