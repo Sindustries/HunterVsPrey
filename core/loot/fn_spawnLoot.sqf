@@ -136,7 +136,8 @@
 				};
 			};
 			
-			//SPECIAL CLOTHING
+			//SPECIAL CLOTHING -DISABLED
+			/*
 			if (_lootType isEqualTo 7) then {
 				_clothing = selectRandom (Sinspawn_lootList select 7);
 				_holder addItemCargoGlobal [_clothing, 1];
@@ -150,6 +151,7 @@
 					_debug setMarkerColor "ColorBlue";
 				};
 			};
+			*/
 			
 			//NIGHT VISION
 			if (_lootType isEqualTo 8) then {
