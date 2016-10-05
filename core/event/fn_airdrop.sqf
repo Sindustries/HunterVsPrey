@@ -14,7 +14,7 @@ _heliSelection = _this select 1;
 //-----------------------------------
 //-GET POS
 
-_heliSpawnPos = [_dropPos,(HVP_phase_radius + 1500),(HVP_phase_radius + 3000),0,1,0,0] call SIN_fnc_findPos;
+_heliSpawnPos = [_dropPos,(HVP_phase_radius + 1000),(HVP_phase_radius + 1200),0,1,0,0] call SIN_fnc_findPos;
 
 //-----------------------------------
 //-CREATE HELI
