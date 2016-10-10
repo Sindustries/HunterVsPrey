@@ -11,7 +11,8 @@ if (vehicle player != player) exitWith {};
 	_unit = _this select 0;
 	_duration = _this select 1;
 	if (_unit != player) exitWith {};
-	if ((_unit getVariable "SMS_isUnconscious") isEqualTo true) exitWith {};	
+	if (vehicle _unit != _unit) exitWith {};
+	if ((_unit getVariable "SMS_isUnconscious") isEqualTo true) exitWith {};
 	
 	_unit setVariable ["SMS_isUnconscious", true, true];	
 	_unit setUnconscious true;

@@ -10,6 +10,8 @@ if (vehicle player != player) exitWith {};
 
 	_unit = _this select 0;
 	
+	if (_unit != player) exitWith {};
+	if (vehicle _unit != _unit) exitWith {};
 	if ((_unit getVariable "SMS_isUnconscious") isEqualTo true) exitWith {};
 	_unit setVariable ["SMS_isUnconscious", true, true];
 	_unit setVariable ["SMS_inBleedout", true, true];
