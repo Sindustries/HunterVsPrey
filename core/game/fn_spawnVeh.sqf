@@ -61,6 +61,7 @@ if (isServer) then {
 			clearItemCargoGlobal _spawncar;
 			clearBackpackCargoGlobal _spawncar;
 			_spawncar setVehicleAmmo 0;
+			_spawncar disableTIEquipment true;
 		
 			if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 				[_spawncar] call HVP_fnc_airdropLoot;

@@ -69,6 +69,7 @@ if (isServer) then {
 					clearItemCargoGlobal _spawnBoat;
 					clearBackpackCargoGlobal _spawnBoat;
 					_spawnBoat setVehicleAmmo 0;
+					_spawnBoat disableTIEquipment true;
 					_spawnBoat allowDamage true;
 					
 					if (HVPDebugMode == 1) then {
