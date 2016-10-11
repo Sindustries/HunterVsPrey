@@ -64,11 +64,11 @@ if ((getPlayerUID player) in SIN_adminUIDs) then {
 player setVariable ["HVP_ready", false, true];
 waitUntil {time > 0};
 //-----------------------------------
+cutText ["", "BLACK FADED", 999];
+//-----------------------------------
 if (player isKindof "B_Survivor_F" && HVPGameType isEqualTo 1 || player isKindof "O_Survivor_F" && HVPGameType isEqualTo 1) exitWith {
 	["wrongslot",false] spawn BIS_fnc_endMission;
 };
-//-----------------------------------
-cutText ["", "BLACK FADED", 999];
 playMusic (selectRandom HVP_music);
 //-----------------------------------
 //-SET TIME OF DAY
@@ -315,14 +315,10 @@ if (_allUnits isEqualTo 1) then {
 	HVPTestMode = 0;
 };
 //-----------------------------------
-//-PLAYER SPAWN
+//-PREPARE PLAYER SPAWN
 cutText ["PREPARING TO SPAWN", "BLACK FADED", 999];
 player setVariable ["HVP_ready", true, true];
 player setVariable ["HVP_spawned", false, true];
-
-if (isServer) then {
-	call HVP_fnc_findSpawns;
-};
 //-----------------------------------
 //-WEATHER CONTROL
 if (isServer) then {
@@ -385,6 +381,9 @@ switch (HVPGameType) do {
 [] spawn HVP_fnc_toxicGas;
 [] call HVP_fnc_eventHandlers;
 //-----------------------------------
+if (isServer) then {
+	[] call HVP_fnc_findSpawns;
+};
 waitUntil {(player getVariable "HVP_spawned") isEqualTo true};
 //-----------------------------------
 playMusic "";
@@ -522,8 +521,20 @@ switch (HVPGameType) do {
 };
 //-----------------------------------
 //-VOICES
-if (side player isEqualTo EAST || HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3 && playerSide isEqualTo RESISTANCE) then {
-	[] call HVP_fnc_redSpeech;
+switch (HVPGameType) do {
+	case 1: {
+		if (playerSide isEqualTo EAST) then {
+			[] call HVP_fnc_redSpeech;
+		};
+	};
+	case 2: {
+		[] call HVP_fnc_redSpeech;
+	};
+	case 3: {
+		if (playerSide isEqualTo RESISTANCE) then {
+			[] call HVP_fnc_redSpeech;
+		};
+	};
 };
 //-----------------------------------
 //-ANTI CAMP
