@@ -75,7 +75,7 @@ player addEventHandler ["InventoryOpened", {
 			if ((getPos player) in _location) then {
 				_locStr = format["%1",_locName];
 			} else {
-				_locStr = format["Outskirts of %1",_locName];
+				_locStr = format["Near %1",_locName];
 			};
 			
 			//DISPLAY
