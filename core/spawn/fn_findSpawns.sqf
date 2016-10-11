@@ -16,7 +16,6 @@ _unconsciousChance = ["groundChanceUnconscious"] call HVP_fnc_getSetting;
 while {_readyPlayers != _allPlayers} do {
 	_allPlayers = {isPlayer _x && alive _x && side _x != sideLogic} count playableUnits;
 	_readyPlayers = {(_x getVariable "HVP_ready") isEqualTo true} count playableUnits;
-	hintSilent format["%1/%2",_readyPlayers,_allPlayers];
 	sleep 1;
 };
 waitUntil {_readyPlayers isEqualTo _allPlayers};
