@@ -108,6 +108,12 @@ class HVP {
 	phaseBreakTime = 0.5;				//Multiplier applied to active phase time to get inactive phase time	
 	phaseTimeDecay = 0.8;				//Multiplier applied to overall phase time after each phase
 	phaseSizeDecay = 0.8;				//Multiplier applied to phase size between each phase
+
+/* PROXIMITY SETTINGS */
+
+	PROXwarnDist = 300;					//Distance (METERS) that player's screen shakes to warn of nearby enemies
+	PROXstamEnableDist = 200;			//Distance (METERS) between players to enable stamina
+	PROXstamDrainDist = 100;			//Distance (METERS) between players to start draining stamina
 	
 /* MISC SETTINGS */	
 	
