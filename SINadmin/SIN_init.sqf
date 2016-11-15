@@ -117,7 +117,7 @@ SIN_fnc_Invisible = {
 };
 
 SIN_fnc_Invulnerable = {
-	_command = "Set Invulnerable";
+	_command = "God Mode";
 	_selectedplayer = SIN_player_list select lbCurSel 2100;
 	_target = _selectedplayer select 1;	
 	{
@@ -171,6 +171,7 @@ SIN_fnc_Reset = {
 				[_x,true] remoteExec ["enableStamina", _x];			
 				_x hideObjectGlobal false;
 				[_x,true] remoteExec ["enableSimulation", _x];
+				[_x,false] remoteExec ["setCaptive",_x];
 				[_command,(name _x)] call SIN_fnc_Message;
 			};
 		};
@@ -213,14 +214,26 @@ SIN_fnc_fullHeal = {
 		if (isPlayer _x) then {
 			if ((getPlayerUID _x) == _target) then {				
 				_x setDamage 0;
-				[_x,["SMS_bloodLevel", SMS_maxBlood]] remoteExec ["setVariable", _x];
-				[_x,["SMS_bleedingRate", 0]] remoteExec ["setVariable", _x];			
+				_x setVariable ["SMS_bleedingRate",0,true];				
 				[_command,(name _x)] call SIN_fnc_Message;				
 			};
 		};
 	} forEach allUnits;
 };
 
+SIN_fnc_setCaptive = {
+	_command = "Set Captive";
+	_selectedplayer = SIN_player_list select lbCurSel 2100;
+	_target = _selectedplayer select 1;	
+	{
+		if (isPlayer _x) then {
+			if ((getPlayerUID _x) == _target) then {
+				[_x,true] remoteExec ["setCaptive",_x];
+				[_command,(name _x)] call SIN_fnc_Message;				
+			};
+		};
+	} forEach allUnits;
+};
 
 //-----------------------------------
 [] spawn SIN_fnc_Key;
