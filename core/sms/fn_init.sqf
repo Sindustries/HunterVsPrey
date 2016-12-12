@@ -32,6 +32,7 @@ if (getText (configFile >> "cfgVehicles" >> typeOf player >> "role") isEqualTo "
 
 //-----------------------------------
 
+_unit setVariable ["SMS_bleeding", false];
 _unit setVariable ["SMS_bloodLevel", SMS_maxBlood];
 _unit setVariable ["SMS_bleedingRate", 0];
 _unit setVariable ["SMS_isUnconscious", false];
