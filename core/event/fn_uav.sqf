@@ -5,24 +5,36 @@
 */
 
 	private ["_uavSelection","_uavArea","_uavSpawnPos","_uavScanSize","_uavTime","_uav","_wp","_uavUpdate"];
-	
+
 	_uavSelection = _this select 0;
 	_uavArea = _this select 1;
 	_uavScanSize = _this select 2; //150-200
 	_uavTime = _this select 3;
 	_uavUpdate = _this select 4;
-	
+
 	_uavSpawnPos = [HVP_phase_pos,(HVP_phase_radius + 1000),(HVP_phase_radius + 2000),0,1,0,0] call SIN_fnc_findPos;
-	
+
 	_uav = createVehicle [(selectRandom _uavSelection),[_uavSpawnPos select 0,_uavSpawnPos select 1,100+(random 50)], [], 0, "FLY"];
 	createVehicleCrew _uav;
+
+	{
+		_x setPos [0,0,0];
+		_x disableAI "TARGET";
+		_x disableAI "AUTOTARGET";
+		_x allowfleeing 0;
+		_x hideObjectGlobal true;
+	} forEach crew _uav;
+
+	_uav disableAI "TARGET";
+	_uav disableAI "AUTOTARGET";
+	_uav allowfleeing 0;
 	_uav flyInHeight 30+(random 70);
-	
+
 	_wp = (group _uav) addWaypoint [[(_uavArea select 0),(_uavArea select 1), 0], 0];
 	_wp setWaypointType "LOITER";
 	_wp setWaypointLoiterType "CIRCLE_L";
 	_wp setWaypointLoiterRadius (_uavScanSize * 0.9);
-	
+
 	private["_uavMarkername", "_UAVMarker"];
 	_uavMarkername = format["UAV%1",(getPos _uav)];
 	_UAVMarker = createMarker [_uavMarkername,(getPos _uav)];
@@ -41,19 +53,27 @@
 		};
 		deleteMarker _UAVMarker;
 	};
-	
-	waitUntil {_uav distance2D _uavArea <= (_uavScanSize+500) || !alive _uav};	
-	if (!alive _uav) exitWith {};
-	
+
+	waitUntil {_uav distance2D _uavArea <= (_uavScanSize+500) || !alive _uav};
+	if (!alive _uav) exitWith {
+		{
+			deleteVehicle _x;
+		} forEach crew _uav;
+	};
+
 	{titleText ["UAV SCANNING IN PROGRESS", "PLAIN DOWN", 0.5];} remoteExec ["bis_fnc_call", 0];
 	"WARNING: A rogue UAV is scanning an area, shoot it down or avoid the area" remoteExec ["systemChat", 0],
 	["HUDuavLayer","HVPHUDuavImg"] remoteExec ["HVP_fnc_showEventIcon", 0];
-	
+
 	while {_uavTime > 0} do {
-		if (!alive _uav) exitWith {};
+		if (!alive _uav) exitWith {
+			{
+				deleteVehicle _x;
+			} forEach crew _uav;
+		};
 		if (_uav distance2D _uavArea <= _uavScanSize) then {
 			_playerCount = {isPlayer _x && alive _x && _x distance2D _uavArea <= _uavScanSize} count allUnits;
-		
+
 			if (_playerCount > 0) then {
 				{
 					if (isPlayer _x && alive _x && _x distance2D _uavArea <= _uavScanSize) then {
@@ -86,6 +106,9 @@
 							if (!alive _uav || _uav distance2D _uavArea > _uavScanSize || _trackedPlayer distance2D _uavArea > _uavScanSize || !alive _trackedPlayer) exitWith {
 								deleteMarker _aMarker;
 								("HUDuavLayer" call BIS_fnc_rscLayer) cutText ["","PLAIN"];
+								{
+									deleteVehicle _x;
+								} forEach crew _uav;
 							};
 						};
 					};
@@ -95,6 +118,9 @@
 		sleep _uavUpdate;
 		_uavTime = _uavTime - _uavUpdate;
 	};
-	
+
 	_uav setDamage 1;
 	["HUDuavLayer"] remoteExec ["HVP_fnc_hideEventIcon", 0];
+	{
+		deleteVehicle _x;
+	} forEach crew _uav;
