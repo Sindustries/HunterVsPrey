@@ -22,7 +22,7 @@ _scenarios = [
 _cfg = (configFile >> "CfgVehicles");
 for "_i" from 0 to ((count _cfg)-1) do {
 	if (isClass (_cfg select _i)) then {
-		_cfgName = configName (_cfg select _i);			
+		_cfgName = configName (_cfg select _i);
 		if (_cfgName isKindOf "Helicopter" && (getNumber ((_cfg select _i) >> "scope") == 2) && (getNumber ((_cfg select _i) >> "isUav")) == 0 && (getNumber ((_cfg select _i) >> "transportSoldier") >= 1)) then {
 			_heliSelection pushBackUnique _cfgName;
 		};
@@ -51,22 +51,22 @@ clearBackpackCargoGlobal _heli;
 clearWeaponCargoGlobal _heli;
 _heli flyInHeight 100+(random 50);
 _heli setDir ((getPos _heli) getDir _heliLandPos);
-	
-_heligroup = createGroup _side; 
+
+_heligroup = createGroup _side;
 _pilot = _heligroup createUnit ["B_Helipilot_F", [5,5,5], [], 0, "NONE"];
 _pilot setcaptive true;
 _pilot setskill 0;
 _pilot disableAI "TARGET";
 _pilot disableAI "AUTOTARGET";
-_heligroup setBehaviour "CARELESS"; 
-_heligroup setCombatMode "BLUE"; 	
+_heligroup setBehaviour "CARELESS";
+_heligroup setCombatMode "BLUE";
 _heligroup allowfleeing 0;
 _heli lock true;
 _heli allowDamage false;
 _pilot allowDamage false;
 _pilot assignAsDriver _heli;
- 
-_pilot moveindriver _heli;	
+
+_pilot moveindriver _heli;
 _pilot doMove _heliLandPos;
 _heligroup setSpeedMode "FULL";
 
@@ -77,7 +77,7 @@ _heligroup setSpeedMode "FULL";
 		sleep 0.01;
 	};
 };
-	
+
 //-----------------------------------
 //-MOVE PLAYER INTO CHOPPER
 
@@ -99,7 +99,7 @@ if (_scenario isEqualTo "Land") then {
 	waitUntil {_heli distance2D _helipad < 100 && unitReady _pilot};
 
 	_heli land "GET OUT";
-	waitUntil {isTouchingGround _heli && (velocityModelSpace _heli select 2) >= 0};
+	waitUntil {isTouchingGround _heli || (getPos _heli select 2) < 1};
 
 	{
 		if (isPlayer _x) then {
@@ -134,15 +134,15 @@ if (_scenario isEqualTo "Explode" || _scenario isEqualTo "Parachute") then {
 			_packHolder = createVehicle ["groundWeaponHolder", [0,0,0], [], 0, "can_collide"];
 			_packHolder addBackpackCargoGlobal [_class, 1];
 			waitUntil {animationState _unit == "HaloFreeFall_non"};
-			_packHolder attachTo [_unit,[-0.12,-0.02,-.74],"pelvis"]; 
+			_packHolder attachTo [_unit,[-0.12,-0.02,-.74],"pelvis"];
 			_packHolder setVectorDirAndUp [[0,-1,-0.05],[0,0,-1]];
 			waitUntil {(getPosATL _unit select 2) <= 100};
 			[_unit,["OpenParachute",_unit]] remoteExec ["action", _unit];
 			waitUntil {animationState _unit == "para_pilot"};
 			[] remoteExec ["HVP_fnc_parasmoke", _unit];
-			_packHolder attachTo [vehicle _unit,[-0.07,0.67,-0.13],"pelvis"]; 
+			_packHolder attachTo [vehicle _unit,[-0.07,0.67,-0.13],"pelvis"];
 			_packHolder setVectorDirAndUp [[0,-0.2,-1],[0,1,0]];
-			waitUntil {(getPos _unit select 2) < 1 || isTouchingGround _unit};		
+			waitUntil {(getPos _unit select 2) < 1 || isTouchingGround _unit};
 			detach _packHolder;
 			deleteVehicle _packHolder;
 			_unit addBackpack _class;
@@ -169,33 +169,33 @@ if (_scenario isEqualTo "Explode" || _scenario isEqualTo "Parachute") then {
 			[_unit] remoteExec ["ace_hearing_fnc_removeEarplugs", _unit];
 			_unit removeItem "ACE_earplugs";
 		};
-		
+
 	};
-	
+
 	waitUntil {_heli distance2D _helipad < 50+(random 250)};
-	
+
 	if (_scenario isEqualTo "Explode") then {
 		_heli setDamage 0.97;
 		_heli allowDamage true;
 		_pilot setDamage 1;
 	};
-	
+
 	sleep 4;
-	
+
 	if (_scenario isEqualTo "Parachute") then {
 		waitUntil {(speed _heli) < 3};
 		sleep 2;
 	};
-	
+
 	{
 		if (isPlayer _x) then {
 			[_x] spawn _saveMe;
 			_x action ["Eject", _heli];
 		};
 	} forEach crew _heli;
-	
+
 	if (_scenario isEqualTo "Parachute") then {
-		waitUntil {(count crew _heli) isEqualTo 1};	
+		waitUntil {(count crew _heli) isEqualTo 1};
 	};
 };
 
@@ -212,7 +212,7 @@ if (_scenario isEqualTo "Land" || _scenario isEqualTo "Parachute" || _scenario i
 		_posCheck = [_heliEndPos] call SIN_fnc_checkPos;
 		if (_posCheck) then {
 			_posFound = true;
-			_pilot doMove _heliEndPos;		
+			_pilot doMove _heliEndPos;
 		};
 	};
 
