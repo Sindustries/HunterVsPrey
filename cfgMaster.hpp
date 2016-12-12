@@ -141,7 +141,7 @@ class SMS {
 	SMS_bloodRegen = 5;					//How much blood to be replenished
 	SMS_bloodRegenRate = 5;				//How often to replenish (in sec)
 	SMS_bleedRate = 5;					//How often bleed ticks happen (in sec)
-	SMS_bleedRateMax = 10;				//Max bleed rate
+	SMS_bleedRateMax = 5;				//Max bleed rate
 	SMS_passOutNum = 0.40;				//At what % blood to pass out
 	SMS_passOutChance = 10;				//Chance of passing out each bleed tick
 	SMS_bleedOutNum = 0.10;				//At what % blood to enter bleedout
