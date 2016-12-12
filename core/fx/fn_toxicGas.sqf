@@ -26,8 +26,8 @@ if (HVPGameType isEqualTo 3) then {
 	};
 };
 
-if (side player isEqualTo RESISTANCE && HVPGameType isEqualTo 1) exitWith {};
-if (side player isEqualTo RESISTANCE && HVPGameType isEqualTo 3) exitWith {};
+if (playerSide isEqualTo RESISTANCE && HVPGameType isEqualTo 1) exitWith {};
+if (playerSide isEqualTo RESISTANCE && HVPGameType isEqualTo 3) exitWith {};
 //-----------------------------------
 //-OPEN LOOP
 while {true} do {
@@ -66,7 +66,7 @@ while {true} do {
 			sleep 5;
 		};
 	};
-	
+
 //-----------------------------------
 //-CLOSE LOOP
 };
