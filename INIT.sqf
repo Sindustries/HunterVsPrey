@@ -52,7 +52,7 @@ if ((getPlayerUID player) in SIN_adminUIDs) then {
 };
 //-----------------------------------
 //REMOVE FUEL FROM PUMPS
-{ 
+{
 	_x setFuelCargo 0;
 } forEach nearestObjects [HVPErrorPos, [
 	//Altis, Stratis
@@ -77,7 +77,7 @@ if (isServer) then {
 		setDate [2015, 1, 12, 0, 0];
 	};
 	if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
-		setDate [2015, 8, 11, floor(random 25), 0];	
+		setDate [2015, 8, 11, floor(random 25), 0];
 	};
 };
 //-----------------------------------
@@ -115,7 +115,7 @@ if (isServer) then {
 		if (HVPZoneSizeMax < _adaptiveZoneMinSize) then {
 			HVPZoneSizeMax = _adaptiveZoneMinSize;
 		};
-	};		
+	};
 	HVPPhaseTime = ((HVPZoneSizeMax * 2) / 5);
 	if (HVPPhaseTime > (_adaptiveZoneMaxTime * 60)) then {
 		HVPPhaseTime = (_adaptiveZoneMaxTime * 60);
@@ -144,7 +144,7 @@ if (!isServer) then {
 			systemChat "Waiting for Host to choose game location...";
 			waitUntil {HVP_Pos_Found isEqualTo true};
 			cutText ["SETTING GAME LOCATION...", "BLACK FADED", 999];
-			openMap [false, false]; 
+			openMap [false, false];
 			player removeitem "itemMap";
 		};
 	};
@@ -161,9 +161,9 @@ if (isServer) then {
 				if ((count _objects) >= 100) then {
 					_posFound = true;
 				};
-			};				
+			};
 			HVP_Pos_Found = true;
-			publicVariable "HVP_Pos_Found";		
+			publicVariable "HVP_Pos_Found";
 		};
 		case 1: {
 			player additem "itemMap";
@@ -269,8 +269,8 @@ cutText ["", "BLACK FADED", 999];
 //-ZONE & EVENT MANAGERS
 if (isServer) then {
 	[] spawn HVP_fnc_phaseInit;
+	[] spawn HVP_fnc_eventManager;
 };
-[] spawn HVP_fnc_eventManager;
 //-----------------------------------
 //-PLAYER LOADOUTS
 cutText ["GEARING UP", "BLACK FADED", 999];
@@ -360,7 +360,7 @@ switch (HVPGameType) do {
 		if (playerSide isEqualTo resistance) then {
 			player setCaptive true;
 		};
-		
+
 		if (isServer) then {
 			_grp = createGroup WEST;
 			sleep 1;
@@ -372,7 +372,7 @@ switch (HVPGameType) do {
 						[_x] joinSilent _grp;
 					};
 				};
-			} forEach playableUnits;	
+			} forEach playableUnits;
 		};
 	};
 };
@@ -402,7 +402,7 @@ cutText ["", "BLACK IN", 5];
 	("HUDGUILayer" call BIS_fnc_rscLayer) cutRsc ["HVP_HUD","PLAIN",-1,false];
 	("HUDAbilLayer" call BIS_fnc_rscLayer) cutRsc ["HVPHUD_ability","PLAIN",-1,false];
 	("HUDPhaseLayer" call BIS_fnc_rscLayer) cutRsc ["HVPHUD_phase","PLAIN",-1,false];
-	
+
 	if (HVPPhaseType isEqualTo 2) then {
 		uiNameSpace getVariable "HVP_HUD_AbilTitle" ctrlSetText "WAITING";
 		uiNameSpace getVariable "HVP_HUD_AbilTitle" ctrlSetTextColor [0, 0, 1, 1];
@@ -485,7 +485,7 @@ if (HVPDebugMode isEqualTo 0) then {
 	if (side player isEqualTo EAST && HVPGameType isEqualTo 1) then {
 		player action ["nvGoggles", player];
 	};
-	
+
 	sleep 8;
 	[] spawn HVP_fnc_intro;
 	[] spawn HVP_fnc_sideTasks;
