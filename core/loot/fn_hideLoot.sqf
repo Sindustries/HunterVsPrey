@@ -2,16 +2,16 @@
 	fn_hideLoot
 	Author: Sinbane
 	Hides loot greater than a radius around the player
-	
+
 */
-private ["_cacheCount"];	
+private ["_cacheCount"];
 //-----------------------------------
 
 _cacheCount = 0;
 
-while {true} do {	
-	sleep 20;	
-	
+while {true} do {
+	sleep 6;
+
 	{
 		if (isNil {_x getVariable "ltCached"}) then {
 			_x setVariable ["ltCached", false];
