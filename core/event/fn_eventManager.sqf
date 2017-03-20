@@ -29,7 +29,7 @@ _airDropHeliSelection = [];
 _cfg = (configFile >> "CfgVehicles");
 for "_i" from 0 to ((count _cfg)-1) do {
 	if (isClass (_cfg select _i)) then {
-		_cfgName = configName (_cfg select _i);			
+		_cfgName = configName (_cfg select _i);
 		if (_cfgName isKindOf "Helicopter" && (getNumber ((_cfg select _i) >> "scope") == 2) && (getNumber ((_cfg select _i) >> "isUav")) == 0 && (getNumber ((_cfg select _i) >> "slingLoadMaxCargoMass") >= 500)) then {
 			_airDropHeliSelection pushBackUnique _cfgName;
 		};
@@ -41,7 +41,7 @@ _heliCrashSelection = [];
 _cfg = (configFile >> "CfgVehicles");
 for "_i" from 0 to ((count _cfg)-1) do {
 	if (isClass (_cfg select _i)) then {
-		_cfgName = configName (_cfg select _i);			
+		_cfgName = configName (_cfg select _i);
 		if (_cfgName isKindOf "helicopter" && (getNumber ((_cfg select _i) >> "scope") == 2) && (getNumber ((_cfg select _i) >> "isUav")) == 0) then {
 			_heliCrashSelection pushBackUnique _cfgName;
 		};
@@ -53,7 +53,7 @@ _nukeHeliSelection = [];
 _cfg = (configFile >> "CfgVehicles");
 for "_i" from 0 to ((count _cfg)-1) do {
 	if (isClass (_cfg select _i)) then {
-		_cfgName = configName (_cfg select _i);			
+		_cfgName = configName (_cfg select _i);
 		if (_cfgName isKindOf "Helicopter" && (getNumber ((_cfg select _i) >> "scope") == 2) && (getNumber ((_cfg select _i) >> "isUav")) == 0 && (getNumber ((_cfg select _i) >> "slingLoadMaxCargoMass") >= 5000)) then {
 			_nukeHeliSelection pushBackUnique _cfgName;
 		};
@@ -65,7 +65,7 @@ _uavSelection = [];
 _cfg = (configFile >> "CfgVehicles");
 for "_i" from 0 to ((count _cfg)-1) do {
 	if (isClass (_cfg select _i)) then {
-		_cfgName = configName (_cfg select _i);			
+		_cfgName = configName (_cfg select _i);
 		if (_cfgName isKindOf "Air" && (getNumber ((_cfg select _i) >> "scope") == 2) && (getNumber ((_cfg select _i) >> "isUav")) == 1) then {
 			_uavSelection pushBackUnique _cfgName;
 		};
@@ -89,7 +89,7 @@ for "_i" from 0 to ((count _cfg)-1) do {
 			["event",(_this select 0),_dropPos] call HVP_fnc_airdrop;
 		};
 	};
-	
+
 //-----------------------------------
 //-DROP POD
 
@@ -111,7 +111,7 @@ for "_i" from 0 to ((count _cfg)-1) do {
 	[_heliCrashSelection] spawn {
 		private "_helicrash_pos";
 		waitUntil {sleep 5; HVP_phase_num >= 1};
-		
+
 		while {true} do {
 			sleep HVP_rareEvent;
 			if (HVP_suddenDeath) exitWith {};
@@ -124,9 +124,9 @@ for "_i" from 0 to ((count _cfg)-1) do {
 //-ARTILLERY
 
 	private ["_vehCount","_missileCount"];
-	
-	_vehCount = 4;
-	_missileCount = 12;
+
+	_vehCount = 8;			//How many MLRS to spawn
+	_missileCount = 6;		//How many rockets fired per MLRS (MAX: 12)
 
 	[_vehCount,_missileCount] spawn {
 		private ["_artyPos","_vehCount","_missileCount"];
@@ -141,16 +141,16 @@ for "_i" from 0 to ((count _cfg)-1) do {
 			[_artyPos,_vehCount,_missileCount] call HVP_fnc_artillery;
 		};
 	};
-	
+
 //-----------------------------------
 //-CHEMICAL ATTACK
 
 	[] spawn {
 		private ["_size","_gasCount","_chemPos"];
 		while {true} do {
-			sleep HVP_commonEvent;			
+			sleep HVP_commonEvent;
 			_size = (HVP_Phase_Radius * 0.05);
-			_gasCount = (_size / 1.25);			
+			_gasCount = (_size / 1.25);
 			_chemPos = [HVP_phase_pos,0,(HVP_phase_radius * 0.9),0,0,0,0] call SIN_fnc_findPos;
 			[_chemPos,_size,_gasCount] call HVP_fnc_chemAttack;
 		};
@@ -162,42 +162,42 @@ for "_i" from 0 to ((count _cfg)-1) do {
 	[] spawn {
 		private ["_quakePos"];
 		waitUntil {sleep 5; HVP_phase_num >= 1};
-		
+
 		while {true} do {
-			sleep HVP_uncommonEvent;			
+			sleep HVP_uncommonEvent;
 			_quakePos = [HVP_phase_pos,0,(HVP_phase_radius * 0.9),0,1,0,0] call SIN_fnc_findPos;
 			[_quakePos,(HVP_phase_radius * 0.2)] call HVP_fnc_quake;
 		};
 	};
-	
+
 //-----------------------------------
-//-NUKE	
-	
+//-NUKE
+
 	[_nukeHeliSelection] spawn {
 		private ["_nukePos","_nuke"];
 		waitUntil {sleep 5; HVP_phase_num >= 1};
-		
+
 		while {true} do {
 			sleep HVP_rareEvent;
-			if (HVP_suddenDeath) exitWith {};			
+			if (HVP_suddenDeath) exitWith {};
 			_nukePos = [HVP_phase_pos,0,(HVP_phase_radius * 0.5),0,0,0,0] call SIN_fnc_findPos;
 			[(_this select 0),_nukePos,(HVP_phase_radius * 0.33),true,true,true,true] call HVP_fnc_nuke;
 
 			sleep HVP_uncommonEvent;
 		};
 	};
-	
+
 //-----------------------------------
 //-UAV
 
 	[_uavSelection] spawn {
-		private ["_uavScanSize","_uavTime","_uavUpdate","_uavScanPos"];		
-		while {true} do {		
+		private ["_uavScanSize","_uavTime","_uavUpdate","_uavScanPos"];
+		while {true} do {
 			sleep HVP_rareEvent;
 			if (HVP_suddenDeath) exitWith {};
 			_uavScanSize = (HVP_Phase_Radius * 0.2);
 			_uavTime = ((60*2)+(random(60*3)));
-			_uavUpdate = 3;			
+			_uavUpdate = 3;
 			_uavScanPos = [HVP_phase_pos,0,(HVP_phase_radius * 0.9),0,0,0,0] call SIN_fnc_findPos;
 			[(_this select 0),_uavScanPos,_uavScanSize,_uavTime,_uavUpdate] call HVP_fnc_uav;
 		};
