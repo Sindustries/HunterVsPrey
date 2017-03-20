@@ -21,7 +21,7 @@ if (HVPGameType isEqualTo 1) then {
 	_cfg = (configFile >> "CfgVehicles");
 	for "_i" from 0 to ((count _cfg)-1) do {
 		if (isClass (_cfg select _i)) then {
-			_cfgName = configName (_cfg select _i);			
+			_cfgName = configName (_cfg select _i);
 			if (_cfgName isKindOf "Car" && (getNumber ((_cfg select _i) >> "scope") isEqualTo 2) && (getNumber ((_cfg select _i) >> "isUav")) isEqualTo 0 && (getText ((_cfg select _i) >> "faction")) isEqualTo "CIV_F") then {
 				_carSel pushBackUnique _cfgName;
 			};
@@ -32,7 +32,7 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 	_cfg = (configFile >> "CfgVehicles");
 	for "_i" from 0 to ((count _cfg)-1) do {
 		if (isClass (_cfg select _i)) then {
-			_cfgName = configName (_cfg select _i);			
+			_cfgName = configName (_cfg select _i);
 			if (_cfgName isKindOf "Car" && (getNumber ((_cfg select _i) >> "scope") isEqualTo 2) && (getNumber ((_cfg select _i) >> "isUav")) isEqualTo 0) then {
 				_carSel pushBackUnique _cfgName;
 			};
@@ -47,12 +47,12 @@ if (isServer) then {
 	_counter = _maxNumVeh;
 	_errorCount = 0;
 	while {_vehCreated < _maxNumVeh} do {
-		
-		_spawnPos = [HVP_pos,0,(HVPZoneSizeMax * 1.25),0.25,0,0,0] call BIS_fnc_findSafePos;
+
+		_spawnPos = [HVP_pos,0,(HVPZoneSizeMax * 4),0.25,0,0,0] call BIS_fnc_findSafePos;
 		_posCheck = [_spawnPos] call SIN_fnc_checkPos;
 		_distCheck = [_spawnPos,_usedPosArray,_minDistSpawn] call SIN_fnc_checkDist;
 		if (_posCheck && _distCheck) then {
-			_spawncar = (selectRandom _carSel) createVehicle _spawnpos;			
+			_spawncar = (selectRandom _carSel) createVehicle _spawnpos;
 			_spawncar allowDamage false;
 			_spawncar setDir (random 360);
 			_spawncar setfuel 0.2 + (random 0.5);
@@ -62,17 +62,17 @@ if (isServer) then {
 			clearBackpackCargoGlobal _spawncar;
 			_spawncar setVehicleAmmo 0;
 			_spawncar disableTIEquipment true;
-		
+
 			if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 				[_spawncar] call HVP_fnc_airdropLoot;
 			};
 			_spawncar setPos (getPos _spawncar);
 			_spawncar allowDamage true;
-			
+
 			if (HVPZombieMode isEqualTo 1 && (random 100) < 75) then {
 				[_spawnPos] spawn Z_fnc_setSpawn;
 			};
-			
+
 			_spawncar addEventHandler ["HandleDamage", {
 				[(_this select 0),(_this select 1),(_this select 2),(_this select 3),(_this select 4)] spawn {
 					private ["_veh","_selectionName","_damage","_source","_projectile"];
@@ -81,7 +81,7 @@ if (isServer) then {
 					_damage = _this select 2;
 					_source = _this select 3;
 					_projectile = _this select 4;
-					
+
 					if (_projectile in HVP_mines) then {
 						_damage = 0;
 					} else {
@@ -89,7 +89,7 @@ if (isServer) then {
 					};
 				};
 			}];
-			
+
 			if (HVPDebugMode isEqualTo 1) then {
 				_markername = format["car%1",_vehCreated];
 				_markerstr = createMarker [str(_markername), getPos _spawncar];
@@ -99,7 +99,7 @@ if (isServer) then {
 				str(_markername) setMarkerColor "ColorBlufor";
 				str(_markername) setMarkerAlpha 0.8;
 			};
-					
+
 			_vehCreated = _vehCreated + 1;
 			_usedPosArray pushBackUnique _spawnpos;
 			sleep 0.01;
