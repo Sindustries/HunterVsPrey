@@ -3,7 +3,7 @@
 	By Sinbane
 	Loads events and keeps them running
 */
-private ["_time","_airDropHeliSelection","_heliCrashSelection","_nukeHeliSelection","_uavSelection","_cfg","_i","_cfgName"];
+private ["_time","_airDropHeliSelection","_heliCrashSelection","_nukeHeliSelection","_uavSelection","_carSel","_cfg","_i","_cfgName"];
 //-----------------------------------
 //-DEFINABLE
 
