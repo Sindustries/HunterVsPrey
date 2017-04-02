@@ -151,7 +151,7 @@ class SMS {
 };
 
 class Z {
-	HVP_maxZombies = 40;				//Total number of alive zombies (per player)
+	HVP_maxZombies = 16;				//Total number of alive zombies (per player)
 	HVP_zhordeSize = 8; 				//Max num to spawn on each spawner
 	HVP_zSpawnChance = 75;				//Chance of a spawner spawning zombies (%)
 	HVP_zBossChance = 2.5;				//Chance of spawning a boss zombie (demon)
