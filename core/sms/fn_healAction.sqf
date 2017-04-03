@@ -8,14 +8,14 @@
 	private ["_unit","_healAction"];
 
 	_unit = _this select 0;
-	
+
 	while {alive _unit} do {
-	
-		waitUntil {sleep 3; (damage _unit) >= 0 && (damage _unit) < 0.25};
-		
-		if ((damage _unit) >= 0 && (damage _unit) < 0.25 && ("FirstAidKit" in (items _unit)) && vehicle player isEqualTo player) then {
+
+		waitUntil {sleep 3; (damage _unit) >= 0 && (damage _unit) < 0.1};
+
+		if ((damage _unit) >= 0 && (damage _unit) < 0.1 && ("FirstAidKit" in (items _unit)) && vehicle player isEqualTo player) then {
 			SMS_healAction = true;
-			_healAction = _unit addAction ["Treat Yourself", {
+			_healAction = _unit addAction ["Stop Bleeding", {
 				private ["_unit","_damage"];
 				_unit = _this select 0;
 				_damage = (damage _unit);
@@ -33,7 +33,7 @@
 					SMS_healAction = false;
 					_unit removeAction _healAction;
 				};
-				if ((damage _unit) isEqualTo 0 || (damage _unit) > 0.25) then {
+				if ((damage _unit) isEqualTo 0 || (damage _unit) > 0.1) then {
 					SMS_healAction = false;
 					_unit removeAction _healAction;
 				};
