@@ -120,9 +120,9 @@ if (_marksman) then {
 if (_APEX) then {
 	_headgearAPEX = ["randomHeadgearAPEX"] call HVP_fnc_getSetting;
 	_uniformSelAPEX = ["randomUniformsAPEX"] call HVP_fnc_getSetting;
-	
+
 	{_uniformSel pushBack _x;} foreach _uniformSelAPEX;
-	
+
 	if (playerSide isEqualTo resistance && HVPGameType isEqualTo 1) then {
 		_mercUniformSelAPEX = ["randomMercUniformAPEX"] call HVP_fnc_getSetting;
 	};
@@ -180,7 +180,7 @@ private ["_mainWeapon","_mainWeaponAccessories","_mainWeaponAmmo","_sideWeapon",
 
 _mainWeapon = player getVariable "loadoutMainWeapon";
 _mainWeaponAccessories = player getVariable "loadoutMainWeaponAccessories";
-_mainWeaponAmmo = player getVariable "loadoutMainWeaponAmmo"; 
+_mainWeaponAmmo = player getVariable "loadoutMainWeaponAmmo";
 _sideWeapon = player getVariable "loadoutSideWeapon";
 _sideWeaponAccessories = player getVariable "loadoutSideWeaponAccessories";
 _sideWeaponAmmo = player getVariable "loadoutSideWeaponAmmo";
@@ -241,12 +241,12 @@ if (count _linkedItems > 0) then {
 if (count _inventoryItems > 0) then {
 	for "_i" from 0 to (count _inventoryItems - 1) do {
 		_item = (_inventoryItems select _i);
-		if (_item isEqualTo "FirstAitKit" && (random 100) < _medChance) then {
+		if (_item isEqualTo "FirstAidKit" && (random 100) < _medChance) then {
 			player addItem _item;
 		} else {
 			player addItem _item;
 		};
-	};	
+	};
 };
 //-----------------------------------
 //-INVENTORY MAGAZINES
@@ -255,7 +255,7 @@ if (count _inventoryMagazines > 0) then {
 		if ((random 100) < _ammoChance) then {
 			player addMagazines [(_inventoryMagazines select _i), floor(random 3)+1];
 		};
-	};	
+	};
 };
 //-----------------------------------
 //-WEAPON AMMO
