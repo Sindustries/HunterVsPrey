@@ -73,12 +73,12 @@ class HVP {
 	};
 
 	CRU_lootChance[] = {	//Crucible & Predator mode
-		20,		//weapons
+		33,		//weapons
 		45,		//magazines
 		12,		//items
 		4.5,	//medical
 		25,		//clothing
-		5,		//vests
+		10,		//vests
 		8,		//backpacks
 		0.33,	//ghillies & other special clothing
 		3,		//night vision
