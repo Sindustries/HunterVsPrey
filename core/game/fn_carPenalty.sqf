@@ -15,14 +15,14 @@ private ["_inCar","_car","_driver","_fuel"];
 
 	waitUntil {sleep 3; vehicle player != player || !alive player};
 	if (!alive player) exitWith {};
-	
+
 	if (vehicle player isKindOf "Ship" && HVPGameType isEqualTo 2 || vehicle player isKindOf "Ship" && HVPGameType isEqualTo 3) then {
 		_inCar = false;
 		waitUntil {sleep 3; vehicle player isEqualTo player};
 	};
-	if (vehicle player isKindOf "Land") then {		
+	if (vehicle player isKindOf "Land") then {
 		_inCar = true;
-		_car = vehicle player;		
+		_car = vehicle player;
 		while {_inCar} do {
 			if (!alive player) exitWith {};
 			if (vehicle player isEqualTo player) then {
@@ -31,10 +31,10 @@ private ["_inCar","_car","_driver","_fuel"];
 				};
 				_inCar = false;
 			};
-			
-			_driver = driver _car;				
+
+			_driver = driver _car;
 			_fuel = fuel _car;
-			
+
 			if (_fuel < 0.05) then {
 				[_car,0] remoteExec ["setFuel", 0];
 			};
@@ -49,10 +49,10 @@ private ["_inCar","_car","_driver","_fuel"];
 			if (_driver isEqualTo player || isNull _driver) then {
 				[_car,_fuel - 0.01] remoteExec ["setFuel", 0];
 			};
-			sleep 1;
+			sleep 2;
 		};
-	};	
-	
+	};
+
 //-----------------------------------
 //-CLOSE LOOP
 };
