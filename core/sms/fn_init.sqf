@@ -41,6 +41,6 @@ _unit setVariable ["SMS_inBleedout", false];
 [_unit] call SMS_fnc_handleDamage;
 [_unit] call SMS_fnc_handleHeal;
 [_unit] spawn SMS_fnc_bloodLevel;
-[_unit] spawn SMS_fnc_healAction;
+//[_unit] spawn SMS_fnc_healAction;
 
 //-----------------------------------
