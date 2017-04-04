@@ -76,7 +76,7 @@ class HVP {
 		33,		//weapons
 		45,		//magazines
 		12,		//items
-		4.5,	//medical
+		8,	//medical
 		25,		//clothing
 		10,		//vests
 		8,		//backpacks
