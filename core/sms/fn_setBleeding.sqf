@@ -37,6 +37,7 @@
 				_largeSplash = createSimpleObject ["a3\characters_f\blood_splash.p3d", getPosWorld _unit];
 				_largeSplash setDir random 360;
 			};*/
+
 			if ((_unit getVariable "SMS_bloodLevel") < (SMS_maxBlood * SMS_passOutNum) && (_unit getVariable "SMS_isUnconscious") isEqualTo false) then {
 				if ((random 100) < SMS_passOutChance) then {
 					[_unit,30] call SMS_fnc_setUnconscious;
