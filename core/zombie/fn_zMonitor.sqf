@@ -7,12 +7,12 @@ private ["_zIndex","_index","_toDelete"];
 //-----------------------------------
 
 	while {true} do {
-		sleep 10;	
-		
+		sleep 5;
+
 		if (HVP_phase_active isEqualTo "true" && alive player) then {
 			if (sunOrMoon isEqualTo 0 || fog >= 0.5 || overcast >= 0.7) then {
 				{
-					if (_x distance player < 80 && (random 100) < HVP_zSpawnChance && !(_x in HVP_usedSpawnerArray)) then {
+					if (_x distance player < 80 && (velocityModelSpace player select 1) > 3 && (random 100) < HVP_zSpawnChance && !(_x in HVP_usedSpawnerArray)) then {
 						[_x,HVP_zhordeSize] call z_fnc_spawnZombies;
 						HVP_usedSpawnerArray pushBack _x;
 					};
@@ -37,7 +37,7 @@ private ["_zIndex","_index","_toDelete"];
 			{
 				if (!alive _x || isNull _x) then {
 					_toDelete pushBack _x;
-				};				
+				};
 			} forEach HVP_zombieArrayClient;
 			HVP_zombieArrayClient = HVP_zombieArrayClient - _toDelete;
 		};
