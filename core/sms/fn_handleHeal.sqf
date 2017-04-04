@@ -13,5 +13,6 @@
 			SMS_bleedingParts = [];
 			//if ((_unit getVariable "SMS_bleedingRate") isEqualTo 0) exitWith {};
 			_unit setVariable ["SMS_bleedingRate", 0];
+			_unit setBleedingRemaining 0;
 		};
 	}];

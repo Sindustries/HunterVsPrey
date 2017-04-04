@@ -26,7 +26,9 @@
 
 			_unit setVariable ["SMS_bloodLevel", (_unit getVariable "SMS_bloodLevel")-(_unit getVariable "SMS_bleedingRate")];
 
-			if ((damage _unit) > 0 && (damage _unit) < 0.6 && (random 100) < 33) then {
+			_unit setBleedingRemaining 120;
+
+			/*if ((damage _unit) > 0 && (damage _unit) < 0.6 && (random 100) < 33) then {
 				_smallSplash = createSimpleObject ["a3\characters_f\data\slop_00.p3d", getPosWorld _unit];
 				_smallSplash setDir random 360;
 				_smallSplash setVectorUp surfaceNormal getPosWorld _smallSplash;
@@ -34,7 +36,7 @@
 			if ((damage _unit) >= 0.6 && (random 100) < 33) then {
 				_largeSplash = createSimpleObject ["a3\characters_f\blood_splash.p3d", getPosWorld _unit];
 				_largeSplash setDir random 360;
-			};
+			};*/
 			if ((_unit getVariable "SMS_bloodLevel") < (SMS_maxBlood * SMS_passOutNum) && (_unit getVariable "SMS_isUnconscious") isEqualTo false) then {
 				if ((random 100) < SMS_passOutChance) then {
 					[_unit,30] call SMS_fnc_setUnconscious;
