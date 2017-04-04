@@ -16,7 +16,7 @@ class HVP_Core {
 		class getSettings {};
 		class updateProgressBar {};
 	};
-	
+
 	class loot {
 		file = "core\loot";
 		class airdropLoot {};
@@ -26,7 +26,7 @@ class HVP_Core {
 		class spawnLoot {};
 		class hideLoot {};
 	}
-	
+
     class spawn {
         file = "core\spawn";
         class findSpawns {};
@@ -34,7 +34,7 @@ class HVP_Core {
 		class heliSpawn {};
         class podSpawn {};
     };
-	
+
 	class game {
 		file = "core\game";
 		class antiCamp {};
@@ -58,7 +58,7 @@ class HVP_Core {
 		class tpw_animals {};
 		class tpw_core {};
 	};
-	
+
 	class events {
 		file = "core\event";
 		class eventManager {};
@@ -74,7 +74,7 @@ class HVP_Core {
 		class dropPod {};
 		class paranormal {};
 	};
-	
+
 	class paranormal {
 		file = "core\event\paranormal";
 		class paraChat {};
@@ -83,7 +83,7 @@ class HVP_Core {
 		class paraGhost {};
 		class paraTeleport {};
 	}
-	
+
 	class abilitycore {
 		file = "core\ability";
 		class abilitymanager {};
@@ -92,7 +92,7 @@ class HVP_Core {
 		class useAbility {};
 		class useAbilityKey {};
 	};
-	
+
 	class abilityClient {
 		file = "core\ability\client";
 		class artilleryAbil {};
@@ -109,9 +109,9 @@ class HVP_Core {
 		class nightVisionThiefAbil {};
 		class revealAbil {};
 		class supplyDropAbil {};
-		class temporaryNightVisionAbil {};		
+		class temporaryNightVisionAbil {};
 	};
-	
+
 	class abilityFX {
 		file = "core\ability\effects";
 		class banishAbilEffect {};
@@ -125,7 +125,7 @@ class HVP_Core {
 		class nightVisionThiefAbilEffect {};
 		class revealAbilEffect {};
 	};
-	
+
 	class FX {
 		file = "core\fx";
 		class knockOutGun {};
@@ -156,6 +156,7 @@ class Zombies {
 		class spawnZombies {};
 		class zDeleter {};
 		class zMonitor {};
+		class zCamo {};
 	};
 };
 
@@ -173,6 +174,6 @@ class SMS {
 		class setUnconscious {};
 	}
 }
-	
+
 
 

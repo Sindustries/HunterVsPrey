@@ -17,6 +17,7 @@ HVP_usedSpawnerArray = [];
 HVP_zombies = [];
 HVP_zombieArray = [];
 HVP_zombieArrayClient = [];
+HVP_zCamoApplied = false;
 
 //-----------------------------------
 //-GET ZOMBIES
@@ -29,7 +30,7 @@ if (isServer) then {
 	_cfg = (configFile >> "CfgVehicles");
 	for "_i" from 0 to ((count _cfg)-1) do {
 		if (isClass (_cfg select _i)) then {
-			_cfgName = configName (_cfg select _i);			
+			_cfgName = configName (_cfg select _i);
 			if (_cfgName isKindOf "Man" && (getNumber ((_cfg select _i) >> "scope") == 2) && (getText ((_cfg select _i) >> "faction") isEqualTo "Ryanzombiesfaction") && (!(_cfgName in _exclusions)) &&
 			(!(_cfgName in HVP_BossZombies))) then {
 				HVP_zombies pushBackUnique _cfgName;
@@ -59,5 +60,11 @@ if (isServer) then {
 		[] spawn z_fnc_zDeleter;
 	};
 };
+
+//-----------------------------------
+//-ZOMBIE CAMO ACTION
+
+zCamo_action = [player addAction["Zombie Camouflage",z_fnc_zCamo,"",0,false,false,"",'
+!isNull cursorObject && player distance cursorObject < 3.5 && (typeOf cursorObject) in ((HVP_zombies)+(HVP_BossZombies)) && vehicle player isEqualTo player && HVP_zCamoApplied isEqualTo false']];
 
 //-----------------------------------
