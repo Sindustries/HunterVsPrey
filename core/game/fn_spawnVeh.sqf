@@ -9,6 +9,7 @@ private ["_maxNumVeh","_carSel","_spawnPos","_posCheck","_car","_spawnCar","_mar
 //-VARIABLES
 
 _minDistSpawn = ["vehicleCarMinDist"] call HVP_fnc_getSetting;
+_lootChance = ["vehicleCarLootChance"] call HVP_fnc_getSetting;
 _maxNumVeh = ((HVPZoneSizeMax*3)/_minDistSpawn);
 _vehCreated = 0;
 _usedPosArray = [];
@@ -64,7 +65,9 @@ if (isServer) then {
 			_spawncar disableTIEquipment true;
 
 			if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
-				[_spawncar] call HVP_fnc_airdropLoot;
+				if ((random 100) < _lootChance) then {
+					[_spawncar] call HVP_fnc_airdropLoot;
+				};
 			};
 			_spawncar setPos (getPos _spawncar);
 			_spawncar allowDamage true;
