@@ -6,8 +6,8 @@ private ["_vehCount","_missileCount","_maxTime","_posFound","_artyPos","_posChec
 //-----------------------------------
 //-SET VARIABLES
 
-_vehCount = 2;
-_missileCount = 12;		//How many each MLRS will try to fire
+_vehCount = 4;
+_missileCount = 6;		//How many each MLRS will try to fire
 
 //-----------------------------------
 //-GET STRIKE LOCATION
@@ -16,23 +16,23 @@ _missileCount = 12;		//How many each MLRS will try to fire
 
 chosen_placement = false;
 clicked = false;
-  
+
 OnMapSingleClick "ClickedPos = _pos; clicked = true;";
-openMap [true, true]; 
+openMap [true, true];
 
 titleText ["DESIGNATE ARTILLERY CO-ORDINATES", "PLAIN", 0.5];
 
 while {true} do {
 
     if (clicked) then {
-		
+
 		_posCheck = [ClickedPos] call SIN_fnc_checkPos;
 		if (_posCheck) then {
 			onMapSingleClick "";
-			openMap [false, false]; 
+			openMap [false, false];
 			chosen_placement = true;
 			titleText ["CO-ORDINATES RECIEVED", "PLAIN", 0.5];
-			[ClickedPos,_vehCount,_missileCount] spawn HVP_fnc_artillery;
+			[ClickedPos,_vehCount,_missileCount,1] spawn HVP_fnc_artillery;
 			sleep 1;
 			//cutText ["", "BLACK FADED", 999];
 		} else {

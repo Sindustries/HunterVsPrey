@@ -138,7 +138,7 @@ for "_i" from 0 to ((count _cfg)-1) do {
 			sleep HVP_uncommonEvent;
 			if (HVP_suddenDeath) exitWith {};
 			_artyPos = [HVP_phase_pos,0,(HVP_phase_radius * 0.9),0,0,0,0] call SIN_fnc_findPos;
-			[_artyPos,_vehCount,_missileCount] call HVP_fnc_artillery;
+			[_artyPos,_vehCount,_missileCount,0] call HVP_fnc_artillery;
 		};
 	};
 
