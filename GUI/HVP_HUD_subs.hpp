@@ -1,27 +1,27 @@
-class HVPHUD_ability 
+class HVPHUD_ability
 {
 	idd = 50;
 	fadeout=1;
 	fadein=3;
 	duration = 1e+1000;
 	onLoad = "uiNameSpace setVariable ['HVP_HUD_AbilTitle', (_this select 0) displayCtrl 101];";
-	
+
 	class controls
 	{
 		class HVPHUD_scAbility
 		{
 			idc = 101;
 			type = 0;
-			style = 2; 
+			style = 2;
 			x = 0.438125 * safezoneW + safezoneX;
 			y = 0.0204 * safezoneH + safezoneY;
 			w = 0.0721875 * safezoneW;
 			h = 0.011 * safezoneH;
 			font = "PuristaLight";
 			sizeEX = "0.016 / (getResolution select 5)";
-			colorBackground[] = {0,0,0,0}; 
+			colorBackground[] = {0,0,0,0};
             colorText[] = {1,1,1,1};
-			text = "";			
+			text = "";
 		};
 	};
 };
@@ -33,21 +33,21 @@ class HVPHUD_phase
 	fadein=3;
 	duration = 1e+1000;
 	onLoad = "uiNameSpace setVariable ['HVP_HUD_PhaseTitle', (_this select 0) displayCtrl 102];";
-	
+
 	class controls
 	{
 		class HVPHUD_scPhase
 		{
 			idc = 102;
 			type = 0;
-			style = 2; 
+			style = 2;
 			x = 0.520625 * safezoneW + safezoneX;
 			y = 0.0204 * safezoneH + safezoneY;
 			w = 0.04125 * safezoneW;
 			h = 0.011 * safezoneH;
 			font = "PuristaMedium";
 			sizeEX = "0.016 / (getResolution select 5)";
-			colorBackground[] = {0,0,0,0}; 
+			colorBackground[] = {0,0,0,0};
             colorText[] = {1,1,1,1};
 			text = "";
 		};
@@ -63,7 +63,7 @@ class HVPHUDProgressBar
 	fadeout=3;
 	movingEnable = 0;
 	onLoad = "uiNamespace setVariable ['PBarProgress', (_this select 0) displayCtrl 103];";
-	
+
 	class controls
 	{
 		class background: ProgressBaseTextHUD
@@ -95,7 +95,7 @@ class HVPHUDartyImg
 	fadein=1;
 	duration = 1e+1000;
 	onLoad = "uiNameSpace setVariable ['HVPHUD_artyImg', (_this select 0) displayCtrl 165];";
-	
+
 	class controls
 	{
 		class HVPHUDartyBG: IGUIBack
@@ -133,7 +133,7 @@ class HVPHUDquakeImg
 	fadein=1;
 	duration = 1e+1000;
 	onLoad = "uiNameSpace setVariable ['HVPHUD_quakeImg', (_this select 0) displayCtrl 166];";
-	
+
 	class controls
 	{
 		class HVPHUDquakeBG: IGUIBack
@@ -171,7 +171,7 @@ class HVPHUDuavImg
 	fadein=1;
 	duration = 1e+1000;
 	onLoad = "uiNameSpace setVariable ['HVPHUD_uavImg', (_this select 0) displayCtrl 167];";
-	
+
 	class controls
 	{
 		class HVPHUDuavBG: IGUIBack
@@ -209,7 +209,7 @@ class HVPHUDchemImg
 	fadein=1;
 	duration = 1e+1000;
 	onLoad = "uiNameSpace setVariable ['HVPHUD_chemImg', (_this select 0) displayCtrl 168];";
-	
+
 	class controls
 	{
 		class HVPHUDchemBG: IGUIBack
@@ -237,5 +237,65 @@ class HVPHUDchemImg
 			w = 0.020625 * safezoneW;
 			h = 0.033 * safezoneH;
 		};
+	};
+};
+
+class HVPHUDcamoTimer
+{
+	idd = 60;
+	fadeout=1;
+	fadein=3;
+	duration = 1e+1000;
+	onLoad = "uiNameSpace setVariable ['HVPHUD_camoTimer', (_this select 0) displayCtrl 3537];";
+
+	class controls
+	{
+		class HVPHUDcamoBG: IGUIBack
+		{
+			idc = 3273;
+			x = 0.288594 * safezoneW + safezoneX;
+			y = -0.00599999 * safezoneH + safezoneY;
+			w = 0.0360937 * safezoneW;
+			h = 0.044 * safezoneH;
+		};
+		class HVPHUDcamoFRM: RscFrame
+		{
+			idc = 3274;
+			x = 0.288594 * safezoneW + safezoneX;
+			y = -0.00599999 * safezoneH + safezoneY;
+			w = 0.0360937 * safezoneW;
+			h = 0.044 * safezoneH;
+		};
+		class HVPHUDcamoTXT: RscText
+		{
+			idc = 3676;
+			type = 0;
+			style = 2;
+			text = "Z-CAMO"; //--- ToDo: Localize;
+			x = 0.292719 * safezoneW + safezoneX;
+			y = 0.00279997 * safezoneH + safezoneY;
+			w = 0.0257812 * safezoneW;
+			h = 0.011 * safezoneH;
+			font = "PuristaMedium";
+			sizeEX = "0.016 / (getResolution select 5)";
+			colorBackground[] = {0,0,0,0};
+            colorText[] = {1,1,1,1};
+		};
+		class HVPHUDcamoTXT2: RscText
+		{
+			idc = 3537;
+			type = 0;
+			style = 2;
+			text = "12:34"; //--- ToDo: Localize;
+			x = 0.29375 * safezoneW + safezoneX;
+			y = 0.0204 * safezoneH + safezoneY;
+			w = 0.0257812 * safezoneW;
+			h = 0.011 * safezoneH;
+			font = "PuristaMedium";
+			sizeEX = "0.016 / (getResolution select 5)";
+			colorBackground[] = {0,0,0,0};
+            colorText[] = {1,1,1,1};
+		};
+
 	};
 };
