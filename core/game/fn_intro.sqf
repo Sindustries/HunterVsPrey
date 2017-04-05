@@ -9,7 +9,7 @@
 _onScreenTime = 8;
 
 _role1 = "Special Thanks";
-_role1names = ["VELTEN, TheMightyFoz, Sovereign, Commando, Shadow, Feather, C.Foley, Minxx, Vyper, Nathan, Josh, Sycorax"];
+_role1names = ["VELTEN, TheMightyFoz, Sovereign, Commando, Shadow, Feather, C.Foley, Steph, Vyper, Nathan, Josh, Sycorax"];
 _role1b = "Special Thanks cont.";
 _role1bnames = ["Finchy, Panchito, JooseY,	Crumbs, Tyseen, Kyle, Tivvroxx, Mishka, Reece (x2)"];
 _role2 = "Mod Credits";
@@ -18,7 +18,7 @@ _role3 = "Script Credits";
 _role3names = ["Player Markers script by Ceh", "TPW Animals and TPW Air by TPW", "Tear Gas script by Taw_jarhead"];
 _role4 = "Script Credits cont.";
 _role4names = ["Cloaking script by XxRTEKxX, HallyG and DreadedEntity"];
- 
+
 {
 sleep 2;
 _memberFunction = _x select 0;
