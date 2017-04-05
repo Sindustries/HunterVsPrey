@@ -10,7 +10,7 @@ class HVP {
 	HVP_ZombieMode = true;				//Set to false to disable zombies
 	HVPDebugMode = false;				//Enable lots of debugging info
 	HVPStatMode = true;					//Set to false to disable stat saving
-	HVPantiCamp = 90;					//0:Disabled - How long (SEC) players have until they are revealed on the map if camping
+	HVPantiCamp = 120;					//0:Disabled - How long (SEC) players have until they are revealed on the map if camping
 
 /* ADAPTIVE TIME SETTINGS */
 
@@ -76,7 +76,7 @@ class HVP {
 		33,		//weapons
 		45,		//magazines
 		12,		//items
-		8,	//medical
+		8,		//medical
 		25,		//clothing
 		10,		//vests
 		8,		//backpacks
@@ -90,6 +90,7 @@ class HVP {
 
 	vehicleCarMinDist = 150;			//Min distance (METERS) between car spawns
 	vehicleBoatMinDist = 100;			//Min distance (METERS) between boat spawns
+	vehicleCarLootChance = 33;			//Chance of a spawned car having loot inside
 
 /* PHASE SETTINGS */
 
