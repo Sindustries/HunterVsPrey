@@ -189,11 +189,13 @@ for "_i" from 0 to ((count _cfg)-1) do {
 
 //-----------------------------------
 //-UAV
-
+/*
 	[_uavSelection] spawn {
 		private ["_uavScanSize","_uavTime","_uavUpdate","_uavScanPos"];
+		systemChat "UAV online";
 		while {true} do {
-			sleep HVP_rareEvent;
+			//sleep HVP_rareEvent;
+			sleep HVP_commonEvent;
 			if (HVP_suddenDeath) exitWith {};
 			_uavScanSize = (HVP_Phase_Radius * 0.2);
 			_uavTime = ((60*2)+(random(60*3)));
@@ -202,7 +204,7 @@ for "_i" from 0 to ((count _cfg)-1) do {
 			[(_this select 0),_uavScanPos,_uavScanSize,_uavTime,_uavUpdate] call HVP_fnc_uav;
 		};
 	};
-
+*/
 //-----------------------------------
 };
 //-----------------------------------
