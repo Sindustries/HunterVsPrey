@@ -251,8 +251,6 @@ if (isServer) then {
 	waitUntil {HVPCarsLoaded isEqualTo true};
 };
 
-
-
 cutText ["LOADING VEHICLES (SEA)", "BLACK FADED", 999];
 if (isServer) then {
 	[] call HVP_fnc_spawnBoats;
