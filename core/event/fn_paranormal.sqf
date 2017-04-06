@@ -1,4 +1,4 @@
-/* 
+/*
 	HVP2 Paranormal Activity Event Script
 	By Sinbane
 */
@@ -20,6 +20,7 @@ if (HVPGameType isEqualTo 1) then {
 			if (vehicle player isEqualTo player) then {
 
 				_eventRoll = floor (random 4);
+				player setCaptive true;
 
 				if (_eventRoll isEqualTo 0) then {
 					if (side player isEqualTo WEST || side player isEqualTo RESISTANCE) then {
@@ -46,6 +47,7 @@ if (HVPGameType isEqualTo 1) then {
 						[] call HVP_fnc_paraChat;
 					};
 				};
+				player setCaptive false;
 			};
 		};
 
@@ -69,6 +71,7 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 			if (vehicle player isEqualTo player) then {
 
 				_eventRoll = floor (random 6);
+				player setCaptive true;
 
 				if (_eventRoll isEqualTo 0) then {
 					[] call HVP_fnc_paraGhost;
@@ -91,6 +94,7 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 						[] call HVP_fnc_paraChat;
 					};
 				};
+				player setCaptive false;
 			};
 		};
 
