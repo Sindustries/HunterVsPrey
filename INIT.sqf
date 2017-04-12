@@ -77,7 +77,14 @@ if (isServer) then {
 		setDate [2015, 1, 12, 0, 0];
 	};
 	if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
-		setDate [2015, 8, 11, floor(random 25), 0];
+		_set = false;
+		while {_set isEqualTo false} do {
+			_time = floor(random 25);
+			if (_time >= 9 && _time <= 17) then {
+				setDate [2015, 8, 11, _time, 0];
+				_set = true;
+			};
+		};
 	};
 };
 //-----------------------------------
