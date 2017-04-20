@@ -23,6 +23,7 @@ respawnTemplates[] = {""};
 disabledAI = 1;
 disableChannels[]={2,4,6};
 joinUnassigned = 1;
+briefing = 0;
 enableDebugConsole = 1;
 
 #include "params.hpp"
@@ -40,13 +41,13 @@ class RscTitles {
 	#include "GUI\HVP_HUD.hpp"
 	#include "GUI\HVP_HUD_subs.hpp"
 	#include "GUI\HVP_HUD_blood.hpp"
-	
-	class Default 
+
+	class Default
 	{
 		idd = -1;
 		fadein = 0;
 		fadeout = 0;
 		duration = 0;
 	};
-	
+
 };
