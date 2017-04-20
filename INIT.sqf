@@ -277,6 +277,9 @@ if (isServer) then {
 	[] spawn HVP_fnc_eventManager;
 };
 //-----------------------------------
+//-PLAYER MARKERS
+[] spawn HVP_fnc_playermarkers;
+//-----------------------------------
 //-PLAYER LOADOUTS
 cutText ["GEARING UP", "BLACK FADED", 999];
 //["LOADOUT"] call HVP_fnc_getSettings;
@@ -307,9 +310,6 @@ if (player isKindOf "VirtualSpectator_F" && isServer) then {
 //-----------------------------------
 //-ABILITY MANAGER
 [] spawn HVP_fnc_abilityManager;
-//-----------------------------------
-//-PLAYER MARKERS
-[] spawn HVP_fnc_playermarkers;
 //-----------------------------------
 //-TEST MODE CHECK
 private "_allUnits";
@@ -402,6 +402,10 @@ enableEnvironment true;
 cutText ["", "BLACK IN", 5];
 //-----------------------------------
 //-HUD Elements
+("HUDHPBar" call BIS_fnc_rscLayer) cutRsc ["HVPHUDHPBar","PLAIN",-1,true];
+uiNameSpace getVariable "HPBarProgress" ctrlSetTextColor [0.2, 0.9, 0.3, 0.7];
+uiNameSpace getVariable "HPBarProgress" progressSetPosition 1;
+[] spawn SMS_fnc_updateHP;
 [] spawn {
 	private "_currentPhase";
 	_currentPhase = HVP_phase_num;

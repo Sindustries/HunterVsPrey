@@ -71,9 +71,9 @@ class HVPHUDProgressBar
 			idc = 37201;
 
 			x = 0.43297 * safezoneW + safezoneX;
-			y = 0.0413 * safezoneH + safezoneY;
+			y = 0.0479 * safezoneH + safezoneY;
 			w = 0.134062 * safezoneW;
-			h = 0.006 * safezoneH;
+			h = 0.0055 * safezoneH;
 			colorBackground[] = {1,0,0,0.4};
 		};
 		class Progress: RscProgressBar
@@ -81,11 +81,58 @@ class HVPHUDProgressBar
 			idc = 103;
 			text = ""; //--- ToDo: Localize;
 			x = 0.43297 * safezoneW + safezoneX;
-			y = 0.0413 * safezoneH + safezoneY;
+			y = 0.0479 * safezoneH + safezoneY;
 			w = 0.134062 * safezoneW;
-			h = 0.006 * safezoneH;
+			h = 0.0055 * safezoneH;
 		};
 	};
+};
+
+class HVPHUDHPBar
+{
+	name = "HVPHUDHPBar";
+	idd = 37201;
+	fadein=1;
+	duration = 1e+1000;
+	fadeout=3;
+	movingEnable = 0;
+	onLoad = "uiNamespace setVariable ['HPBarProgress', (_this select 0) displayCtrl 1354];";
+
+	class controls
+	{
+		class background: ProgressBaseTextHUD
+		{
+			idc = 37202;
+
+			x = 0.432969 * safezoneW + safezoneX;
+			y = 0.0402 * safezoneH + safezoneY;
+			w = 0.134062 * safezoneW;
+			h = 0.0055 * safezoneH;
+			colorBackground[] = {1,0,0,0.4};
+		};
+		class Progress: RscProgressBar
+		{
+			idc = 1354;
+			text = ""; //--- ToDo: Localize;
+			x = 0.432969 * safezoneW + safezoneX;
+			y = 0.0402 * safezoneH + safezoneY;
+			w = 0.134062 * safezoneW;
+			h = 0.0055 * safezoneH;
+		};
+	};
+};
+
+class HVPHUDhpBarPR: RscButtonMenu
+{
+	idc = 2401;
+	text = "PROGRESS BAR HERE PLEASE"; //--- ToDo: Localize;
+
+};
+class HVPHUDProgressBarLocation: RscButtonMenu
+{
+	idc = 2400;
+	text = "PROGRESS BAR HERE PLEASE"; //--- ToDo: Localize;
+
 };
 
 class HVPHUDartyImg

@@ -172,6 +172,7 @@ class SMS {
 		class setBleeding {};
 		class setBleedout {};
 		class setUnconscious {};
+		class updateHP {};
 	}
 }
 

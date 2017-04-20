@@ -9,6 +9,10 @@ if (lifeState player isEqualTo "INCAPACITATED" || lifeState player isEqualTo "IN
 
 ("HUDAbilLayer" call BIS_fnc_rscLayer) cutText ["","PLAIN"];
 ("HUDBLOODLayer" call BIS_fnc_rscLayer) cutText ["","PLAIN"];
+("HUDHPBar" call BIS_fnc_rscLayer) cutRsc ["","PLAIN"];
+
+uiNameSpace getVariable "HPBarProgress" ctrlSetTextColor [0.2, 0.9, 0.3, 0.7];
+uiNameSpace getVariable "HPBarProgress" progressSetPosition 0;
 
 //-----------------------------------
 //-REMOVE PLAYER GEAR
@@ -34,7 +38,7 @@ if (HVPZombieMode isEqualTo 1) then {
 		["YOU HAVE BEEN KILLED","<t align = 'center' shadow = '1' size = '1.0' font='PuristaBold'>%1</t><br/>", 25]
 	]
 ] spawn BIS_fnc_typeText;
-	
+
 sleep 16;
 
 if (HVPGameType isEqualTo 2) then {
