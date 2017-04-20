@@ -341,6 +341,7 @@ switch (HVPGameType) do {
 		resistance setFriend [east, 0];
 		if (playerSide isEqualTo east) then {
 			player setCaptive true;
+			player setAnimSpeedCoef 1.2;
 		};
 	};
 	//-CRUCIBLE SETTINGS
@@ -364,6 +365,7 @@ switch (HVPGameType) do {
 		resistance setFriend [east, 0];
 		if (playerSide isEqualTo resistance) then {
 			player setCaptive true;
+			player setAnimSpeedCoef 1.2;
 		};
 
 		if (isServer) then {
