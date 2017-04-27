@@ -23,37 +23,37 @@
 		_nvg = selectRandom (Sinspawn_lootList select 8);
 		_sns = selectRandom (Sinspawn_lootList select 9);
 
-		if (HVP_lootChance < (random 100)) then {
+		if (HVP_lootChance > (random 100)) then {
 			_drop addWeaponCargoGlobal [_weapon, 1];
 			_drop addMagazineCargoGlobal [_mag1, floor (random 3)];
 		};
-		if (HVP_lootChance < (random 100)) then {
+		if (HVP_lootChance > (random 100)) then {
 			_drop addMagazineCargoGlobal [_mag2, floor (random 2)];
 		};
-		if (HVP_lootChance < (random 100)) then {
+		if (HVP_lootChance > (random 100)) then {
 			_drop addItemCargoGlobal [_item, 1];
 		};
-		if (HVP_lootChance < (random 100)) then {
+		if (HVP_lootChance > (random 100)) then {
 			_drop addItemCargoGlobal [_med, floor (random 2)];
 		};
-		if (HVP_lootChance < (random 100)) then {
+		if (HVP_lootChance > (random 100)) then {
 			_drop addItemCargoGlobal [_clothes, 1];
 		};
-		if (HVP_lootChance < (random 100)) then {
+		if (HVP_lootChance > (random 100)) then {
 			_drop addItemCargoGlobal [_vest, 1];
 		};
-		if (HVP_lootChance < (random 100)) then {
+		if (HVP_lootChance > (random 100)) then {
 			_drop addBackpackCargoGlobal [_backpack, 1];
 		};
 
 		if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
-			if ((Sinspawn_lootChance select 7) < (random 100)) then {
+			if ((Sinspawn_lootChance select 7) > (random 100)) then {
 				_drop addItemCargoGlobal [_spClothes, floor (random 2)];
 			};
-			if ((Sinspawn_lootChance select 8) < (random 100)) then {
+			if ((Sinspawn_lootChance select 8) > (random 100)) then {
 				_drop addItemCargoGlobal [_nvg, floor (random 2)];
 			};
-			if ((Sinspawn_lootChance select 9) < (random 100)) then {
+			if ((Sinspawn_lootChance select 9) > (random 100)) then {
 				_drop addItemCargoGlobal [_sns, floor (random 2)];
 			};
 		};
