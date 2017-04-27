@@ -96,17 +96,18 @@ if (HVPDelay isEqualTo 1) then {
 };
 playMusic (selectRandom HVP_music);
 //-----------------------------------
-//-SET TIME OF DAY
+//-SET TIME OF DAY						setDate [year, month, day, hour, minute]
 if (isServer) then {
+	_date = numberToDate [(2015+floor(random 20)),random 1];
 	if (HVPGameType isEqualTo 1) then {
-		setDate [2015, 1, 12, 0, 0];
+		setDate [(_date select 0), (_date select 1), (_date select 2), 0, 0];
 	};
 	if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 		_set = false;
 		while {_set isEqualTo false} do {
 			_time = floor(random 25);
-			if (_time >= 9 && _time <= 17) then {
-				setDate [2015, 8, 11, _time, 0];
+			if (_time >= 6 && _time <= 15) then {
+				setDate [(_date select 0), (_date select 1), (_date select 2), _time, (_date select 4)];
 				_set = true;
 			};
 		};
