@@ -7,6 +7,7 @@ private ["_side","_cfg","_i","_cfgName","_heliSelection","_scenarios","_scenario
 //-----------------------------------
 
 _side = _this select 0;
+_heliLandPos = _this select 1;
 
 //-----------------------------------
 _heliSelection = [];
@@ -29,7 +30,6 @@ for "_i" from 0 to ((count _cfg)-1) do {
 	};
 };
 
-
 //-----------------------------------
 //-FIND A SPAWN LOCATION FOR HELI
 
@@ -38,7 +38,6 @@ _heliSpawnPos = [HVP_phase_pos,(HVP_phase_radius + 1000),(HVP_phase_radius + 200
 //-----------------------------------
 //-CREATE A LANDING ZONE
 
-_heliLandPos = [HVP_phase_pos,0,HVP_phase_radius,10,0,0.25,0] call SIN_fnc_findPos;
 _helipad = createVehicle ["Land_HelipadEmpty_F", _heliLandPos, [], 0, "NONE"];
 
 //-----------------------------------

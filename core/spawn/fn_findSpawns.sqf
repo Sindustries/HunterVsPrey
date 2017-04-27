@@ -31,7 +31,7 @@ waitUntil {_readyPlayers isEqualTo _allPlayers};
 			if (_spawn isEqualTo "Ground") then {
 				_spawnFound = false;
 				while {!_spawnFound} do {
-					_spawnPos = [HVP_Pos,0,(HVPZoneSizeMax * 0.8),0.25,0,0,0] call SIN_fnc_findPos;
+					_spawnPos = [HVP_Pos,0,(HVPZoneSizeMax*1.2),0.25,0,0,0] call SIN_fnc_findPos;
 					_distCheck = [_spawnPos,_usedSpawnPos,((HVPZoneSizeMax*2)/_allPlayers)] call SIN_fnc_checkDist;
 					if (_distCheck) then {
 						_spawnFound = true;
@@ -48,7 +48,7 @@ waitUntil {_readyPlayers isEqualTo _allPlayers};
 			if (_spawn isEqualTo "HALO") then {
 				_spawnFound = false;
 				while {!_spawnFound} do {
-					_spawnPos = [HVP_Pos,0,(HVPZoneSizeMax * 0.8),0,0,0,0] call SIN_fnc_findPos;
+					_spawnPos = [HVP_Pos,0,(HVPZoneSizeMax * 1.2),0,0,0,0] call SIN_fnc_findPos;
 					_distCheck = [_spawnPos,_usedSpawnPos,((HVPZoneSizeMax*2)/_allPlayers)] call SIN_fnc_checkDist;
 					if (_distCheck) then {
 						_spawnFound = true;
@@ -58,16 +58,34 @@ waitUntil {_readyPlayers isEqualTo _allPlayers};
 				};
 			};
 			if (_spawn isEqualTo "Heli") then {
-				[(side _x)] remoteExec ["HVP_fnc_heliSpawn", _x];
+				_spawnFound = false;
+				while {!_spawnFound} do {
+					_spawnPos = [HVP_Pos,0,(HVPZoneSizeMax * 1),0,0,0,0] call SIN_fnc_findPos;
+					_distCheck = [_spawnPos,_usedSpawnPos,((HVPZoneSizeMax*2)/_allPlayers)] call SIN_fnc_checkDist;
+					if (_distCheck) then {
+						_spawnFound = true;
+						_usedSpawnPos pushBack _spawnPos;
+						[(side _x),_spawnPos] remoteExec ["HVP_fnc_heliSpawn", _x];
+					};
+				};
 			};
 			if (_spawn isEqualTo "Pod") then {
-				[(side _x)] remoteExec ["HVP_fnc_podSpawn", _x];
+				_spawnFound = false;
+				while {!_spawnFound} do {
+					_spawnPos = [HVP_Pos,0,(HVPZoneSizeMax * 1.2),0,0,0,0] call SIN_fnc_findPos;
+					_distCheck = [_spawnPos,_usedSpawnPos,((HVPZoneSizeMax*2)/_allPlayers)] call SIN_fnc_checkDist;
+					if (_distCheck) then {
+						_spawnFound = true;
+						_usedSpawnPos pushBack _spawnPos;
+						[(side _x),_spawnPos] remoteExec ["HVP_fnc_podSpawn", _x];
+					};
+				};
 			};
 		};
 		if (HVPSpawnType isEqualTo 1) then {
 			_spawnFound = false;
 			while {!_spawnFound} do {
-				_spawnPos = [HVP_Pos,0,(HVPZoneSizeMax * 0.8),0.25,0,0,0] call SIN_fnc_findPos;
+				_spawnPos = [HVP_Pos,0,(HVPZoneSizeMax * 1.2),0.25,0,0,0] call SIN_fnc_findPos;
 				_distCheck = [_spawnPos,_usedSpawnPos,((HVPZoneSizeMax*2)/_allPlayers)] call SIN_fnc_checkDist;
 				if (_distCheck) then {
 					_spawnFound = true;
@@ -85,21 +103,38 @@ waitUntil {_readyPlayers isEqualTo _allPlayers};
 		if (HVPSpawnType isEqualTo 2) then {
 			_spawnFound = false;
 			while {!_spawnFound} do {
-				_spawnPos = [HVP_Pos,0,(HVPZoneSizeMax * 0.8),0,0,0,0] call SIN_fnc_findPos;
+				_spawnPos = [HVP_Pos,0,(HVPZoneSizeMax * 1.2),0,0,0,0] call SIN_fnc_findPos;
 				_distCheck = [_spawnPos,_usedSpawnPos,((HVPZoneSizeMax*2)/_allPlayers)] call SIN_fnc_checkDist;
 				if (_distCheck) then {
 					_spawnFound = true;
 					_usedSpawnPos pushBack _spawnPos;
 					[_spawnPos] remoteExec ["HVP_fnc_haloSpawn", _x];
-					_x setVariable ["HVP_spawned", true, true];
 				};
 			};
 		};
 		if (HVPSpawnType isEqualTo 3) then {
-			[(side _x)] remoteExec ["HVP_fnc_heliSpawn", _x];
+			_spawnFound = false;
+				while {!_spawnFound} do {
+				_spawnPos = [HVP_Pos,0,(HVPZoneSizeMax * 1),0,0,0,0] call SIN_fnc_findPos;
+				_distCheck = [_spawnPos,_usedSpawnPos,((HVPZoneSizeMax*2)/_allPlayers)] call SIN_fnc_checkDist;
+				if (_distCheck) then {
+					_spawnFound = true;
+					_usedSpawnPos pushBack _spawnPos;
+					[(side _x),_spawnPos] remoteExec ["HVP_fnc_heliSpawn", _x];
+				};
+			};
 		};
 		if (HVPSpawnType isEqualTo 4) then {
-			[(side _x)] remoteExec ["HVP_fnc_podSpawn", _x];
+			_spawnFound = false;
+			while {!_spawnFound} do {
+				_spawnPos = [HVP_Pos,0,(HVPZoneSizeMax * 1.2),0,0,0,0] call SIN_fnc_findPos;
+				_distCheck = [_spawnPos,_usedSpawnPos,((HVPZoneSizeMax*2)/_allPlayers)] call SIN_fnc_checkDist;
+				if (_distCheck) then {
+					_spawnFound = true;
+					_usedSpawnPos pushBack _spawnPos;
+					[(side _x),_spawnPos] remoteExec ["HVP_fnc_podSpawn", _x];
+				};
+			};
 		};
 	};
 } forEach playableUnits;

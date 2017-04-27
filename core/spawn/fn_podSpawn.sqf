@@ -7,14 +7,7 @@ private ["_pos","_posFound","_posCheck","_side","_pod","_light","_index","_crate
 //-----------------------------------
 //-POS
 
-_posFound = false;
-while {!_posFound} do {
-	_pos = [HVP_phase_pos,0,HVP_phase_radius,1,0,0.4,0] call BIS_fnc_findSafePos;
-	_posCheck = [_pos] call SIN_fnc_checkPos;
-	if (_posCheck) then {
-		_posFound = true;
-	};
-};
+_pos = _this select 0;
 
 //-----------------------------------
 //-CREATE POD
@@ -39,7 +32,7 @@ player allowDamage false;
 player setVariable ["HVP_spawned", true, true];
 
 //-----------------------------------
-//- WAIT UNTIL CRASH 
+//- WAIT UNTIL CRASH
 
 waitUntil {isTouchingGround _pod};
 [_pod,["vehicle_collision",350]] remoteExec ["say3D", 0];
@@ -69,7 +62,7 @@ _sparks1 attachTo [_pod];
 	sleep (random 120);
 	{deleteVehicle _x;} forEach (_fire getVariable ["effects", []]);
 	deleteVehicle _fire;
-};	
+};
 waitUntil {velocityModelSpace _pod isEqualTo [0,0,0]};
 sleep 1;
 {
