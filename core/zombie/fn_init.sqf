@@ -17,7 +17,8 @@ HVP_usedSpawnerArray = [];
 HVP_zombies = [];
 HVP_zombieArray = [];
 HVP_zombieArrayClient = [];
-HVP_zCamoApplied = false;
+
+player setVariable ["z_CamoApplied",false];
 
 //-----------------------------------
 //-GET ZOMBIES
@@ -65,6 +66,6 @@ if (isServer) then {
 //-ZOMBIE CAMO ACTION
 
 zCamo_action = [player addAction["Zombie Camouflage",z_fnc_zCamo,"",0,false,false,"",'
-!isNull cursorObject && player distance cursorObject < 3.5 && (typeOf cursorObject) in ((HVP_zombies)+(HVP_BossZombies)) && vehicle player isEqualTo player && HVP_zCamoApplied isEqualTo false']];
-
+!isNull cursorObject && player distance cursorObject < 3.5 && (typeOf cursorObject) in ((HVP_zombies)+(HVP_BossZombies)) && !alive cursorObject && vehicle player isEqualTo player']];
+// && (player getVariable ["z_CamoApplied",false]) isEqualTo false
 //-----------------------------------
