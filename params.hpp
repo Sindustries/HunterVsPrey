@@ -24,4 +24,12 @@ class Params {
 		isGlobal = 1;
 	};
 
+	class gamedelay3 {
+		title = "Delay Game Start:";
+		values[] = {1,0};
+		texts[] = {"True","False"};
+		default = 0;
+		isGlobal = 1;
+	};
+
 }

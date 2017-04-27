@@ -14,10 +14,19 @@ setTimeMultiplier 0;
 player enableSimulation false;
 player allowDamage false;
 player enableStamina false;
+removeAllWeapons player;
+removeAllItems player;
+removeAllAssignedItems player;
+removeUniform player;
+removeVest player;
+removeBackpack player;
+removeHeadgear player;
+removeGoggles player;
 //-----------------------------------
 //-MAIN
 HVPGameType = (paramsArray select 1);
 HVPManual = (paramsArray select 2);
+HVPDelay = (paramsArray select 3);
 //-----------------------------------
 ["HVP"] call HVP_fnc_getSettings;
 HVPPhaseType = ["HVPPhaseType"] call HVP_fnc_getSetting;
@@ -68,6 +77,19 @@ cutText ["", "BLACK FADED", 999];
 //-----------------------------------
 if (player isKindof "B_Survivor_F" && HVPGameType isEqualTo 1 || player isKindof "O_Survivor_F" && HVPGameType isEqualTo 1) exitWith {
 	["wrongslot",false] spawn BIS_fnc_endMission;
+};
+//-----------------------------------
+//-DELAY GAME IF ENABLED
+if (HVPDelay isEqualTo 1) then {
+	if (isServer) then {
+		player addAction ["Start Game", { HVPDelay = 0; publicVariable "HVPDelay"; }];
+	};
+	cutText ["", "BLACK IN", 1];
+	player enableSimulation true;
+	waitUntil {HVPDelay isEqualTo 0};
+	removeAllActions player;
+	player enableSimulation false;
+	cutText ["", "BLACK FADED", 999];
 };
 playMusic (selectRandom HVP_music);
 //-----------------------------------
@@ -164,8 +186,8 @@ if (isServer) then {
 			_posFound = false;
 			while {!_posFound} do {
 				HVP_Pos = [(getPos player),0,99999,0,0,0,0] call SIN_fnc_findPos;
-				_objects = nearestObjects [HVP_Pos, ["All"], HVP_phase_radius];
-				if ((count _objects) >= 100) then {
+				_objects = nearestObjects [HVP_Pos, ["Building"], HVP_phase_radius];
+				if ((count _objects) >= 50) then {
 					_posFound = true;
 				};
 			};
@@ -402,10 +424,6 @@ enableEnvironment true;
 cutText ["", "BLACK IN", 5];
 //-----------------------------------
 //-HUD Elements
-("HUDHPBar" call BIS_fnc_rscLayer) cutRsc ["HVPHUDHPBar","PLAIN",-1,true];
-uiNameSpace getVariable "HPBarProgress" ctrlSetTextColor [0.2, 0.9, 0.3, 0.7];
-uiNameSpace getVariable "HPBarProgress" progressSetPosition 1;
-[] spawn SMS_fnc_updateHP;
 [] spawn {
 	private "_currentPhase";
 	_currentPhase = HVP_phase_num;
@@ -413,6 +431,11 @@ uiNameSpace getVariable "HPBarProgress" progressSetPosition 1;
 	("HUDGUILayer" call BIS_fnc_rscLayer) cutRsc ["HVP_HUD","PLAIN",-1,false];
 	("HUDAbilLayer" call BIS_fnc_rscLayer) cutRsc ["HVPHUD_ability","PLAIN",-1,false];
 	("HUDPhaseLayer" call BIS_fnc_rscLayer) cutRsc ["HVPHUD_phase","PLAIN",-1,false];
+
+	("HUDHPBarLayer" call BIS_fnc_rscLayer) cutRsc ["HVPHUDHPBar","PLAIN",-1,false];
+	uiNameSpace getVariable "HPBarProgress" ctrlSetTextColor [0.2, 0.9, 0.3, 0.7];
+	uiNameSpace getVariable "HPBarProgress" progressSetPosition 1;
+	[] spawn SMS_fnc_updateHP;
 
 	if (HVPPhaseType isEqualTo 2) then {
 		uiNameSpace getVariable "HVP_HUD_AbilTitle" ctrlSetText "WAITING";
