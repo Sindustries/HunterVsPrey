@@ -59,9 +59,7 @@ titleText ["AVOID LANDING AT SPEEDS GREATER THAN 10km/h", "PLAIN", 1];
 
 //-PARASMOKE
 
-//[] spawn HVP_fnc_parasmoke;
-_smoke = createVehicle ["SmokeShellBlue", (getposATL player), [], 0, "NONE"];
-_smoke attachTo [vehicle player, [0,0,0.15]];
+[] spawn HVP_fnc_parasmoke;
 
 //-----------------------------------
 //-LANDING
@@ -129,8 +127,7 @@ sleep 3;
 
 //-PARASMOKE
 
-_smoke = createVehicle ["SmokeShellBlue", (getposATL player), [], 0, "NONE"];
-_smoke attachTo [vehicle player, [0,0,0.15]];
+[] spawn HVP_fnc_parasmoke;
 
 //-----------------------------------
 //-LANDING
