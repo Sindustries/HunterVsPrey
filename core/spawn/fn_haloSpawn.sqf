@@ -65,7 +65,6 @@ titleText ["AVOID LANDING AT SPEEDS GREATER THAN 10km/h", "PLAIN", 1];
 //-LANDING
 
 waitUntil {(getPos player select 2) < 1 || isTouchingGround player};
-detach _smoke;
 if ((speed player) >= 20) then {
 	waitUntil {animationState player != "para_pilot"};
 	sleep 1;
@@ -133,7 +132,6 @@ sleep 3;
 //-LANDING
 
 	waitUntil {(getPos player select 2) < 1 || isTouchingGround player};
-	detach _smoke;
 	if ((speed player) >= 20) then {
 		waitUntil {animationState player != "para_pilot"};
 		sleep 1;
