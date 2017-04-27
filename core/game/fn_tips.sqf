@@ -23,14 +23,15 @@ _tips = [
 "You can use your ability quickly by pressing SHIFT + ENTER",
 "Weapon sway is effected by how much you are carrying. Travel light to lower the sway.",
 "If AntiCamp is enabled you won't be able to stay in the same area for very long before your location is revealed to everybody",
-"While inside a vehicle the fuel will quickly drain and you will be kicked out when it empties (doesn't effect boats in Crucible or Predator Mode)"
+"While inside a vehicle the fuel will quickly drain and you will be kicked out when it empties (doesn't effect boats in Crucible or Predator Mode)",
+"Ich habe das semen kanonen geladen"
 ];
 
 if (HVPGameType isEqualTo 1) then {
 //TEAM MODE SPECIFIC
 	_tipsTeam = [
 	"Blue Team starts with Flashlights and guns, while Red Team has NVG's and must use Takedowns/Melee.",
-	"Killing Blue Team members before they can group up is a good tactic.",	
+	"Killing Blue Team members before they can group up is a good tactic.",
 	"Don't have a map? Co-ordinate with your team leader until you find one.",
 	"Medics spawn with medical equipment.",
 	"Each class starts with different gear and abilities.",
