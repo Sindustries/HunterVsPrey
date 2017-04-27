@@ -81,7 +81,7 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 Sinspawn_lootList = [
 [ //WEAPONS	-- AUTO FILLED - See below
 
-[ //PISTOLS	-- AUTO FILLED - See below
+], [ //PISTOLS	-- AUTO FILLED - See below
 
 ], [ //MAGAZINES -- AUTO FILLED - See below
 
