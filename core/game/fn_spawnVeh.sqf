@@ -10,7 +10,7 @@ private ["_maxNumVeh","_carSel","_spawnPos","_posCheck","_car","_spawnCar","_mar
 
 _minDistSpawn = ["vehicleCarMinDist"] call HVP_fnc_getSetting;
 _lootChance = ["vehicleCarLootChance"] call HVP_fnc_getSetting;
-_maxNumVeh = ((HVPZoneSizeMax*2)/_minDistSpawn);
+_maxNumVeh = 100;			//((HVPZoneSizeMax*2)/_minDistSpawn);
 _vehCreated = 0;
 _usedPosArray = [];
 
@@ -84,7 +84,7 @@ if (isServer) then {
 					_projectile = _this select 4;
 
 					if (_projectile in HVP_mines) then {
-						_damage = 0;
+						_damage = (damage _veh)+0;
 					} else {
 						_veh setHit [_selectionName,_damage];
 					};
