@@ -11,7 +11,7 @@ _dayMult = ["daytimeMultiplier"] call HVP_fnc_getSetting;
 _nightMult = ["nighttimeMultiplier"] call HVP_fnc_getSetting;
 
 if (HVPGameType isEqualTo 1) then {
-	setTimeMultiplier 0;
+	setTimeMultiplier 1;
 };
 if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 	if (sunOrMoon isEqualTo 0) then {
@@ -46,7 +46,7 @@ setWind [0, 0, true];
 [] spawn {
 	private ["_onGround","_allUnits"];
 	waitUntil {HVP_phase_num isEqualTo 1};
-	
+
 	_onGround = {isPlayer _x && isTouchingGround _x && (getPosATL _x select 2) < 1} count playableUnits;
 	_allUnits = {isPlayer _x && side _x != sideLogic} count playableUnits;
 	while {_onGround != _allUnits} do {
@@ -71,7 +71,7 @@ if (HVPGameType isEqualTo 1) exitWith {
 //-----------------------------------
 //-CRUCIBLE & PREDATOR MODE
 
-if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {	
+if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 	while {true} do {
 		if (sunOrMoon isEqualTo 1) then {
 			(30 * timeMultiplier) setOvercast (random 1);
