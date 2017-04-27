@@ -13,7 +13,7 @@ cutText ["", "BLACK FADED", 999];
 player enableSimulation false;
 player setCaptive true;
 [player,true] remoteExec ["hideObject", 0];
-player setPos [(_pos select 0),(_pos select 1),0];
+player setPos [(_pos select 0),(_pos select 1),150];
 player setDir (random 360);
 
 systemChat format["Welcome to Dolphin's Quest, %1.",profileName];
@@ -27,8 +27,9 @@ sleep 2;
 		["by Veltenbane","<t align = 'center' shadow = '1' size = '0.6'>%1</t>", 5]
 	]
 ] spawn BIS_fnc_typeText;
-	
+
 sleep 10;
+player setPos [(_pos select 0),(_pos select 1),0];
 cutText ["", "BLACK IN", 5];
 [player,false] remoteExec ["hideObject", 0];
 player enableSimulation true;

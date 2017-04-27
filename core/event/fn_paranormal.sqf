@@ -19,7 +19,7 @@ if (HVPGameType isEqualTo 1) then {
 		if (sunOrMoon isEqualTo 0) then {
 			if (vehicle player isEqualTo player) then {
 
-				_eventRoll = floor (random 4);
+				_eventRoll = floor (random 5);
 				player setCaptive true;
 
 				if (_eventRoll isEqualTo 0) then {
@@ -47,6 +47,9 @@ if (HVPGameType isEqualTo 1) then {
 						[] call HVP_fnc_paraChat;
 					};
 				};
+				if (_eventRoll isEqualTo 4) then {
+					[] call HVP_fnc_paraSkydive;
+				};
 				player setCaptive false;
 			};
 		};
@@ -70,7 +73,7 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 		if (sunOrMoon isEqualTo 0) then {
 			if (vehicle player isEqualTo player) then {
 
-				_eventRoll = floor (random 6);
+				_eventRoll = floor (random 7);
 				player setCaptive true;
 
 				if (_eventRoll isEqualTo 0) then {
@@ -93,6 +96,9 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 					if (_allUnits > 4) then {
 						[] call HVP_fnc_paraChat;
 					};
+				};
+				if (_eventRoll isEqualTo 6) then {
+					[] call HVP_fnc_paraSkydive;
 				};
 				player setCaptive false;
 			};
