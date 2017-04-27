@@ -81,9 +81,12 @@ if (player isKindof "B_Survivor_F" && HVPGameType isEqualTo 1 || player isKindof
 //-----------------------------------
 //-DELAY GAME IF ENABLED
 if (HVPDelay isEqualTo 1) then {
+	private "_pos";
 	if (isServer) then {
 		player addAction ["Start Game", { HVPDelay = 0; publicVariable "HVPDelay"; }];
 	};
+	_pos = [(getPos player),0,99999] call SIN_fnc_findPos;
+	player setPos _pos;
 	cutText ["", "BLACK IN", 1];
 	player enableSimulation true;
 	waitUntil {HVPDelay isEqualTo 0};
