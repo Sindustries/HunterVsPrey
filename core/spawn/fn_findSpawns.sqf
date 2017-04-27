@@ -38,11 +38,10 @@ waitUntil {_readyPlayers isEqualTo _allPlayers};
 						_usedSpawnPos pushBack _spawnPos;
 						_x setPos [_spawnPos select 0,_spawnPos select 1,0];
 						_x setDir (random 360);
+						_x setVariable ["HVP_spawned", true, true];
 						if ((random 100) < _unconsciousChance && HVPTestMode isEqualTo 0) then {
-							_x enableSimulation true;
 							[_x, 10] remoteExec ["SMS_fnc_setUnconscious", _x];
 						};
-						_x setVariable ["HVP_spawned", true, true];
 					};
 				};
 			};
@@ -55,7 +54,6 @@ waitUntil {_readyPlayers isEqualTo _allPlayers};
 						_spawnFound = true;
 						_usedSpawnPos pushBack _spawnPos;
 						[_spawnPos] remoteExec ["HVP_fnc_haloSpawn", _x];
-						_x setVariable ["HVP_spawned", true, true];
 					};
 				};
 			};
@@ -106,5 +104,5 @@ waitUntil {_readyPlayers isEqualTo _allPlayers};
 	};
 } forEach playableUnits;
 
-	
+
 //-----------------------------------

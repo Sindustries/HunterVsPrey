@@ -5,7 +5,7 @@
 */
 //-----------------------------------
 //-GET SPAWN LOCATION
-		
+
 _spawnPos = _this select 0;
 
 [player] call ace_hearing_fnc_putInEarplugs;
@@ -36,6 +36,7 @@ _packHolder addBackpackCargoGlobal [_class, 1];
 
 player setPos [_spawnPos select 0,_spawnPos select 1,(1500 + (random 1000))];
 player setDir (random 360);
+player setVariable ["HVP_spawned", true, true];
 
 //-----------------------------------
 //-FREE FALL
@@ -44,7 +45,7 @@ waitUntil {animationState player == "HaloFreeFall_non"};
 sleep 3;
 titleText ["YOUR PARACHUTE WILL OPEN AUTOMATICALLY AT 200m", "PLAIN", 1.5];
 
-_packHolder attachTo [player,[-0.12,-0.02,-.74],"pelvis"]; 
+_packHolder attachTo [player,[-0.12,-0.02,-.74],"pelvis"];
 _packHolder setVectorDirAndUp [[0,-1,-0.05],[0,0,-1]];
 
 //-----------------------------------
@@ -52,27 +53,29 @@ _packHolder setVectorDirAndUp [[0,-1,-0.05],[0,0,-1]];
 
 waitUntil {(getPos player select 2) < 200 || animationState player == "para_pilot"};
 player action ["OpenParachute", player];
-_packHolder attachTo [vehicle player,[-0.07,0.67,-0.13],"pelvis"]; 
+_packHolder attachTo [vehicle player,[-0.07,0.67,-0.13],"pelvis"];
 _packHolder setVectorDirAndUp [[0,-0.2,-1],[0,1,0]];
 titleText ["AVOID LANDING AT SPEEDS GREATER THAN 10km/h", "PLAIN", 1];
 
 //-PARASMOKE
 
-[] spawn HVP_fnc_parasmoke;
+//[] spawn HVP_fnc_parasmoke;
+_smoke = createVehicle ["SmokeShellBlue", (getposATL player), [], 0, "NONE"];
+_smoke attachTo [vehicle player, [0,0,0.15]];
 
 //-----------------------------------
 //-LANDING
 
 waitUntil {(getPos player select 2) < 1 || isTouchingGround player};
+detach _smoke;
 if ((speed player) >= 20) then {
 	waitUntil {animationState player != "para_pilot"};
 	sleep 1;
-	[player, 16] spawn SMS_fnc_setUnconscious;
+	[player, 10] spawn SMS_fnc_setUnconscious;
 	player setDamage 0.1;
 	player setHit ["legs", 0.1];
 	[player,3] spawn SMS_fnc_setBleeding;
 };
-	
 
 detach _packHolder;
 deleteVehicle _packHolder;
@@ -89,7 +92,7 @@ for "_i" from 0 to (count (_items select 0) - 1) do {
 	(unitBackpack player) addItemCargoGlobal [(_items select 0) select _i,(_items select 1) select _i]; //return the items
 };
 
-sleep 2;	
+sleep 2;
 	if (side player == RESISTANCE) then {
 		player action ["nvGogglesOff", player];
 	};
@@ -108,32 +111,32 @@ sleep 3;
 	player addBackpack "b_parachute";
 	player setPos [_spawnPos select 0,_spawnPos select 1,(1500 + (random 1000))];
 	player setDir (random 360);
-	
+	player setVariable ["HVP_spawned", true, true];
+
 //-----------------------------------
 //-FREE FALL
 
 	waitUntil {animationState player == "HaloFreeFall_non"};
-	player enableSimulation true;
-	enableEnvironment true;
-	cutText ["", "BLACK IN", 5];
 	sleep 3;
 	titleText ["YOUR PARACHUTE WILL OPEN AUTOMATICALLY AT 200m", "PLAIN", 1.5];
-	
+
 //-----------------------------------
 //-PARACHUTE OPEN
-		
+
 	waitUntil {(getPos player select 2) < 200 || animationState player == "para_pilot"};
 	player action ["OpenParachute", player];
 	titleText ["AVOID LANDING AT SPEEDS GREATER THAN 10km/h", "PLAIN", 1];
-	
+
 //-PARASMOKE
 
-[] spawn HVP_fnc_parasmoke;
-	
+_smoke = createVehicle ["SmokeShellBlue", (getposATL player), [], 0, "NONE"];
+_smoke attachTo [vehicle player, [0,0,0.15]];
+
 //-----------------------------------
 //-LANDING
-	
+
 	waitUntil {(getPos player select 2) < 1 || isTouchingGround player};
+	detach _smoke;
 	if ((speed player) >= 20) then {
 		waitUntil {animationState player != "para_pilot"};
 		sleep 1;
@@ -142,8 +145,8 @@ sleep 3;
 		player setHit ["legs", 0.1];
 		[player,3] spawn SMS_fnc_setBleeding;
 	};
-	
-	sleep 2;	
+
+	sleep 2;
 	if (side player == RESISTANCE) then {
 		player action ["nvGogglesOff", player];
 	};
