@@ -90,7 +90,7 @@ class HVP {
 
 /* VEHICLE SPAWN SETTINGS */
 
-	vehicleCarMinDist = 150;			//Min distance (METERS) between car spawns
+	vehicleCarMinDist = 500;			//Min distance (METERS) between car spawns
 	vehicleBoatMinDist = 100;			//Min distance (METERS) between boat spawns
 	vehicleCarLootChance = 33;			//Chance of a spawned car having loot inside
 
