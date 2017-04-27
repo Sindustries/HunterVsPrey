@@ -308,9 +308,8 @@ if (isServer) then {
 //-PLAYER LOADOUTS
 cutText ["GEARING UP", "BLACK FADED", 999];
 //["LOADOUT"] call HVP_fnc_getSettings;
-player enableSimulation true;
 [] call HVP_fnc_loadout;
-player enableSimulation false;
+player switchMove "";
 cutText ["", "BLACK FADED", 999];
 //-----------------------------------
 //-INIT SPECTATORS
@@ -419,10 +418,10 @@ if (isServer) then {
 waitUntil {(player getVariable "HVP_spawned") isEqualTo true};
 //-----------------------------------
 playMusic "";
+player enableSimulation true;
 sleep 3;
 waitUntil {(player getVariable "SMS_isUnconscious") isEqualTo false};
 player setCustomAimCoef 0.75;
-player enableSimulation true;
 enableEnvironment true;
 cutText ["", "BLACK IN", 5];
 //-----------------------------------
