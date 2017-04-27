@@ -81,6 +81,7 @@ class HVP_Core {
 		class paraDarkness {};
 		class paraDecoy {};
 		class paraGhost {};
+		class paraSkydive {};
 		class paraTeleport {};
 	}
 
