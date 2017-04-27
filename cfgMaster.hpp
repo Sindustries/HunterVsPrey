@@ -147,7 +147,7 @@ class SMS {
 	SMS_passOutChance = 10;				//Chance of passing out each bleed tick
 	SMS_bleedOutNum = 0.10;				//At what % blood to enter bleedout
 	SMS_bleedoutChance = 10;			//Chance that the player will bleedout each bleed tick while lower than bleedout threshold
-	SMS_bloodLossCOEF = 1.5;			//Overall damage to blood level after adding up damage to all body parts
+	SMS_bloodLossCOEF = 4;				//Overall damage to bleed level after adding up damage to all body parts
 	SMS_fallDamage = 0.25;				//Amount of fall damage received
 };
 
