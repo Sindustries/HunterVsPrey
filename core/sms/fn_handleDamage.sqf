@@ -7,7 +7,7 @@
 			_damage = _this select 2;
 			_source = _this select 3;
 			_projectile = _this select 4;
-			
+
 			if (_projectile in HVP_mines) then {
 				_damage = 0;
 				[_unit, 30] spawn SMS_fnc_setUnconscious;
@@ -15,7 +15,7 @@
 			if (_projectile isEqualTo "") then {
 				_damage = (_damage * SMS_fallDamage);
 			};
-			
+
 			if (HVPGameType isEqualTo 1) then {
 				if (side _unit isEqualTo WEST && !(_projectile in HVP_redAmmo)) then {
 					_unit setDamage ((damage _unit)+(_damage/4));
@@ -48,8 +48,8 @@
 					_unit setHit [_selectionName, ((damage _unit)+(_damage/10))];
 				};
 			};
-			
-			if (_damage >= 0.05) then {
+
+			if (_damage >= 0.1) then {
 				[_unit,(_damage * SMS_bloodLossCOEF)] spawn SMS_fnc_setBleeding;
 			};
 			if (_damage >= 0.75 && (_unit getVariable "SMS_isUnconscious") isEqualTo false) then {
