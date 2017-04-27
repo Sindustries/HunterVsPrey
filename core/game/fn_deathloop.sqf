@@ -27,18 +27,14 @@ while {alive player} do {
 
 	if (side player != sideLogic && alive player) then {
 		if ((player distance2D HVP_phase_pos) > HVP_phase_radius) then {
-			if ((random 100) < 50) then {
-				_damage = 0.05+(random 0.05);
-				player setDamage ((damage player)+_damage);
-				[player, _damage] spawn SMS_fnc_setBleeding;
+			if ((player getVariable ["SMS_bleeding",false]) isEqualTo false) then {
+				[player,SMS_bleedRateMax] spawn SMS_fnc_setBleeding;
 			};
-			if ((random 100) < 5) then {
-				[player, 12] call SMS_fnc_setUnconscious;
-			};
-		};		
+			player setDamage ((damage player)+(HVP_phase_num/100));
+		};
 	};
 
-	sleep 5 + (random 5);
+	sleep 1;
 
 //-----------------------------------
 };
