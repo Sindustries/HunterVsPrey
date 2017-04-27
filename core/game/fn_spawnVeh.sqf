@@ -65,9 +65,7 @@ if (isServer) then {
 			_spawncar disableTIEquipment true;
 
 			if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
-				if ((random 100) < _lootChance) then {
-					[_spawncar] call HVP_fnc_airdropLoot;
-				};
+				[_spawncar] call HVP_fnc_airdropLoot;
 			};
 			_spawncar setPos (getPos _spawncar);
 			_spawncar allowDamage true;
