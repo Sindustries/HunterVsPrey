@@ -10,7 +10,7 @@ private ["_maxNumVeh","_carSel","_spawnPos","_posCheck","_car","_spawnCar","_mar
 
 _minDistSpawn = ["vehicleCarMinDist"] call HVP_fnc_getSetting;
 _lootChance = ["vehicleCarLootChance"] call HVP_fnc_getSetting;
-_maxNumVeh = ((HVPZoneSizeMax*3)/_minDistSpawn);
+_maxNumVeh = ((HVPZoneSizeMax*2)/_minDistSpawn);
 _vehCreated = 0;
 _usedPosArray = [];
 
