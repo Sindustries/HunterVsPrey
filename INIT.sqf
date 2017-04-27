@@ -190,7 +190,7 @@ if (isServer) then {
 			_posFound = false;
 			while {!_posFound} do {
 				HVP_Pos = [(getPos player),0,99999,0,0,0,0] call SIN_fnc_findPos;
-				_objects = nearestObjects [HVP_Pos, ["Building"], (HVP_phase_radius/2)];
+				_objects = nearestObjects [HVP_Pos, ["Building"], (HVP_phase_radius*0.75)];
 				if ((count _objects) >= 50) then {
 					_posFound = true;
 				};
