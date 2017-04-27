@@ -13,19 +13,25 @@
 	for "_i" from 0 to _dropRate do {
 		_weapon = selectRandom (Sinspawn_lootList select 0);
 		_mag1 = selectRandom (getArray (configFile >> "CfgWeapons" >> _weapon >> "magazines"));
-		_mag2 = selectRandom (Sinspawn_lootList select 1);
-		_item = selectRandom (Sinspawn_lootList select 2);
-		_med = selectRandom (Sinspawn_lootList select 3);
-		_clothes = selectRandom (Sinspawn_lootList select 4);
-		_vest = selectRandom (Sinspawn_lootList select 5);
-		_backpack = selectRandom (Sinspawn_lootList select 6);
-		_spClothes = selectRandom (Sinspawn_lootList select 7);
-		_nvg = selectRandom (Sinspawn_lootList select 8);
-		_sns = selectRandom (Sinspawn_lootList select 9);
+		_pistol = selectRandom (Sinspawn_lootList select 1);
+		_magPistol = selectRandom (getArray (configFile >> "CfgWeapons" >> _pistol >> "magazines"));
+		_mag2 = selectRandom (Sinspawn_lootList select 2);
+		_item = selectRandom (Sinspawn_lootList select 3);
+		_med = selectRandom (Sinspawn_lootList select 4);
+		_clothes = selectRandom (Sinspawn_lootList select 5);
+		_vest = selectRandom (Sinspawn_lootList select 6);
+		_backpack = selectRandom (Sinspawn_lootList select 7);
+		_spClothes = selectRandom (Sinspawn_lootList select 8);
+		_nvg = selectRandom (Sinspawn_lootList select 9);
+		_sns = selectRandom (Sinspawn_lootList select 10);
 
 		if (HVP_lootChance > (random 100)) then {
 			_drop addWeaponCargoGlobal [_weapon, 1];
 			_drop addMagazineCargoGlobal [_mag1, floor (random 3)];
+		};
+		if (HVP_lootChance > (random 100)) then {
+			_drop addWeaponCargoGlobal [_pistol, 1];
+			_drop addMagazineCargoGlobal [_magPistol, floor (random 3)];
 		};
 		if (HVP_lootChance > (random 100)) then {
 			_drop addMagazineCargoGlobal [_mag2, floor (random 2)];

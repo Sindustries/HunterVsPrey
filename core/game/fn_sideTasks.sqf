@@ -51,7 +51,7 @@ if (HVPGameType != 1) then {
 	_taskWep setTaskState "Assigned";
 	[_taskWep] spawn {
 		_taskWep = _this select 0;
-		waitUntil {sleep 3; (currentWeapon player) in (Sinspawn_lootList select 0)};
+		waitUntil {sleep 3; (currentWeapon player) in ((Sinspawn_lootList select 0)+(Sinspawn_lootList select 1))};
 		_taskWep setTaskState "Succeeded";
 		["TaskSucceeded",["","Find a Weapon"]] call bis_fnc_showNotification;
 	};

@@ -59,7 +59,8 @@ class HVP {
 	/* Loot chance table */
 
 	HVP_lootChance[] = {	//Hunter vs Prey Mode
-		5,		//weapons
+		5,		//rifles, launchers
+		5,		//pistols
 		33,		//magazines
 		8,		//items
 		4,		//medical
@@ -73,7 +74,8 @@ class HVP {
 	};
 
 	CRU_lootChance[] = {	//Crucible & Predator mode
-		33,		//weapons
+		33,		//rifles, launchers
+		25,		//pistols
 		45,		//magazines
 		12,		//items
 		8,		//medical
