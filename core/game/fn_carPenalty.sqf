@@ -40,7 +40,13 @@ private ["_inCar","_car","_driver","_fuel"];
 			};
 			if (_fuel isEqualTo 0) then {
 				[_car,["wheel_1_1_steering", 1]] remoteExec ["setHit", 0];
+				[_car,["wheel_1_2_steering", 1]] remoteExec ["setHit", 0];
+				[_car,["wheel_1_3_steering", 1]] remoteExec ["setHit", 0];
+				[_car,["wheel_1_4_steering", 1]] remoteExec ["setHit", 0];
 				[_car,["wheel_2_1_steering", 1]] remoteExec ["setHit", 0];
+				[_car,["wheel_2_2_steering", 1]] remoteExec ["setHit", 0];
+				[_car,["wheel_2_3_steering", 1]] remoteExec ["setHit", 0];
+				[_car,["wheel_2_4_steering", 1]] remoteExec ["setHit", 0];
 				waitUntil {sleep 0.1; speed _car < 1};
 				[_car,true] remoteExec ["lock",0];
 				player action ["lightOff", _car];
