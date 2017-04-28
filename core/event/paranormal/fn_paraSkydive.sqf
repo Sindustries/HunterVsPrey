@@ -17,6 +17,7 @@ player setDir (random 360);
 waitUntil {(getPos player select 2) < 25};
 
 player setPos [(_pos select 0),(_pos select 1),0];
+player switchMove "";
 sleep 1;
 player allowDamage true;
 
