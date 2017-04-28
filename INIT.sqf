@@ -185,15 +185,27 @@ if (!isServer) then {
 if (isServer) then {
 	switch (HVPManual) do {
 		case 0: {
-			private ["_posFound","_objects"];
+			private ["_posFound","_objects","_spawnableHouses"];
 			cutText ["FINDING GAME LOCATION", "BLACK FADED", 999];
 			_posFound = false;
 			while {!_posFound} do {
 				HVP_Pos = [(getPos player),0,99999,0,0,0,0] call SIN_fnc_findPos;
 				_objects = nearestObjects [HVP_Pos, ["Building"], (HVP_phase_radius*0.75)];
-				if ((count _objects) >= 50) then {
+				_spawnableHouses = [];
+				{
+					if (count (_x buildingPos -1) > 0) then {
+						_spawnableHouses pushBackUnique _x;
+					};
+				} forEach _objects;
+
+				if ((count _spawnableHouses) >= 50) then {
 					_posFound = true;
 				};
+
+				//if (HVPDebugMode isEqualTo 1) then {
+					systemChat format ["Total Buildings: %1",(count _objects)];
+					systemChat format ["Total Buildings (Spawnable): %1",(count _spawnableHouses)];
+				//};
 			};
 			HVP_Pos_Found = true;
 			publicVariable "HVP_Pos_Found";
