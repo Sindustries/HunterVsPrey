@@ -7,7 +7,7 @@ private ["_pos","_posFound","_posCheck","_side","_pod","_light","_index","_crate
 //-----------------------------------
 //-POS
 
-_pos = _this select 0;
+_pos = _this select 1;
 
 //-----------------------------------
 //-CREATE POD
