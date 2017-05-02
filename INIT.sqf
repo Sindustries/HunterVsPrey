@@ -50,6 +50,7 @@ HVPErrorPos = (getArray(configFile >> "CfgWorlds" >> worldName >> "centerPositio
 HVP_Pos_Found = false;
 HVP_suddenDeath = false;
 HVPZombiesLoaded = false;
+HVPFurntitureLoaded = false;
 HVPLootLoaded = false;
 HVPCarsLoaded = false;
 HVPBoatsLoaded = false;
@@ -262,7 +263,7 @@ if (isServer) then {
 	[90,(300/2),1,[20,30,50,70,80],0] spawn HVP_fnc_tpw_air;
 };
 //-----------------------------------
-//-INIT LOOT, CARS, BOATS, ZOMBEES!
+//-INIT LOOT, CARS, BOATS, ZOMBEES! & FURNITURE
 ("HUDProgressBar" call BIS_fnc_rscLayer) cutRsc ["HVPHUDProgressBar","PLAIN",-1,true];
 uiNameSpace getVariable "PBarProgress" ctrlSetTextColor [0.2, 0.5, 0.9, 1];
 
@@ -277,6 +278,16 @@ if (HVPZombieMode isEqualTo 1) then {
 		waitUntil {HVPZombiesLoaded isEqualTo true};
 	};
 };
+
+cutText ["LOADING FURNITURE", "BLACK FADED", 999];
+if (isServer) then {
+	[] call HVP_fnc_HFSHouseFinder;
+	HVPFurntitureLoaded = true;
+	publicVariable "HVPFurntitureLoaded";
+} else {
+	waitUntil {HVPFurntitureLoaded isEqualTo true};
+};
+[] call HVP_fnc_HFSMoveComp;
 
 cutText ["LOADING LOOT", "BLACK FADED", 999];
 if (isServer) then {
@@ -304,7 +315,6 @@ if (isServer) then {
 } else {
 	waitUntil {HVPBoatsLoaded isEqualTo true};
 };
-
 
 ("HUDProgressBar" call BIS_fnc_rscLayer) cutText ["","PLAIN"];
 cutText ["", "BLACK FADED", 999];
