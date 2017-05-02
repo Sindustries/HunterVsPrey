@@ -129,6 +129,7 @@ class HVP_Core {
 
 	class FX {
 		file = "core\fx";
+		class gasMask {};
 		class knockOutGun {};
 		class mineDetector {};
 		class nukeFXash {};

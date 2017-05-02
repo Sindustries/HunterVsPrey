@@ -202,10 +202,10 @@ if (isServer) then {
 					_posFound = true;
 				};
 
-				//if (HVPDebugMode isEqualTo 1) then {
+				if (HVPDebugMode isEqualTo 1) then {
 					systemChat format ["Total Buildings: %1",(count _objects)];
 					systemChat format ["Total Buildings (Spawnable): %1",(count _spawnableHouses)];
-				//};
+				};
 			};
 			HVP_Pos_Found = true;
 			publicVariable "HVP_Pos_Found";
@@ -420,6 +420,7 @@ switch (HVPGameType) do {
 		};
 	};
 };
+[] spawn HVP_fnc_gasMask;
 [] call HVP_fnc_knockOutGun;
 [] spawn HVP_fnc_mineDetector;
 [] spawn HVP_fnc_toxicGas;

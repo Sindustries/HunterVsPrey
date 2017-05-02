@@ -73,7 +73,7 @@ class CfgSounds
         sound[] = {"SFX\raptor5.ogg", db+1, 1.0};
         titles[] = {0,""};
     };
-	
+
 	//ALIA NUKE
 	class murmur
 	{
@@ -86,29 +86,49 @@ class CfgSounds
 		name = "nuke"; // Name for mission editor
 		sound[] = {\SFX\nuke.ogg, db+20, 1.0};
 		titles[] = {0, ""};
-	};	
+	};
 	class nuke_2
 	{
 		name = "nuke_2"; // Name for mission editor
 		sound[] = {\SFX\nuke_2.ogg, db+30, 1.0};
 		titles[] = {0, ""};
-	};	
+	};
 	class nuke_3
 	{
 		name = "nuke_3"; // Name for mission editor
 		sound[] = {\SFX\nuke_3.ogg, db+25, 1.0};
 		titles[] = {0, ""};
-	};		
+	};
 	class wind_strong
 	{
 		name = "wind_strong"; // Name for mission editor
 		sound[] = {\SFX\wind_strong.ogg, 1, 1.0};
 		titles[] = {0, ""};
 	};
-	class geiger
-	{
-		name = "geiger"; // Name for mission editor
-		sound[] = {\SFX\geiger.ogg, .7, 1.0};
-		titles[] = {0, ""};
-	};	
-}; 
+
+    //RAD
+    class geiger
+    {
+        name = "geiger"; // Name for mission editor
+        sound[] = {\SFX\geiger.ogg, .7, 1.0};
+        titles[] = {0, ""};
+    };
+    class breath
+    {
+        name = "breathe";
+        sound[] = {"\SFX\breath.ogg", 0.6, 1.0};
+        titles[] = {0,""};
+    };
+    class echipare
+    {
+        name = "echipare";
+        sound[] = {"\SFX\echipare.ogg", 1, 1.0};
+        titles[] = {0,""};
+    };
+    class dezechipare
+    {
+        name = "dezechipare";
+        sound[] = {"\SFX\dezechipare.ogg", 1, 1.0};
+        titles[] = {0,""};
+    };
+};
