@@ -1,6 +1,6 @@
 class Params {
 
-	class brk4 {
+	class brk0 {
         title = "//-MAIN";
         values[] = {0};
         texts[] = {""};
@@ -8,7 +8,7 @@ class Params {
 		isGlobal = 1;
     };
 
-	class game5 {
+	class game1 {
 		title = "Game Type";
 		values[] = {1,2,3};
 		texts[] = {"Hunter vs Prey","Crucible","Predator"};
@@ -16,7 +16,7 @@ class Params {
 		isGlobal = 1;
 	};
 
-	class gameloc7 {
+	class gameloc2 {
 		title = "Game Location:";
 		values[] = {0,1};
 		texts[] = {"Random","Manual"};
@@ -24,7 +24,15 @@ class Params {
 		isGlobal = 1;
 	};
 
-	class gamedelay3 {
+	class furn3 {
+		title = "Furniture (Makes cities very laggy):";
+		values[] = {0,10,25,50,75,100};
+		texts[] = {"Disabled","10% of buildings","25% of buildings","50% of buildings","75% of buildings","100% of buildings"};
+		default = 0;
+		isGlobal = 1;
+	};
+
+	class gamedelay4 {
 		title = "Delay Game Start:";
 		values[] = {1,0};
 		texts[] = {"True","False"};

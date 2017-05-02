@@ -50,6 +50,7 @@ HVPErrorPos = (getArray(configFile >> "CfgWorlds" >> worldName >> "centerPositio
 HVP_Pos_Found = false;
 HVP_suddenDeath = false;
 HVPZombiesLoaded = false;
+HVPFurnitureMode = (paramsArray select 3);
 HVPFurntitureLoaded = false;
 HVPLootLoaded = false;
 HVPCarsLoaded = false;
@@ -279,15 +280,17 @@ if (HVPZombieMode isEqualTo 1) then {
 	};
 };
 
-cutText ["LOADING FURNITURE", "BLACK FADED", 999];
-if (isServer) then {
-	[] call HVP_fnc_HFSHouseFinder;
-	HVPFurntitureLoaded = true;
-	publicVariable "HVPFurntitureLoaded";
-} else {
-	waitUntil {HVPFurntitureLoaded isEqualTo true};
+if (HVPFurnitureMode > 0) then {
+	cutText ["LOADING FURNITURE", "BLACK FADED", 999];
+	if (isServer) then {
+		[] call HVP_fnc_HFSHouseFinder;
+		HVPFurntitureLoaded = true;
+		publicVariable "HVPFurntitureLoaded";
+	} else {
+		waitUntil {HVPFurntitureLoaded isEqualTo true};
+	};
+	[] call HVP_fnc_HFSMoveComp;
 };
-[] call HVP_fnc_HFSMoveComp;
 
 cutText ["LOADING LOOT", "BLACK FADED", 999];
 if (isServer) then {

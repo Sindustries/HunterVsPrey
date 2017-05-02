@@ -20,7 +20,7 @@ _houses =  (nearestObjects [_mkrpos, ["house"], _mkrmax]);// Fills an array with
 uisleep 3;
 _counter = _housenumber;
 while {_i < _housenumber} do {
-	if (random 100 < 20) then {
+	if (random 100 < HVPFurnitureMode) then {
 		[_houses select (_i)] call HVP_fnc_HFSCompSpawner;		//every house executes the script
 	};
 	_i = _i+1;
