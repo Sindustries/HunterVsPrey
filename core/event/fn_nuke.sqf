@@ -28,15 +28,15 @@ clearBackpackCargoGlobal _eventHeli;
 clearWeaponCargoGlobal _eventHeli;
 _eventHeli flyInHeight 100+(random 50);
 _eventHeli setDir ((getPos _eventHeli) getDir _nukePos);
-	
-_eventheligroup = createGroup west; 
+
+_eventheligroup = createGroup west;
 _pilot = _eventheligroup createUnit ["B_Helipilot_F", [5,5,5], [], 0, "NONE"];
 _pilot setcaptive true;
 _pilot setskill 0;
 _pilot disableAI "TARGET";
 _pilot disableAI "AUTOTARGET";
-_eventheligroup setBehaviour "CARELESS"; 
-_eventheligroup setCombatMode "BLUE"; 	
+_eventheligroup setBehaviour "CARELESS";
+_eventheligroup setCombatMode "BLUE";
 _eventheligroup allowfleeing 0;
 _eventHeli lock true;
 _eventHeli allowDamage false;
@@ -45,8 +45,8 @@ _pilot assignAsDriver _eventHeli;
 
 _obj_nuke = createVehicle ["Land_Device_slingloadable_F", _heliSpawnPos,[], 0, "CAN COLLIDE"];
 _eventHeli setSlingLoad _obj_nuke;
- 
-_pilot moveindriver _eventHeli;	
+
+_pilot moveindriver _eventHeli;
 _pilot doMove _nukePos;
 _eventheligroup setSpeedMode "FULL";
 
@@ -62,9 +62,9 @@ _obj_nuke attachTo [_parachute,[0,0,0.5]];
 
 //-----------------------------------
 //-FIND END LOCATION FOR HELI
-	
+
 _heliEndPos = [HVP_phase_pos,(HVP_phase_radius + 2000),(HVP_phase_radius + 4000),0,1,0,0] call SIN_fnc_findPos;
-_pilot doMove _heliEndPos;		
+_pilot doMove _heliEndPos;
 
 [_pilot,_eventHeli,_nukePos] spawn {
 	_pilot = _this select 0;
@@ -114,7 +114,7 @@ hideObjectGlobal _obj_nuke;
 
 if (_weather_effect) then {
 	[] remoteExec ["HVP_fnc_nukeFXweather", 0];
-	//[] remoteExec ["HVP_fnc_nukeFXfog", 0];
+	[] remoteExec ["HVP_fnc_nukeFXfog", 0];
 };
 if (_damage_buildings_units) then {
 	[_obj_nuke,_radius] spawn HVP_fnc_nukeFXdamage;
