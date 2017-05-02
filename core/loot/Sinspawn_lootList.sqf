@@ -152,7 +152,9 @@ Sinspawn_lootList = [
 "U_O_T_Sniper_F",
 "U_O_T_FullGhillie_tna_F"
 ], [ //NIGHT VISION
-
+"H_PilotHelmetFighter_B",
+"H_PilotHelmetFighter_O",
+"H_PilotHelmetFighter_I"
 ], [ //SUPPRESSORS
 "muzzle_snds_H",
 "muzzle_snds_L",
