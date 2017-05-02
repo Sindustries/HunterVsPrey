@@ -25,7 +25,7 @@ if (HVPGameType != 1) then {
 	_taskNVG setTaskState "Assigned";
 	[_taskNVG] spawn {
 		_taskNVG = _this select 0;
-		waitUntil {sleep 3; (hmd player) in (Sinspawn_lootList select 8)};
+		waitUntil {sleep 3; (hmd player) in (Sinspawn_lootList select 9)};
 		_taskNVG setTaskState "Succeeded";
 		["TaskSucceeded",["","Find Night Vision Goggles"]] call bis_fnc_showNotification;
 	};
