@@ -9,9 +9,6 @@ if (lifeState player isEqualTo "INCAPACITATED" || lifeState player isEqualTo "IN
 
 ("HUDAbilLayer" call BIS_fnc_rscLayer) cutText ["","PLAIN"];
 ("HUDBLOODLayer" call BIS_fnc_rscLayer) cutText ["","PLAIN"];
-("HUDHPBar" call BIS_fnc_rscLayer) cutRsc ["","PLAIN"];
-
-uiNameSpace getVariable "HPBarProgress" ctrlSetTextColor [0.2, 0.9, 0.3, 0.7];
 uiNameSpace getVariable "HPBarProgress" progressSetPosition 0;
 
 //-----------------------------------
