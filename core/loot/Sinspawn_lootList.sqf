@@ -61,10 +61,7 @@ Sinspawn_lootList = [
 "U_B_T_Sniper_F",
 "U_B_T_FullGhillie_tna_F",
 "U_O_T_Sniper_F",
-"U_O_T_FullGhillie_tna_F",
-"Mask_M50",
-"Mask_M40",
-"Mask_M40_OD"
+"U_O_T_FullGhillie_tna_F"
 ], [ //NIGHT VISION
 
 ], [ //SUPPRESORS
@@ -153,10 +150,7 @@ Sinspawn_lootList = [
 "U_B_T_Sniper_F",
 "U_B_T_FullGhillie_tna_F",
 "U_O_T_Sniper_F",
-"U_O_T_FullGhillie_tna_F",
-"Mask_M50",
-"Mask_M40",
-"Mask_M40_OD"
+"U_O_T_FullGhillie_tna_F"
 ], [ //NIGHT VISION
 
 ], [ //SUPPRESSORS
@@ -264,7 +258,7 @@ for "_i" from 0 to ((count _cfg)-1) do {
 	if (isClass (_cfg select _i)) then {
 		_cfgName = configName (_cfg select _i);
 		if (_cfgName isKindof ["HelmetBase", configFile >> "CfgWeapons"] || _cfgName isKindOf ["H_HelmetB", configFile >> "CfgWeapons"]) then {
-			if ((getNumber ((_cfg select _i) >> "scope") == 2) && !(_cfgName in (Sinspawn_lootList select 7))) then {
+			if ((getNumber ((_cfg select _i) >> "scope") == 2) && !(_cfgName in (Sinspawn_lootList select 8))) then {
 				if ((count (getArray ((_cfg select _i) >> "subItems"))) isEqualTo 0) then {
 					(Sinspawn_lootList select 5) pushBackUnique _cfgName;
 				} else {
@@ -281,7 +275,7 @@ for "_i" from 0 to ((count _cfg)-1) do {
 	if (isClass (_cfg select _i)) then {
 		_cfgName = configName (_cfg select _i);
 		if (_cfgName isKindOf ["Uniform_Base", configFile >> "CfgWeapons"] && (getNumber ((_cfg select _i) >> "scope") == 2)) then {
-			if (!(_cfgName in (Sinspawn_lootList select 7))) then {
+			if (!(_cfgName in (Sinspawn_lootList select 8))) then {
 				(Sinspawn_lootList select 5) pushBackUnique _cfgName;
 			};
 		};

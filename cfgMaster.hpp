@@ -133,7 +133,7 @@ class HVP {
 	/* Music tracks to be played while game is loading */
 	HVP_music[] = { "AmbientTrack01_F_EXP","AmbientTrack01a_F_EXP","AmbientTrack01b_F_EXP","Fallout","Wasteland","MAD","BackgroundTrack01_F_EPC","AmbientTrack01_F_EPB" };
 	/* Gas Masks */
-	HVP_gasMasks[] = { "H_PilotHelmetFighter_B","H_PilotHelmetFighter_O","H_PilotHelmetFighter_I","H_CrewHelmetHeli_B","H_CrewHelmetHeli_O","H_CrewHelmetHeli_I","H_Shemag_khk","H_Shemag_tan","H_Shemag_olive","H_Shemag_olive_hs","H_ShemagOpen_khk","H_ShemagOpen_tan","H_RacingHelmet_1_F","H_RacingHelmet_2_F","H_RacingHelmet_3_F","H_RacingHelmet_4_F","H_RacingHelmet_1_black_F","H_RacingHelmet_1_blue_F","H_RacingHelmet_1_green_F","H_RacingHelmet_1_red_F","H_RacingHelmet_1_white_F","H_RacingHelmet_1_yellow_F","H_RacingHelmet_1_orange_F","G_Bandanna_aviator","G_Bandanna_beast","G_Bandanna_blk","G_Bandanna_khk","G_Bandanna_oli","G_Bandanna_shades","G_Bandanna_sport","G_Bandanna_tan","H_HelmetO_ViperSP_hex_F","H_HelmetO_ViperSP_ghex_F","G_Balaclava_TI_blk_F","G_Balaclava_TI_G_blk_F","G_Balaclava_TI_G_tna_F","G_Balaclava_TI_tna_F","Mask_M50","Mask_M40","Mask_M40_OD" };
+	HVP_gasMasks[] = { "H_PilotHelmetFighter_B","H_PilotHelmetFighter_O","H_PilotHelmetFighter_I","H_CrewHelmetHeli_B","H_CrewHelmetHeli_O","H_CrewHelmetHeli_I","H_HelmetO_ViperSP_hex_F","H_HelmetO_ViperSP_ghex_F","Mask_M50","Mask_M40","Mask_M40_OD" };
 	/* Red Team "knockout" guns */
 	HVP_redGuns[] = { "hgun_P07_F" };
 	HVP_redAmmo[] = { "B_9x21_Ball_Tracer_Red" };
