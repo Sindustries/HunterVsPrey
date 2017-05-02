@@ -41,6 +41,7 @@ class RscTitles {
 	#include "GUI\HVP_HUD.hpp"
 	#include "GUI\HVP_HUD_subs.hpp"
 	#include "GUI\HVP_HUD_blood.hpp"
+	#include "GUI\equipment_prot.hpp"
 
 	class Default
 	{
