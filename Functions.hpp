@@ -15,6 +15,13 @@ class HVP_Core {
 		class getSetting {};
 		class getSettings {};
 		class updateProgressBar {};
+		class HFSCompCreator {};
+		class HFSCompSpawner {};
+		class HFSDrop {};
+		class HFSHouseFinder {};
+		class HFSMove {};
+		class HFSMoveComp {};
+		class HFSRotate {};
 	};
 
 	class loot {
