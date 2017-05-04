@@ -28,10 +28,10 @@ end_HVPloser = {
 
 if (HVPGameType isEqualTo 1) then {
 	while {true} do {
-		_redAlive = {isPlayer _x && !alive _x && side _x isEqualTo east} count allUnits;
-		_bluAlive = {isPlayer _x && !alive _x && side _x isEqualTo west} count allUnits;
-		_mercAlive = {isPlayer _x && !alive _x && side _x isEqualTo resistance} count allUnits;
-		
+		_redAlive = {isPlayer _x && (_x getVariable ["HVP_alive",false]) isEqualTo false && side _x isEqualTo east} count allUnits;
+		_bluAlive = {isPlayer _x && (_x getVariable ["HVP_alive",false]) isEqualTo false && side _x isEqualTo west} count allUnits;
+		_mercAlive = {isPlayer _x && (_x getVariable ["HVP_alive",false]) isEqualTo false && side _x isEqualTo resistance} count allUnits;
+
 		if (_redAlive isEqualTo 0 && _bluAlive > 0 && _mercAlive isEqualTo 0) exitWith {
 			{
 				if (isPlayer _x && side _x isEqualTo WEST) then {
@@ -49,7 +49,7 @@ if (HVPGameType isEqualTo 1) then {
 					};
 				};
 			} forEach allUnits;
-			
+
 			sleep _delay;
 			"bluewin" call BIS_fnc_endMissionServer;
 		};
@@ -105,10 +105,10 @@ if (HVPGameType isEqualTo 1) then {
 					};
 				};
 			} forEach allUnits;
-			
+
 			sleep _delay;
 			"nobodywin" call BIS_fnc_endMissionServer;
-		};			
+		};
 		sleep 3;
 	};
 };
@@ -118,8 +118,8 @@ if (HVPGameType isEqualTo 1) then {
 
 if (HVPGameType isEqualTo 2) then {
 	while {true} do {
-		_allAlive = {isPlayer _x && alive _x && side _x != sideLogic} count allUnits;
-		
+		_allAlive = {isPlayer _x && (_x getVariable ["HVP_alive",false]) isEqualTo true && side _x != sideLogic} count allUnits;
+
 		if (_allAlive isEqualTo 1) exitWith {
 			{
 				if (isPlayer _x && alive _x && side _x != sideLogic) then {
@@ -151,7 +151,7 @@ if (HVPGameType isEqualTo 2) then {
 					};
 				};
 			} forEach allUnits;
-			
+
 			sleep _delay;
 			"nobodywin" call BIS_fnc_endMissionServer;
 		};
@@ -165,9 +165,9 @@ if (HVPGameType isEqualTo 2) then {
 if (HVPGameType isEqualTo 3) then {
 	while {true} do {
 		private ["_preyAlive","_predAlive"];
-		_preyAlive = {isPlayer _x && alive _x && side _x != RESISTANCE && side _x != sideLogic} count allUnits;
-		_predAlive = {isPlayer _x && alive _x && side _x isEqualTo resistance} count allUnits;
-		
+		_preyAlive = {isPlayer _x && (_x getVariable ["HVP_alive",false]) isEqualTo false && side _x != RESISTANCE && side _x != sideLogic} count allUnits;
+		_predAlive = {isPlayer _x && (_x getVariable ["HVP_alive",false]) isEqualTo false && side _x isEqualTo resistance} count allUnits;
+
 		if (_preyAlive isEqualTo 0) exitWith {
 			{
 				if (isPlayer _x && alive _x && side _x != sideLogic) then {
@@ -206,7 +206,7 @@ if (HVPGameType isEqualTo 3) then {
 					};
 				};
 			} forEach allUnits;
-			
+
 			sleep _delay;
 			"preywin" call BIS_fnc_endMissionServer;
 		};
