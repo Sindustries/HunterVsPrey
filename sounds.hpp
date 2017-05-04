@@ -116,19 +116,19 @@ class CfgSounds
     class breath
     {
         name = "breathe";
-        sound[] = {"\SFX\breath.ogg", 0.6, 1.0};
+        sound[] = {"\SFX\breath.ogg", 0.6, 1.0, 25};
         titles[] = {0,""};
     };
     class echipare
     {
         name = "echipare";
-        sound[] = {"\SFX\echipare.ogg", 1, 1.0};
+        sound[] = {"\SFX\echipare.ogg", 1, 1.0, 25};
         titles[] = {0,""};
     };
     class dezechipare
     {
         name = "dezechipare";
-        sound[] = {"\SFX\dezechipare.ogg", 1, 1.0};
+        sound[] = {"\SFX\dezechipare.ogg", 1, 1.0, 25};
         titles[] = {0,""};
     };
 };

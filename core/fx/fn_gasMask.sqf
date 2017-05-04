@@ -1,29 +1,30 @@
-fnc_overlay = { 0 cutRsc ["equipment_prot","PLAIN", 1, false];	sleep 1.6;};
-
-sleep 1;
-
+/*
+	fn_gaskMask
+	Author: Sinbane
+	Displays an overlay and plays sounds while player is wearing a gas mask
+*/
 while {alive player} do {
+//-----------------------------------
 
 	waitUntil {(headgear player) in HVP_gasMasks || (goggles player) in HVP_gasMasks};
-		playsound "echipare";
-		sleep 2.5;
-		overlayeffects = 0 spawn fnc_overlay;
-		sleep 0.5;
-		0 fadeSound (soundVolume/6);
+	[player,["echipare",10]] remoteExec ["say3D", 0];
 
-		[] spawn {
-			while {(headgear player) in HVP_gasMasks || (goggles player) in HVP_gasMasks && alive player} do {
-				_int_b = linearConversion [0, 1,(getFatigue player), 5, 0, true];
-				playsound "breath";
-				sleep (2 + _int_b);
-			};
+	sleep 2.5;
+	["HVPgasMaskLayer","equipment_prot"] call HVP_fnc_showEventIcon;
+
+	[] spawn {
+		while {(headgear player) in HVP_gasMasks || (goggles player) in HVP_gasMasks && alive player} do {
+			_int_b = linearConversion [0, 1,(getFatigue player), 5, 0, true];
+			[player,["breath",10]] remoteExec ["say3D", 0];
+			sleep (2 + _int_b);
 		};
+	};
 
 	waitUntil {!((headgear player) in HVP_gasMasks) && !((goggles player) in HVP_gasMasks) || !alive player};
-		playsound "dezechipare";
-		terminate overlayeffects;
-		0 cutText ["","PLAIN"];
-		0 fadeSound 1;
+	[player,["dezechipare",10]] remoteExec ["say3D", 0];
+	["HVPgasMaskLayer"] call HVP_fnc_hideEventIcon;
 
 	sleep 0.1;
+
+//-----------------------------------
 };
