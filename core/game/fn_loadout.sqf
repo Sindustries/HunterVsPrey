@@ -332,7 +332,7 @@ if (_mainWeapon isEqualTo "Random") then {
 if (_sideWeapon isEqualTo "Random") then {
 	_weaponFound = false;
 	while {!_weaponFound} do {
-		_weapon = selectRandom (Sinspawn_lootList select 0);
+		_weapon = selectRandom (Sinspawn_lootList select 1);
 		if (_weapon isKindOf ["Pistol", configFile >> "CfgWeapons"]) then {
 			_weaponFound = true;
 		};
