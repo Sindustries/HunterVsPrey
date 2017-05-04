@@ -49,10 +49,9 @@ if (isServer) then {
 	_errorCount = 0;
 	while {_vehCreated < _maxNumVeh} do {
 
-		_spawnPos = [HVP_pos,0,(HVPZoneSizeMax * 4),0.25,0,0,0] call BIS_fnc_findSafePos;
-		_posCheck = [_spawnPos] call SIN_fnc_checkPos;
+		_spawnPos = [HVP_pos,0,(HVPZoneSizeMax * 4),0.25] call SIN_fnc_findPos;
 		_distCheck = [_spawnPos,_usedPosArray,_minDistSpawn] call SIN_fnc_checkDist;
-		if (_posCheck && _distCheck) then {
+		if (_distCheck) then {
 			_spawncar = (selectRandom _carSel) createVehicle _spawnpos;
 			_spawncar allowDamage false;
 			_spawncar setDir (random 360);
