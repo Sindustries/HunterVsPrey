@@ -48,7 +48,7 @@ if (isServer) then {
 	_errorCount = 0;
 	while {_boatsCreated < _maxNumBoats} do {
 
-		_shorePos = [HVP_pos,0,HVPZoneSizeMax,0,0,9999,1] call SIN_fnc_findPos;
+		_shorePos = [HVP_pos,0,(HVPZoneSizeMax*1.5),0,0,9999,1] call SIN_fnc_findPos;
 		_spawnPos = [_shorePos,0,50,0.25,2,0,0] call SIN_fnc_findPos;
 		_distCheck = [_spawnPos,_usedPosArray,_minDistSpawn] call SIN_fnc_checkDist;
 		if (_distCheck) then {
