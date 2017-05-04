@@ -18,8 +18,8 @@ class Params {
 
 	class gameloc2 {
 		title = "Game Location:";
-		values[] = {0,1};
-		texts[] = {"Random","Manual"};
+		values[] = {0,1,2};
+		texts[] = {"Anywhere","Random City","Manual"};
 		default = 0;
 		isGlobal = 1;
 	};
