@@ -1,9 +1,9 @@
 /*
     LOADOUT CONFIG
 */
-class LOADOUT {	
+class LOADOUT {
 	/* HUNTER VS PREY MODE */
-	class HVP {	
+	class HVP {
 		/* BLUE TEAM */
 		class BLUE {
 			class TeamLeader {
@@ -42,7 +42,7 @@ class LOADOUT {
 				loadoutMask = "";
 				loadoutLinkedItems[] = { "itemMap", "itemWatch", "itemRadio", "itemCompass" };
 				loadoutInventoryItems[] = { "FirstAidKit" };
-				loadoutInventoryMagazines[] = { "1Rnd_SmokeGreen_Grenade_shell","1Rnd_SmokeBlue_Grenade_shell","UGL_FlareGreen_F" }; 
+				loadoutInventoryMagazines[] = { "1Rnd_SmokeGreen_Grenade_shell","1Rnd_SmokeBlue_Grenade_shell","UGL_FlareGreen_F" };
 			};
 			class Medic {
 				loadoutType = "B_medic_F";
@@ -98,7 +98,7 @@ class LOADOUT {
 				loadoutHelmet = "";
 				loadoutBackpack = "";
 				loadoutBinoculars = "";
-				loadoutNightVision = "NVGoggles_OPFOR";
+				loadoutNightVision = "Kio_Z_Mask_NVG";
 				loadoutMask = "";
 				loadoutLinkedItems[] = { "itemMap", "itemWatch", "itemRadio", "itemCompass" };
 				loadoutInventoryItems[] = { "FirstAidKit" };
@@ -136,7 +136,7 @@ class LOADOUT {
 				loadoutHelmet = "";
 				loadoutBackpack = "B_Kitbag_cbr";
 				loadoutBinoculars = "";
-				loadoutNightVision = "NVGoggles_OPFOR";
+				loadoutNightVision = "Kio_Z_Mask_NVG";
 				loadoutMask = "";
 				loadoutLinkedItems[] = { "itemMap", "itemWatch", "itemRadio", "itemCompass" };
 				loadoutInventoryItems[] = { "FirstAidKit","ToolKit","MineDetector" };
@@ -155,12 +155,12 @@ class LOADOUT {
 				loadoutHelmet = "";
 				loadoutBackpack = "O_UAV_01_backpack_F";
 				loadoutBinoculars = "";
-				loadoutNightVision = "NVGoggles_OPFOR";
+				loadoutNightVision = "Kio_Z_Mask_NVG";
 				loadoutMask = "";
 				loadoutLinkedItems[] = { "itemMap", "itemWatch", "itemRadio", "itemCompass", "O_UavTerminal" };
 				loadoutInventoryItems[] = { "FirstAidKit" };
 				loadoutInventoryMagazines[] = { "SmokeShellRed","ACE_M84" };
-			};			
+			};
 		};
 		/* MERCENARY */
 		class MERC {
@@ -245,7 +245,6 @@ class LOADOUT {
 			loadoutLinkedItems[] = { "itemMap", "itemWatch", "itemRadio", "itemCompass", "itemGPS" };
 			loadoutInventoryItems[] = { "FirstAidKit","MineDetector" };
 			loadoutInventoryMagazines[] = { "SmokeShellRed", "APERSBoundingMine_Range_Mag","ACE_M84" };
-		};		
-	};	
+		};
+	};
 };
-	

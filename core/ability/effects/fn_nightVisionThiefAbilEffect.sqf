@@ -18,24 +18,25 @@ if ((player distance _pos) < 80) then {
 		if (player isKindOf "O_spotter_F") then {
 			player removeItem "NVGoggles_blk_F";
 		} else {
-			player removeItem "NVGoggles_OPFOR";
+			player removeItem "Kio_Z_Mask_NVG";
 		};
+
 		titleText ["YOU'VE BEEN HIT BY NIGHT VISION THIEF!", "PLAIN DOWN", 0.6];
-		
+
 		[_time] call HVP_fnc_progressBar;
-		
+
 		if (player isKindOf "O_spotter_F") then {
 			player linkItem "NVGoggles_blk_F";
 		} else {
-			player linkItem "NVGoggles_OPFOR";
+			player linkItem "Kio_Z_Mask_NVG";
 		};
 	};
 
-	if (side player == WEST) then {	
+	if (side player == WEST) then {
 		player action ["GunLightOff", player];
 		player action ["nvGoggles", player];
 		titleText ["TEMPORARY NIGHT VISION", "PLAIN DOWN", 0.6];
-				
+
 		[_time] call HVP_fnc_progressBar;
 
 		player action ["nvGogglesOff", player];
