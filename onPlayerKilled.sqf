@@ -5,7 +5,7 @@
 */
 //-----------------------------------
 
-if (lifeState player isEqualTo "INCAPACITATED" || lifeState player isEqualTo "INJURED" || lifeState player isEqualTo "HEALTHY") exitWith {};
+player setVariable ["HVP_alive",false,true];
 
 ("HUDAbilLayer" call BIS_fnc_rscLayer) cutText ["","PLAIN"];
 ("HUDBLOODLayer" call BIS_fnc_rscLayer) cutText ["","PLAIN"];
