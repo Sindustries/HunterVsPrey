@@ -4,7 +4,7 @@
 	Description: Horror based Battle Royale style Team Deathmatch with custom classes, events & abilities
 */
 private "_version";
-_version = "8.16.35";
+_version = "12";
 //-----------------------------------
 waitUntil {isPlayer player};
 enableSaving [false, false];
