@@ -119,6 +119,12 @@ class CfgSounds
         sound[] = {"\SFX\breath.ogg", 0.6, 1.0, 25};
         titles[] = {0,""};
     };
+    class cough
+    {
+        name = "cough";
+        sound[] = {"\SFX\cough.ogg", 0.6, 1.0, 25};
+        titles[] = {0,""};
+    };
     class echipare
     {
         name = "echipare";

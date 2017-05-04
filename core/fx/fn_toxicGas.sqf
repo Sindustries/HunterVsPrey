@@ -54,6 +54,7 @@ while {true} do {
 			enableCamShake true;	 // enables camera shake
 			addCamShake [10, 45, 10];	// sets shakevalues
 			player setStamina 3; // sets stamina to pretty much empty
+			[player,["cough",10]] remoteExec ["say3D", 0]; // player coughs
 			5 fadeSound 0.1;	 // fades the sound to 10% in 5 seconds
 			sleep 5;
 			if (playerSide isEqualTo WEST && HVPGameType isEqualTo 1 || HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
