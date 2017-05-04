@@ -504,7 +504,7 @@ cutText ["", "BLACK IN", 5];
 	("HUDHPBarLayer" call BIS_fnc_rscLayer) cutRsc ["HVPHUDHPBar","PLAIN",-1,false];
 	uiNameSpace getVariable "HPBarProgress" ctrlSetTextColor [0.2, 0.9, 0.3, 0.7];
 	uiNameSpace getVariable "HPBarProgress" progressSetPosition 1;
-	//[] spawn SMS_fnc_updateHP;
+	[] spawn SMS_fnc_updateHP;
 
 	if (HVPPhaseType isEqualTo 2) then {
 		uiNameSpace getVariable "HVP_HUD_AbilTitle" ctrlSetText "WAITING";

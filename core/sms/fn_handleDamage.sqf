@@ -55,7 +55,5 @@
 			if (_damage >= 0.75 && (_unit getVariable "SMS_isUnconscious") isEqualTo false) then {
 				[_unit,30] spawn SMS_fnc_setUnconscious;
 			};
-
-			uiNameSpace getVariable "HPBarProgress" progressSetPosition (1 - (damage player));
 		};
 	}];
