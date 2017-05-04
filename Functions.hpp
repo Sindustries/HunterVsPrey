@@ -164,6 +164,7 @@ class Zombies {
 		class setSpawn {};
 		class spawnZombies {};
 		class zDeleter {};
+		class zMask {};
 		class zMonitor {};
 		class zCamo {};
 	};

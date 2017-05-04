@@ -57,6 +57,7 @@ if (isServer) then {
 [] spawn {
 	waitUntil {sleep 1; HVP_phase_active isEqualTo "true"};
 	[] spawn z_fnc_zMonitor;
+	[] spawn z_fnc_zMask;
 	if (isServer) then {
 		[] spawn z_fnc_zDeleter;
 	};
