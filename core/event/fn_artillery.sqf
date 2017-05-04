@@ -42,13 +42,12 @@
 		_MLRS_gunnerArray pushBack _MLRSgunner;
 	};
 
+	if (_type isEqualTo 0) then {
+		["HUDartyLayer","HVPHUDartyImg"] remoteExecCall  ["HVP_fnc_showEventIcon", 0];
+	};
 	{titleText ["ARTILLERY BARRAGE COMMENCING", "PLAIN DOWN", 0.5];} remoteExec ["bis_fnc_call", 0];
 	"WARNING: Artillery Barrage incoming to the area marked by a red circle. If you are inside it, don't linger too long.." remoteExec ["systemChat", 0];
 	true remoteExec ["showChat", 0];
-
-	if (_type isEqualTo 0) then {
-		["HUDartyLayer","HVPHUDartyImg"] remoteExec ["HVP_fnc_showEventIcon", 0];
-	};
 
 	sleep 25;
 
@@ -71,5 +70,5 @@
 	deleteMarker _artilleryMarker2;
 
 	if (_type isEqualTo 0) then {
-		["HUDartyLayer"] remoteExec ["HVP_fnc_hideEventIcon", 0];
+		["HUDartyLayer"] remoteExecCall ["HVP_fnc_hideEventIcon", 0];
 	};

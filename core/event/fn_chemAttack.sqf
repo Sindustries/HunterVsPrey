@@ -30,9 +30,9 @@ _chemMarker2 setMarkerColor "ColorRed";
 _chemMarker2 setMarkerSize [0.75,0.75];
 _chemMarker2 setMarkerAlpha 1;
 
+["HUDchemLayer","HVPHUDchemImg"] remoteExecCall ["HVP_fnc_showEventIcon", 0];
 {titleText ["CHEMICAL ATTACK COMMENCING", "PLAIN DOWN", 0.5];} remoteExec ["bis_fnc_call", 0];
 "WARNING: A Chemical Attack is about to commence on the area marked by a red skull. You'll be safe from it if you have the correct protection!" remoteExec ["systemChat", 0];
-["HUDchemLayer","HVPHUDchemImg"] remoteExec ["HVP_fnc_showEventIcon", 0];
 
 sleep 20 + (random 30);
 
@@ -62,6 +62,6 @@ sleep 60;
 
 deleteMarker _chemMarker;
 deleteMarker _chemMarker2;
-["HUDchemLayer"] remoteExec ["HVP_fnc_hideEventIcon", 0];
+["HUDchemLayer"] remoteExecCall ["HVP_fnc_hideEventIcon", 0];
 
 //-----------------------------------
