@@ -26,16 +26,16 @@ clearWeaponCargoGlobal _eventHeli;
 _eventHeli flyInHeight 50+(random 50);
 _eventHeli setDir ((getPos _eventHeli) getDir _helicrash_pos);
 
-_eventheligroup = createGroup west; 
+_eventheligroup = createGroup west;
 _pilot = _eventheligroup createUnit ["B_Helipilot_F", [5,5,5], [], 0, "NONE"];
 _eventheligroup setBehaviour "SAFE";
 _pilot setcaptive true;
 _pilot allowfleeing 0;
-_pilot disableAI "Target"; 
+_pilot disableAI "Target";
 _eventHeli lock true;
 _eventHeli allowDamage false;
 _pilot allowDamage false;
- 
+
 _pilot moveindriver _eventHeli;
 
 //-----------------------------------
@@ -59,6 +59,9 @@ waitUntil {isTouchingGround _eventHeli};
 
 if (HVPZombieMode isEqualTo 1) then {
 	[(getPos _eventHeli)] spawn Z_fnc_setSpawn;
+};
+if ((random 100) < 90) then {
+	HVPRadioActiveObjects pushBackUnique [(getPos _eventHeli),30];
 };
 
 for "_counter" from 1 to 2 do {

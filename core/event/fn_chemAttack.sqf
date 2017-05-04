@@ -38,6 +38,9 @@ sleep 20 + (random 30);
 
 //-----------------------------------
 //-SPAWN THE GAS
+if ((random 100) < 33) then {
+	HVPRadioActiveObjects pushBackUnique [_pos,_size];
+};
 
 for "_gas" from 0 to _gasCount do {
 	_smokepos = [(_pos select 0)+(random _size)-(random _size),(_pos select 1)+(random _size)-(random _size), 0];
@@ -56,7 +59,7 @@ if (HVPZombieMode isEqualTo 1) then {
 //-----------------------------------
 
 sleep 60;
-	
+
 deleteMarker _chemMarker;
 deleteMarker _chemMarker2;
 ["HUDchemLayer"] remoteExec ["HVP_fnc_hideEventIcon", 0];

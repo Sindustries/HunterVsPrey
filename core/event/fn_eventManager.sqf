@@ -150,7 +150,7 @@ for "_i" from 0 to ((count _cfg)-1) do {
 		while {true} do {
 			sleep HVP_commonEvent;
 			_size = (HVP_Phase_Radius * 0.05);
-			_gasCount = (_size / 1.25);
+			_gasCount = (_size / 3);
 			_chemPos = [HVP_phase_pos,0,(HVP_phase_radius * 0.9),0,0,0,0] call SIN_fnc_findPos;
 			[_chemPos,_size,_gasCount] call HVP_fnc_chemAttack;
 		};

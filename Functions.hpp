@@ -59,6 +59,7 @@ class HVP_Core {
 		class playermarkers {};
 		class sideTasks {};
 		class spawnBoats {};
+		class spawnRadObjects {};
 		class spawnVeh {};
 		class tips {};
 		class tpw_air {};
@@ -149,6 +150,7 @@ class HVP_Core {
 		class parasmoke {};
 		class proximity {};
 		class quakeFX {};
+		class radObject {};
 		class redHp {};
 		class redSpeech {};
 		class toxicGas {};

@@ -94,6 +94,11 @@ class HVP {
 	vehicleBoatMinDist = 100;			//Min distance (METERS) between boat spawns
 	vehicleCarLootChance = 33;			//Chance of a spawned car having loot inside
 
+/* RADOBJ SPAWN SETTINGS */
+
+	radObjMinDist = 100;				//Min distance (METERS) between object spawns
+	radObjRadChance = 66;				//Chance (%) that a spawned object will be irradiated
+
 /* PHASE SETTINGS */
 
 	HVPPhaseType = 1;					//1:Multiple, 2:Single
