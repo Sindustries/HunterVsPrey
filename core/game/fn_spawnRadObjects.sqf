@@ -168,7 +168,7 @@ if (isServer) then {
 
 //-----------------------------------
 //-MAP MARKERS
-IF (HVPDebugMode) then {
+IF (HVPDebugMode isEqualTo 1) then {
 	{
 		_aMarkername = format["radZone%1",(_x select 0)];
 		_radMarker = createMarker [_aMarkername, (_x select 0)];
