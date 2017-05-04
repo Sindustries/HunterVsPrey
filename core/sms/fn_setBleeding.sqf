@@ -38,6 +38,10 @@
 				_largeSplash setDir random 360;
 			};*/
 
+			if (damage _unit < 0.2) then {
+				_unit setDamage (damage _unit)+0.01;
+			};
+
 			if ((_unit getVariable "SMS_bloodLevel") < (SMS_maxBlood * SMS_passOutNum) && (_unit getVariable "SMS_isUnconscious") isEqualTo false) then {
 				if ((random 100) < SMS_passOutChance) then {
 					[_unit,8] call SMS_fnc_setUnconscious;

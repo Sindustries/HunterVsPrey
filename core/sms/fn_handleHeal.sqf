@@ -9,5 +9,6 @@
 			player setDamage 0;
 			player setVariable ["SMS_bleedingRate", 0];
 			player setBleedingRemaining 0;
+			uiNameSpace getVariable "HPBarProgress" progressSetPosition (1 - (damage player));
 		};
 	}];
