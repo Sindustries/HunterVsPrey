@@ -56,6 +56,8 @@ HVPFurntitureLoaded = false;
 HVPLootLoaded = false;
 HVPCarsLoaded = false;
 HVPBoatsLoaded = false;
+HVPRadObjsLoaded = false;
+HVP_mapLocations = [];
 HVP_mines = [];
 //-----------------------------------
 /* Admin Menu */
@@ -71,7 +73,12 @@ if ((getPlayerUID player) in SIN_adminUIDs) then {
 	"Land_FuelStation_Feed_F", "Land_fs_feed_F",
 	//Tanoa
 	"Land_FuelStation_01_pump_F", "Land_FuelStation_02_pump_F"
-], 50000];
+], 999999];
+//-----------------------------------
+//-GET MAP LOCATIONS
+{
+	HVP_mapLocations pushBackUnique [(locationPosition _x),(size _x)];
+} forEach nearestLocations [HVPErrorPos, ["NameCity","NameCityCapital","NameVillage","Airport"], 999999];
 //-----------------------------------
 player setVariable ["HVP_ready", false, true];
 waitUntil {time > 0};
@@ -254,6 +261,9 @@ if (isServer) then {
 	};
 };
 //-----------------------------------
+"HVPGasMaskLayer" cutRsc ["equipment_prot","PLAIN",-1,false];
+"HVPGasMaskLayer" cutFadeOut 0;
+//-----------------------------------
 //-SMS
 ["SMS"] call HVP_fnc_getSettings;
 [player] call SMS_fnc_init;
@@ -265,7 +275,7 @@ if (isServer) then {
 	[90,(300/2),1,[20,30,50,70,80],0] spawn HVP_fnc_tpw_air;
 };
 //-----------------------------------
-//-INIT LOOT, CARS, BOATS, ZOMBEES! & FURNITURE
+//-INIT LOOT, CARS, BOATS, ZOMBEES! & FURNITURE, RADOBJECTS
 ("HUDProgressBar" call BIS_fnc_rscLayer) cutRsc ["HVPHUDProgressBar","PLAIN",-1,true];
 uiNameSpace getVariable "PBarProgress" ctrlSetTextColor [0.2, 0.5, 0.9, 1];
 
@@ -274,6 +284,7 @@ if (HVPZombieMode isEqualTo 1) then {
 	["Z"] call HVP_fnc_getSettings;
 	[] call z_fnc_init;
 	if (isServer) then {
+		uiSleep 1;
 		HVPzombiesLoaded = true;
 		publicVariable "HVPZombiesLoaded";
 	} else {
@@ -284,6 +295,7 @@ if (HVPZombieMode isEqualTo 1) then {
 if (HVPFurnitureMode > 0) then {
 	cutText ["LOADING FURNITURE", "BLACK FADED", 999];
 	if (isServer) then {
+		uiSleep 1;
 		[] call HVP_fnc_HFSHouseFinder;
 		HVPFurntitureLoaded = true;
 		publicVariable "HVPFurntitureLoaded";
@@ -295,6 +307,7 @@ if (HVPFurnitureMode > 0) then {
 
 cutText ["LOADING LOOT", "BLACK FADED", 999];
 if (isServer) then {
+	uiSleep 1;
 	[] call HVP_fnc_lootInit;
 	HVPLootLoaded = true;
 	publicVariable "HVPLootLoaded";
@@ -304,6 +317,7 @@ if (isServer) then {
 
 cutText ["LOADING VEHICLES (LAND)", "BLACK FADED", 999];
 if (isServer) then {
+	uiSleep 1;
 	[] call HVP_fnc_spawnVeh;
 	HVPCarsLoaded = true;
 	publicVariable "HVPCarsLoaded";
@@ -313,11 +327,22 @@ if (isServer) then {
 
 cutText ["LOADING VEHICLES (SEA)", "BLACK FADED", 999];
 if (isServer) then {
+	uiSleep 1;
 	[] call HVP_fnc_spawnBoats;
 	HVPBoatsLoaded = true;
 	publicVariable "HVPBoatsLoaded";
 } else {
 	waitUntil {HVPBoatsLoaded isEqualTo true};
+};
+
+cutText ["LOADING RADIOACTIVE ZONES", "BLACK FADED", 999];
+if (isServer) then {
+	uiSleep 1;
+	[] call HVP_fnc_spawnRadObjects;
+	HVPRadObjsLoaded = true;
+	publicVariable "HVPRadObjsLoaded";
+} else {
+	waitUntil {HVPRadObjsLoaded isEqualTo true};
 };
 
 ("HUDProgressBar" call BIS_fnc_rscLayer) cutText ["","PLAIN"];
@@ -435,23 +460,11 @@ switch (HVPGameType) do {
 	};
 };
 [] spawn HVP_fnc_gasMask;
+[] spawn HVP_fnc_radObject;
 [] call HVP_fnc_knockOutGun;
 [] spawn HVP_fnc_mineDetector;
 [] spawn HVP_fnc_toxicGas;
 [] call HVP_fnc_eventHandlers;
-//-----------------------------------
-//-NVG SOUND
-[] spawn {
-	waitUntil {!isNull (findDisplay 46)};
-	private "_keyHandler";
-	_keyHandler = (findDisplay 46) displayAddEventHandler ["KeyDown", {
-		if (_code in (actionKeys "nightVision") && (currentVisionMode player) isEqualTo 0) then {
-			playsound "3DEN_visionMode";
-			_handled = true;
-		};
-		_handled;
-	}];
-};
 //-----------------------------------
 if (isServer) then {
 	[] call HVP_fnc_findSpawns;
