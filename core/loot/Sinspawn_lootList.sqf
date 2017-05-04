@@ -125,7 +125,10 @@ Sinspawn_lootList = [
 "optic_Holosight_khk_F",
 "optic_Holosight_smg_blk_F",
 "acc_flashlight",
-"acc_pointer_IR"
+"acc_pointer_IR",
+"Mask_M50",
+"Mask_M40",
+"Mask_M40_OD"
 ], [ //MEDICAL
 "FirstAidKit"
 ], [ //CLOTHING	-- AUTO FILLED! see below
