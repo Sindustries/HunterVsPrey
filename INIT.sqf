@@ -182,6 +182,10 @@ if (!isServer) then {
 			waitUntil {HVP_Pos_Found isEqualTo true};
 		};
 		case 1: {
+			cutText ["FINDING GAME LOCATION", "BLACK FADED", 999];
+			waitUntil {HVP_Pos_Found isEqualTo true};
+		};
+		case 2: {
 			player additem "itemMap";
 			openMap [true, true];
 			cutText ["", "BLACK IN", 1];
@@ -222,13 +226,21 @@ if (isServer) then {
 			publicVariable "HVP_Pos_Found";
 		};
 		case 1: {
+			_locations = [];
+			{
+				_locations pushBackUnique (locationPosition _x);
+			} forEach nearestLocations [HVPErrorPos, ["NameCity","NameCityCapital"], 999999];
+			HVP_pos = (selectRandom _locations);
+			HVP_Pos_Found = true;
+		};
+		case 2: {
 			player additem "itemMap";
 			[] call HVP_fnc_manual;
 			player removeitem "itemMap";
 		};
 	};
 };
-cutText ["", "BLACK FADED", 999];
+cutText ["PRELOADING", "BLACK FADED", 999];
 //-----------------------------------
 //-DISPLAY WELCOME MESSAGE
 switch (HVPGameType) do {
