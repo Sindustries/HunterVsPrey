@@ -11,7 +11,7 @@ _time = 300+floor(random 300);
 
 //-----------------------------------
 
-player playMove "ainvpknlmstpslaywrfldnon_medic";
+player playMove "ainvpknlmstpslaywnondnon_medic";
 
 sleep 6;
 
