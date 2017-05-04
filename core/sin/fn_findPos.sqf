@@ -3,7 +3,7 @@
 	Author: Sinbane
 	Finds a random location
 */
-private ["_errorPos","_posFound","_return"];
+private ["_errorPos","_posFound","_return","_add"];
 //-----------------------------------
 params [
     ["_pos",[]],
@@ -16,7 +16,7 @@ params [
 ];
 
 _errorPos = (getArray(configFile >> "CfgWorlds" >> worldName >> "centerPosition"));
-_add = 10;
+_add = 100;
 
 //-----------------------------------
 
@@ -26,7 +26,9 @@ while {!_posFound} do {
 	if ((_return select 0) != (_errorPos select 0) && (_return select 1) != (_errorPos select 1)) then {
 		_posFound = true;
 	} else {
-		_maxDist = _maxDist + _add;
+		if (_water > 0) then {
+			_maxDist = _maxDist + _add;
+		};
 	};
 };
 
