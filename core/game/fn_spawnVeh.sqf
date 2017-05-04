@@ -13,6 +13,7 @@ _lootChance = ["vehicleCarLootChance"] call HVP_fnc_getSetting;
 _maxNumVeh = 100;			//((HVPZoneSizeMax*2)/_minDistSpawn);
 _vehCreated = 0;
 _usedPosArray = [];
+_carArray = [];
 
 //-----------------------------------
 //-VEHICLE ARRAYS
@@ -90,6 +91,9 @@ if (isServer) then {
 				};
 			}];
 
+			_carArray pushBack _spawncar;
+			_spawncar enableSimulation false;
+
 			if (HVPDebugMode isEqualTo 1) then {
 				_markername = format["car%1",_vehCreated];
 				_markerstr = createMarker [str(_markername), getPos _spawncar];
@@ -111,5 +115,9 @@ if (isServer) then {
 		if (_errorCount >= _maxNumVeh) exitWith {};
 	};
 };
+
+{
+	_x enableSimulation true;
+} forEach _carArray;
 
 //-----------------------------------
