@@ -85,7 +85,7 @@ class HVP {
 		0.33,	//ghillies & other special clothing
 		3,		//night vision
 		2.35,	//suppressors
-		0		//thermals
+		0.001	//thermals
 	};
 
 /* VEHICLE SPAWN SETTINGS */
