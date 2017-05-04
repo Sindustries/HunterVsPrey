@@ -114,7 +114,7 @@ hideObjectGlobal _obj_nuke;
 
 if (_weather_effect) then {
 	[] remoteExec ["HVP_fnc_nukeFXweather", 0];
-	[] remoteExec ["HVP_fnc_nukeFXfog", 0];
+	//[] remoteExec ["HVP_fnc_nukeFXfog", 0];
 };
 if (_damage_buildings_units) then {
 	[_obj_nuke,_radius] spawn HVP_fnc_nukeFXdamage;
