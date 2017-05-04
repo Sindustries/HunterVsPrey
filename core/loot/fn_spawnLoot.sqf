@@ -15,7 +15,7 @@
 			_spawned = true;
 
 			//WEAPONS - RIFLES, LAUNCHERS
-			if (_lootType isEqualTo 0) then {
+			if (_lootType isEqualTo 0 && (count (Sinspawn_lootList select 0)) > 0) then {
 
 				_weapon = selectRandom (Sinspawn_lootList select 0);
 				_holder addWeaponCargoGlobal [_weapon, 1];
@@ -36,7 +36,7 @@
 			};
 
 			//WEAPONS - PISTOLS
-			if (_lootType isEqualTo 1) then {
+			if (_lootType isEqualTo 1 && (count (Sinspawn_lootList select 1)) > 0) then {
 
 				_weapon = selectRandom (Sinspawn_lootList select 1);
 				_holder addWeaponCargoGlobal [_weapon, 1];
@@ -57,12 +57,14 @@
 			};
 
 			//MAGAZINES
-			if (_lootType isEqualTo 2) then {
+			if (_lootType isEqualTo 2 && (count (Sinspawn_lootList select 2)) > 0) then {
 				_magazineClass = selectRandom (Sinspawn_lootList select 2);
 				_holder addMagazineCargoGlobal [_magazineClass, floor(random 2)];
-				if ((random 100) < 10) then {
-					_magazineClass = selectRandom ((getArray (configFile >> "CfgWeapons" >> (selectRandom (Sinspawn_lootList select 0)) >> "magazines"))+(getArray (configFile >> "CfgWeapons" >> (selectRandom (Sinspawn_lootList select 1)) >> "magazines")));
-					_holder addMagazineCargoGlobal [_magazineClass, floor(random 2)];
+				if ((random 100) < 10 ) then {
+					if ((count (Sinspawn_lootList select 0)) > 0 && (count (Sinspawn_lootList select 1)) > 0) then {
+						_magazineClass = selectRandom ((getArray (configFile >> "CfgWeapons" >> (selectRandom (Sinspawn_lootList select 0)) >> "magazines"))+(getArray (configFile >> "CfgWeapons" >> (selectRandom (Sinspawn_lootList select 1)) >> "magazines")));
+						_holder addMagazineCargoGlobal [_magazineClass, floor(random 2)];
+					};
 				};
 				if (HVPDebugMode isEqualTo 1) then {
 					_id = format ["%1",_pos];
