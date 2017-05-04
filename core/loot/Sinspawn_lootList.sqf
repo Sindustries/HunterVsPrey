@@ -222,6 +222,40 @@ if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
 			};
 		};
 	};
+	//-----------------------------------
+	//-WEAPON SETS
+
+	_weapons = [];
+
+	switch (HVPWeaponSet) do {
+		case 0: {
+			//UNRESTRICTED
+		};
+		case 1: {
+			//3 RANDOM
+			for "_i" from 1 to 3 do {
+				_wep = selectRandom (Sinspawn_lootList select 0);
+				_weapons pushBackUnique _wep;
+			};
+			Sinspawn_lootList = [_weapons,[],(Sinspawn_lootList select 2),(Sinspawn_lootList select 3),(Sinspawn_lootList select 4),(Sinspawn_lootList select 5),(Sinspawn_lootList select 6),(Sinspawn_lootList select 7),(Sinspawn_lootList select 8),(Sinspawn_lootList select 9),(Sinspawn_lootList select 10),(Sinspawn_lootList select 11)];
+		};
+		case 2: {
+			//6 RANDOM
+			for "_i" from 1 to 6 do {
+				_wep = selectRandom (Sinspawn_lootList select 0);
+				_weapons pushBackUnique _wep;
+			};
+			Sinspawn_lootList = [_weapons,[],(Sinspawn_lootList select 2),(Sinspawn_lootList select 3),(Sinspawn_lootList select 4),(Sinspawn_lootList select 5),(Sinspawn_lootList select 6),(Sinspawn_lootList select 7),(Sinspawn_lootList select 8),(Sinspawn_lootList select 9),(Sinspawn_lootList select 10),(Sinspawn_lootList select 11)];
+		};
+		case 3: {
+			//CROSSBOWS ONLY
+			Sinspawn_lootList = [["KA_crossbow_black","KA_crossbow_wood"],[],(Sinspawn_lootList select 2),(Sinspawn_lootList select 3),(Sinspawn_lootList select 4),(Sinspawn_lootList select 5),(Sinspawn_lootList select 6),(Sinspawn_lootList select 7),(Sinspawn_lootList select 8),(Sinspawn_lootList select 9),(Sinspawn_lootList select 10),(Sinspawn_lootList select 11)];
+		};
+		case 4: {
+			//PISTOLS ONLY
+			Sinspawn_lootList = [[],(Sinspawn_lootList select 1),(Sinspawn_lootList select 2),(Sinspawn_lootList select 3),(Sinspawn_lootList select 4),(Sinspawn_lootList select 5),(Sinspawn_lootList select 6),(Sinspawn_lootList select 7),(Sinspawn_lootList select 8),(Sinspawn_lootList select 9),(Sinspawn_lootList select 10),(Sinspawn_lootList select 11)];
+		};
+	};
 	//Magazines/grenades
 	_cfg = (configFile >> "CfgMagazines");
 	for "_i" from 0 to ((count _cfg)-1) do {
@@ -344,6 +378,9 @@ for "_i" from 0 to ((count _cfg)-1) do {
 if (HVPZombieMode isEqualTo 1) then {
 	(Sinspawn_lootList select 4) pushBack "RyanZombiesAntiVirusTemporary_Item";
 	(Sinspawn_lootList select 4) pushBack "RyanZombiesAntiVirusCure_Item";
+	if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
+		(Sinspawn_lootList select 9) pushBackUnique "Kio_Z_Mask_NVG";
+	};
 };
 
 //-----------------------------------
