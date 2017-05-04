@@ -315,7 +315,7 @@ if (HVPFurnitureMode > 0) then {
 	} else {
 		waitUntil {HVPFurntitureLoaded isEqualTo true};
 	};
-	[] call HVP_fnc_HFSMoveComp;
+	//[] call HVP_fnc_HFSMoveComp;
 };
 
 cutText ["LOADING LOOT", "BLACK FADED", 999];
