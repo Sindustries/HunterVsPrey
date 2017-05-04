@@ -26,7 +26,9 @@ removeGoggles player;
 //-MAIN
 HVPGameType = (paramsArray select 1);
 HVPManual = (paramsArray select 2);
-HVPDelay = (paramsArray select 3);
+HVPWeaponSet = (paramsArray select 3);
+HVPFurnitureMode = (paramsArray select 4);
+HVPDelay = (paramsArray select 5);
 //-----------------------------------
 ["HVP"] call HVP_fnc_getSettings;
 HVPPhaseType = ["HVPPhaseType"] call HVP_fnc_getSetting;
@@ -50,7 +52,6 @@ HVPErrorPos = (getArray(configFile >> "CfgWorlds" >> worldName >> "centerPositio
 HVP_Pos_Found = false;
 HVP_suddenDeath = false;
 HVPZombiesLoaded = false;
-HVPFurnitureMode = (paramsArray select 3);
 HVPFurntitureLoaded = false;
 HVPLootLoaded = false;
 HVPCarsLoaded = false;
@@ -438,6 +439,19 @@ switch (HVPGameType) do {
 [] spawn HVP_fnc_mineDetector;
 [] spawn HVP_fnc_toxicGas;
 [] call HVP_fnc_eventHandlers;
+//-----------------------------------
+//-NVG SOUND
+[] spawn {
+	waitUntil {!isNull (findDisplay 46)};
+	private "_keyHandler";
+	_keyHandler = (findDisplay 46) displayAddEventHandler ["KeyDown", {
+		if (_code in (actionKeys "nightVision") && (currentVisionMode player) isEqualTo 0) then {
+			playsound "3DEN_visionMode";
+			_handled = true;
+		};
+		_handled;
+	}];
+};
 //-----------------------------------
 if (isServer) then {
 	[] call HVP_fnc_findSpawns;
