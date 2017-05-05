@@ -13,6 +13,7 @@ while {alive player} do {
 
 	{
 		if ((_x select 0) distance player < ((_x select 1)/2)) then {
+
 			while {(_x select 0) distance player < ((_x select 1)/2)} do {
 				_noise_rad = ppEffectCreate ["FilmGrain", 2000];
 				_noise_rad ppEffectEnable true;
