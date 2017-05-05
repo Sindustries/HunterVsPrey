@@ -16,7 +16,7 @@ params [
 ];
 
 _errorPos = (getArray(configFile >> "CfgWorlds" >> worldName >> "centerPosition"));
-_add = 100;
+_add = 200;
 
 //-----------------------------------
 
@@ -26,7 +26,7 @@ while {!_posFound} do {
 	if ((_return select 0) != (_errorPos select 0) && (_return select 1) != (_errorPos select 1)) then {
 		_posFound = true;
 	} else {
-		if (_water > 0) then {
+		if (_water > 0 || _shore > 0) then {
 			_maxDist = _maxDist + _add;
 		};
 	};
