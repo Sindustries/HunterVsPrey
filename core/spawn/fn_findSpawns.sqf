@@ -11,7 +11,7 @@ _usedSpawnPos = [];
 _allPlayers = {isPlayer _x && alive _x && side _x != sideLogic} count playableUnits;
 _readyPlayers = {(_x getVariable "HVP_ready") isEqualTo true && (_x getVariable "HVP_spawned") isEqualTo false} count playableUnits;
 
-_unconsciousChance = ["groundChanceUnconscious"] call HVP_fnc_getSetting;
+_restrainChance = ["groundChanceRestrain"] call HVP_fnc_getSetting;
 
 while {_readyPlayers != _allPlayers} do {
 	_allPlayers = {isPlayer _x && alive _x && side _x != sideLogic} count playableUnits;
@@ -38,10 +38,14 @@ waitUntil {_readyPlayers isEqualTo _allPlayers};
 						_usedSpawnPos pushBack _spawnPos;
 						_x setPos [_spawnPos select 0,_spawnPos select 1,0];
 						_x setDir (random 360);
-						_x setVariable ["HVP_spawned", true, true];
-						if ((random 100) < _unconsciousChance && HVPTestMode isEqualTo 0) then {
-							[_x, 10] remoteExec ["SMS_fnc_setUnconscious", _x];
+						if ((random 100) < _restrainChance) then {
+							[_x,"Acts_AidlPsitMstpSsurWnonDnon_loop"] remoteExec ["switchMove",0];
+							[_x] spawn {
+								sleep 6;
+								[(_this select 0),"Acts_AidlPsitMstpSsurWnonDnon_out"] remoteExec ["playMove",0];
+							};
 						};
+						_x setVariable ["HVP_spawned", true, true];
 					};
 				};
 			};
@@ -92,9 +96,12 @@ waitUntil {_readyPlayers isEqualTo _allPlayers};
 					_usedSpawnPos pushBack _spawnPos;
 					_x setPos [_spawnPos select 0,_spawnPos select 1,0];
 					_x setDir (random 360);
-					if ((random 100) < _unconsciousChance && HVPTestMode isEqualTo 0) then {
-						_x enableSimulation true;
-						[_x, 10] remoteExec ["SMS_fnc_setUnconscious", _x];
+					if ((random 100) < _restrainChance) then {
+						[_x,"Acts_AidlPsitMstpSsurWnonDnon_loop"] remoteExec ["switchMove",0];
+						[_x] spawn {
+							sleep 6;
+							[(_this select 0),"Acts_AidlPsitMstpSsurWnonDnon_out"] remoteExec ["playMove",0];
+						};
 					};
 					_x setVariable ["HVP_spawned", true, true];
 				};
