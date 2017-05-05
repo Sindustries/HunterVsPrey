@@ -148,6 +148,6 @@ sleep 3;
 };
 
 [player] call ace_hearing_fnc_removeEarplugs;
-player removeItem "ACE_earplugs";
+player removeItems "ACE_earplugs";
 
 //-----------------------------------

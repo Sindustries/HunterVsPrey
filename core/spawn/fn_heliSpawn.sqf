@@ -104,7 +104,7 @@ if (_scenario isEqualTo "Land") then {
 		if (isPlayer _x) then {
 			doGetOut _x;
 			[_x] remoteExec ["ace_hearing_fnc_removeEarplugs", _x];
-			_x removeItem "ACE_earplugs";
+			_x removeItems "ACE_earplugs";
 		};
 	} forEach crew _heli;
 
@@ -166,7 +166,7 @@ if (_scenario isEqualTo "Explode" || _scenario isEqualTo "Parachute") then {
 			[] remoteExec ["HVP_fnc_parasmoke", _unit];
 			waitUntil {(getPos _unit select 2) < 1 || isTouchingGround _unit};
 			[_unit] remoteExec ["ace_hearing_fnc_removeEarplugs", _unit];
-			_unit removeItem "ACE_earplugs";
+			_unit removeItems "ACE_earplugs";
 		};
 
 	};
