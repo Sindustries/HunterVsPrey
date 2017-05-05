@@ -35,6 +35,15 @@ for "_i" from 0 to ((count _cfg)-1) do {
 		};
 	};
 };
+_cfg = (configFile >> "CfgVehicles");
+for "_i" from 0 to ((count _cfg)-1) do {
+	if (isClass (_cfg select _i)) then {
+		_cfgName = configName (_cfg select _i);
+		if (_cfgName isKindOf "VTOL_Base_F" && (getNumber ((_cfg select _i) >> "scope") == 2) && (getNumber ((_cfg select _i) >> "isUav")) == 0) then {
+			_heliSelection pushBackUnique _cfgName;
+		};
+	};
+};
 
 //HeliCrash Heli selection
 _heliCrashSelection = [];
