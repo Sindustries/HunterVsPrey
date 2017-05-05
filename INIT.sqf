@@ -82,6 +82,9 @@ if ((getPlayerUID player) in SIN_adminUIDs) then {
 //-----------------------------------
 player setVariable ["HVP_ready", false, true];
 player setVariable ["HVP_alive",true,true];
+player setVariable ["HVPsavedHeadgear","",false];
+player setVariable ["HVPsavedGoggles","",false];
+player setVariable ["HVPearPlugs",false,false];
 waitUntil {time > 0};
 //-----------------------------------
 cutText ["", "BLACK FADED", 999];
@@ -114,14 +117,7 @@ if (isServer) then {
 		setDate [(_date select 0), (_date select 1), (_date select 2), 0, 0];
 	};
 	if (HVPGameType isEqualTo 2 || HVPGameType isEqualTo 3) then {
-		_set = false;
-		while {_set isEqualTo false} do {
-			_time = floor(random 25);
-			if (_time >= 6 && _time <= 15) then {
-				setDate [(_date select 0), (_date select 1), (_date select 2), _time, (_date select 4)];
-				_set = true;
-			};
-		};
+		setDate _date;
 	};
 };
 //-----------------------------------
@@ -413,6 +409,7 @@ if (_allUnits isEqualTo 1) then {
 cutText ["PREPARING TO SPAWN", "BLACK FADED", 999];
 player setVariable ["HVP_ready", true, true];
 player setVariable ["HVP_spawned", false, true];
+playMusic "";
 //-----------------------------------
 //-WEATHER CONTROL
 if (isServer) then {
@@ -474,23 +471,33 @@ switch (HVPGameType) do {
 };
 [] spawn HVP_fnc_gasMask;
 [] spawn HVP_fnc_radObject;
+[] spawn HVP_fnc_radLocation;
 [] call HVP_fnc_knockOutGun;
 [] spawn HVP_fnc_mineDetector;
 [] spawn HVP_fnc_toxicGas;
 [] call HVP_fnc_eventHandlers;
 //-----------------------------------
 if (isServer) then {
+	sleep 3;
 	[] call HVP_fnc_findSpawns;
 };
 waitUntil {(player getVariable "HVP_spawned") isEqualTo true};
 //-----------------------------------
-playMusic "";
 player enableSimulation true;
 sleep 3;
 waitUntil {(player getVariable "SMS_isUnconscious") isEqualTo false};
 player setCustomAimCoef 0.75;
 enableEnvironment true;
 cutText ["", "BLACK IN", 5];
+//-----------------------------------
+//-CUSTOM KEYS
+[] spawn {
+	waitUntil {!isNull (findDisplay 46)};
+	private "_keyHandler";
+	_keyHandler = (findDisplay 46) displayAddEventHandler ["KeyDown", {
+		[_this select 0,_this select 1,_this select 2,_this select 3,_this select 4] call HVP_fnc_keyHandler;
+	}];
+};
 //-----------------------------------
 //-HUD Elements
 [] spawn {
@@ -650,19 +657,4 @@ if (HVPGameType isEqualTo 3 && playerSide != resistance) then {
 //-----------------------------------
 //-TIPS
 [] spawn HVP_fnc_tips;
-
-//-----------------------------------
-//-MUSIC LOOP
-/*
-[] spawn {
-	while {true} do {
-		waitUntil {daytime < 6 || daytime > 18};
-		sleep 300+(random 300);
-		if (daytime < 6 || daytime > 18) then {
-			playMusic (selectRandom HVPMusic);
-		};
-	};
-};
-*/
-
 //-----------------------------------
