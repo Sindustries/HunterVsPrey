@@ -371,6 +371,7 @@ cutText ["GEARING UP", "BLACK FADED", 999];
 //["LOADOUT"] call HVP_fnc_getSettings;
 [] call HVP_fnc_loadout;
 player switchMove "";
+sleep 2;
 cutText ["", "BLACK FADED", 999];
 //-----------------------------------
 //-INIT SPECTATORS
@@ -485,7 +486,6 @@ waitUntil {(player getVariable "HVP_spawned") isEqualTo true};
 //-----------------------------------
 player enableSimulation true;
 sleep 3;
-waitUntil {(player getVariable "SMS_isUnconscious") isEqualTo false};
 player setCustomAimCoef 0.75;
 enableEnvironment true;
 cutText ["", "BLACK IN", 5];
