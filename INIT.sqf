@@ -490,15 +490,6 @@ player setCustomAimCoef 0.75;
 enableEnvironment true;
 cutText ["", "BLACK IN", 5];
 //-----------------------------------
-//-CUSTOM KEYS
-[] spawn {
-	waitUntil {!isNull (findDisplay 46)};
-	private "_keyHandler";
-	_keyHandler = (findDisplay 46) displayAddEventHandler ["KeyDown", {
-		[_this select 0,_this select 1,_this select 2,_this select 3,_this select 4] call HVP_fnc_keyHandler;
-	}];
-};
-//-----------------------------------
 //-HUD Elements
 [] spawn {
 	private "_currentPhase";
@@ -594,6 +585,16 @@ if (HVPDebugMode isEqualTo 0) then {
 	};
 	if (side player isEqualTo EAST && HVPGameType isEqualTo 1) then {
 		player action ["nvGoggles", player];
+	};
+
+	//-----------------------------------
+	//-CUSTOM KEYS
+	[] spawn {
+		waitUntil {!isNull (findDisplay 46)};
+		private "_keyHandler";
+		_keyHandler = (findDisplay 46) displayAddEventHandler ["KeyDown", {
+			[_this select 0,_this select 1,_this select 2,_this select 3,_this select 4] call HVP_fnc_keyHandler;
+		}];
 	};
 
 	sleep 8;
