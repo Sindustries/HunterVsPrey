@@ -147,7 +147,6 @@ class HVP_Core {
 		class nukeFXfalling {};
 		class nukeFXfog {};
 		class nukeFXignite {};
-		class nukeFXrad {};
 		class nukeFXweather {};
 		class parasmoke {};
 		class proximity {};
