@@ -177,15 +177,11 @@ for "_i" from 0 to ((count _cfg)-1) do {
 		[_nukeHeliSelection] spawn {
 			private ["_nukePos","_nuke"];
 			waitUntil {sleep 5; HVP_phase_num >= 1};
+			sleep (HVP_rareEvent+HVP_uncommonEvent);
+			if (HVP_suddenDeath) exitWith {};
 
-			while {true} do {
-				sleep HVP_rareEvent;
-				if (HVP_suddenDeath) exitWith {};
-				_nukePos = [HVP_phase_pos,0,(HVP_phase_radius * 0.5),0,0,0,0] call SIN_fnc_findPos;
-				[(_this select 0),_nukePos,(HVP_phase_radius * 0.33),true,true,true,true] call HVP_fnc_nuke;
-
-				sleep HVP_uncommonEvent;
-			};
+			_nukePos = [HVP_phase_pos,0,(HVP_phase_radius * 0.5),0,0,0,0] call SIN_fnc_findPos;
+			[(_this select 0),_nukePos,(HVP_phase_radius * 0.33),true,true,true,true] call HVP_fnc_nuke;
 		};
 	};
 
