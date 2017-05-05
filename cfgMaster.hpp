@@ -97,7 +97,7 @@ class HVP {
 /* RADOBJ SPAWN SETTINGS */
 
 	radObjMinDist = 100;				//Min distance (METERS) between object spawns
-	radObjRadChance = 66;				//Chance (%) that a spawned object will be irradiated
+	radObjRadChance = 80;				//Chance (%) that a spawned object will be irradiated
 
 /* PHASE SETTINGS */
 
