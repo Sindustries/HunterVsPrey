@@ -18,6 +18,11 @@ _usedPosArray = [];
 HVPRadioActiveObjects = [];
 HVPRadioActiveLocations = [];
 
+_message = {
+	_msg = format["LOADING RADIOACTIVE ZONE %1/%2",RAD_locNum,RAD_noLocs];
+	cutText [_msg, "BLACK FADED", 999];
+};
+
 //-----------------------------------
 //-OBJECT ARRAYS
 
@@ -64,20 +69,22 @@ _radObjArray = (_radObjCars+_radObjAir);
 //-SPAWN OBJECTS (INSIDE LOCATIONS)
 
 if (isServer) then {
-	private ["_noLocs","_locNum","_objPos","_add"];
-	_noLocs = 0;
-	_locNum = 1;
+	private ["_objPos","_add","_dir"];
+	RAD_noLocs = 1;
+	RAD_locNum = 0;
 	{
 		if ((_x select 0) distance2D HVP_pos < (HVPZoneSizeMax*2)) then {
 			HVPRadioActiveLocations pushBack [(_x select 0),((_x select 1) select 0)];
-			_noLocs = _noLocs + 1;
+			RAD_noLocs = RAD_noLocs + 1;
+			publicVariable "RAD_noLocs";
 		};
 	} forEach HVP_mapLocations;
 
 	{
 		if ((_x select 0) distance2D HVP_pos < (HVPZoneSizeMax*2)) then {
-			_locNum = _locNum + 1;
-			{cutText ["LOADING RADIOACTIVE ZONES (CITIES)", "BLACK FADED", 999];} remoteExec ["bis_fnc_call", 0];
+			RAD_locNum = RAD_locNum + 1;
+			publicVariable "RAD_locNum";
+			_message remoteExec ["bis_fnc_call", 0];
 			_maxNumObjLoc = (((_x select 1) select 0)/5);
 			_counter = _maxNumObjLoc;
 			_errorCount = 0;
@@ -92,6 +99,7 @@ if (isServer) then {
 						_roadFound = true;
 						_road = (_nearRoads select 0);
 						_connectedRoads = roadsConnectedTo _road;
+						_dir = [_road, (_connectedRoads select 0)] call BIS_fnc_DirTo;
 						_objPos = (getPos _road);
 					} else {
 						_add = _add + 5;
@@ -107,7 +115,7 @@ if (isServer) then {
 				if (_distCheck) then {
 					_obj = (selectRandom _radObjCars) createVehicle _objPos;
 					_obj allowDamage false;
-					_obj setDir (random 360);
+					_obj setDir (_dir+(random 75)-(random 75));
 					_obj setPos (getPos _obj);
 					_obj allowDamage true;
 
@@ -134,7 +142,9 @@ if (isServer) then {
 //-SPAWN OBJECTS (OUTSIDE LOCATIONS)
 
 if (isServer) then {
-	{cutText ["LOADING RADIOACTIVE ZONES (WILDERNESS)", "BLACK FADED", 999];} remoteExec ["bis_fnc_call", 0];
+	RAD_locNum = RAD_locNum + 1;
+	publicVariable "RAD_locNum";
+	_message remoteExec ["bis_fnc_call", 0];
 	_counter = _maxNumObj;
 	_errorCount = 0;
 	_objCreated = 0;
@@ -184,4 +194,8 @@ IF (HVPDebugMode isEqualTo 1) then {
 //-----------------------------------
 publicVariable "HVPRadioActiveObjects";
 publicVariable "HVPRadioActiveLocations";
+RAD_locNum = nil;
+RAD_noLocs = nil;
+publicVariable "RAD_locNum";
+publicVariable "RAD_noLocs";
 //-----------------------------------
