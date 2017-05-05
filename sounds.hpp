@@ -211,4 +211,66 @@ class CfgSounds
         sound[] = {"\SFX\ambient_wind.ogg", 1, 1};
         titles[] = {1, ""};
     };
+
+    //FIREWORKS
+    class firework1
+    {
+        name = "firework1";
+        sound[] = {"\SFX\firework1.ogg", db+30, 1};
+        titles[] = {1, ""};
+    };
+    class firework2
+    {
+        name = "firework2";
+        sound[] = {"\SFX\firework2.ogg", db+30, 1};
+        titles[] = {1, ""};
+    };
+    class firework3
+    {
+        name = "firework3";
+        sound[] = {"\SFX\firework3.ogg", db+30, 1};
+        titles[] = {1, ""};
+    };
+    class fluier1
+    {
+        name = "fluier1";
+        sound[] = {"\SFX\fluier1.ogg", db+15, 1};
+        titles[] = {1, ""};
+    };
+    class fluier2
+    {
+        name = "fluier2";
+        sound[] = {"\SFX\fluier2.ogg", db+15, 1};
+        titles[] = {1, ""};
+    };
+    class fluier3
+    {
+        name = "fluier3";
+        sound[] = {"\SFX\fluier3.ogg", db+15, 1};
+        titles[] = {1, ""};
+    };
+    class fluier4
+    {
+        name = "fluier4";
+        sound[] = {"\SFX\fluier4.ogg", db+15, 1};
+        titles[] = {1, ""};
+    };
+    class fluier5
+    {
+        name = "fluier5";
+        sound[] = {"\SFX\fluier5.ogg", db+15, 1};
+        titles[] = {1, ""};
+    };
+    class fluier6
+    {
+        name = "fluier6";
+        sound[] = {"\SFX\fluier6.ogg", db+15, 1};
+        titles[] = {1, ""};
+    };
+    class fluier7
+    {
+        name = "fluier7";
+        sound[] = {"\SFX\fluier7.ogg", db+15, 1};
+        titles[] = {1, ""};
+    };
 };

@@ -16,6 +16,13 @@ _delay = 20;
 end_HVPwinner = {
 	maintask setTaskState "Succeeded";
 	["TaskSucceeded",["","Win The Games"]] call bis_fnc_showNotification;
+
+	for "_i" from 0 to (8+floor(random 10)) do {
+		_pos = [(getPos player),0,30] call SIN_fnc_findPos;
+		_launcher = "land_helipadempty_f" createVehicleLocal _pos;
+		[_launcher,60] spawn HVP_fnc_fireWorks;
+		sleep 1+(random 2);
+	};
 };
 
 end_HVPloser = {

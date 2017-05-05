@@ -50,6 +50,7 @@ class HVP_Core {
 		class deathLoop {};
 		class endConditions {};
 		class eventHandlers {};
+		class fireworks {};
 		class intro {};
 		class loadout {};
 		class manual {};
@@ -138,6 +139,9 @@ class HVP_Core {
 
 	class FX {
 		file = "core\fx";
+		class fwrLumina {};
+		class fwrRock {};
+		class fwrSparks {};
 		class gasMask {};
 		class knockOutGun {};
 		class mineDetector {};
