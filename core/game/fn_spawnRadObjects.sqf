@@ -16,6 +16,7 @@ _maxNumObjLoc = 30;
 _objCreated = 0;
 _usedPosArray = [];
 HVPRadioActiveObjects = [];
+HVPRadioActiveLocations = [];
 
 //-----------------------------------
 //-OBJECT ARRAYS
@@ -68,6 +69,7 @@ if (isServer) then {
 	_locNum = 1;
 	{
 		if ((_x select 0) distance2D HVP_pos < (HVPZoneSizeMax*2)) then {
+			HVPRadioActiveLocations pushBack [(_x select 0),((_x select 1) select 0)];
 			_noLocs = _noLocs + 1;
 		};
 	} forEach HVP_mapLocations;
@@ -181,4 +183,5 @@ IF (HVPDebugMode isEqualTo 1) then {
 };
 //-----------------------------------
 publicVariable "HVPRadioActiveObjects";
+publicVariable "HVPRadioActiveLocations";
 //-----------------------------------
