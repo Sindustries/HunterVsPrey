@@ -14,6 +14,7 @@ class HVP_Core {
 		file = "core\core";
 		class getSetting {};
 		class getSettings {};
+		class keyHandler {};
 		class updateProgressBar {};
 		class HFSCompCreator {};
 		class HFSCompSpawner {};
@@ -142,6 +143,7 @@ class HVP_Core {
 		class mineDetector {};
 		class nukeFXash {};
 		class nukeFXdamage {};
+		class nukeFXdust {};
 		class nukeFXfalling {};
 		class nukeFXfog {};
 		class nukeFXignite {};
@@ -150,6 +152,7 @@ class HVP_Core {
 		class parasmoke {};
 		class proximity {};
 		class quakeFX {};
+		class radLocation {};
 		class radObject {};
 		class redHp {};
 		class redSpeech {};
