@@ -124,6 +124,11 @@ if (_radiation) then {
 };
 if (_fallout) then {
 	[] remoteExec ["HVP_fnc_nukeFXash", 0];
+	_velocity_dust = [random 10,random 10,-1];
+	_color_dust = [1.0, 0.9, 0.8];
+	_alpha_dust = 0.02+random 0.2;
+	_freq_dust = 60+random 60;
+	[_velocity_dust,_color_dust,_alpha_dust,_freq_dust] remoteExec ["HVP_fnc_nukeFXdust",0];
 };
 [_obj_nuke] spawn HVP_fnc_nukeFXfalling;
 
@@ -134,6 +139,9 @@ deleteMarker _nukeMarker2;
 
 _location = createLocation ["NameVillage", (getPos _obj_nuke), _radius, _radius];
 _location setText "Radiation Zone";
+
+HVPRadioActiveLocations pushBack [(getPos _obj_nuke),_radius];
+publicVariable "HVPRadioActiveLocations";
 
 //-----------------------------------
 
