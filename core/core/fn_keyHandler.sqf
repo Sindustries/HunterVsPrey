@@ -32,7 +32,7 @@ switch (_code) do {
             	if ((goggles player) in HVP_gasMasks) then {
             		if (player canAdd (goggles player)) then {
             			player setVariable ["HVPsavedGoggles",(goggles player),false];
-            			removegoggles player;
+            			removeGoggles player;
             			player addItem (player getVariable "HVPsavedGoggles");
             		} else {
             			systemChat "Not enough room to stow gas mask!";
@@ -49,7 +49,7 @@ switch (_code) do {
 	            	};
 	            	if ((player getVariable "HVPsavedGoggles") != "" && (player getVariable "HVPsavedGoggles") in (vestItems player + uniformItems player + backpackItems player)) then {
 	            		player removeItem (player getVariable "HVPsavedGoggles");
-	            		player addHeadgear (player getVariable "HVPsavedGoggles");
+	            		player addGoggles (player getVariable "HVPsavedGoggles");
 	            	};
 	            };
 	            _handled = true;
