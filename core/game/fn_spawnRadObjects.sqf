@@ -24,7 +24,7 @@ _message = {
 };
 
 //-----------------------------------
-//-OBJECT ARRAYS
+//-OBJECT ARRAYS (WRECKS)
 
 _radObjCars = [
 "Land_Wreck_BMP2_F",
@@ -62,6 +62,19 @@ _radObjAir = [
 "Land_HistoricalPlaneDebris_03_F",
 "Land_HistoricalPlaneDebris_04_F"
 ];
+
+//-----------------------------------
+//-EXTRA VEHICLE ARRAYS
+
+_cfg = (configFile >> "CfgVehicles");
+for "_i" from 0 to ((count _cfg)-1) do {
+	if (isClass (_cfg select _i)) then {
+		_cfgName = configName (_cfg select _i);
+		if (_cfgName isKindOf "Car" && (getNumber ((_cfg select _i) >> "scope") isEqualTo 2) && (getNumber ((_cfg select _i) >> "isUav")) isEqualTo 0) then {
+			_radObjCars pushBackUnique _cfgName;
+		};
+	};
+};
 
 _radObjArray = (_radObjCars+_radObjAir);
 
@@ -120,10 +133,10 @@ if (isServer) then {
 				_distCheck = [_spawnPos,_usedPosArray,_minDistLocation] call SIN_fnc_checkDist;
 				if (_distCheck) then {
 					_obj = (selectRandom _radObjCars) createVehicle _objPos;
-					_obj allowDamage false;
 					_obj setDir (_dir+(random 75)-(random 75));
 					_obj setPos (getPos _obj);
-					_obj allowDamage true;
+					_obj setDamage [1,false];
+					_obj enableSimulation false;
 
 					_size = (getNumber (configfile >> "CfgVehicles" >> (typeOf _obj) >> "mapSize"));
 					if ((random 100) < _radChance) then {
@@ -160,10 +173,10 @@ if (isServer) then {
 		_distCheck = [_spawnPos,_usedPosArray,_minDistSpawn] call SIN_fnc_checkDist;
 		if (_distCheck) then {
 			_obj = (selectRandom _radObjArray) createVehicle _spawnpos;
-			_obj allowDamage false;
 			_obj setDir (random 360);
 			_obj setPos (getPos _obj);
-			_obj allowDamage true;
+			_obj setDamage [1,false];
+			_obj enableSimulation false;
 
 			if (HVPZombieMode isEqualTo 1 && (random 100) < 90) then {
 				[_spawnPos] spawn Z_fnc_setSpawn;
