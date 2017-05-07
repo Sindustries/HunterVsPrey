@@ -43,37 +43,30 @@ if (isServer) then {
 			_posCheck = [_spawnPos] call SIN_fnc_checkPos;
 			_distCheck = [_spawnPos,_usedPosArray,_minDistSpawn] call SIN_fnc_checkDist;
 			if (_posCheck && _distCheck) then {
-				_grp = createGroup WEST;
-				_monkey = _grp createUnit ["B_crew_F",_spawnPos, [], 0, "FORM"];
-				_monkey hideobjectglobal true;
-				_depth = (getPosATL _monkey select 2);
-				if (_depth >= 1) then {
-					_spawnBoat = (selectRandom _boatSelection) createVehicle _spawnPos;
-					_spawnBoat allowDamage false;
-					_spawnBoat setDir (random 360);
-					_spawnBoat setfuel 0.2 + (random 0.7);
-					clearMagazineCargoGlobal _spawnBoat;
-					clearWeaponCargoGlobal _spawnBoat;
-					clearItemCargoGlobal _spawnBoat;
-					clearBackpackCargoGlobal _spawnBoat;
-					_spawnBoat setVehicleAmmo 0;
-					_spawnBoat disableTIEquipment true;
-					_spawnBoat allowDamage true;
+				_spawnBoat = (selectRandom _boatSelection) createVehicle _spawnPos;
+				_spawnBoat allowDamage false;
+				_spawnBoat setDir (random 360);
+				_spawnBoat setfuel 0.2 + (random 0.7);
+				clearMagazineCargoGlobal _spawnBoat;
+				clearWeaponCargoGlobal _spawnBoat;
+				clearItemCargoGlobal _spawnBoat;
+				clearBackpackCargoGlobal _spawnBoat;
+				_spawnBoat setVehicleAmmo 0;
+				_spawnBoat disableTIEquipment true;
+				_spawnBoat allowDamage true;
 
-					if (HVPDebugMode isEqualTo 1) then {
-						_markername = format["boat%1",_boatsCreated];
-						_markerstr = createMarker [str(_markername), getPos _spawnBoat];
-						str(_markername) setMarkerShape "ICON";
-						str(_markername) setMarkerType "respawn_naval";
-						str(_markername) setMarkerSize [0.75, 0.75];
-						str(_markername) setMarkerColor "ColorBlufor";
-						str(_markername) setMarkerAlpha 0.8;
-					};
-
-					_usedPosArray pushBackUnique _spawnPos;
-					_boatsCreated = _boatsCreated + 1;
+				if (HVPDebugMode isEqualTo 1) then {
+					_markername = format["boat%1",_boatsCreated];
+					_markerstr = createMarker [str(_markername), getPos _spawnBoat];
+					str(_markername) setMarkerShape "ICON";
+					str(_markername) setMarkerType "respawn_naval";
+					str(_markername) setMarkerSize [0.75, 0.75];
+					str(_markername) setMarkerColor "ColorBlufor";
+					str(_markername) setMarkerAlpha 0.8;
 				};
-				deleteVehicle _monkey;
+
+				_usedPosArray pushBackUnique _spawnPos;
+				_boatsCreated = _boatsCreated + 1;
 			} else {
 				_errorCount = _errorCount + 1;
 			};
