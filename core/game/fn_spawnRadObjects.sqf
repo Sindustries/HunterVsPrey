@@ -100,7 +100,11 @@ if (isServer) then {
 						_roadFound = true;
 						_road = (_nearRoads select 0);
 						_connectedRoads = roadsConnectedTo _road;
-						_dir = [_road, (_connectedRoads select 0)] call BIS_fnc_DirTo;
+						if (count _connectedRoads > 0) then {
+							_dir = [_road, (_connectedRoads select 0)] call BIS_fnc_DirTo;
+						} else {
+							_dir = (random 360);
+						};
 						_objPos = (getPos _road);
 					} else {
 						_add = _add + 5;
