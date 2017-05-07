@@ -7,7 +7,7 @@ while {alive player} do {
 //-----------------------------------
 
 	waitUntil {(headgear player) in HVP_gasMasks || (goggles player) in HVP_gasMasks};
-	[player,["echipare",10]] remoteExec ["say3D", 0];
+	[player,["echipare",14]] remoteExec ["say3D", 0];
 	"HVPGasMaskLayer" cutRsc ["equipment_prot","PLAIN",-1,false];
 	sleep 2.5;
 
@@ -20,7 +20,7 @@ while {alive player} do {
 	};
 
 	waitUntil {!((headgear player) in HVP_gasMasks) && !((goggles player) in HVP_gasMasks) || !alive player};
-	[player,["dezechipare",10]] remoteExec ["say3D", 0];
+	[player,["dezechipare",14]] remoteExec ["say3D", 0];
 	 "HVPGasMaskLayer" cutfadeout 0;
 
 	sleep 0.1;
