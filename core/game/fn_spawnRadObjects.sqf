@@ -69,7 +69,7 @@ _radObjArray = (_radObjCars+_radObjAir);
 //-SPAWN OBJECTS (INSIDE LOCATIONS)
 
 if (isServer) then {
-	private ["_objPos","_add","_dir"];
+	private ["_objPos","_add"];
 	RAD_noLocs = 1;
 	RAD_locNum = 0;
 	{
@@ -82,6 +82,7 @@ if (isServer) then {
 
 	{
 		if ((_x select 0) distance2D HVP_pos < (HVPZoneSizeMax*2)) then {
+			private ["_dir"];
 			RAD_locNum = RAD_locNum + 1;
 			publicVariable "RAD_locNum";
 			_message remoteExec ["bis_fnc_call", 0];
