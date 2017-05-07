@@ -120,18 +120,22 @@ if (_damage_buildings_units) then {
 	[_obj_nuke,_radius] spawn HVP_fnc_nukeFXdamage;
 };
 if (_radiation) then {
-	HVPRadioActiveLocations pushBack [(getPos _obj_nuke),_radius];
-	HVPRadioActiveObjects pushBack [(getPos _obj_nuke),_radius];
+	HVPRadioActiveLocations pushBack [(getPos _obj_nuke),(_radius*2)];
+	HVPRadioActiveObjects pushBack [(getPos _obj_nuke),(_radius*2)];
 	publicVariable "HVPRadioActiveLocations";
 	publicVariable "HVPRadioActiveObjects";
 };
 if (_fallout) then {
 	[] remoteExec ["HVP_fnc_nukeFXash", 0];
-	_velocity_dust = [random 10,random 10,-1];
-	_color_dust = [1.0, 0.9, 0.8];
-	_alpha_dust = 0.02+random 0.2;
-	_freq_dust = 60+random 60;
-	[_velocity_dust,_color_dust,_alpha_dust,_freq_dust] remoteExec ["HVP_fnc_nukeFXdust",0];
+	[] spawn {
+		while {true} do {
+			sleep 60+random 60;
+			_velocity_dust = [random 10,random 10,-1];
+			_color_dust = [1.0, 0.9, 0.8];
+			_alpha_dust = 0.02+random 0.2;
+			[_velocity_dust,_color_dust,_alpha_dust] remoteExec ["HVP_fnc_nukeFXdust",0];
+		};
+	};
 };
 [_obj_nuke] spawn HVP_fnc_nukeFXfalling;
 
