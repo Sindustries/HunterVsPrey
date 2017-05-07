@@ -98,6 +98,9 @@ _nukeMarker2 setMarkerSize [0.75,0.75];
 _nukeMarker2 setMarkerAlpha 1;
 
 {titleText ["NUCLEAR DEVICE DETECTED", "PLAIN DOWN", 0.5];} remoteExec ["bis_fnc_call", 0];
+"WARNING: A nuclear device has been located in the orange area marked by a green skull. It will detonate in approx 3 minutes." remoteExec ["systemChat", 0];
+true remoteExec ["showChat", 0];
+sleep 60;
 "WARNING: A nuclear device has been located in the orange area marked by a green skull. It will detonate in approx 2 minutes." remoteExec ["systemChat", 0];
 true remoteExec ["showChat", 0];
 sleep 60;
@@ -129,7 +132,7 @@ if (_fallout) then {
 	[] remoteExec ["HVP_fnc_nukeFXash", 0];
 	[] spawn {
 		while {true} do {
-			sleep 60+random 60;
+			sleep 120+random 120;
 			_velocity_dust = [random 10,random 10,-1];
 			_color_dust = [1.0, 0.9, 0.8];
 			_alpha_dust = 0.02+random 0.2;
