@@ -6,14 +6,16 @@
 	_breakTime = ["phaseBreakTime"] call HVP_fnc_getSetting;
 	_sizeDecay = ["phaseSizeDecay"] call HVP_fnc_getSetting;
 	_timeDecay = ["phaseTimeDecay"] call HVP_fnc_getSetting;
-	
+
+	deletemarker HVP_PosMarker;
+
 	while {true} do {
 		//-----------------------------------
 		//-CREATE ZONE
 
 		HVP_phase_num = HVP_phase_num + 1;
 		publicVariable "HVP_phase_num";
-			
+
 		_markername = format["PhaseMark%1",HVP_phase_num];
 		_markerstr = createMarker [str(_markername), HVP_phase_pos];
 		str(_markername) setMarkerShape "ELLIPSE";
@@ -25,7 +27,7 @@
 
 		//-----------------------------------
 		//-COUNTDOWN
-		
+
 		if (HVP_phase_num isEqualTo 1 && HVPPhaseSpacing isEqualTo 2 || HVPPhaseSpacing isEqualTo 1) then {
 			[(HVPPhaseTime * _breakTime)] remoteExec ["HVP_fnc_phaseClock", 0];
 			HVP_phaseClockActive = 1;
@@ -39,7 +41,7 @@
 
 		HVP_phase_active = "true";
 		publicVariable "HVP_phase_active";
-		
+
 		if (HVP_suddenDeath) then {
 			while {HVP_phase_radius > 2} do {
 				HVP_phase_radius = HVP_phase_radius - _sizeDrop;
@@ -66,13 +68,13 @@
 			if (HVP_phase_radius <= 2) exitWith {};
 		};
 		if (HVP_phase_radius <= 2) exitWith {};
-		
+
 		//-----------------------------------
 		//-CREATE GHOST OF WHERE ZONE WILL MOVE TO
-		
+
 		_newRadius = (HVP_phase_radius * _sizeDecay);
 		_newPos = [HVP_phase_pos,0,_newRadius,0,0,0,0] call SIN_fnc_findPos;
-		
+
 		_newmarkername = format["NextPhaseMark%1",HVP_phase_num];
 		_newmarkerstr = createMarker [str(_newmarkername), _newPos];
 		str(_newmarkername) setMarkerShape "ELLIPSE";
@@ -91,7 +93,7 @@
 		waitUntil {HVP_phaseClockActive isEqualTo 0};
 		//-----------------------------------
 		//-DEACTIVATE PHASE
-		
+
 		deleteMarker str(_markername);
 		deleteMarker str(_newmarkername);
 
@@ -106,15 +108,15 @@
 		publicVariable "HVP_phase_radius";
 		HVP_phase_pos = _newPos;
 		publicVariable "HVP_phase_pos";
-		
+
 		HVPPhaseTime = (HVPPhaseTime * _timeDecay);
 		publicVariable "HVPPhaseTime";
-		
+
 		if (HVPPhaseType isEqualTo 1 && HVP_phase_radius < 500) then {
 			HVP_suddenDeath = true;
 			publicVariable "HVP_suddenDeath";
 		};
-		
+
 		//-----------------------------------
 		//-CLOSE LOOP
 	};

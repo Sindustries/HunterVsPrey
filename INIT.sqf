@@ -235,6 +235,13 @@ if (isServer) then {
 			player removeitem "itemMap";
 		};
 	};
+	HVP_PosMarker = createMarker ["HVP_PosMarker", HVP_Pos];
+	HVP_PosMarker setMarkerShape "ELLIPSE";
+	HVP_PosMarker setMarkerType "EMPTY";
+	HVP_PosMarker setMarkerBrush "Border";
+	HVP_PosMarker setMarkerColor "Colorblue";
+	HVP_PosMarker setMarkerSize [HVP_phase_radius, HVP_phase_radius];
+	HVP_PosMarker setMarkerAlpha 0.66;
 };
 cutText ["PRELOADING", "BLACK FADED", 999];
 //-----------------------------------
