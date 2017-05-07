@@ -89,6 +89,7 @@ if (isServer) then {
 			_counter = _maxNumObjLoc;
 			_errorCount = 0;
 			_objCreated = 0;
+			_dir = (random 360);
 			while {_objCreated < _maxNumObjLoc} do {
 				_roadFound = false;
 				_add = 5;
@@ -107,7 +108,6 @@ if (isServer) then {
 					if (_add >= ((_x select 1) select 0)) then {
 						_roadFound = true;
 						_spawnPos = [(_x select 0),0,((_x select 1) select 0),0.2] call SIN_fnc_findPos;
-						_dir = (random 360);
 					};
 				};
 
