@@ -22,6 +22,8 @@ removeVest player;
 removeBackpack player;
 removeHeadgear player;
 removeGoggles player;
+setViewDistance 900;
+setObjectViewDistance [1000,100];
 //-----------------------------------
 //-MAIN
 HVPGameType = (paramsArray select 1);
