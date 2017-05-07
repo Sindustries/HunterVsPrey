@@ -442,6 +442,9 @@ switch (HVPGameType) do {
 			player setCaptive true;
 			player setAnimSpeedCoef 1.2;
 		};
+		if (playerSide isEqualTo WEST || playerSide isEqualTo resistance) then {
+			player enableStamina true;
+		};
 	};
 	//-CRUCIBLE SETTINGS
 	case 2: {
@@ -452,6 +455,7 @@ switch (HVPGameType) do {
 		east setFriend [resistance, 0];
 		resistance setFriend [west, 0];
 		resistance setFriend [east, 0];
+		player enableStamina true;
 	};
 	//-PREDATOR SETTINGS
 	case 3: {
@@ -465,6 +469,9 @@ switch (HVPGameType) do {
 		if (playerSide isEqualTo resistance) then {
 			player setCaptive true;
 			player setAnimSpeedCoef 1.2;
+		};
+		if (playerSide isEqualTo WEST || playerSide isEqualTo EAST) then {
+			player enableStamina true;
 		};
 
 		if (isServer) then {

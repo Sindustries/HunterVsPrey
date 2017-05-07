@@ -22,19 +22,19 @@ _pos = _this select 0;
 
 if (playerSide isEqualTo WEST && HVPGameType isEqualTo 1 || HVPGameType isEqualTo 3) then {
 	if ((player distance _pos) < 80) then {
-		
+
 		titleText ["TEMPORARY IMMUNITY TO FATIGUE AND HEALTH REGENERATION", "PLAIN DOWN", 0.6];
-		
-		[_regenHP,_regenRate,_abilTime] spawn HVP_fnc_healthRegenAbilEffect;	
+
+		[_regenHP,_regenRate,_abilTime] spawn HVP_fnc_healthRegenAbilEffect;
 
 		if (HVPGameType isEqualTo 3 && playerSide != resistance || HVPGameType isEqualTo 1) then {
 			player setVariable ["isFatigueFree",true];
-			player enableStamina false;		
-			[_time] call HVP_fnc_progressBar;		
+			player enableStamina false;
+			[_time] call HVP_fnc_progressBar;
 			player enableStamina true;
-			player setVariable ["isFatigueFree",false];		
+			player setVariable ["isFatigueFree",false];
 			titleText ["IMMUNITY TO FATIGUE EXPIRED", "PLAIN DOWN", 0.6];
-		};		
+		};
 	};
 };
 
@@ -43,17 +43,17 @@ if (playerSide isEqualTo WEST && HVPGameType isEqualTo 1 || HVPGameType isEqualT
 
 if (HVPGameType isEqualTo 2) then {
 	titleText ["TEMPORARY IMMUNITY TO FATIGUE AND HEALTH REGENERATION", "PLAIN DOWN", 0.6];
-		
+
 	[_regenHP,_regenRate,_abilTime] spawn HVP_fnc_healthRegenAbilEffect;
-		
+
 	player setVariable ["isFatigueFree",true];
 	player enableStamina false;
-		
+
 	[_time] call HVP_fnc_progressBar;
-		
+
 	player enableStamina true;
 	player setVariable ["isFatigueFree",false];
-	
+
 	titleText ["IMMUNITY TO FATIGUE EXPIRED", "PLAIN DOWN", 0.6];
 };
 
