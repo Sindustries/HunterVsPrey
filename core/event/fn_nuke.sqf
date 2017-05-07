@@ -121,7 +121,9 @@ if (_damage_buildings_units) then {
 };
 if (_radiation) then {
 	HVPRadioActiveLocations pushBack [(getPos _obj_nuke),_radius];
+	HVPRadioActiveObjects pushBack [(getPos _obj_nuke),_radius];
 	publicVariable "HVPRadioActiveLocations";
+	publicVariable "HVPRadioActiveObjects";
 };
 if (_fallout) then {
 	[] remoteExec ["HVP_fnc_nukeFXash", 0];
