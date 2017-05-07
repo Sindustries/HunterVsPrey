@@ -106,7 +106,7 @@ if (HVPDelay isEqualTo 1) then {
 	waitUntil {HVPDelay isEqualTo 0};
 	removeAllActions player;
 	player enableSimulation false;
-	cutText ["", "BLACK FADED", 999];
+	cutText ["PRELOADING", "BLACK FADED", 999];
 };
 playMusic (selectRandom HVP_music);
 //-----------------------------------
@@ -209,8 +209,13 @@ if (isServer) then {
 					};
 				} forEach _objects;
 
-				if ((count _spawnableHouses) >= 30) then {
+				if ((count _spawnableHouses) >= 60) then {
 					_posFound = true;
+					{
+						if ((random 100) < 10) then {
+							_x setDamage [1,false];
+						};
+					} forEach _spawnableHouses;
 				};
 
 				if (HVPDebugMode isEqualTo 1) then {
