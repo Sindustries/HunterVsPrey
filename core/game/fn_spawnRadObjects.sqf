@@ -66,6 +66,7 @@ _radObjAir = [
 //-----------------------------------
 //-EXTRA VEHICLE ARRAYS
 
+/* -- CAUSES A TON OF FPS DROP!
 _cfg = (configFile >> "CfgVehicles");
 for "_i" from 0 to ((count _cfg)-1) do {
 	if (isClass (_cfg select _i)) then {
@@ -75,6 +76,7 @@ for "_i" from 0 to ((count _cfg)-1) do {
 		};
 	};
 };
+*/
 
 _radObjArray = (_radObjCars+_radObjAir);
 
