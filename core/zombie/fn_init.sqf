@@ -66,7 +66,7 @@ if (isServer) then {
 //-----------------------------------
 //-ZOMBIE CAMO ACTION
 
-zCamo_action = [player addAction["Zombie Camouflage",z_fnc_zCamo,"",0,false,false,"",'
+zCamo_action = [player addAction["Zombie Camouflage",z_fnc_zCamo,"",0,false,true,"",'
 !isNull cursorObject && player distance cursorObject < 3.5 && (typeOf cursorObject) in ((HVP_zombies)+(HVP_BossZombies)) && !alive cursorObject && vehicle player isEqualTo player']];
 // && (player getVariable ["z_CamoApplied",false]) isEqualTo false
 //-----------------------------------
