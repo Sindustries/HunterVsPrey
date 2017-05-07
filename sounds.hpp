@@ -116,13 +116,13 @@ class CfgSounds
     class breath
     {
         name = "breathe";
-        sound[] = {"\SFX\breath.ogg", 0.6, 1.0, 25};
+        sound[] = {"\SFX\breath.ogg", 0.8, 1.0, 25};
         titles[] = {0,""};
     };
     class cough
     {
         name = "cough";
-        sound[] = {"\SFX\cough.ogg", 0.6, 1.0, 25};
+        sound[] = {"\SFX\cough.ogg", 1, 1.0, 25};
         titles[] = {0,""};
     };
     class echipare
