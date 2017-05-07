@@ -43,4 +43,4 @@ private ["_zIndex","_index","_toDelete"];
 		};
 	};
 
-//-----------------------------------
+//-----------------------------------	AmovPercMstpSnonWnonDnon_SaluteIn
